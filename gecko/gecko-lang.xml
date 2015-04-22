@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+	
+	<!-- Ontology Header -->
+	<owl:Ontology rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang">
+		<dc:title>The GECKO Ontology</dc:title>
+		<dc:description>
+			A suitable Ontology for the GECKO multi-agent system
+			This schema classifies the common language of GECKO multi-agent systems
+		</dc:description>
+	</owl:Ontology>
+	
+	
+	<!--
+		Operating State Class Taxonomy 
+	 -->
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#state">
+	 	<rdf:label>Element State</rdf:label>
+	 	<rdf:comment>Classify the possible states of the elements in the systems</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#actuatorState">
+	 	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#state" />
+	 	<rdf:label>Actuator Operating State</rdf:label>
+	 	<rdf:comment>Classify actuators' operating states</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#agentState">
+	 	<rdfs:subClassOf rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#state" />
+	 	<rdf:label>Agent Operating State</rdf:label>
+	 	<rdf:comment>Classify agents' operating states</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#resourceState">
+	 	<rdfs:subClassOf rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#state" />
+	 	<rdf:label>Resource Availability Sate</rdf:label>
+	 	<rdf:comment>Classify resources' availability states</rdf:comment>
+	 </owl:Class>
+	
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#hasState" />
+	
+	
+	<!-- 
+		Relation Taxonomy 
+	-->	
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#relation">
+		<rdf:label>Relation</rdf:label>
+		<rdf:comment>Classify General Relationships</rdf:comment>
+	</owl:Class>
+
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#temporal">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#relation" />
+		<rdf:label>Temporal Relation</rdf:label>
+		<rdf:comment>Classify Temporal Relationships</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#meets">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#temporal" />
+		<rdf:label>Meets</rdf:label>
+		<rdf:comment>The Class of Meets temporal relations between two temporal intervals</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#before">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#temporal" />
+		<rdf:label>Before</rdf:label>
+		<rdf:comment>The Class of Before temporal relations between two temporal intervals</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#contains">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#temporal" />
+		<rdf:label>Contains</rdf:label>
+		<rdf:comment>The Class of Contains temporal relations between two temporal intervals</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#during">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#temporal" />
+		<rdf:label>During</rdf:label>
+		<rdf:comment>The Class of During temporal relations between two temporal intervals</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#equals">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#temporal" />
+		<rdf:label>Equals</rdf:label>
+		<rdf:comment>The Class of Equals temporal relations between two temporal interval</rdf:comment>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#hasState" />
+
+</rdf:RDF>

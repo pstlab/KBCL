@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+	
+	<!-- Ontology Header -->
+	<owl:Ontology rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology">
+		<dc:title>The GECKO Ontology</dc:title>
+		<dc:description>
+			A suitable Ontology for the GECKO distribute architecture
+		</dc:description>
+	</owl:Ontology>
+	
+	<!-- AGENT CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#agent">
+		<rdfs:label>Agent</rdfs:label>
+		<rdfs:comment>Class representing a general agent in the GECKO distribute architecture</rdfs:comment>	
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#module">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#agent" />
+		<rdfs:label>Transportation Module</rdfs:label>
+		<rdfs:comment>Class representing a transportation module agent in the GECKO distribute architecture</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#machine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#agent" />
+		<rdfs:label>Working Machine</rdfs:label>
+		<rdfs:comment>Class representing a working machine agent in the GECKO distribute architecture</rdfs:comment>
+	</owl:Class>
+	
+	<!-- FUNCTIONALITY CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#functionality">
+		<rdfs:label>Functionality</rdfs:label>
+		<rdfs:comment>Class representing agents' functionalities in the GECKO distribute architecture</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#action">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#functionality" />
+		<rdfs:label>Action</rdfs:label>
+		<rdfs:comment>
+			Class representing action functionalities of an agent. 
+			This sub-class models functionalities able to produce an effect in the environment, e.g. move something. 
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#action" />
+		<rdfs:label>Channel</rdfs:label>
+		<rdfs:comment>
+			Class representing channel functionalities of an agent.
+			This sub-class models all types of actions that are able to move something within the production environment.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#changeover">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#action" />
+		<rdfs:label>Change Over</rdfs:label>
+		<rdfs:comment>
+			Class representing change over functionalities of an agent.
+			This sub-class models all types of actions that are able to change the internal capabilities of the agent.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<!-- COMPONENT CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#component">
+		<rdfs:label>Component</rdfs:label>
+		<rdfs:comment>
+			Class representing components of an agent in the GECKO distribute architecture
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#information">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#component" />
+		<rdfs:label>Information</rdfs:label>
+		<rdfs:comment>
+			Class representing information components of an agent.
+			This sub-class models all types of components that neither change agent's capacities nor 
+			act on the elements of the production environment but characterize agents' behaviors 
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#actuator">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#component" />
+		<rdfs:label>Actuator</rdfs:label>
+		<rdfs:comment>
+			Class representing actuator components of an agent.
+			This sub-class models all type of components that affect the elements in the production 
+			environment by changing their status. Actuators are the basic components that allow agents
+			to operate in the environment according to their capabilities.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#port">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#information" />
+		<rdfs:label>Port</rdfs:label>
+		<rdfs:comment>
+			Class representing ports of an agent.
+			This sub-class models components that make the agent able to cooperate with other 
+			agents in the production environment
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#actuator" />
+		<rdfs:label>Cross Transfer Engine</rdfs:label>
+		<rdfs:comment>
+			Class representing cross transfer engines of an agent in the GECKO distribute architecture.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#actuator" />
+		<rdfs:label>Conveyor Engine</rdfs:label>
+		<rdfs:comment>
+			Class representing conveyor engines of an agent in the GECKO distribute architecture.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<!-- TOPOLOGY CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#topology">
+		<rdfs:label>Topology</rdfs:label>
+		<rdfs:comment>
+			Class representing topology information about the agent and the overall shop floor 
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#topology" />
+		<rdfs:label>Neighbor</rdfs:label>
+		<rdfs:comment>
+			Class representing neighbor information of an agent
+		</rdfs:comment>
+	</owl:Class>
+	
+	
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#ID" />
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#duration" />
+	
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#hasFunctionality" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasComponent" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasNeighbor" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#onPort" />
+	
+	<!-- TEMPORAL RELATIONS -->
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#during" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#meets" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#before" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#equals" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#contains" />
+	
+</rdf:RDF>

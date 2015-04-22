@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+	<!-- Ontology Header -->
+	<owl:Ontology rdf:about="http://pst.istc.cnr.it/gecko/ontology/local">
+		<dc:title>The GEcko Ontology</dc:title>
+		<dc:description>
+			A suitable Ontology for the GECKO multi-agent system
+			This schema classifies local context information types
+		</dc:description>
+	</owl:Ontology>
+	
+	<!-- 
+		Topology Class Taxonomy
+	 -->
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/local#topology">
+	 	<rdf:label>Topology</rdf:label>
+	 	<rdf:comment>Classify Topology information types</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/local#neighborhood">
+	 	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/local#topology" />
+	 	<rdf:label>Neighborhood</rdf:label>
+	 	<rdf:comment>Classify Neighborhood information types for an agent</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/local#neighbor">
+	 	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/local#neighborhood" />
+	 	<rdf:label>Neighbor</rdf:label>
+	 	<rdf:comment>Classify Neighbor types for an agent</rdf:comment>
+	 </owl:Class>
+
+</rdf:RDF>

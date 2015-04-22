@@ -1,0 +1,42 @@
+PROBLEM T1_Problem (DOMAIN T1_Domain) 
+{
+	f00 <fact> T1_Channel.T1_Channel_timeline.Idle() AT [0, 0] [0, +INF] [1, +INF];
+	
+	f01 <fact> T1_Cross_Transfer_1.T1_Cross_Transfer_1_timeline.Cross_1_Down() AT [0, 0] [0, +INF] [1, +INF];
+	f02 <fact> T1_Cross_Transfer_2.T1_Cross_Transfer_2_timeline.Cross_2_Down() AT [0, 0] [0, +INF] [1, +INF];
+	f03 <fact> T1_Cross_Transfer_3.T1_Cross_Transfer_3_timeline.Cross_3_Down() AT [0, 0] [0, +INF] [1, +INF];
+	f04 <fact> T1_Cross_Transfer_4.T1_Cross_Transfer_4_timeline.Cross_4_Down() AT [0, 0] [0, +INF] [1, +INF];
+	f05 <fact> T1_Cross_Transfer_5.T1_Cross_Transfer_5_timeline.Cross_5_Down() AT [0, 0] [0, +INF] [1, +INF];
+	f06 <fact> T1_Cross_Transfer_6.T1_Cross_Transfer_6_timeline.Cross_6_Down() AT [0, 0] [0, +INF] [1, +INF];
+	
+	f07 <fact> T1_Port_F1.T1_Port_F1_timeline.Port_F1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f08 <fact> T1_Port_F2.T1_Port_F2_timeline.Port_F2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f09 <fact> T1_Port_B1.T1_Port_B1_timeline.Port_B1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f10 <fact> T1_Port_B2.T1_Port_B2_timeline.Port_B2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f11 <fact> T1_Port_L1.T1_Port_L1_timeline.Port_L1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f12 <fact> T1_Port_L2.T1_Port_L2_timeline.Port_L2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f13 <fact> T1_Port_L3.T1_Port_L3_timeline.Port_L3_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f14 <fact> T1_Port_R1.T1_Port_R1_timeline.Port_R1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f15 <fact> T1_Port_R2.T1_Port_R2_timeline.Port_R2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f16 <fact> T1_Port_R3.T1_Port_R3_timeline.Port_R3_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	
+	f17 <fact> T1_Straight_Conveyor_1.T1_Straight_Conveyor_1_timeline.Straight_Conveyor_1_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f18 <fact> T1_Straight_Conveyor_2.T1_Straight_Conveyor_2_timeline.Straight_Conveyor_2_Still() AT [0, 0] [0, +INF] [1, +INF];
+	
+	//f19 <fact> T1_Cross_Conveyor_1.T1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f20 <fact> T1_Cross_Conveyor_2.T1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f21 <fact> T1_Cross_Conveyor_3.T1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f22 <fact> T1_Cross_Conveyor_4.T1_Cross_Conveyor_4_timeline.Cross_Conveyor_4_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f23 <fact> T1_Cross_Conveyor_5.T1_Cross_Conveyor_5_timeline.Cross_Conveyor_5_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f24 <fact> T1_Cross_Conveyor_6.T1_Cross_Conveyor_6_timeline.Cross_Conveyor_6_Still() AT [0, 0] [0, +INF] [1, +INF];
+	
+	f25 <fact> T1_Neighbor_F1.T1_Neighbor_F1_timeline.Neighbor_F1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f26 <fact> T1_Neighbor_F2.T1_Neighbor_F2_timeline.Neighbor_F2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f27 <fact> T1_Neighbor_B1.T1_Neighbor_B1_timeline.Neighbor_B1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f28 <fact> T1_Neighbor_B2.T1_Neighbor_B2_timeline.Neighbor_B2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f29 <fact> T1_Neighbor_L.T1_Neighbor_L_timeline.Neighbor_L_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f30 <fact> T1_Neighbor_R.T1_Neighbor_R_timeline.Neighbor_R_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	
+	//	g0 <goal> T1_Channel.T1_Channel_timeline.Channel_F_B() AT [10, 10] [11, +INF] [1, +INF];
+	//	g1 <goal> T1_Channel.T1_Channel_timeline.Channel_B_F() AT [101, 101] [11, +INF] [1, +INF];
+}

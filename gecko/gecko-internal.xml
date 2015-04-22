@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+	
+	<!-- Ontology Header -->
+	<owl:Ontology rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal">
+		<dc:title>The GECKO Ontology</dc:title>
+		<dc:description>
+			A suitable Ontology for the GECKO multi-agent system
+			This schema classifies internal context information types
+		</dc:description>
+	</owl:Ontology>
+	
+	<!-- 
+		Internal Element Class Taxonomy
+	 -->
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#element">
+	 	<rdf:label>Internal Element</rdf:label>
+	 	<rdf:comment>Classify internal element types composing an agent</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#actuator">
+	 	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#element" />
+	 	<rdf:label>Actuator</rdf:label>
+	 	<rdf:comment>Classify Actuator element types composing an agent</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#cooperation">
+	 	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#element" />
+	 	<rdf:label>Cooperation Element</rdf:label>
+	 	<rdf:comment>Classify Cooperation element types composing an agent</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#logic">
+	 	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#element" />
+	 	<rdf:label>Logical Element</rdf:label>
+	 	<rdf:comment>Classify Logical element types composing an agent</rdf:comment>
+	 </owl:Class>
+	 
+	 <owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#crossTransfer">
+	 	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#actuator" />
+	 	<rdf:label>Cross Transfer Engine</rdf:label>
+	 	<rdf:comment>Classify Cross Transfer Engine types composing an agent</rdf:comment>
+	 </owl:Class>
+	 
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#conveyor">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#actuator" />
+		<rdf:label>Conveyor Engine</rdf:label>
+		<rdf:comment>Classify Conveyor Engine types composing an agent</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#port">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#cooperation" />
+		<rdf:label>Port</rdf:label>
+		<rdf:comment>Classify Port types composing an agent</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/internal#unit">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#logic" />
+		<rdf:label>Transportation Unit</rdf:label>
+		<rdf:comment>Classify Transportation Unit types composing an agent</rdf:comment>
+	</owl:Class>
+
+</rdf:RDF>

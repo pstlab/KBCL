@@ -1,0 +1,8 @@
+PREFIX rdfs:	<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX gecko:	<http://pst.istc.cnr.it/gecko/test/ontology#>
+
+SELECT ?module ?id
+WHERE {
+	?module a gecko:module .
+	?module gecko:ID ?id .
+}

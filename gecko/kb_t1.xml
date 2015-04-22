@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:glang="http://pst.istc.cnr.it/gecko/ontology/lang#"
+	xmlns:gg="http://pst.istc.cnr.it/gecko/ontology/global#"
+	xmlns:gl="http://pst.istc.cnr.it/gecko/ontology/local#"
+	xmlns:gi="http://pst.istc.cnr.it/gecko/ontology/internal#">
+	
+	
+	<!-- 
+		Define module's main conveyor
+	 -->
+	 
+	 <rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#forward">
+	 	<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#actuatorState" />
+	 	<gg:description>Forward</gg:description>
+	 </rdf:Description>
+	 
+	 <rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#backward">
+	 	<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#actuatorState" />
+	 	<gg:description>Backward</gg:description>
+	 </rdf:Description>
+	 
+	 <rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#mainConveyor">
+	 	<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#conveyor" />
+	 	<gg:description>T1 Main Conveyor Engine</gg:description>
+	 	<glang:hasState>
+	 		<rdf:Bag>
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#forward" />
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#backward" />
+	 		</rdf:Bag>
+	 	</glang:hasState>
+	 </rdf:Description>
+	 
+	 <rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#crossConveyor1">
+	 	<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#conveyor" />
+	 	<gg:description>T1U1 Cross Conveyor Engine</gg:description>
+	 	<glang:hasState>
+	 		<rdf:Bag>
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#forward" />
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#backward" />
+	 		</rdf:Bag>
+	 	</glang:hasState>
+	 </rdf:Description>
+	 
+	 <rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#crossConveyor2">
+	 	<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#conveyor" />
+	 	<gg:description>T1U2 Cross Conveyor Engine</gg:description>
+	 	<glang:hasState>
+	 		<rdf:Bag>
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#forward" />
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#backward" />
+	 		</rdf:Bag>
+	 	</glang:hasState>
+	 </rdf:Description>
+	 
+	 <rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#crossConveyor3">
+	 	<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/internal#conveyor" />
+	 	<gg:description>T1U3 Cross Conveyor Engine</gg:description>
+	 	<glang:hasState>
+	 		<rdf:Bag>
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#forward" />
+	 			<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#backward" />
+	 		</rdf:Bag>
+	 	</glang:hasState>
+	 </rdf:Description>
+	
+	<!--
+		Define module's functionality implementations 
+	 -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#f1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#channel" />
+		<gg:procedure>Channel_F1_B3</gg:procedure>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#f2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#channel" />
+		<gg:procedure>Channel_B3_F1</gg:procedure>
+	</rdf:Description>
+
+
+	<!-- 
+		Define Transportation Module T1
+	 -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/kb/t1#module">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#module" />
+		<gg:description>T1</gg:description>
+		<gg:hasFunctionality>
+			<rdf:Bag>
+				<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#f1" />
+				<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/kb/t1#f2" />
+			</rdf:Bag>
+		</gg:hasFunctionality>
+	</rdf:Description>
+	
+</rdf:RDF>

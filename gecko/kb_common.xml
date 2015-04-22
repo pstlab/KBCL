@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:lang="http://pst.istc.cnr.it/gecko/ontology/lang#"
+	xmlns:gg="http://pst.istc.cnr.it/gecko/ontology/global#">
+
+	
+	<!-- Instantiates some predefined possible states -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#online">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#agentState" />
+		<gg:description>Online</gg:description>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#offline">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#agentState" />
+		<gg:description>Offline</gg:description>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#failure">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#agentState" />
+		<gg:description>Failure</gg:description>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#maintenance">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#agentState" />
+		<gg:description>Maintenance</gg:description>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#availale">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#resourceState" />
+		<gg:description>Available</gg:description>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/ontology/lang#notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/ontology/lang#resourceState" />
+		<gg:description>Not Available</gg:description>
+	</rdf:Description>
+	
+</rdf:RDF>

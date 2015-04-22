@@ -1,0 +1,1775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:kbcl="http://kbcl.com/ijcai/kbcl/ontology#">
+	
+	<!-- Ontology Header -->
+	<owl:Ontology rdf:about="http://kbcl.com/ijcai/kbcl/ontology">
+		<dc:title>The kbcl Ontology</dc:title>
+		<dc:description>
+			A suitable Ontology for the kbcl distribute architecture
+		</dc:description>
+	</owl:Ontology>
+	
+	<!-- AGENT CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#agent">
+		<rdfs:label>Agent</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#module">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#agent" />
+		<rdfs:label>Transportation Module</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#machine">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#agent" />
+		<rdfs:label>Working Machine</rdfs:label>
+	</owl:Class>
+	
+	<!-- FUNCTIONALITY CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#functionality">
+		<rdfs:label>Function</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#test">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#functionality" />
+		<rdfs:label>Test</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#sense">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#test" />
+		<rdfs:label>Sense</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#communication">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#functionality" />
+		<rdfs:label>Communication</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#send">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#communication" />
+		<rdfs:label>Send</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#receive">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#communication" />
+		<rdfs:label>Receive</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#action">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#functionality" />
+		<rdfs:label>Action</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#channel">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#action" />
+		<rdfs:label>Channel</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#changeover">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#action" />
+		<rdfs:label>Change Over</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#join">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#action" />
+		<rdfs:label>Join</rdfs:label>
+	</owl:Class>
+
+	<owl:Class rdf:about="http://kbcl.com/ijcai/kbcl/ontology#branch">
+		<rdfs:subClassOf rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#action" />
+		<rdfs:label>Branch</rdfs:label>
+	</owl:Class>	
+	
+	<!-- CHANNEL F F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFFimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFF">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F F</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFFimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFBimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFB">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F B</kbcl:ID>
+		<kbcl:minDuration>30</kbcl:minDuration>
+		<kbcl:maxDuration>60</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFBimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFL1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFL1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F L1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFL1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFL2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFL2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F L2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFL2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFL3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFL3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F L3</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFL3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFR1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFR1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F R1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFR1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFR2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFR2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F R2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFR2implementation1" />
+	</rdf:Description>	
+
+
+	<!-- CHANNEL F R3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFR3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelFR3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel F R3</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFR3implementation1" />
+	</rdf:Description>
+
+
+	<!-- CHANNEL B F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBFimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBF">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B F</kbcl:ID>
+		<kbcl:minDuration>30</kbcl:minDuration>
+		<kbcl:maxDuration>60</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBFimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL B B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBBimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBB">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B B</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBBimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL B L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBL1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBL1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B L1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBL1implementation1" />
+	</rdf:Description>
+	
+	
+	<!-- CHANNEL B L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBL2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBL2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B L2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBL2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL B L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBL3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBL3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B L3</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBL3implementation1" />
+	</rdf:Description>
+	
+	
+	<!-- CHANNEL B R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBR1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBR1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B R1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBR1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL B R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBR2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBR2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B R2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBR2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL B R3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBR3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelBR3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel B R3</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBR3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1Fimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1F">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 F</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1Fimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1Bimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1B">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 B</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1Bimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1L1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1L1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 L1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1L1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1L2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1L2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 L2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1L2implementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL L1 L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1L3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1L3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 L3</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1L3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1R1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1R1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 R1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1R1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1R2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1R2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 R2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1R2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 R3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1R3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL1R3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L1 R3</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1R3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L2 F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2Fimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2F">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 F</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2Fimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L2 B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2Bimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2B">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 B</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2Bimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L2 L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2L1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2L1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 L1</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2L1implementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL L2 L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2L2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2L2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 L2</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2L2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L2 L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2L3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2L3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 L3</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2L3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L2 R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2R1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2R1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 R1</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2R1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L2 R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2R2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2R2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 R2</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2R2implementation1" />
+	</rdf:Description>
+
+	<!-- CHANNEL L2 R3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2R3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL2R3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L2 R3</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2R3implementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL L3 F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3Fimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3F">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 F</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3Fimplementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL L3 B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3Bimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3B">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 B</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3Bimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L3 L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3L1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3L1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 L1</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3L1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L3 L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3L2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3L2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 L2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3L2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L3 L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3L3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3L3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 L3</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3L3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L3 R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3R1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3R1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 R1</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3R1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L3 R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3R2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3R2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 R2</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3R2implementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL L3 R3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3R3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelL3R3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel L3 R3</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3R3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R1 F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1Fimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1F">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 F</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1Fimplementation1" />
+	</rdf:Description>
+
+	<!-- CHANNEL R1 B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1Bimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1B">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 B</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1Bimplementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL R1 L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1L1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1L1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 L1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1L1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R1 L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1L2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1L2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 L2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1L2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R1 L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1L3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1L3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 L3</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1L3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R1 R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1R1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1R1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 R1</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1R1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R1 R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1R2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1R2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 R2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1R2implementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL R1 R3 -->	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1R3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR1R3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R1 R3</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1R3implementation1" />
+	</rdf:Description>	
+	
+	
+	<!-- CHANNEL R2 F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2Fimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2F">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 F</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2Fimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R2 B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2Bimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2B">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 B</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2Bimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R2 L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2L1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2L1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 L1</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2L1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R2 L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2L2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2L2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 L2</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2L2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R2 L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2L3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2L3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 L3</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2L3implementation1" />
+	</rdf:Description>	
+	
+	<!-- CHANNEL R2 R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2R1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2R1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 R1</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2R1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R2 R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2R2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2R2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 R2</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2R2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R2 R3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2R3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR2R3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R2 R3</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2R3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R3 F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3Fimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portFavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3F">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 F</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3Fimplementation1" />
+	</rdf:Description>
+
+	<!-- CHANNEL R3 B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3Bimplementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portBavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0backward" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3B">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 B</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>25</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3Bimplementation1" />
+	</rdf:Description>
+
+	<!-- CHANNEL R3 L1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3L1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3L1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 L1</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3L1implementation1" />
+	</rdf:Description>
+
+	<!-- CHANNEL R3 L2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3L2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3L2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 L2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3L2implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R3 L3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3L3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborLavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portL3available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3L3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 L3</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3L3implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R3 R1 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3R1implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR1available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross1up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor1forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2down" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3R1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 R1</kbcl:ID>
+		<kbcl:minDuration>40</kbcl:minDuration>
+		<kbcl:maxDuration>55</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3R1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL R3 R2 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3R2implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR2available" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross2up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor2forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor0forward" />
+		<kbcl:contains rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3down" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3R2">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 R2</kbcl:ID>
+		<kbcl:minDuration>20</kbcl:minDuration>
+		<kbcl:maxDuration>35</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3R2implementation1" />
+	</rdf:Description>	
+
+	<!-- CHANNEL R3 R3 -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3R3implementation1">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#implementation" />
+		<!-- constraints -->
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#neighborRavailable" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#portR3available" />
+		<kbcl:during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#cross3up" />
+		<kbcl:starts-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3backward" />	
+		<kbcl:ends-during rdf:resource="http://kbcl.com/ijcai/kbcl/t1#conveyor3forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#channelR3R3">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#channel" />
+		<kbcl:ID>Channel R3 R3</kbcl:ID>
+		<kbcl:minDuration>10</kbcl:minDuration>
+		<kbcl:maxDuration>20</kbcl:maxDuration>
+		<!-- implementation -->
+		<kbcl:hasImplementation rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3R3implementation1" />
+	</rdf:Description>
+	
+	<!-- SEND F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#sendF">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#send" />
+		<kbcl:ID>Send F</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>	
+	
+	<!-- SEND B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#sendB">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#send" />
+		<kbcl:ID>Send B</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>
+	
+	<!-- SEND L -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#sendL">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#send" />
+		<kbcl:ID>Send L</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>
+	
+	<!-- SEND R -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#sendR">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#send" />
+		<kbcl:ID>Send R</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>
+	
+	
+	
+	
+	
+	
+	<!-- RECEIVE F -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#receiveF">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#receive" />
+		<kbcl:ID>Receive F</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>	
+	
+	<!-- RECEIVE B -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#receiveB">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#receive" />
+		<kbcl:ID>Receive B</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>
+	
+	<!-- RECEIVE L -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#receiveL">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#receive" />
+		<kbcl:ID>Receive L</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>
+	
+	<!-- RECEIVE R -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#receiveR">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#receive" />
+		<kbcl:ID>Receive R</kbcl:ID>
+		<kbcl:minDuration>3</kbcl:minDuration>
+		<kbcl:maxDuration>5</kbcl:maxDuration>
+	</rdf:Description>
+	
+	
+	
+	<!-- T1 AGENT SPECIFICATION -->
+	<rdf:Description rdf:about="http://kbcl.com/ijcai/kbcl/t1#module">
+		<rdf:type rdf:resource="http://kbcl.com/ijcai/kbcl/ontology#module" />
+		<kbcl:ID>T1</kbcl:ID>
+		
+		<!-- functionalities -->
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFF" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFB" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFL1" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFL2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFL3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFR1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFR2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelFR3" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBF" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBB" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBL1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBL2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBL3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBR1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBR2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelBR3" /> 
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1F" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1B" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1L1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1L2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1L3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1R1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1R2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL1R3" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2F" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2B" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2L1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2L2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2L3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2R1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2R2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL2R3" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3F" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3B" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3L1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3L2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3L3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3R1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3R2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelL3R3" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1F" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1B" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1L1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1L2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1L3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1R1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1R2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR1R3" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2F" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2B" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2L1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2L2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2L3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2R1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2R2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR2R3" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3F" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3B" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3L1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3L2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3L3" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3R1" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3R2" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#channelR3R3" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#sendF" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#sendL" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#sendR" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#sendB" />
+		
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#receiveF" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#receiveL" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#receiveR" />
+		<kbcl:hasFunctionality rdf:resource="http://kbcl.com/ijcai/kbcl/t1#receiveB" />
+		
+	</rdf:Description>
+
+</rdf:RDF>

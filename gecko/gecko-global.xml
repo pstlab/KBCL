@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+	<!-- Ontology Header -->
+	<owl:Ontology rdf:about="http://pst.istc.cnr.it/gecko/ontology/global">
+		<dc:title>The GECKO Ontology</dc:title>
+		<dc:description>
+			A suitable Ontology for the GECKO multi-agent system
+			This schema classifies global context information types
+		</dc:description>
+	</owl:Ontology>
+	
+	<!-- 
+		Agent Class Taxonomy 
+	-->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#agent">
+		<rdf:label>Agent</rdf:label>
+		<rdf:comment>Classify the agents in the GECKO multi-agent system</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#module">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#agent" />
+		<rdf:label>Transportation Module</rdf:label>
+		<rdf:comment>Classify the transportation modules agents in the system</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#machine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#agent" />
+		<rdf:label>Working Machine</rdf:label>
+		<rdf:comment>Classify the working machine agents in the system</rdf:comment>
+	</owl:Class>
+	
+	
+	<!-- 
+		Functionality Class Taxonomy 
+	-->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#functionality">
+		<rdf:label>Functionality</rdf:label>
+		<rdf:comment>Classify functionalities in terms of their effects</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#action">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#functionality" />
+		<rdf:label>Action</rdf:label>
+		<rdf:comment>Classify actions the agent are able to perform</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#test">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#functionality" />
+		<rdf:label>Test</rdf:label>
+		<rdf:comment>Classify self-diagnostic capabilities of the agent</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#communication">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#functionality" />
+		<rdf:label>Communication</rdf:label>
+		<rdf:comment>Classify communication capabilities of the agent</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#channel">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#action" />
+		<rdf:label>Channel</rdf:label>
+		<rdf:comment>Classify actions that have the effect of moving some objects</rdf:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#changeover">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/ontology/global#action" />
+		<rdf:label>Change Over</rdf:label>
+		<rdf:comment>Classify actions that have the effect of changing the operational features of the agent</rdf:comment>
+	</owl:Class>
+	
+	
+	<!--
+		Definition of global properties
+	-->
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#description" />
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#procedure" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/gecko/ontology/global#hasFunctionality" />
+
+</rdf:RDF>

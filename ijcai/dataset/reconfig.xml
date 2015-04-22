@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:gecko="http://pst.istc.cnr.it/ijcai/gecko/ontology#">
+	
+	<!-- Ontology Header -->
+	<owl:Ontology rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology">
+		<dc:title>The GECKO Ontology</dc:title>
+		<dc:description>
+			A suitable Ontology for the GECKO distribute architecture
+		</dc:description>
+	</owl:Ontology>
+	
+	<!-- AGENT CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#agent">
+		<rdfs:label>Agent</rdfs:label>
+		<rdfs:comment>Class representing a general agent in the GECKO distribute architecture</rdfs:comment>	
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#module">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#agent" />
+		<rdfs:label>Transportation Module</rdfs:label>
+		<rdfs:comment>Class representing a transportation module agent in the GECKO distribute architecture</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#machine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#agent" />
+		<rdfs:label>Working Machine</rdfs:label>
+		<rdfs:comment>Class representing a working machine agent in the GECKO distribute architecture</rdfs:comment>
+	</owl:Class>
+	
+	<!-- FUNCTIONALITY CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#functionality">
+		<rdfs:label>Functionality</rdfs:label>
+		<rdfs:comment>Class representing agents' functionalities in the GECKO distribute architecture</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#action">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#functionality" />
+		<rdfs:label>Action</rdfs:label>
+		<rdfs:comment>
+			Class representing action functionalities of an agent. 
+			This sub-class models functionalities able to produce an effect in the environment, e.g. move something. 
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#action" />
+		<rdfs:label>Channel</rdfs:label>
+		<rdfs:comment>
+			Class representing channel functionalities of an agent.
+			This sub-class models all types of actions that are able to move something within the production environment.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#changeover">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#action" />
+		<rdfs:label>Change Over</rdfs:label>
+		<rdfs:comment>
+			Class representing change over functionalities of an agent.
+			This sub-class models all types of actions that are able to change the internal capabilities of the agent.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<!-- COMPONENT CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#component">
+		<rdfs:label>Component</rdfs:label>
+		<rdfs:comment>
+			Class representing components of an agent in the GECKO distribute architecture
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#information">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#component" />
+		<rdfs:label>Information</rdfs:label>
+		<rdfs:comment>
+			Class representing information components of an agent.
+			This sub-class models all types of components that neither change agent's capacities nor 
+			act on the elements of the production environment but characterize agents' behaviors 
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#actuator">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#component" />
+		<rdfs:label>Actuator</rdfs:label>
+		<rdfs:comment>
+			Class representing actuator components of an agent.
+			This sub-class models all type of components that affect the elements in the production 
+			environment by changing their status. Actuators are the basic components that allow agents
+			to operate in the environment according to their capabilities.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#port">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#information" />
+		<rdfs:label>Port</rdfs:label>
+		<rdfs:comment>
+			Class representing ports of an agent.
+			This sub-class models components that make the agent able to cooperate with other 
+			agents in the production environment
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#actuator" />
+		<rdfs:label>Cross Transfer Engine</rdfs:label>
+		<rdfs:comment>
+			Class representing cross transfer engines of an agent in the GECKO distribute architecture.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#actuator" />
+		<rdfs:label>Conveyor Engine</rdfs:label>
+		<rdfs:comment>
+			Class representing conveyor engines of an agent in the GECKO distribute architecture.
+		</rdfs:comment>
+	</owl:Class>
+	
+	<!-- TOPOLOGY CLASSES DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#topology">
+		<rdfs:label>Topology</rdfs:label>
+		<rdfs:comment>
+			Class representing topology information about the agent and the overall shop floor 
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#topology" />
+		<rdfs:label>Neighbor</rdfs:label>
+		<rdfs:comment>
+			Class representing neighbor information of an agent
+		</rdfs:comment>
+	</owl:Class>
+	
+	<!-- STATE CLASS DEFINITION -->
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#state">
+		<rdfs:label>Component State</rdfs:label>
+		<rdfs:comment>
+			Class representing the possible states of agents' components
+		</rdfs:comment>
+	</owl:Class>
+	
+	
+	
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#ID" />
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#minDuration" />
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#maxDuration" />
+	
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasState" />
+	
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasFunctionality" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasComponent" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasNeighbor" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#connectedBy" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasRestriction" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#hasImplementation" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#from" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#to" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#type" />
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction">
+		<rdfs:label>Restriction</rdfs:label>
+		<rdfs:comment>
+			Specify some restrictions on elements
+		</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction">
+	<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<rdfs:label>Temporal Restriction</rdfs:label>
+		<rdfs:comment>
+			Specify temporal restrictions among elements
+		</rdfs:comment>
+	</owl:Class>
+	
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#implementation">
+		<rdfs:label>Implementation</rdfs:label>
+		<rdfs:comment>
+			Functionality implementation
+		</rdfs:comment>
+	</owl:Class>
+
+	<!-- TEMPORAL RELATIONS -->
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#during">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#meets">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#before">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#equals">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#contains">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#starts-during">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#ends-during">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#start-start">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ijcai/gecko/ontology#end-end">
+		<rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporal" />
+	</owl:ObjectProperty>
+	
+	
+	<!-- KNOWLEDGE BASE INSTANCE -->
+	
+	<!-- PORT F1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port F1 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port F1 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port F1</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1notavailable" />
+	</rdf:Description>
+	
+	
+	<!-- PORT F2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portF2available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port F2 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portF2notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port F2 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portF2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port F2</gecko:ID>
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF2available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF2notavailable" />
+	</rdf:Description>
+	
+	
+	<!-- PORT B1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port B1 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port B1 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port B1</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1notavailable" />
+	</rdf:Description>
+	
+	<!-- PORT B2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portB2available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port B2 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portB2notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port B2 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portB2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port B2</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB2available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB2notavailable" />
+	</rdf:Description>
+	
+	<!-- PORT L1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port L1 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port L1 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port L1</gecko:ID>
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1notavailable" />
+	</rdf:Description>
+	
+	<!-- PORT L2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL2available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port L2 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL2notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port L2 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port L2</gecko:ID>
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL2available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL2notavailable" />
+	</rdf:Description>
+	
+	
+	<!-- PORT L3 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL3available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port L3 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL3notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port L3 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portL3">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port L3</gecko:ID>
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL3available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL3notavailable" />
+	</rdf:Description>
+	
+	<!-- PORT R1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port R1 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port R1 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port R1</gecko:ID>
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1notavailable" />
+	</rdf:Description>
+	
+	<!-- PORT R2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR2available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port R2 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR2notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port R2 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port R2</gecko:ID>
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR2available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR2notavailable" />
+	</rdf:Description>
+	
+	<!-- PORT R3 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR3available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port R3 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR3notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Port R3 Not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portR3">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port R3</gecko:ID>
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR3available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR3notavailable" />
+	</rdf:Description>	
+	
+
+	
+	
+	
+	<!-- NEIGHBOR F1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor F1 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor F1 not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>Neighbor F1</gecko:ID>
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1" />
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1notavailable" />
+	</rdf:Description>
+	
+	<!-- NEIGHBOR F2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF2available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor F2 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF2notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor F2 not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>Neighbor F2</gecko:ID>
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF2" />
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF2available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF2notavailable" />
+	</rdf:Description>
+	
+	
+	<!-- PORT B1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB1available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor B1 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB1notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor B1 not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>Neighbor B1</gecko:ID>
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1" />
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB1available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB1notavailable" />
+	</rdf:Description>
+	
+	<!-- PORT B2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB2available">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor B2 Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB2notavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor B2 not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>Neighbor B2</gecko:ID>
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1" />
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB2available" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB2notavailable" />
+	</rdf:Description>
+	
+	
+	<!-- NEIGHBOR L -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborLavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor L Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborLnotavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor L not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborL">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>Neighbor L</gecko:ID>
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1" />
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL2" />
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL3" />
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborLavailable" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborLnotavailable" />
+	</rdf:Description>
+	
+	<!-- NEIGHBOR R -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborRavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor R Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborRnotavailable">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Neighbor R not Available</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborR">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>Neighbor R</gecko:ID>
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1" />
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR2" />
+		<gecko:connectedBy rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR3" />
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborRavailable" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborRnotavailable" />
+	</rdf:Description>
+	
+	<!-- STRAIGHT CONVEYOR 1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1forward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Straight Conveyor 1 Forward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1backward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Straight Conveyor 1 Backward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1still">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Straight Conveyor 1 Still</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straightconveyor1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Straight Conveyor 1</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1backward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1still" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1restriction" />
+	</rdf:Description>
+	
+	<!-- STRAIGHT CONVEYOR 2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2forward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Straight Conveyor 2 Forward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2backward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Straight Conveyor 2 Backward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2still">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Straight Conveyor 2 Still</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#straightconveyor2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Straight Conveyor 2</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2backward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2still" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS CONVEYOR 2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2forward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 2 Forward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2backward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 2 Backward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2still">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 2 Still</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor2restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Cross Conveyor 2</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2backward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2still" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor2restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS CONVEYOR 3 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3forward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 3 Forward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3backward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 3 Backward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3still">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 3 Still</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor3restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor3">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Cross Conveyor 3</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3backward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3still" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor3restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS CONVEYOR 4 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4forward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 4 Forward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4backward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 4 Backward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4still">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 4 Still</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor4restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor4">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Cross Conveyor 4</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4backward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4still" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor4restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS CONVEYOR 5 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5forward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 5 Forward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5backward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 5 Backward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5still">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 5 Still</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor5restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor5">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Cross Conveyor 5</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5backward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5still" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor5restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS CONVEYOR 6 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6forward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 6 Forward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6backward">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 6 Backward</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6still">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross Conveyor 6 Still</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor6restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor6">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Cross Conveyor 6</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6forward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6backward" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6still" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor6restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS TRANSFER 1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1up">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 1 Up</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1down">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 1 Down</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1changing">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 1 Changing</gecko:ID>
+		<gecko:minDuration>3</gecko:minDuration>
+		<gecko:maxDuration>3</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1down" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine" />
+		<gecko:ID>Cross Transfer 1</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1down" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1changing" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS TRANSFER 2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2up">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 2 Up</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2down">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 2 Down</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2changing">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 2 Changing</gecko:ID>
+		<gecko:minDuration>3</gecko:minDuration>
+		<gecko:maxDuration>3</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2down" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine" />
+		<gecko:ID>Cross Transfer 2</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2down" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2changing" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS TRANSFER 3 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3up">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 3 Up</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3down">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 3 Down</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3changing">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 3 Changing</gecko:ID>
+		<gecko:minDuration>3</gecko:minDuration>
+		<gecko:maxDuration>3</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3down" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine" />
+		<gecko:ID>Cross Transfer 3</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3down" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3changing" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS TRANSFER 4 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4up">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 4 Up</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4down">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 4 Down</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4changing">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 4 Changing</gecko:ID>
+		<gecko:minDuration>3</gecko:minDuration>
+		<gecko:maxDuration>3</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4down" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine" />
+		<gecko:ID>Cross Transfer 4</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4down" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4changing" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS TRANSFER 5 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5up">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 5 Up</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5down">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 5 Down</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5changing">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 5 Changing</gecko:ID>
+		<gecko:minDuration>3</gecko:minDuration>
+		<gecko:maxDuration>3</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5down" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine" />
+		<gecko:ID>Cross Transfer 5</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5down" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5changing" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5restriction" />
+	</rdf:Description>
+	
+	<!-- CROSS TRANSFER 6 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6up">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 6 Up</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6down">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 6 Down</gecko:ID>
+		<gecko:minDuration>1</gecko:minDuration>
+		<gecko:maxDuration>H</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6changing">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#state" />
+		<gecko:ID>Cross 6 Changing</gecko:ID>
+		<gecko:minDuration>3</gecko:minDuration>
+		<gecko:maxDuration>3</gecko:maxDuration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6restriction">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#restriction" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6down" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#crosstransferengine" />
+		<gecko:ID>Cross Transfer 6</gecko:ID>
+		<!-- states -->
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6up" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6down" />
+		<gecko:hasState rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6changing" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6restriction" />
+	</rdf:Description>
+	
+	
+	
+	<!-- CHANNEL F1 B1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1B1implementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#implementation" />
+		<!-- constraints -->
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1available" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB1available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1available" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1B1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel" />
+		<gecko:ID>Channel F1 B1</gecko:ID>
+		<gecko:minDuration>30</gecko:minDuration>
+		<gecko:maxDuration>60</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1B1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F1 L1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1L1implementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1backward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1down" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1up" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1L1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel" />
+		<gecko:ID>Channel F1 L1</gecko:ID>
+		<gecko:minDuration>10</gecko:minDuration>
+		<gecko:maxDuration>30</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1L1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL L1 R1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelL1R1implementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1up" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2up" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1forward" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1L1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel" />
+		<gecko:ID>Channel F1 L1</gecko:ID>
+		<gecko:minDuration>10</gecko:minDuration>
+		<gecko:maxDuration>30</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1L1implementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL F1 R1 -->
+	
+	<!-- Implementation 2 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1available" />
+		
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1down" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1backward" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight1backward" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3down" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3up" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3forward" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4forward" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4up" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4down" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2forward" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2up" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2forward" />
+		<!-- restrictions -->
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction1" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction2" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction3" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction4" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction5" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction6" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction7" />
+		<gecko:hasRestriction rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction8" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>before</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3down" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3up" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>during</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3forward" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3up" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction3">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>equals</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3forward" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction4">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>during</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4forward" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4up" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction5">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>before</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4up" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4down" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction6">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>during</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4down" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction7">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>during</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2down" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straight2forward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2restriction8">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#temporalrestriction" />
+		<gecko:type>before</gecko:type>
+		<gecko:from rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2down" />
+		<gecko:to rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2up" />
+	</rdf:Description>
+	
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel" />
+		<gecko:ID>Channel F1 R1</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>80</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1implementation2" />
+	</rdf:Description>
+	
+	
+	<!-- T1 AGENT SPECIFICATION -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#module">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#module" />
+		<gecko:ID>T1</gecko:ID>
+		
+		<!-- functionalities -->
+		<gecko:hasFunctionality rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1B1" />
+		<gecko:hasFunctionality rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelF1R1" />
+		
+		<!-- composition -->
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straightconveyor1" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#straightconveyor2" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor2" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor3" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor4" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor5" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#crossconveyor6" />
+		
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF1" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF2" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB1" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB2" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL1" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL2" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portL3" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR1" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR2" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portR3" />
+		
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross1" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross2" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross3" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross4" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross5" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#cross6" />
+		
+		<!-- local topology -->
+		<gecko:hasNeighbor rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF1" />
+		<gecko:hasNeighbor rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB1" />
+		<gecko:hasNeighbor rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF2" />
+		<gecko:hasNeighbor rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB2" />
+		<gecko:hasNeighbor rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborL" />
+		<gecko:hasNeighbor rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborR" />
+	</rdf:Description>
+	
+	
+</rdf:RDF>

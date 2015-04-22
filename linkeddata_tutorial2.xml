@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	RDF/XML document declaration
+	An RDF  document can contain more than one statement describing the data graph. 
+-->
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:feature="http://www.linkeddatatools.com/clothing-features#">
+	
+	<!-- 
+		The rdf:Description tag can contain one or more statements about the same subject.
+		This tag simply means "I'm going to describe something (a subject) and I'm giving
+		it the unique ID http://www.linkeddatatools.com/clothes#t-shirt".
+	-->
+	<rdf:Description rdf:about="http://www.linkeddatatools.com/clothes#t-shirt">
+		
+		<!-- 
+			RDF statements describe the characteristics of their subjects using 
+			properties (predicates in RDF terminology).
+			
+			The first property says "the subject has property with name feature:size
+			which has the literal value 12".
+			
+			The second property says "the subject has property with name feature:color
+			with object referring to the statement with ID http://linkeddatatools.com/colors#white"
+			
+			Note that the second predicate is referring to a subject ID of another 
+			statement (a resource). Objects in RDF can refer (reference) the subjects
+			of other statements. 
+		-->
+		
+		<feature:size>12</feature:size>
+		<feature:color rdf:resource="http://www.linkeddatatools.com/colors#white" />
+		
+	</rdf:Description>
+
+</rdf:RDF>

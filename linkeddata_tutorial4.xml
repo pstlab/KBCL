@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:plants="http://www.linkeddatatools.com/plants#">
+	
+	<!-- 
+		OWL Ontology Header
+		
+		Although an ontology doesn't have to include header, it is a good
+		practice to include information that can help others to understand
+		what your ontology contains.
+		In this example we include a title and a description for the ontology.
+		But this is also the place where we could include version information
+		and where you can state that your ontology imports other ontologies.    
+	-->
+	<owl:Ontology rdf:about="http://www.linkeddatatools.com/plants">
+		<dc:title>The LinkedDataTools.com Example Plant Ontology </dc:title>
+		<dc:description>
+			An example ontology written for the LinkedDataTools.com RDFS and OWL
+			introduction tutorial 
+		</dc:description>
+	</owl:Ontology>
+	
+	<!-- OWL Class definition - PlantType -->
+	<owl:Class rdf:about="http://www.linkeddatatools.com/plants#planttypes">
+		<rdfs:label>The Plant Type</rdfs:label>
+		<rdfs:comment>The Class of Plant Types.</rdfs:comment>
+	</owl:Class>
+	
+	<!-- OWL SubClass definition - Flowers -->
+	<owl:Class rdf:about="http://www.linkeddatatools.com/plants#flowers">
+		
+		<!-- Flowers is a SubClassification of planttype -->
+		<rdfs:subClassOf rdf:resource="http://www.linkeddatatools.com/plants#planttypes" />
+		<rdfs:label>Flowering plants</rdfs:label>
+		<rdfs:comment>Flowering plants, also known as angiosperms.</rdfs:comment>
+		
+	</owl:Class>
+	
+	<!-- OWL SubClass definition - Shrub -->
+	<owl:Class rdf:about="http://www.linkeddatatools.com/plants#shrubs">
+		
+		<!-- Shrub is a SubClassification of planttype -->
+		<rdfs:subClassOf rdf:resource="http://www.linkeddatatools.com/plants#planttypes" />
+		<rdfs:label>Shrubbery</rdfs:label>
+		<rdfs:comment>Shrubs, a type of plant which branches from the base</rdfs:comment>
+	</owl:Class>
+	
+	<!-- Define the family datatype property -->
+	<owl:DatatypeProperty rdf:about="http://linkeddatatools.com/plants#family" />
+	
+	
+	<!-- 
+		IMPORTANT POINT 
+		At this point, if you are an object oriented programmer, your mind may well 
+		be thinking of programmatic object classes and their associated properties and 
+		comparing them to what we've just learned out OWL classes. Don't - they're not quite 
+		the same. Note from the example above. The 'family' property was defined independent 
+		of any class type, and was assigned to the instance of class flower (magnolia). 
+		Another instance of the same class may not have this property. So in OWL, note that 
+		the properties that instances have are not described in their class types, but their 
+		instances. In this case, you may use the same 'family' property for an instance of a 
+		completely different class.
+	 -->
+	
+	<!-- define the similarlyPopularTo object property -->
+	<owl:ObjectProperty rdf:about="http://www.linkeddatatools.com/plants#similarlyPopularTo" />
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- Define the Orchid class instance -->
+	<rdf:Description rdf:about="http://www.linkeddatatools.com/plants#orchid">
+		<!-- Orchid is an individual of the flowers class -->
+		<rdf:type rdf:resource="http://www.linkeddatatools.com/plants#flowers" />
+		<plants:family>Orchidace</plants:family>
+		<plants:similarlyPopularTo rdf:resource="http://www.linkeddatatools.com/plants#magnolia" />
+	</rdf:Description>
+	
+	
+	<!-- Individuals (instance) example RDF Statement -->
+	<rdf:Description rdf:about="http://www.linkeddatatools.com/plants#magnolia">
+		<!-- Magnolia is a type of (instance) the flawers classification -->
+		<rdf:type rdf:resource="http://www.linkeddatatools.com/plants#flowers" />
+		<!-- The Magnolia is part of the 'Magnoliceae' family -->
+		<plants:family>Magnoliceae</plants:family>
+	</rdf:Description>
+	
+</rdf:RDF>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:gecko="http://pst.istc.cnr.it/gecko/test/ontology#">
+	
+	<!-- SCHEMA -->
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#agent">
+		<rdfs:label>Agent</rdfs:label>
+		<rdfs:comment>Entity Agent in the GECKO multi-agent system</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#module">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#agent" />
+		<rdfs:label>Transportation Module</rdfs:label>
+		<rdfs:comment>Entity Module which represents a transportation module in the GECKO production environment</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#machine">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#agent" />
+		<rdfs:label>Machine</rdfs:label>
+		<rdfs:comment>Entity Machine which represents a working machine in the GEKCO production environment</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#functionality">
+		<rdfs:label>Functionality</rdfs:label>
+		<rdfs:comment>Entity Functionality which represents a functionality of a GECKO agent</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#action">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#functionality" />
+		<rdfs:label>Action</rdfs:label>
+		<rdfs:comment>Entity Action which represents a functionality able to change the status of the environment</rdfs:comment>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#channel">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#action" />
+		<rdfs:label>Channel</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#changeover">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#action" />
+		<rdfs:label>Change Over</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#test">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#functionality" />
+		<rdfs:label>Test</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#communication">
+		<rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#functionality" />
+		<rdfs:label>Communication</rdfs:label>
+	</owl:Class>
+	
+	
+	<owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#ID" />
+	<owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/gecko/test/ontology#functionalities" />
+	
+	
+	<!-- INSTANCE -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/test/kb/t1#ChannelFB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#channel" />
+		<gecko:ID>Channel-F-B</gecko:ID>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/test/kb/t1#ChannelBF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#channel" />
+		<gecko:ID>Channel-B-F</gecko:ID>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/test/kb/t1#ChangeoverU1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#changeover" />
+		<gecko:ID>Change-Over TU1</gecko:ID>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/test/kb/t1#agent">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#module" />
+		<gecko:ID>T1</gecko:ID>
+		<gecko:functinalities>
+			<rdf:Bag>
+				<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/test/kb/t1#ChannelFB" />
+				<rdf:li rdf:resource="http://pst.istc.cnr.it/gecko/test/kb/t1#ChannelBF" />
+			</rdf:Bag>
+		</gecko:functinalities>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/test/kb/t2#agent">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#module" />
+		<gecko:ID>T2</gecko:ID>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/gecko/test/kb/m1#agent">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/gecko/test/ontology#machine" />
+		<gecko:ID>M1</gecko:ID>
+	</rdf:Description>
+	
+</rdf:RDF>

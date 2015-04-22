@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:gecko="http://pst.istc.cnr.it/ijcai/gecko/ontology#">
+	
+	<!-- Define port F of module T1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port F</gecko:ID>
+	</rdf:Description>
+
+	<!-- Define port B of module T1 -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#portB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#port" />
+		<gecko:ID>Port B</gecko:ID>
+	</rdf:Description>
+	
+	<!-- Define neighbors -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>T2</gecko:ID>
+		<gecko:onPort rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#neighbor" />
+		<gecko:ID>T3</gecko:ID>
+		<gecko:onPort rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB" />
+	</rdf:Description>
+	
+	<!-- Define conveyor -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#conveyor">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#conveyorengine" />
+		<gecko:ID>Conveyor</gecko:ID>
+	</rdf:Description>
+	
+	<!-- Define Channel functionalities -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelFB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel" />
+		<gecko:ID>Channel-F-B</gecko:ID>
+		<gecko:duration>10</gecko:duration>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#channelBF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#channel" />
+		<gecko:ID>Channel-B-F</gecko:ID>
+		<gecko:duration>10</gecko:duration>
+	</rdf:Description>
+	
+	<!-- Define the transportation module agent -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ijcai/gecko/t1#module">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/ontology#module" />
+		<gecko:ID>T1</gecko:ID>
+		
+		<!-- functionalities -->
+		<gecko:hasFunctionality rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelFB" />
+		<gecko:hasFunctionality rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#channelBF" />
+		
+		<!-- composition -->
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#conveyor" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portF" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#portB" />
+		
+		<!-- local topology -->
+		<gecko:hasNeighbor rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborF" />
+		<gecko:hasComponent rdf:resource="http://pst.istc.cnr.it/ijcai/gecko/t1#neighborB" />
+	</rdf:Description>
+
+</rdf:RDF>

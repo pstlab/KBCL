@@ -1,0 +1,30 @@
+PROBLEM T1_Problem (DOMAIN T1_Domain) 
+{
+	f00 <fact> T1_Channel.T1_Channel_timeline.Idle() AT [0, 0] [0, +INF] [1, +INF];
+	
+	f01 <fact> T1_Cross_Transfer_1.T1_Cross_Transfer_1_timeline.Cross_1_Down() AT [0, 0] [0, +INF] [1, +INF];
+	f02 <fact> T1_Cross_Transfer_2.T1_Cross_Transfer_2_timeline.Cross_2_Down() AT [0, 0] [0, +INF] [1, +INF];
+	f03 <fact> T1_Cross_Transfer_3.T1_Cross_Transfer_3_timeline.Cross_3_Down() AT [0, 0] [0, +INF] [1, +INF];
+	
+	f07 <fact> T1_Port_F.T1_Port_F_timeline.Port_F_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f09 <fact> T1_Port_B.T1_Port_B_timeline.Port_B_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f11 <fact> T1_Port_L1.T1_Port_L1_timeline.Port_L1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f12 <fact> T1_Port_L2.T1_Port_L2_timeline.Port_L2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f13 <fact> T1_Port_L3.T1_Port_L3_timeline.Port_L3_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f14 <fact> T1_Port_R1.T1_Port_R1_timeline.Port_R1_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f15 <fact> T1_Port_R2.T1_Port_R2_timeline.Port_R2_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f16 <fact> T1_Port_R3.T1_Port_R3_timeline.Port_R3_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	
+	f17 <fact> T1_Main_Conveyor.T1_Main_Conveyor_timeline.Main_Conveyor_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f19 <fact> T1_Cross_Conveyor_1.T1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f20 <fact> T1_Cross_Conveyor_2.T1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Still() AT [0, 0] [0, +INF] [1, +INF];
+	f21 <fact> T1_Cross_Conveyor_3.T1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Still() AT [0, 0] [0, +INF] [1, +INF];
+	
+	f25 <fact> T1_Neighbor_F.T1_Neighbor_F_timeline.Neighbor_F_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f26 <fact> T1_Neighbor_R.T1_Neighbor_R_timeline.Neighbor_R_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f27 <fact> T1_Neighbor_B.T1_Neighbor_B_timeline.Neighbor_B_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	f28 <fact> T1_Neighbor_L.T1_Neighbor_L_timeline.Neighbor_L_Available() AT [0, 0] [1000, 1000] [1000, 1000];
+	
+	f29 <fact> T1_Send.T1_Send_timeline.Idle() AT [0, 0] [1, +INF] [1, +INF];
+	f30 <fact> T1_Receive.T1_Receive_timeline.Idle() AT [0, 0] [1, +INF] [1, +INF]; 
+}

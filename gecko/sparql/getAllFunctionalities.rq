@@ -1,0 +1,9 @@
+PREFIX rdfs:	<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX gecko:	<http://pst.istc.cnr.it/gecko/test/ontology#>
+
+SELECT ?id ?func
+WHERE {
+	?f <http://www.w3.org/2000/01/rdf-schema#subClassOf>* gecko:functionality .
+	?func a ?f .
+	?func gecko:ID ?id .
+}
