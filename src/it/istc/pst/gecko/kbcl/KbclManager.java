@@ -108,7 +108,8 @@ public class KbclManager
 		// create token request
 		EPSLTokenDescriptor goal = this.factory.createTokenDescriptor(
 				tl, 
-				value.getValue(), 
+				value.getValue(),
+				true,
 				new long[] {1, this.model.getHorizon()}, 
 				new long[] {1, this.model.getHorizon()}, 
 				new long[] {value.getDmin(), value.getDmax()},

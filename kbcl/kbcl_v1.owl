@@ -1,0 +1,561 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://pst.istc.cnr.it/ontology/kbcl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://pst.istc.cnr.it/ontology/kbcl">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#Action"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Agent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ChangeOver"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Channel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Element"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ExternalElement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Functionality"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InternalElement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Machine"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Module"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Neighbor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Port"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#canReceiveIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#canSendIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#connect"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasChannel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasElement"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasExternalElement"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasInput"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasInternalElement"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasNeighbor"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasOutput"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasPort"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isConnectedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isElementOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isExternalElementOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isInputIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isInternalElementOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isNeighborOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isOutputIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isPortOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isReceiveEnabled"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isSendEnabled"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#channel_bf"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#channel_fb"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#channel_fr"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#module_t1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#neighbor_b"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#neighbor_f"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#neighbor_r"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#port_b"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#port_f"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#port_r"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Channel"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Action"/>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="#hasInput"/>
+                <Class IRI="#Port"/>
+            </ObjectExactCardinality>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="#hasOutput"/>
+                <Class IRI="#Port"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Module"/>
+        <ObjectUnionOf>
+            <ObjectIntersectionOf>
+                <Class IRI="#Agent"/>
+                <ObjectMinCardinality cardinality="1">
+                    <ObjectProperty IRI="#canSendIn"/>
+                    <Class IRI="#Channel"/>
+                </ObjectMinCardinality>
+            </ObjectIntersectionOf>
+            <ObjectMinCardinality cardinality="1">
+                <ObjectProperty IRI="#canReceiveIn"/>
+                <Class IRI="#Channel"/>
+            </ObjectMinCardinality>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#Action"/>
+        <Class IRI="#Functionality"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Action"/>
+        <ObjectUnionOf>
+            <Class IRI="#ChangeOver"/>
+            <Class IRI="#Channel"/>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Agent"/>
+        <ObjectUnionOf>
+            <Class IRI="#Machine"/>
+            <Class IRI="#Module"/>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ChangeOver"/>
+        <Class IRI="#Action"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Channel"/>
+        <Class IRI="#Action"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Element"/>
+        <ObjectUnionOf>
+            <Class IRI="#ExternalElement"/>
+            <Class IRI="#InternalElement"/>
+        </ObjectUnionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ExternalElement"/>
+        <Class IRI="#Element"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InternalElement"/>
+        <Class IRI="#Element"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Machine"/>
+        <Class IRI="#Agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Module"/>
+        <Class IRI="#Agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Neighbor"/>
+        <Class IRI="#ExternalElement"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Port"/>
+        <Class IRI="#InternalElement"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#Agent"/>
+        <Class IRI="#Element"/>
+        <Class IRI="#Functionality"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ChangeOver"/>
+        <Class IRI="#Channel"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ExternalElement"/>
+        <Class IRI="#InternalElement"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Machine"/>
+        <Class IRI="#Module"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#channel_bf"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#channel_fb"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#channel_fr"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#module_t1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#neighbor_b"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#neighbor_f"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#neighbor_r"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#port_b"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#port_f"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="#port_r"/>
+    </ClassAssertion>
+    <DifferentIndividuals>
+        <NamedIndividual IRI="#channel_bf"/>
+        <NamedIndividual IRI="#channel_fb"/>
+        <NamedIndividual IRI="#channel_fr"/>
+        <NamedIndividual IRI="#module_t1"/>
+        <NamedIndividual IRI="#neighbor_b"/>
+        <NamedIndividual IRI="#neighbor_f"/>
+        <NamedIndividual IRI="#neighbor_r"/>
+        <NamedIndividual IRI="#port_b"/>
+        <NamedIndividual IRI="#port_f"/>
+        <NamedIndividual IRI="#port_r"/>
+    </DifferentIndividuals>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasInput"/>
+        <NamedIndividual IRI="#channel_bf"/>
+        <NamedIndividual IRI="#port_b"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasOutput"/>
+        <NamedIndividual IRI="#channel_bf"/>
+        <NamedIndividual IRI="#port_f"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasInput"/>
+        <NamedIndividual IRI="#channel_fb"/>
+        <NamedIndividual IRI="#port_f"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasOutput"/>
+        <NamedIndividual IRI="#channel_fb"/>
+        <NamedIndividual IRI="#port_b"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasInput"/>
+        <NamedIndividual IRI="#channel_fr"/>
+        <NamedIndividual IRI="#port_f"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasOutput"/>
+        <NamedIndividual IRI="#channel_fr"/>
+        <NamedIndividual IRI="#port_r"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasElement"/>
+        <NamedIndividual IRI="#module_t1"/>
+        <NamedIndividual IRI="#port_b"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasElement"/>
+        <NamedIndividual IRI="#module_t1"/>
+        <NamedIndividual IRI="#port_r"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasElement"/>
+        <NamedIndividual IRI="#module_t1"/>
+        <NamedIndividual IRI="#port_f"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#connect"/>
+        <NamedIndividual IRI="#port_b"/>
+        <NamedIndividual IRI="#neighbor_b"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#connect"/>
+        <NamedIndividual IRI="#port_f"/>
+        <NamedIndividual IRI="#neighbor_f"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#connect"/>
+        <NamedIndividual IRI="#port_r"/>
+        <NamedIndividual IRI="#neighbor_r"/>
+    </ObjectPropertyAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasNeighbor"/>
+        <ObjectProperty IRI="#hasExternalElement"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasPort"/>
+        <ObjectProperty IRI="#hasInternalElement"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#isNeighborOf"/>
+        <ObjectProperty IRI="#isExternalElementOf"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#isPortOf"/>
+        <ObjectProperty IRI="#isInternalElementOf"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isReceiveEnabled"/>
+        <ObjectProperty IRI="#canReceiveIn"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isSendEnabled"/>
+        <ObjectProperty IRI="#canSendIn"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isConnectedBy"/>
+        <ObjectProperty IRI="#connect"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasElement"/>
+        <ObjectProperty IRI="#isElementOf"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasExternalElement"/>
+        <ObjectProperty IRI="#isExternalElementOf"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isInputIn"/>
+        <ObjectProperty IRI="#hasInput"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isInternalElementOf"/>
+        <ObjectProperty IRI="#hasInternalElement"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isNeighborOf"/>
+        <ObjectProperty IRI="#hasNeighbor"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isOutputIn"/>
+        <ObjectProperty IRI="#hasOutput"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasPort"/>
+        <ObjectProperty IRI="#isPortOf"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#connect"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasInput"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasOutput"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#connect"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#hasElement"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#canReceiveIn"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#canSendIn"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#connect"/>
+        <Class IRI="#InternalElement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasChannel"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasElement"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasExternalElement"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasInput"/>
+        <Class IRI="#Action"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasInternalElement"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasNeighbor"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasOutput"/>
+        <Class IRI="#Action"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasPort"/>
+        <Class IRI="#Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#canReceiveIn"/>
+        <Class IRI="#Channel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#canSendIn"/>
+        <Class IRI="#Channel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#connect"/>
+        <Class IRI="#ExternalElement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasChannel"/>
+        <Class IRI="#Channel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasElement"/>
+        <Class IRI="#Element"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasExternalElement"/>
+        <Class IRI="#ExternalElement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasInput"/>
+        <Class IRI="#InternalElement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasInternalElement"/>
+        <Class IRI="#InternalElement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasNeighbor"/>
+        <Class IRI="#Neighbor"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasOutput"/>
+        <Class IRI="#InternalElement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasPort"/>
+        <Class IRI="#Port"/>
+    </ObjectPropertyRange>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#hasElement"/>
+            <ObjectProperty IRI="#connect"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#hasNeighbor"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#hasNeighbor"/>
+            <ObjectProperty IRI="#isConnectedBy"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#hasPort"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#hasPort"/>
+            <ObjectProperty IRI="#isInputIn"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#canReceiveIn"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#hasPort"/>
+            <ObjectProperty IRI="#isOutputIn"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#canSendIn"/>
+    </SubObjectPropertyOf>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+
