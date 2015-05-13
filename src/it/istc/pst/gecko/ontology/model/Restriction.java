@@ -1,8 +1,6 @@
 package it.istc.pst.gecko.ontology.model;
 
 import it.istc.pst.gecko.ontology.kb.ComponentDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
-import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +10,25 @@ import java.util.List;
  * @author alessandroumbrico
  *
  */
-public class Restriction 
+public abstract class Restriction 
 {
 	private String id;
 	private Component component;
 	private List<State> states;
 	
-	private ComponentDAO dao;
+	protected ComponentDAO dao;
 	
 	/**
 	 * 
 	 * @param id
 	 * @param comp
 	 */
-	public Restriction(String id, Component comp) {
+	protected Restriction(String id, Component comp) {
 		this.id = id;
 		this.component = comp;
 		
 		// lazy approach 
 		this.states = null;
-		
-		// get factory
-		KnowledgeBaseFactory factory = new RDFKnowledgeBaseFactory();
-		// create component DAO
-		this.dao = factory.createComponentDAO();
 	}
 	
 	/**

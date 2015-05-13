@@ -1,10 +1,10 @@
 package it.istc.pst.gecko.ontology.kb.model;
 
+import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
-import it.istc.pst.gecko.ontology.model.KnowledgeBaseFacade;
 
 import java.util.List;
 import java.util.Map;

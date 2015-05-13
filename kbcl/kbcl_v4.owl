@@ -1,0 +1,474 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY kbcl "http://pst.istc.cnr.it/ontology/kbcl#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:kbcl="http://pst.istc.cnr.it/ontology/kbcl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <Ontology rdf:about="http://pst.istc.cnr.it/ontology/kbcl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#connect -->
+
+    <ObjectProperty rdf:about="&kbcl;connect">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="&kbcl;ExternalElement"/>
+        <rdfs:domain rdf:resource="&kbcl;InternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasChannel -->
+
+    <ObjectProperty rdf:about="&kbcl;hasChannel">
+        <rdfs:range rdf:resource="&kbcl;Channel"/>
+        <rdfs:domain rdf:resource="&kbcl;Module"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasElement -->
+
+    <ObjectProperty rdf:about="&kbcl;hasElement">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
+        <rdfs:range rdf:resource="&kbcl;Element"/>
+        <inverseOf rdf:resource="&kbcl;isElementOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasExternalElement -->
+
+    <ObjectProperty rdf:about="&kbcl;hasExternalElement">
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
+        <rdfs:range rdf:resource="&kbcl;ExternalElement"/>
+        <rdfs:subPropertyOf rdf:resource="&kbcl;hasElement"/>
+        <inverseOf rdf:resource="&kbcl;isExternalElementOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasInput -->
+
+    <ObjectProperty rdf:about="&kbcl;hasInput">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&kbcl;Action"/>
+        <rdfs:range rdf:resource="&kbcl;InternalElement"/>
+        <inverseOf rdf:resource="&kbcl;isInputIn"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasInternalElement -->
+
+    <ObjectProperty rdf:about="&kbcl;hasInternalElement">
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
+        <rdfs:range rdf:resource="&kbcl;InternalElement"/>
+        <rdfs:subPropertyOf rdf:resource="&kbcl;hasElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasNeighbor -->
+
+    <ObjectProperty rdf:about="&kbcl;hasNeighbor">
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
+        <rdfs:range rdf:resource="&kbcl;Neighbor"/>
+        <rdfs:subPropertyOf rdf:resource="&kbcl;hasExternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasOutput -->
+
+    <ObjectProperty rdf:about="&kbcl;hasOutput">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&kbcl;Action"/>
+        <rdfs:range rdf:resource="&kbcl;InternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasPort -->
+
+    <ObjectProperty rdf:about="&kbcl;hasPort">
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
+        <rdfs:range rdf:resource="&kbcl;Port"/>
+        <rdfs:subPropertyOf rdf:resource="&kbcl;hasInternalElement"/>
+        <inverseOf rdf:resource="&kbcl;isPortOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isConnectedBy -->
+
+    <ObjectProperty rdf:about="&kbcl;isConnectedBy">
+        <inverseOf rdf:resource="&kbcl;connect"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isElementOf -->
+
+    <ObjectProperty rdf:about="&kbcl;isElementOf"/>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isExternalElementOf -->
+
+    <ObjectProperty rdf:about="&kbcl;isExternalElementOf"/>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isInputIn -->
+
+    <ObjectProperty rdf:about="&kbcl;isInputIn"/>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isInternalElementOf -->
+
+    <ObjectProperty rdf:about="&kbcl;isInternalElementOf">
+        <inverseOf rdf:resource="&kbcl;hasInternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isNeighborOf -->
+
+    <ObjectProperty rdf:about="&kbcl;isNeighborOf">
+        <inverseOf rdf:resource="&kbcl;hasNeighbor"/>
+        <rdfs:subPropertyOf rdf:resource="&kbcl;isExternalElementOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isOutputIn -->
+
+    <ObjectProperty rdf:about="&kbcl;isOutputIn">
+        <inverseOf rdf:resource="&kbcl;hasOutput"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#isPortOf -->
+
+    <ObjectProperty rdf:about="&kbcl;isPortOf">
+        <rdfs:subPropertyOf rdf:resource="&kbcl;isInternalElementOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Action -->
+
+    <Class rdf:about="&kbcl;Action">
+        <rdfs:subClassOf rdf:resource="&kbcl;Functionality"/>
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&kbcl;ChangeOver"/>
+                    <rdf:Description rdf:about="&kbcl;Channel"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Agent -->
+
+    <Class rdf:about="&kbcl;Agent">
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&kbcl;Machine"/>
+                    <rdf:Description rdf:about="&kbcl;Module"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#ChangeOver -->
+
+    <Class rdf:about="&kbcl;ChangeOver">
+        <rdfs:subClassOf rdf:resource="&kbcl;Action"/>
+        <disjointWith rdf:resource="&kbcl;Channel"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Channel -->
+
+    <Class rdf:about="&kbcl;Channel">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&kbcl;Action"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&kbcl;hasInput"/>
+                        <onClass rdf:resource="&kbcl;Port"/>
+                        <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                    </Restriction>
+                    <Restriction>
+                        <onProperty rdf:resource="&kbcl;hasOutput"/>
+                        <onClass rdf:resource="&kbcl;Port"/>
+                        <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&kbcl;Action"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Element -->
+
+    <Class rdf:about="&kbcl;Element">
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&kbcl;ExternalElement"/>
+                    <rdf:Description rdf:about="&kbcl;InternalElement"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#ExternalElement -->
+
+    <Class rdf:about="&kbcl;ExternalElement">
+        <rdfs:subClassOf rdf:resource="&kbcl;Element"/>
+        <disjointWith rdf:resource="&kbcl;InternalElement"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Functionality -->
+
+    <Class rdf:about="&kbcl;Functionality"/>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#InternalElement -->
+
+    <Class rdf:about="&kbcl;InternalElement">
+        <rdfs:subClassOf rdf:resource="&kbcl;Element"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Machine -->
+
+    <Class rdf:about="&kbcl;Machine">
+        <rdfs:subClassOf rdf:resource="&kbcl;Agent"/>
+        <disjointWith rdf:resource="&kbcl;Module"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Module -->
+
+    <Class rdf:about="&kbcl;Module">
+        <rdfs:subClassOf rdf:resource="&kbcl;Agent"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Neighbor -->
+
+    <Class rdf:about="&kbcl;Neighbor">
+        <rdfs:subClassOf rdf:resource="&kbcl;ExternalElement"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#Port -->
+
+    <Class rdf:about="&kbcl;Port">
+        <rdfs:subClassOf rdf:resource="&kbcl;InternalElement"/>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#channel_bf -->
+
+    <Thing rdf:about="&kbcl;channel_bf">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <kbcl:hasInput rdf:resource="&kbcl;port_b"/>
+        <kbcl:hasOutput rdf:resource="&kbcl;port_f"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#channel_fb -->
+
+    <Thing rdf:about="&kbcl;channel_fb">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <kbcl:hasOutput rdf:resource="&kbcl;port_b"/>
+        <kbcl:hasInput rdf:resource="&kbcl;port_f"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#channel_fr -->
+
+    <Thing rdf:about="&kbcl;channel_fr">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <kbcl:hasInput rdf:resource="&kbcl;port_f"/>
+        <kbcl:hasOutput rdf:resource="&kbcl;port_r"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#module_t1 -->
+
+    <Thing rdf:about="&kbcl;module_t1">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <kbcl:hasElement rdf:resource="&kbcl;port_b"/>
+        <kbcl:hasElement rdf:resource="&kbcl;port_f"/>
+        <kbcl:hasElement rdf:resource="&kbcl;port_r"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#neighbor_b -->
+
+    <Thing rdf:about="&kbcl;neighbor_b">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#neighbor_f -->
+
+    <Thing rdf:about="&kbcl;neighbor_f">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#neighbor_r -->
+
+    <Thing rdf:about="&kbcl;neighbor_r">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#port_b -->
+
+    <Thing rdf:about="&kbcl;port_b">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <kbcl:connect rdf:resource="&kbcl;neighbor_b"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#port_f -->
+
+    <Thing rdf:about="&kbcl;port_f">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <kbcl:connect rdf:resource="&kbcl;neighbor_f"/>
+    </Thing>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#port_r -->
+
+    <Thing rdf:about="&kbcl;port_r">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <kbcl:connect rdf:resource="&kbcl;neighbor_r"/>
+    </Thing>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&kbcl;Agent"/>
+            <rdf:Description rdf:about="&kbcl;Element"/>
+            <rdf:Description rdf:about="&kbcl;Functionality"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="&kbcl;channel_bf"/>
+            <rdf:Description rdf:about="&kbcl;channel_fb"/>
+            <rdf:Description rdf:about="&kbcl;channel_fr"/>
+            <rdf:Description rdf:about="&kbcl;module_t1"/>
+            <rdf:Description rdf:about="&kbcl;neighbor_b"/>
+            <rdf:Description rdf:about="&kbcl;neighbor_f"/>
+            <rdf:Description rdf:about="&kbcl;neighbor_r"/>
+            <rdf:Description rdf:about="&kbcl;port_b"/>
+            <rdf:Description rdf:about="&kbcl;port_f"/>
+            <rdf:Description rdf:about="&kbcl;port_r"/>
+        </distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

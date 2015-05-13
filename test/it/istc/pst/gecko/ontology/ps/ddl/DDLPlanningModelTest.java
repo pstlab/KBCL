@@ -1,7 +1,7 @@
 package it.istc.pst.gecko.ontology.ps.ddl;
 
+import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
 
 import java.util.List;

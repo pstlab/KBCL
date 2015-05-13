@@ -3,13 +3,13 @@ package it.istc.pst.gecko.kbcl.app.cli;
 import it.istc.pst.gecko.kbcl.KbclManager;
 import it.istc.pst.gecko.kbcl.exception.KbclInitializationException;
 import it.istc.pst.gecko.kbcl.exception.KbclRequestProcessingFailureException;
+import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
 import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.ExternalComponent;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
-import it.istc.pst.gecko.ontology.model.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
 
 import java.io.BufferedReader;

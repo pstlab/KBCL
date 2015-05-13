@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.kb;
 
-import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
 import it.istc.pst.gecko.ontology.model.Component;
@@ -18,6 +18,14 @@ import java.util.Map;
  */
 public interface AgentDAO 
 {
+	/**
+	 * 
+	 * @param name
+	 * @param type
+	 * @return
+	 */
+	public Agent createAgent(String name, AgentType type);
+	
 	/**
 	 * 
 	 * @return
@@ -41,9 +49,10 @@ public interface AgentDAO
 	 * 
 	 * @param id
 	 * @return
-	 * @throws RDFResourceNotFoundException
+	 * @throws ResourceNotFoundException
 	 */
-	public Agent retrieveAgentById(String id) throws RDFResourceNotFoundException;
+	public Agent retrieveAgentById(String id) 
+			throws ResourceNotFoundException;
 	
 	/**
 	 * 

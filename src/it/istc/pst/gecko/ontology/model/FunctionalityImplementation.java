@@ -10,7 +10,7 @@ import java.util.Map;
  * @author alessandroumbrico
  *
  */
-public class FunctionalityImplementation 
+public abstract class FunctionalityImplementation 
 {
 	private Functionality funcionality;
 	private List<TemporalConstraint> constraints;
@@ -20,7 +20,7 @@ public class FunctionalityImplementation
 	 * 
 	 * @param func
 	 */
-	public FunctionalityImplementation(Functionality func) {
+	protected FunctionalityImplementation(Functionality func) {
 		this.funcionality = func;
 		this.constraints = new ArrayList<TemporalConstraint>();
 		this.restrictions = new HashMap<State, List<TemporalConstraint>>();

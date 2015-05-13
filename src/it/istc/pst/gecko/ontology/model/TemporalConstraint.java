@@ -5,7 +5,7 @@ package it.istc.pst.gecko.ontology.model;
  * @author alessandroumbrico
  *
  */
-public class TemporalConstraint 
+public abstract class TemporalConstraint 
 {
 	private String id;
 	private String label;
@@ -17,7 +17,7 @@ public class TemporalConstraint
 	 * @param label
 	 * @param target
 	 */
-	public TemporalConstraint(String id, String label, State target) {
+	protected TemporalConstraint(String id, String label, State target) {
 		this.id = id;
 		this.label = label;
 		this.target = target;

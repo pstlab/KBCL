@@ -1,11 +1,11 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
+import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
-import it.istc.pst.gecko.ontology.model.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.State;
 import it.istc.pst.gecko.ontology.model.TemporalConstraint;
 

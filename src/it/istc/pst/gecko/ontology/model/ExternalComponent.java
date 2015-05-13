@@ -6,7 +6,7 @@ package it.istc.pst.gecko.ontology.model;
  * @author alessandroumbrico
  *
  */
-public class ExternalComponent extends Component
+public abstract class ExternalComponent extends Component
 {
 	private Component connectedBy;
 	
@@ -15,7 +15,7 @@ public class ExternalComponent extends Component
 	 * @param id
 	 * @param label
 	 */
-	public ExternalComponent(String id, String label) {
+	protected ExternalComponent(String id, String label) {
 		super(id, label);
 		// lazy approach
 		this.connectedBy = null;

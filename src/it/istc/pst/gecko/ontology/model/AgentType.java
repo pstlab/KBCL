@@ -5,7 +5,7 @@ package it.istc.pst.gecko.ontology.model;
  * @author alessandroumbrico
  *
  */
-public class AgentType 
+public abstract class AgentType 
 {
 	private String id;
 	private String label;
@@ -15,7 +15,7 @@ public class AgentType
 	 * @param id
 	 * @param label
 	 */
-	public AgentType(String id, String label) {
+	protected AgentType(String id, String label) {
 		this.id = id;
 		this.label = label;
 	}

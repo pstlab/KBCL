@@ -1,10 +1,14 @@
-package it.istc.pst.gecko.ontology.model;
+package it.istc.pst.gecko.ontology;
 
 import it.istc.pst.gecko.ontology.kb.AgentDAO;
 import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
 import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
+import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.gecko.ontology.model.Agent;
+import it.istc.pst.gecko.ontology.model.AgentType;
+import it.istc.pst.gecko.ontology.model.FunctionalityType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +88,7 @@ public class KnowledgeBaseFacade
 	 * @throws RDFResourceNotFoundException 
 	 */
 	public Agent getAgentById(String agentId) 
-			throws RDFResourceNotFoundException 
+			throws ResourceNotFoundException 
 	{
 		// create DAO
 		AgentDAO dao = this.factory.createAgentDAO();

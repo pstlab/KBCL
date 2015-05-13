@@ -6,6 +6,8 @@ import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.ExternalComponent;
 import it.istc.pst.gecko.ontology.model.Restriction;
 import it.istc.pst.gecko.ontology.model.State;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFModelFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +27,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 public class RDFComponentDAO implements ComponentDAO 
 {
 	private RDFDatasetManager manager;
+	private RDFModelFactory factory;
 	
 	/**
 	 * 
@@ -32,6 +35,7 @@ public class RDFComponentDAO implements ComponentDAO
 	protected RDFComponentDAO() {
 		// get data set reference
 		this.manager = RDFDatasetManager.getSingletonInstance();
+		this.factory = RDFModelFactory.getSingletonInstance();
 	}
 	
 	/**
@@ -59,7 +63,7 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create component
-			Component comp = new Component(
+			RDFComponent comp = this.factory.createComponent(
 					sol.get("?comp").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm());
 			
@@ -81,7 +85,7 @@ public class RDFComponentDAO implements ComponentDAO
 			throws RDFResourceNotFoundException 
 	{
 		// prepare data
-		Component comp = null;
+		RDFComponent comp = null;
 		
 		// prepare query
 		String queryString = "SELECT ?label "
@@ -101,7 +105,7 @@ public class RDFComponentDAO implements ComponentDAO
 			// next solution
 			QuerySolution sol = it.next();
 			// create component
-			comp = new Component(
+			comp = this.factory.createComponent(
 					id,
 					sol.get("?label").asLiteral().getLexicalForm());
 		}
@@ -142,7 +146,7 @@ public class RDFComponentDAO implements ComponentDAO
 			// next solution
 			QuerySolution sol = it.next();
 			// create component
-			comp = new ExternalComponent(
+			comp = this.factory.createExternalCopmonent(
 					id,
 					sol.get("?label").asLiteral().getLexicalForm());
 		}
@@ -182,12 +186,12 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create State
-			State s = new State(
+			State s = this.factory.createState(
 					sol.get("?state").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),
 					sol.get("?dmax").asLiteral().getLexicalForm(),
-					comp);
+					this.factory.createComponent(comp.getId(), comp.getLabel()));
 			
 			// add state
 			states.add(s);
@@ -227,7 +231,7 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create component
-			c = new Component(
+			c = this.factory.createComponent(
 					sol.get("?c").asResource().getURI(),
 					sol.get("?l").asLiteral().getLexicalForm());
 		}
@@ -262,9 +266,9 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create State
-			Restriction restriction = new Restriction(
+			Restriction restriction = this.factory.createRestriction(
 					sol.get("?restriction").asResource().getURI(),
-					comp);
+					this.factory.createComponent(comp.getId(), comp.getLabel()));
 			
 			// add state
 			restrictions.add(restriction);
@@ -302,12 +306,15 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create State
-			State state = new State(
+			State state = this.factory.createState(
 					sol.get("?state").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),
 					sol.get("?dmax").asLiteral().getLexicalForm(),
-					restriction.getComponent());
+					this.factory.createComponent(
+							restriction.getComponent().getId(), 
+							restriction.getComponent().getLabel())
+					);
 			
 			// add state
 			states.add(state);

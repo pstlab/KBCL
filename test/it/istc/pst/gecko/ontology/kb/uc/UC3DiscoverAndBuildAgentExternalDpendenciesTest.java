@@ -1,9 +1,9 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
+import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.State;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
 package it.istc.pst.gecko.ontology.kb.model;
 
+import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Restriction;
 import it.istc.pst.gecko.ontology.model.State;
 

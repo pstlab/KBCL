@@ -5,7 +5,7 @@ package it.istc.pst.gecko.ontology.model;
  * @author alessandroumbrico
  *
  */
-public class State 
+public abstract class State 
 {
 	private String id;
 	private String label;
@@ -21,7 +21,7 @@ public class State
 	 * @param dmax
 	 * @param component
 	 */
-	public State(String id, String label, String dmin, String dmax, Component component) {
+	protected State(String id, String label, String dmin, String dmax, Component component) {
 		this.id = id;
 		this.label = label;
 		this.component = component;

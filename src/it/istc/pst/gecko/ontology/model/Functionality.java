@@ -1,8 +1,6 @@
 package it.istc.pst.gecko.ontology.model;
 
 import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
-import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
  * @author alessandroumbrico
  *
  */
-public class Functionality 
+public abstract class Functionality 
 {
 	private String id;
 	private String label;
@@ -21,7 +19,7 @@ public class Functionality
 	private String dmax;
 	private List<FunctionalityImplementation> implementations;
 	
-	private FunctionalityDAO dao;
+	protected FunctionalityDAO dao;
 	
 	/**
 	 * 
@@ -31,7 +29,7 @@ public class Functionality
 	 * @param dmax
 	 * @param type
 	 */
-	public Functionality(String id, String label, String dmin, String dmax, FunctionalityType type) {
+	protected Functionality(String id, String label, String dmin, String dmax, FunctionalityType type) {
 		this.id = id;
 		this.label = label;
 		this.type = type;
@@ -40,9 +38,6 @@ public class Functionality
 		
 		// lazy approach
 		this.implementations = null;
-		// create DAO
-		KnowledgeBaseFactory factory = new RDFKnowledgeBaseFactory();
-		this.dao = factory.createFunctionalityDAO();
 	}
 	
 	/**

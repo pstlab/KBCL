@@ -2,7 +2,7 @@ package it.istc.pst.gecko.ontology.kb.rdf;
 
 import it.istc.pst.gecko.ontology.kb.AgentDAO;
 import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
-import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
 import it.istc.pst.gecko.ontology.model.Component;
@@ -156,7 +156,7 @@ public class RDFAgentDAOTest
 			Assert.assertEquals(a1.getId(), a2.getId());
 			Assert.assertEquals(a1.getLabel(), a2.getLabel());
 		}
-		catch (RDFResourceNotFoundException ex) {
+		catch (ResourceNotFoundException ex) {
 			Assert.assertTrue(false);
 		}
 		
@@ -166,7 +166,7 @@ public class RDFAgentDAOTest
 			System.out.println(a3);
 			Assert.assertTrue(false);
 		}
-		catch (RDFResourceNotFoundException ex) {
+		catch (ResourceNotFoundException ex) {
 			Assert.assertNotNull(ex);
 			System.out.println("OK!");
 		}

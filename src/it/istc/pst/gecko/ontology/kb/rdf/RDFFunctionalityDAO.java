@@ -2,12 +2,15 @@ package it.istc.pst.gecko.ontology.kb.rdf;
 
 import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
-import it.istc.pst.gecko.ontology.model.State;
 import it.istc.pst.gecko.ontology.model.TemporalConstraint;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFModelFactory;
+import it.istc.pst.gecko.ontology.model.rdf.RDFState;
+import it.istc.pst.gecko.ontology.model.rdf.RDFTemporalConstraint;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +30,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 public class RDFFunctionalityDAO implements FunctionalityDAO 
 {
 	private RDFDatasetManager manager;
+	private RDFModelFactory factory;
 	
 	/**
 	 * 
@@ -34,6 +38,7 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 	protected RDFFunctionalityDAO() {
 		// get data set reference
 		this.manager = RDFDatasetManager.getSingletonInstance();
+		this.factory = RDFModelFactory.getSingletonInstance();
 	}
 	
 	/**
@@ -62,7 +67,7 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			FunctionalityType f = new FunctionalityType(
+			FunctionalityType f = this.factory.createFunctionalityType(
 						sol.get("?type").asResource().getURI(),
 						sol.get("?label").asLiteral().getLexicalForm());
 			// add 
@@ -123,12 +128,12 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			Functionality f = new Functionality(
+			Functionality f = this.factory.createFunctionality(
 					sol.get("?func").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),
 					sol.get("?dmax").asLiteral().getLexicalForm(),
-					type);
+					this.factory.createFunctionalityType(type.getId(), type.getLabel()));
 			// add 
 			funcs.add(f);
 		}
@@ -169,12 +174,12 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 			QuerySolution sol = it.next();
 			
 			// create type
-			FunctionalityType type = new FunctionalityType(
+			RDFFunctionalityType type = this.factory.createFunctionalityType(
 					sol.get("?type").asResource().getURI(),
 					sol.get("?typeLabel").asLiteral().getLexicalForm());
 			
 			// get information
-			func = new Functionality(
+			func = this.factory.createFunctionality(
 					id,
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),
@@ -206,7 +211,9 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 		for (String id : ids) 
 		{
 			// create implementation
-			FunctionalityImplementation impl = new FunctionalityImplementation(f);
+			FunctionalityImplementation impl = this.factory.createFunctionalityImplementation(
+					this.factory.createFunctionality(f.getId(), f.getLabel(), f.getMinDuration(), f.getMaxDuration(), 
+							this.factory.createFunctionalityType(f.getType().getId(), f.getType().getLabel())));
 			
 			// prepare query to get implementation constraints
 			String queryString = "SELECT ?constraint ?state ?stateLabel ?dmin ?dmax ?comp ?compLabel "
@@ -229,12 +236,12 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 				// next solution
 				QuerySolution sol = it.next();
 				// create component
-				Component comp = new Component(
+				RDFComponent comp = this.factory.createComponent(
 						sol.get("?comp").asResource().getURI(),
 						sol.get("?compLabel").asLiteral().getLexicalForm());
 				
 				// create state
-				State state = new State(
+				RDFState state = this.factory.createState(
 						sol.get("?state").asResource().getURI(),
 						sol.get("?stateLabel").asLiteral().getLexicalForm(),
 						sol.get("?dmin").asLiteral().getLexicalForm(),
@@ -244,7 +251,7 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 				// create constraint
 				String constraintId = sol.get("?constraint").asResource().getURI();
 				String label = constraintId.split("#")[1].toUpperCase();
-				TemporalConstraint constraint = new TemporalConstraint(constraintId, label, state);
+				TemporalConstraint constraint = this.factory.createTemporalConstraint(constraintId, label, state);
 				// add constraint to implementation
 				impl.addConstraint(constraint);
 			}
@@ -282,27 +289,27 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 				QuerySolution sol = it.next();
 				
 				// create "from" state
-				State fromState = new State(
+				RDFState fromState = this.factory.createState(
 						sol.get("?fromState").asResource().getURI(), 
 						sol.get("?fromStateLabel").asLiteral().getLexicalForm(),
 						sol.get("?fromStateMinDur").asLiteral().getLexicalForm(), 
 						sol.get("?fromStateMaxDur").asLiteral().getLexicalForm(), 
-						new Component(
+						this.factory.createComponent(
 								sol.get("?fromComp").asResource().getURI(), 
 								sol.get("?fromCompLabel").asLiteral().getLexicalForm()));
 				
 				// create "to" state
-				State toState = new State(
+				RDFState toState = this.factory.createState(
 						sol.get("?toState").asResource().getURI(), 
 						sol.get("?toStateLabel").asLiteral().getLexicalForm(),
 						sol.get("?toStateMinDur").asLiteral().getLexicalForm(), 
 						sol.get("?toStateMaxDur").asLiteral().getLexicalForm(), 
-						new Component(
+						this.factory.createComponent(
 								sol.get("?toComp").asResource().getURI(),
 								sol.get("?toCompLabel").asLiteral().getLexicalForm()));
 				
 				// create temporal constraint
-				TemporalConstraint restriction = new TemporalConstraint(
+				RDFTemporalConstraint restriction = this.factory.createTemporalConstraint(
 						sol.get("?res").asResource().getURI(),
 						sol.get("?temporalLabel").asLiteral().getLexicalForm(), 
 						toState);

@@ -5,7 +5,7 @@ package it.istc.pst.gecko.ontology.model;
  * @author alessandroumbrico
  *
  */
-public class FunctionalityType 
+public abstract class FunctionalityType 
 {
 	private String id;
 	private String label;
@@ -15,7 +15,7 @@ public class FunctionalityType
 	 * @param id
 	 * @param label
 	 */
-	public FunctionalityType(String id, String label) {
+	protected FunctionalityType(String id, String label) {
 		this.id = id;
 		this.label = label;
 	}

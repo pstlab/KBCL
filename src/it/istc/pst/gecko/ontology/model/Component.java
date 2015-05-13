@@ -1,8 +1,6 @@
 package it.istc.pst.gecko.ontology.model;
 
 import it.istc.pst.gecko.ontology.kb.ComponentDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
-import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
  * @author alessandroumbrico
  *
  */
-public class Component 
+public abstract class Component 
 {
 	protected String id;
 	protected String label;
@@ -26,17 +24,13 @@ public class Component
 	 * @param id
 	 * @param label
 	 */
-	public Component(String id, String label) {
+	protected Component(String id, String label) {
 		this.id = id;
 		this.label = label;
 		
 		// lazy load approach
 		this.states = null;
 		this.restrictions = null;
-		// get factory
-		KnowledgeBaseFactory factory = new RDFKnowledgeBaseFactory();
-		// create DAO
-		this.dao = factory.createComponentDAO();
 	}
 	
 	/**

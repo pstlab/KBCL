@@ -1,8 +1,6 @@
 package it.istc.pst.gecko.ontology.model;
 
 import it.istc.pst.gecko.ontology.kb.AgentDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
-import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +12,7 @@ import java.util.Map;
  * @author alessandroumbrico
  *
  */
-public class Agent 
+public abstract class Agent 
 {
 	private String id;
 	private String label;
@@ -22,8 +20,8 @@ public class Agent
 	private Map<FunctionalityType, List<Functionality>> functionalities;
 	private List<Component> components;
 	private List<ExternalComponent> neighbors;
-	
-	private AgentDAO dao;
+
+	protected AgentDAO dao;
 	
 	/**
 	 * 
@@ -31,7 +29,7 @@ public class Agent
 	 * @param label
 	 * @param type
 	 */
-	public Agent(String id, String label, AgentType type) {
+	protected Agent(String id, String label, AgentType type) {
 		this.id = id;
 		this.label = label;
 		this.type = type;
@@ -39,11 +37,6 @@ public class Agent
 		this.functionalities = null;
 		this.components = null;
 		this.neighbors = null;
-		
-		// get factory
-		KnowledgeBaseFactory factory = new RDFKnowledgeBaseFactory();
-		// get DAO
-		this.dao = factory.createAgentDAO();
 	}
 	
 	/**

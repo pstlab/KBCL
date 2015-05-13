@@ -8,6 +8,12 @@ import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.ExternalComponent;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFModelFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +35,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 public class RDFAgentDAO implements AgentDAO
 {
 	private RDFDatasetManager manager;
+	private RDFModelFactory factory;
 	
 	/**
 	 * 
@@ -36,6 +43,7 @@ public class RDFAgentDAO implements AgentDAO
 	protected RDFAgentDAO() {
 		// get data set reference
 		this.manager = RDFDatasetManager.getSingletonInstance();
+		this.factory = RDFModelFactory.getSingletonInstance();
 	}
 	
 	/**
@@ -64,9 +72,10 @@ public class RDFAgentDAO implements AgentDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			AgentType a = new AgentType(
-						sol.get("?type").asResource().getURI(),
-						sol.get("?label").asLiteral().getLexicalForm());
+			AgentType a = 
+					this.factory.createAgentType(
+							sol.get("?type").asResource().getURI(),
+							sol.get("?label").asLiteral().getLexicalForm());
 			// add 
 			types.add(a);
 		}
@@ -123,11 +132,10 @@ public class RDFAgentDAO implements AgentDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			Agent a = new Agent(
+			Agent a = this.factory.createAgent(
 					sol.get("?agent").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
-					type);
-			
+					this.factory.createAgentType(type.getId(), type.getLabel()));
 			// add 
 			agents.add(a);
 		}
@@ -166,12 +174,12 @@ public class RDFAgentDAO implements AgentDAO
 			QuerySolution sol = it.next();
 			
 			// create type
-			AgentType type = new AgentType(
+			RDFAgentType type = this.factory.createAgentType(
 					sol.get("?type").asResource().getURI(),
 					sol.get("?typeLabel").asLiteral().getLexicalForm());
 			
 			// get information
-			a = new Agent(
+			a = this.factory.createAgent(
 					id,
 					sol.get("?label").asLiteral().getLexicalForm(),
 					type);
@@ -215,12 +223,12 @@ public class RDFAgentDAO implements AgentDAO
 		while (it.hasNext()) {
 			QuerySolution sol = it.next();
 			// create FunctionalityType
-			FunctionalityType type = new FunctionalityType(
+			RDFFunctionalityType type = this.factory.createFunctionalityType(
 					sol.get("?type").asResource().getURI(),
 					sol.get("?typeLabel").asLiteral().getLexicalForm());
 			
 			// create Functionality
-			Functionality func = new Functionality(
+			RDFFunctionality func = this.factory.createFunctionality(
 					sol.get("?func").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),
@@ -266,7 +274,7 @@ public class RDFAgentDAO implements AgentDAO
 			// get next
 			QuerySolution sol = it.next();
 			// create component
-			Component c = new Component(
+			RDFComponent c = this.factory.createComponent(
 					sol.get("?c").asResource().getURI(), 
 					sol.get("?label").asLiteral().getLexicalForm());
 			
@@ -304,7 +312,7 @@ public class RDFAgentDAO implements AgentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create neighbor
-			ExternalComponent neighbor = new ExternalComponent(
+			RDFExternalComponent neighbor = this.factory.createExternalCopmonent(
 					sol.get("?n").asResource().getURI(),
 					sol.get("?l").asLiteral().getLexicalForm());
 			
@@ -316,5 +324,11 @@ public class RDFAgentDAO implements AgentDAO
 		exec.close();
 		// get agent's neighbors
 		return neighbors;
+	}
+
+	@Override
+	public Agent createAgent(String name, AgentType type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

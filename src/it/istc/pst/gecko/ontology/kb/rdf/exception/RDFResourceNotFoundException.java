@@ -1,11 +1,13 @@
 package it.istc.pst.gecko.ontology.kb.rdf.exception;
 
+import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
+
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class RDFResourceNotFoundException extends Exception {
+public class RDFResourceNotFoundException extends ResourceNotFoundException {
 
 	/**
 	 * 
