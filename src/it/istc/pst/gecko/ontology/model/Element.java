@@ -1,5 +1,6 @@
 package it.istc.pst.gecko.ontology.model;
 
+
 /**
  * 
  * @author alessandroumbrico
@@ -7,9 +8,11 @@ package it.istc.pst.gecko.ontology.model;
  */
 public abstract class Element 
 {
-	private String id;
-	private String label;
-	private ElementType type;
+	protected String id;
+	protected String label;
+	protected ElementType type;
+	
+	
 	
 	/**
 	 * 

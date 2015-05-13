@@ -1,4 +1,4 @@
-package it.istc.pst.gecko.ontology.kb.model;
+package it.istc.pst.gecko.ontology.kb.model.rdf;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

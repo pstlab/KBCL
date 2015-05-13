@@ -1,14 +1,14 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.AgentDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
-import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,7 @@ import org.junit.Test;
 public class RDFAgentDAOTest 
 {
 	protected static final String DEFAULT_DATASET = "ijcai/test.xml";
-	private KnowledgeBaseFactory factory;
+	private RDFKnowledgeBaseFactory factory;
 	
 	/**
 	 * 
@@ -60,10 +60,10 @@ public class RDFAgentDAOTest
 		System.out.println();
 		
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		
 		// call DAO method
-		List<AgentType> types = dao.retrieveAllAgentTypes();
+		List<RDFAgentType> types = dao.retrieveAllAgentTypes();
 		Assert.assertNotNull(types);
 		Assert.assertFalse(types.isEmpty());
 		Assert.assertTrue(types.size() == 2);
@@ -82,10 +82,10 @@ public class RDFAgentDAOTest
 		System.out.println();
 		
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		
 		// call DAO method
-		List<Agent> agents = dao.retrieveAllAgents();
+		List<RDFAgent> agents = dao.retrieveAllAgents();
 		Assert.assertNotNull(agents);
 		Assert.assertFalse(agents.isEmpty());
 		Assert.assertTrue(agents.size() == 1);
@@ -104,10 +104,10 @@ public class RDFAgentDAOTest
 		System.out.println();
 		
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		
 		// get all agent types
-		List<AgentType> types = dao.retrieveAllAgentTypes();
+		List<RDFAgentType> types = dao.retrieveAllAgentTypes();
 		Assert.assertNotNull(types);
 		Assert.assertFalse(types.isEmpty());
 		Assert.assertTrue(types.size() == 2);
@@ -117,7 +117,7 @@ public class RDFAgentDAOTest
 			// print type
 			System.out.println(type);
 			// get agents by type
-			List<Agent> agents = dao.retrieveAgentsByType(type);
+			List<RDFAgent> agents = dao.retrieveAgentsByType(type);
 			
 			// check result
 			Assert.assertNotNull(agents);
@@ -140,7 +140,7 @@ public class RDFAgentDAOTest
 		System.out.println();
 		
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		
 		// get agents
 		Agent a1 = dao.retrieveAllAgents().get(0);
@@ -183,7 +183,7 @@ public class RDFAgentDAOTest
 		System.out.println();
 		
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		
 		// get an agent
 		Agent agent = dao.retrieveAllAgents().get(0);
@@ -191,7 +191,7 @@ public class RDFAgentDAOTest
 		System.out.println(agent);
 		
 		// get agent's functionalities
-		Map<FunctionalityType, List<Functionality>> funcs = dao.retrieveAgentFunctionalities(agent);
+		Map<RDFFunctionalityType, List<RDFFunctionality>> funcs = dao.retrieveAgentFunctionalities(agent);
 		Assert.assertNotNull(funcs);
 		Assert.assertTrue(funcs.size() > 0);
 		// print functionalities
@@ -209,15 +209,15 @@ public class RDFAgentDAOTest
 		System.out.println();
 		
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		
 		// get an agent
-		Agent agent = dao.retrieveAllAgents().get(0);
+		RDFAgent agent = dao.retrieveAllAgents().get(0);
 		Assert.assertNotNull(agent);
 		System.out.println(agent);
 		
 		// get agent's components
-		List<Component> comps = dao.retrieveAgentInternalComponents(agent);
+		List<RDFComponent> comps = dao.retrieveAgentInternalComponents(agent);
 		Assert.assertNotNull(comps);
 		Assert.assertTrue(comps.size() > 0);
 		// print functionalities
@@ -235,15 +235,15 @@ public class RDFAgentDAOTest
 		System.out.println();
 		
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		
 		// get an agent
-		Agent agent = dao.retrieveAllAgents().get(0);
+		RDFAgent agent = dao.retrieveAllAgents().get(0);
 		Assert.assertNotNull(agent);
 		System.out.println(agent);
 		
 		// get agent's components
-		List<ExternalComponent> list = dao.retrieveAgentExternalComponents(agent);
+		List<RDFExternalComponent> list = dao.retrieveAgentExternalComponents(agent);
 		Assert.assertNotNull(list);
 		Assert.assertTrue(list.size() > 0);
 		// print functionalities

@@ -1,14 +1,12 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.AgentDAO;
-import it.istc.pst.gecko.ontology.kb.ComponentDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.Restriction;
-import it.istc.pst.gecko.ontology.model.State;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFRestriction;
+import it.istc.pst.gecko.ontology.model.rdf.RDFState;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ import org.junit.Test;
 public class RDFComponentDAOTest 
 {
 	protected static final String DEFAULT_DATASET = "ijcai/test.xml";
-	private KnowledgeBaseFactory factory;
+	private RDFKnowledgeBaseFactory factory;
 	
 	/**
 	 * 
@@ -59,10 +57,10 @@ public class RDFComponentDAOTest
 		System.out.println();
 		
 		// create DAO
-		ComponentDAO dao = this.factory.createComponentDAO();
+		RDFComponentDAO dao = this.factory.createComponentDAO();
 		
 		// get an agent
-		List<Component> comps = dao.retrieveAllInternalComponents();
+		List<RDFComponent> comps = dao.retrieveAllInternalComponents();
 		Assert.assertNotNull(comps);
 		Assert.assertTrue(comps.size() > 0);
 		System.out.println(comps);
@@ -79,7 +77,7 @@ public class RDFComponentDAOTest
 		System.out.println();
 		
 		// create DAO
-		ComponentDAO dao = this.factory.createComponentDAO();
+		RDFComponentDAO dao = this.factory.createComponentDAO();
 		
 		// get an agent
 		Component c1 = dao.retrieveAllInternalComponents().get(0);
@@ -120,17 +118,17 @@ public class RDFComponentDAOTest
 		System.out.println();
 		
 		// create DAO
-		ComponentDAO dao = this.factory.createComponentDAO();
+		RDFComponentDAO dao = this.factory.createComponentDAO();
 		
 		// get an agent
-		List<Component> comps = dao.retrieveAllInternalComponents();
+		List<RDFComponent> comps = dao.retrieveAllInternalComponents();
 		// get a component
 		Component c = comps.get(0);
 		System.out.println("\n" + c + "\n");
 		// get agent's functionalities
 		Assert.assertNotNull(c);
 		// get states
-		List<State> states = dao.retrieveComponentStates(c);
+		List<RDFState> states = dao.retrieveComponentStates(c);
 		Assert.assertNotNull(states);
 		Assert.assertTrue(states.size() > 0);
 		// print functionalities
@@ -148,15 +146,15 @@ public class RDFComponentDAOTest
 		System.out.println();
 		
 		// create DAO
-		ComponentDAO dao = this.factory.createComponentDAO();
+		RDFComponentDAO dao = this.factory.createComponentDAO();
 		// get Agent DAO
-		AgentDAO adao = this.factory.createAgentDAO();
+		RDFAgentDAO adao = this.factory.createAgentDAO();
 		
-		Agent agent = adao.retrieveAllAgents().get(0);
-		ExternalComponent neighbor = adao.retrieveAgentExternalComponents(agent).get(0);
+		RDFAgent agent = adao.retrieveAllAgents().get(0);
+		RDFExternalComponent neighbor = adao.retrieveAgentExternalComponents(agent).get(0);
 		System.out.println(neighbor);
 		// call DAO method
-		List<State> states = dao.retrieveComponentStates(neighbor);
+		List<RDFState> states = dao.retrieveComponentStates(neighbor);
 		Assert.assertNotNull(states);
 		Assert.assertTrue(states.size() > 0);
 		// print agent types
@@ -174,12 +172,12 @@ public class RDFComponentDAOTest
 		System.out.println();
 		
 		// create DAO
-		ComponentDAO dao = this.factory.createComponentDAO();
+		RDFComponentDAO dao = this.factory.createComponentDAO();
 		// get Agent DAO
-		AgentDAO adao = this.factory.createAgentDAO();
+		RDFAgentDAO adao = this.factory.createAgentDAO();
 		
-		Agent agent = adao.retrieveAllAgents().get(0);
-		ExternalComponent neighbor = adao.retrieveAgentExternalComponents(agent).get(0);
+		RDFAgent agent = adao.retrieveAllAgents().get(0);
+		RDFExternalComponent neighbor = adao.retrieveAgentExternalComponents(agent).get(0);
 		System.out.println(neighbor);
 		// call DAO method
 		Component c = dao.retrieveConnectedComponent(neighbor);
@@ -200,13 +198,13 @@ public class RDFComponentDAOTest
 		System.out.println();
 		
 		// create DAO
-		ComponentDAO dao = this.factory.createComponentDAO();
+		RDFComponentDAO dao = this.factory.createComponentDAO();
 		// get all internal components
-		List<Component> comps = dao.retrieveAllInternalComponents();
+		List<RDFComponent> comps = dao.retrieveAllInternalComponents();
 		Assert.assertNotNull(comps);
-		for (Component comp : comps) {
+		for (RDFComponent comp : comps) {
 			// retrieve restrictions if any
-			List<Restriction> restrictions = dao.retrieveComponentRestrictions(comp);
+			List<RDFRestriction> restrictions = dao.retrieveComponentRestrictions(comp);
 			Assert.assertNotNull(restrictions);
 			// check if any restriction is specified
 			if (!restrictions.isEmpty()) {
@@ -228,20 +226,20 @@ public class RDFComponentDAOTest
 		System.out.println();
 		
 		// create DAO
-		ComponentDAO dao = this.factory.createComponentDAO();
+		RDFComponentDAO dao = this.factory.createComponentDAO();
 		// get all internal components
-		List<Component> comps = dao.retrieveAllInternalComponents();
+		List<RDFComponent> comps = dao.retrieveAllInternalComponents();
 		Assert.assertNotNull(comps);
-		for (Component comp : comps) {
+		for (RDFComponent comp : comps) {
 			// retrieve restrictions if any
-			List<Restriction> restrictions = dao.retrieveComponentRestrictions(comp);
+			List<RDFRestriction> restrictions = dao.retrieveComponentRestrictions(comp);
 			Assert.assertNotNull(restrictions);
 			// check if any restriction is specified
 			if (!restrictions.isEmpty()) {
 				// get a restriction
-				Restriction res = restrictions.get(0);
+				RDFRestriction res = restrictions.get(0);
 				// retrieve restriciton's states
-				List<State> states = dao.retrieveRestrictionStates(res);
+				List<RDFState> states = dao.retrieveRestrictionStates(res);
 				Assert.assertNotNull(states);
 				Assert.assertTrue(states.size() > 0);
 				

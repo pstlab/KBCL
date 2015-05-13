@@ -2,6 +2,7 @@ package it.istc.pst.gecko.ontology.model.owl;
 
 
 
+
 /**
  * 
  * @author alessandroumbrico
@@ -70,5 +71,25 @@ public class OWLModelFactory {
 	public OWLElement createElement(String id, String label, OWLElementType type) {
 		return new OWLElement(id, label, type);
 	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param label
+	 * @return
+	 */
+	public OWLFunctionalityType createFunctionalityType(String id, String label) {
+		return new OWLFunctionalityType(id, label);
+	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param label
+	 * @param type
+	 * @return
+	 */
+	public OWLFunctionality createFunctionality(String id, String label, OWLFunctionalityType type) {
+		return new OWLFunctionality(id, label, type);
+	}
 }

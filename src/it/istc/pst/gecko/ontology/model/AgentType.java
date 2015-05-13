@@ -49,12 +49,7 @@ public abstract class AgentType
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof AgentType)) {
-			throw new RuntimeException("Uncomparable objects");
-		}
-		
-		AgentType other = (AgentType) obj;
-		return this.id.equals(other.getId());
+		return (obj instanceof AgentType) && ((AgentType) obj).id.equals(this.id);
 	}
 	
 	/**

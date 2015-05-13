@@ -1,14 +1,15 @@
 package it.istc.pst.gecko.ontology.model.rdf;
 
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
 
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class RDFExternalComponent extends ExternalComponent 
+public class RDFExternalComponent extends RDFComponent 
 {
+	protected RDFComponent connectedBy;
+	
 	/**
 	 * 
 	 * @param id
@@ -16,5 +17,31 @@ public class RDFExternalComponent extends ExternalComponent
 	 */
 	protected RDFExternalComponent(String id, String label) {
 		super(id, label);
+		// lazy approach
+		this.connectedBy = null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public RDFComponent getConnectedBy() {
+		// check component
+		if (this.connectedBy == null) {
+			// load data
+			this.connectedBy = this.dao.retrieveConnectedComponent(this);
+		}
+		return connectedBy;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return "[ExternalComponent id=" + this.id + "\n"
+				+ "\tlabel= " + this.label + "\n"
+				+ "\tconnectedBy= " + this.connectedBy + "\n"
+				+ "\tstates= " + this.states +"]\n";
 	}
 }

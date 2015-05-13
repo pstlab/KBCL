@@ -1,13 +1,14 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
-import it.istc.pst.gecko.ontology.model.State;
-import it.istc.pst.gecko.ontology.model.TemporalConstraint;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityImplementation;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFState;
+import it.istc.pst.gecko.ontology.model.rdf.RDFTemporalConstraint;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,10 +51,10 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 		System.out.println();
 		
 		// get agents in the knowledge base
-		List<Agent> agents = this.facade.getAgents();
+		List<RDFAgent> agents = this.facade.getAgents();
 		Assert.assertNotNull(agents);
 		Assert.assertTrue(agents.size() > 0);
-		for (Agent agent : agents) 
+		for (RDFAgent agent : agents) 
 		{
 			Assert.assertNotNull(agent);
 			// print agent information
@@ -62,12 +63,12 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 			System.out.println();
 
 			// get agent functionalities
-			Map<FunctionalityType, List<Functionality>> functionalities = agent.getFunctionalities();
+			Map<RDFFunctionalityType, List<RDFFunctionality>> functionalities = agent.getFunctionalities();
 			Assert.assertNotNull(functionalities);
 			Assert.assertTrue(functionalities.size() > 0);
 			for (FunctionalityType type : functionalities.keySet()) {
 				// get functionalities
-				List<Functionality> funcs = agent.getFunctionalitiesByType(type);
+				List<RDFFunctionality> funcs = agent.getFunctionalitiesByType(type);
 				Assert.assertNotNull(funcs);
 				System.out.println(type);
 				System.out.println(funcs);
@@ -86,13 +87,13 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 		System.out.println();
 		
 		// get agents
-		List<Agent> agents = this.facade.getAgents();
+		List<RDFAgent> agents = this.facade.getAgents();
 		Assert.assertNotNull(agents);
 		Assert.assertTrue(agents.size() > 0);
-		for (Agent agent : agents) 
+		for (RDFAgent agent : agents) 
 		{
 			// get agent functionalities
-			Map<FunctionalityType, List<Functionality>> type2funcs = agent.getFunctionalities();
+			Map<RDFFunctionalityType, List<RDFFunctionality>> type2funcs = agent.getFunctionalities();
 			Assert.assertNotNull(type2funcs);
 			Assert.assertTrue(type2funcs.size() > 0);
 			for (FunctionalityType type : type2funcs.keySet()) 
@@ -105,8 +106,8 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 				sv.put(defval, new ArrayList<String>());
 				
 				// get functionalities by type
-				List<Functionality> funcs = agent.getFunctionalitiesByType(type);
-				for (Functionality func : funcs) 
+				List<RDFFunctionality> funcs = agent.getFunctionalitiesByType(type);
+				for (RDFFunctionality func : funcs) 
 				{
 					// get functionality label
 					String value = func.getLabel().replace(" ", "_");
@@ -147,40 +148,40 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 		System.out.println();
 		
 		// get agents
-		List<Agent> agents = this.facade.getAgents();
+		List<RDFAgent> agents = this.facade.getAgents();
 		Assert.assertNotNull(agents);
 		Assert.assertTrue(agents.size() > 0);
-		for (Agent agent : agents) 
+		for (RDFAgent agent : agents) 
 		{
 			Assert.assertNotNull(agent);
 			System.out.println(agent);
 			System.out.println("..... Agent's Synchronizations");
 			
 			// get agent's functionalities
-			Map<FunctionalityType, List<Functionality>> type2funcs = agent.getFunctionalities();
-			for (FunctionalityType type : type2funcs.keySet()) 
+			Map<RDFFunctionalityType, List<RDFFunctionality>> type2funcs = agent.getFunctionalities();
+			for (RDFFunctionalityType type : type2funcs.keySet()) 
 			{
 				// get functionalities by type
-				List<Functionality> funcs = agent.getFunctionalitiesByType(type);
+				List<RDFFunctionality> funcs = agent.getFunctionalitiesByType(type);
 				Assert.assertNotNull(funcs);
-				for (Functionality func : funcs) 
+				for (RDFFunctionality func : funcs) 
 				{
 					// get Functionality implementation
-					List<FunctionalityImplementation> implementations = func.getImplementations();
+					List<RDFFunctionalityImplementation> implementations = func.getImplementations();
 					Assert.assertNotNull(implementations);
 					Assert.assertTrue(implementations.size() >= 0);
-					for (FunctionalityImplementation implementation : implementations)
+					for (RDFFunctionalityImplementation implementation : implementations)
 					{
 						// build synchronization
 						System.out.println("Synchronization for fucntionality [" + func.getLabel().replace(" ", "_") + "()]\n\t- Duration: [" + func.getMinDuration() + ", " + func.getMaxDuration() + "]");
 		
 						// build constraints
-						for (TemporalConstraint con : implementation.getConstraints()) 
+						for (RDFTemporalConstraint con : implementation.getConstraints()) 
 						{
 							// temporal constraint label
 							String label = con.getLabel().replace(" ", "_");
 							// required state
-							State state = con.getTarget();
+							RDFState state = con.getTarget();
 							String stateLabel = state.getLabel().replace(" ", "_");
 							// on component
 							Component comp = state.getComponent();
@@ -194,17 +195,17 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 						
 						System.out.println("\nTemporal restrictions:");
 						// build restriction constraints
-						for (State s : implementation.getRestrictions().keySet()) {
+						for (RDFState s : implementation.getRestrictions().keySet()) {
 							// get "from" value
 							String fromLabel = s.getLabel().replace(" ", "_");
 							// on component
 							String fromCompLabel = s.getComponent().getLabel().replace(" ", "_");
-							for (TemporalConstraint con : implementation.getRestrictions().get(s)) {
+							for (RDFTemporalConstraint con : implementation.getRestrictions().get(s)) {
 								// temporal constraint label
 								String label = con.getLabel().replace(" ", "_");
 								
 								// get "to" value
-								State to = con.getTarget();
+								RDFState to = con.getTarget();
 								String toLabel = to.getLabel().replace(" ", "_");
 								// on component
 								Component toComp = to.getComponent();

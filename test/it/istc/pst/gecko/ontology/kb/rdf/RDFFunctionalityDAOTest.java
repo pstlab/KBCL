@@ -1,11 +1,10 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityImplementation;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityImplementation;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ import org.junit.Test;
 public class RDFFunctionalityDAOTest 
 {
 	protected static final String DEFAULT_DATASET = "ijcai/test.xml";
-	private KnowledgeBaseFactory factory;
+	private RDFKnowledgeBaseFactory factory;
 	
 	/**
 	 * 
@@ -56,10 +55,10 @@ public class RDFFunctionalityDAOTest
 		System.out.println();
 		
 		// create DAO
-		FunctionalityDAO dao = this.factory.createFunctionalityDAO();
+		RDFFunctionalityDAO dao = this.factory.createFunctionalityDAO();
 		
 		// call DAO method
-		List<FunctionalityType> types = dao.retrieveAllFunctionalityTypes();
+		List<RDFFunctionalityType> types = dao.retrieveAllFunctionalityTypes();
 		Assert.assertNotNull(types);
 		Assert.assertFalse(types.isEmpty());
 		Assert.assertTrue(types.size() == 3);
@@ -78,13 +77,13 @@ public class RDFFunctionalityDAOTest
 		System.out.println();
 		
 		// create DAO
-		FunctionalityDAO dao = this.factory.createFunctionalityDAO();
+		RDFFunctionalityDAO dao = this.factory.createFunctionalityDAO();
 		
 		// get all functionality types
-		List<FunctionalityType> types = dao.retrieveAllFunctionalityTypes();
-		for (FunctionalityType type : types) {
+		List<RDFFunctionalityType> types = dao.retrieveAllFunctionalityTypes();
+		for (RDFFunctionalityType type : types) {
 			// call DAO method
-			List<Functionality> funcs = dao.retrieveFunctionalitiesByType(type);
+			List<RDFFunctionality> funcs = dao.retrieveFunctionalitiesByType(type);
 			Assert.assertNotNull(funcs);
 			Assert.assertTrue(funcs.size() >= 0);
 			// print agent types
@@ -103,10 +102,10 @@ public class RDFFunctionalityDAOTest
 		System.out.println();
 		
 		// create DAO
-		FunctionalityDAO dao = this.factory.createFunctionalityDAO();
+		RDFFunctionalityDAO dao = this.factory.createFunctionalityDAO();
 		
 		// call DAO method
-		List<Functionality> funcs = dao.retrieveAllFunctionalities();
+		List<RDFFunctionality> funcs = dao.retrieveAllFunctionalities();
 		Assert.assertNotNull(funcs);
 		Assert.assertTrue(funcs.size() >= 0);
 		// print agent types
@@ -124,15 +123,15 @@ public class RDFFunctionalityDAOTest
 		System.out.println();
 		
 		// create DAO
-		FunctionalityDAO dao = this.factory.createFunctionalityDAO();
+		RDFFunctionalityDAO dao = this.factory.createFunctionalityDAO();
 		
 		// call DAO method
-		Functionality f1 = dao.retrieveAllFunctionalities().get(0);
+		RDFFunctionality f1 = dao.retrieveAllFunctionalities().get(0);
 		Assert.assertNotNull(f1);
 		System.out.println(f1);
 		try {
 			// success expected
-			Functionality f2 = dao.retrieveFunctionalityById(f1.getId());
+			RDFFunctionality f2 = dao.retrieveFunctionalityById(f1.getId());
 			Assert.assertNotNull(f2);
 			Assert.assertTrue(f1.equals(f2));
 			Assert.assertEquals(f1.getLabel(), f2.getLabel());
@@ -167,20 +166,20 @@ public class RDFFunctionalityDAOTest
 		System.out.println();
 		
 		// create DAO
-		FunctionalityDAO dao = this.factory.createFunctionalityDAO();
+		RDFFunctionalityDAO dao = this.factory.createFunctionalityDAO();
 		
 		// call DAO method
-		List<Functionality> funcs = dao.retrieveAllFunctionalities();
+		List<RDFFunctionality> funcs = dao.retrieveAllFunctionalities();
 		Assert.assertNotNull(funcs);
 		Assert.assertTrue(funcs.size() >= 0);
 		// get a functionality
-		Functionality func = funcs.get(0);
+		RDFFunctionality func = funcs.get(0);
 		System.out.println(func);
 		// get implementation
-		List<FunctionalityImplementation> implementations = dao.retrieveFunctionalityImplementations(func);
+		List<RDFFunctionalityImplementation> implementations = dao.retrieveFunctionalityImplementations(func);
 		Assert.assertNotNull(implementations);
 		Assert.assertTrue(implementations.size() > 0);
-		for (FunctionalityImplementation implementation : implementations) {
+		for (RDFFunctionalityImplementation implementation : implementations) {
 			Assert.assertNotNull(implementation);
 			Assert.assertNotNull(implementation.getConstraints());
 			Assert.assertTrue(implementation.getConstraints().size() > 0);

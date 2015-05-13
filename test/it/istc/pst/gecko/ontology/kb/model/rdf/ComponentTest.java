@@ -1,11 +1,11 @@
-package it.istc.pst.gecko.ontology.kb.model;
+package it.istc.pst.gecko.ontology.kb.model.rdf;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.Restriction;
-import it.istc.pst.gecko.ontology.model.State;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFRestriction;
+import it.istc.pst.gecko.ontology.model.rdf.RDFState;
 
 import java.util.List;
 
@@ -45,18 +45,18 @@ public class ComponentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
-		List<Component> components = agent.getComponents();
+		RDFAgent agent = this.facade.getAgents().get(0);
+		List<RDFComponent> components = agent.getComponents();
 		Assert.assertNotNull(components);
 		Assert.assertTrue(components.size() > 0);
 		System.out.println(agent);
 		
 		// get a component and check states
-		Component c1 = components.get(0);
+		RDFComponent c1 = components.get(0);
 		Assert.assertNotNull(c1);
 		System.out.println(c1);
 		// check states
-		List<State> states = c1.getStates();
+		List<RDFState> states = c1.getStates();
 		Assert.assertNotNull(states);
 		Assert.assertTrue(states.size() > 0);
 		System.out.println(c1);
@@ -74,14 +74,14 @@ public class ComponentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		// get a neighbor
-		ExternalComponent neighbor = agent.getNeighbors().get(0);
+		RDFExternalComponent neighbor = agent.getNeighbors().get(0);
 		System.out.println(neighbor);
 		
 		// get neighbor's states
-		List<State> states = neighbor.getStates();
+		List<RDFState> states = neighbor.getStates();
 		Assert.assertNotNull(states);
 		Assert.assertTrue(states.size() > 0);
 		System.out.println(agent);
@@ -98,17 +98,17 @@ public class ComponentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		// get a neighbor
-		ExternalComponent neighbor = agent.getNeighbors().get(0);
+		RDFExternalComponent neighbor = agent.getNeighbors().get(0);
 		System.out.println(neighbor);
 		neighbor.getStates();
 		
 		// get neighbor's states
-		Component comp = neighbor.getConnectedBy();
+		RDFComponent comp = neighbor.getConnectedBy();
 		Assert.assertNotNull(comp);
-		List<State> states = comp.getStates();
+		List<RDFState> states = comp.getStates();
 		Assert.assertNotNull(states);
 		Assert.assertTrue(states.size() > 0);
 		System.out.println(agent);
@@ -125,14 +125,14 @@ public class ComponentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		// get components
-		List<Component> comps = agent.getComponents();
+		List<RDFComponent> comps = agent.getComponents();
 		Assert.assertNotNull(comps);
-		for (Component comp : comps) {
+		for (RDFComponent comp : comps) {
 			// check restrictions if any
-			List<Restriction> restrictions = comp.getRestrictions();
+			List<RDFRestriction> restrictions = comp.getRestrictions();
 			Assert.assertNotNull(restrictions);
 			if (!restrictions.isEmpty()) {
 				// print component information
@@ -152,20 +152,20 @@ public class ComponentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		// get components
-		List<Component> comps = agent.getComponents();
+		List<RDFComponent> comps = agent.getComponents();
 		Assert.assertNotNull(comps);
-		for (Component comp : comps) {
+		for (RDFComponent comp : comps) {
 			// check restrictions if any
-			List<Restriction> restrictions = comp.getRestrictions();
+			List<RDFRestriction> restrictions = comp.getRestrictions();
 			Assert.assertNotNull(restrictions);
 			if (!restrictions.isEmpty()) {
 				// get a restriction
-				Restriction res = restrictions.get(0);
+				RDFRestriction res = restrictions.get(0);
 				// get restriction states
-				List<State> states = res.getStates();
+				List<RDFState> states = res.getStates();
 				Assert.assertNotNull(states);
 				Assert.assertTrue(states.size() > 0);
 				

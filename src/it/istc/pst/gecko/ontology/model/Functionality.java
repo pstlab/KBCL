@@ -1,9 +1,5 @@
 package it.istc.pst.gecko.ontology.model;
 
-import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
@@ -12,32 +8,21 @@ import java.util.List;
  */
 public abstract class Functionality 
 {
-	private String id;
-	private String label;
-	private FunctionalityType type;
-	private String dmin;			
-	private String dmax;
-	private List<FunctionalityImplementation> implementations;
+	protected String id;
+	protected String label;
+	protected FunctionalityType type;
 	
-	protected FunctionalityDAO dao;
 	
 	/**
 	 * 
 	 * @param id
 	 * @param label
-	 * @param dmin
-	 * @param dmax
 	 * @param type
 	 */
-	protected Functionality(String id, String label, String dmin, String dmax, FunctionalityType type) {
+	protected Functionality(String id, String label, FunctionalityType type) {
 		this.id = id;
 		this.label = label;
 		this.type = type;
-		this.dmin = dmin;
-		this.dmax = dmax;
-		
-		// lazy approach
-		this.implementations = null;
 	}
 	
 	/**
@@ -66,35 +51,6 @@ public abstract class Functionality
 	
 	/**
 	 * 
-	 * @return
-	 */
-	public String getMinDuration() {
-		return this.dmin;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public String getMaxDuration() {
-		return this.dmax;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public List<FunctionalityImplementation> getImplementations() {
-		// check list
-		if (this.implementations == null) {
-			// load data
-			this.implementations = this.dao.retrieveFunctionalityImplementations(this);
-		}
-		return new ArrayList<FunctionalityImplementation>(this.implementations);
-	}
-	
-	/**
-	 * 
 	 */
 	@Override
 	public int hashCode() {
@@ -106,12 +62,7 @@ public abstract class Functionality
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof Functionality)) {
-			throw new RuntimeException("Uncomparable objects");
-		}
-		
-		Functionality other = (Functionality) obj;
-		return this.id.equals(other.getId());
+		return (obj instanceof Functionality) && ((Functionality) obj).id.equals(this.id);
 	}
 	
 	/**
@@ -121,8 +72,6 @@ public abstract class Functionality
 	public String toString() {
 		return "[Functionality id=" + this.id + "\n"
 				+ "\tlabel= " + this.label + "\n"
-				+ "\tduration= [" + this.dmin + ", " + this.dmax + "]\n"
-				+ "\ttype= " + this.type + "\n"
-				+ "\timplementations= " + this.implementations + "]\n";
+				+ "\ttype= " + this.type + "]\n";
 	}
 }

@@ -1,24 +1,27 @@
 package it.istc.pst.gecko.ontology.kb.owl;
 
-import it.istc.pst.gecko.ontology.kb.ElementDAO;
 import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
 import it.istc.pst.gecko.ontology.kb.owl.exception.OWLResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Element;
 import it.istc.pst.gecko.ontology.model.ElementType;
+import it.istc.pst.gecko.ontology.model.owl.OWLElement;
+import it.istc.pst.gecko.ontology.model.owl.OWLElementType;
 import it.istc.pst.gecko.ontology.model.owl.OWLModelFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.ontology.OntResource;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class OWLElementDAO implements ElementDAO 
+public class OWLElementDAO 
 {
 	private OWLDatasetManager dataset;
 	private OWLModelFactory factory;
@@ -35,19 +38,23 @@ public class OWLElementDAO implements ElementDAO
 	 * 
 	 * @return
 	 */
-	@Override
-	public List<ElementType> retrieveAllElementTypes() {
-		List<ElementType> list = new ArrayList<>();
+	public List<OWLElementType> retrieveAllElementTypes() {
+		List<OWLElementType> list = new ArrayList<>();
 		
 		// get element class
 		OntClass e = this.dataset.model.getOntClass(OWLDatasetManager.NS + "Element");
+		// add root type
+		list.add(this.factory.createElementType(e.getURI(), e.getLocalName()));
+		
 		// get all subclasses
-		Iterator<OntClass> it = e.listSubClasses();
+		Iterator<OntClass> it = e.listSubClasses(false);
 		while (it.hasNext()) {
 			// get subclass
 			OntClass subclass = it.next();
-			// add element type
-			list.add(this.factory.createElementType(subclass.getURI(), subclass.getLocalName()));
+			if (!subclass.isAnon()) {
+				// add element type
+				list.add(this.factory.createElementType(subclass.getURI(), subclass.getLocalName()));
+			}
 		}
 		
 		// get element type
@@ -58,9 +65,9 @@ public class OWLElementDAO implements ElementDAO
 	 * 
 	 * @param id
 	 * @return
+	 * @throws ResourceNotFoundException
 	 */
-	@Override
-	public ElementType retrieveElementTypeById(String id) 
+	public OWLElementType retrieveElementTypeById(String id) 
 			throws ResourceNotFoundException
 	{
 		// get class
@@ -73,28 +80,94 @@ public class OWLElementDAO implements ElementDAO
 		return this.factory.createElementType(e.getURI(), e.getLocalName());
 	}
 
-	@Override
-	public List<Element> retrieveAllElements() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 
+	 * @return
+	 */
+	public List<OWLElement> retrieveAllElements() {
+		List<OWLElement> list = new ArrayList<>();
+		
+		// get ONTOLOGY class
+		OntClass e = this.dataset.model.getOntClass(OWLDatasetManager.NS + "Element");
+		Iterator<? extends OntResource> it = e.listInstances(false);
+		while (it.hasNext()) {
+			// get next individual
+			Individual ie = it.next().asIndividual();
+			// get individual class
+			Resource type = ie.getRDFType();
+			
+			// create element
+			list.add(this.factory.createElement(ie.getURI(), ie.getLocalName(), 
+					this.factory.createElementType(type.getURI(), type.getLocalName())));
+		}
+		
+		// get elements
+		return list;
 	}
 
-	@Override
-	public List<Element> retrieveElementByType(ElementType type) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public List<OWLElement> retrieveElementsByType(ElementType type) {
+		List<OWLElement> list = new ArrayList<>();
+		
+		// get resource
+		OntClass typeClass = this.dataset.model.getOntClass(type.getId());
+		// get individuals
+		Iterator<? extends OntResource> it = typeClass.listInstances(false);
+		while (it.hasNext()) {
+			// get individual
+			Individual ei = it.next().asIndividual();
+			// add element
+			list.add(this.factory.createElement(ei.getURI(), ei.getLocalName(), 
+					this.factory.createElementType(typeClass.getURI(), typeClass.getLocalName())));
+		}
+
+		// get list
+		return list;
 	}
 
-	@Override
-	public Element retrieveElementById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws ResourceNotFoundException
+	 */
+	public OWLElement retrieveElementById(String id) 
+			throws ResourceNotFoundException
+	{
+		// get individual
+		Individual e = this.dataset.model.getIndividual(id);
+		// check
+		if (e == null) {
+			throw new ResourceNotFoundException("No Element individual found for \"" + id + "\"");
+		}
+		
+		// get class
+		Resource type = e.getRDFType();
+		// get element
+		return this.factory.createElement(e.getURI(), e.getLocalName(), 
+				this.factory.createElementType(type.getURI(), type.getLocalName()));
 	}
 
-	@Override
-	public Element createElement(String name, ElementType type) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 
+	 * @param name
+	 * @param type
+	 * @return
+	 */
+	public OWLElement createElement(String name, ElementType type) 
+	{
+		// get class
+		OntClass typeClass = this.dataset.model.getOntClass(type.getId());
+		// create individual
+		Individual e = typeClass.createIndividual(OWLDatasetManager.NS + name);
+		
+		// get element
+		return this.factory.createElement(e.getURI(), e.getLocalName(), 
+				this.factory.createElementType(typeClass.getURI(), typeClass.getLocalName()));
 	}
 
 }

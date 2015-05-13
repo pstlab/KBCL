@@ -1,13 +1,9 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.AgentDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
-import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
@@ -32,7 +28,7 @@ import com.hp.hpl.jena.query.QuerySolution;
  * @author alessandroumbrico
  *
  */
-public class RDFAgentDAO implements AgentDAO
+public class RDFAgentDAO
 {
 	private RDFDatasetManager manager;
 	private RDFModelFactory factory;
@@ -50,10 +46,9 @@ public class RDFAgentDAO implements AgentDAO
 	 * 
 	 * @return
 	 */
-	@Override
-	public List<AgentType> retrieveAllAgentTypes() {
+	public List<RDFAgentType> retrieveAllAgentTypes() {
 		// prepare data
-		List<AgentType> types = new ArrayList<AgentType>();
+		List<RDFAgentType> types = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?type ?label "
@@ -72,7 +67,7 @@ public class RDFAgentDAO implements AgentDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			AgentType a = 
+			RDFAgentType a = 
 					this.factory.createAgentType(
 							sol.get("?type").asResource().getURI(),
 							sol.get("?label").asLiteral().getLexicalForm());
@@ -90,15 +85,14 @@ public class RDFAgentDAO implements AgentDAO
 	 * 
 	 * @return
 	 */
-	@Override
-	public List<Agent> retrieveAllAgents() {
+	public List<RDFAgent> retrieveAllAgents() {
 		// prepare data
-		List<Agent> agents = new ArrayList<Agent>();
+		List<RDFAgent> agents = new ArrayList<>();
 		
 		// get all agent types
-		List<AgentType> types = this.retrieveAllAgentTypes();
+		List<RDFAgentType> types = this.retrieveAllAgentTypes();
 		// check if any instance of the current type of agent exists
-		for (AgentType type : types) {
+		for (RDFAgentType type : types) {
 			// get agents of the current type
 			agents.addAll(this.retrieveAgentsByType(type));
 		}
@@ -109,11 +103,13 @@ public class RDFAgentDAO implements AgentDAO
 
 	/**
 	 * Check if any Agent of the selected AgentType exists
+	 * 
+	 * @param type
+	 * @return
 	 */
-	@Override
-	public List<Agent> retrieveAgentsByType(AgentType type) {
+	public List<RDFAgent> retrieveAgentsByType(AgentType type) {
 		// prepare data
-		List<Agent> agents = new ArrayList<Agent>();
+		List<RDFAgent> agents = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?agent ?label "
@@ -132,7 +128,7 @@ public class RDFAgentDAO implements AgentDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			Agent a = this.factory.createAgent(
+			RDFAgent a = this.factory.createAgent(
 					sol.get("?agent").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					this.factory.createAgentType(type.getId(), type.getLabel()));
@@ -148,13 +144,15 @@ public class RDFAgentDAO implements AgentDAO
 
 	/**
 	 * 
+	 * @param id
+	 * @return
+	 * @throws RDFResourceNotFoundException
 	 */
-	@Override
-	public Agent retrieveAgentById(String id) 
+	public RDFAgent retrieveAgentById(String id) 
 			throws RDFResourceNotFoundException 
 	{
 		// prepare data
-		Agent a = null;
+		RDFAgent a = null;
 		// prepare query
 		String queryString = "SELECT ?label ?type ?typeLabel "
 				+ "WHERE {"
@@ -198,11 +196,12 @@ public class RDFAgentDAO implements AgentDAO
 	
 	/**
 	 * 
+	 * @param agent
+	 * @return
 	 */
-	@Override
-	public Map<FunctionalityType, List<Functionality>> retrieveAgentFunctionalities(Agent agent) {
+	public Map<RDFFunctionalityType, List<RDFFunctionality>> retrieveAgentFunctionalities(Agent agent) {
 		// prepare data
-		Map<FunctionalityType, List<Functionality>> functionalities = new HashMap<FunctionalityType, List<Functionality>>();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> functionalities = new HashMap<>();
 		
 		// prepare query
 		String queryString = "SELECT ?func ?label ?dmin ?dmax ?type ?typeLabel "
@@ -237,7 +236,7 @@ public class RDFAgentDAO implements AgentDAO
 			
 			// check data
 			if (!functionalities.containsKey(type)) {
-				functionalities.put(type, new ArrayList<Functionality>());
+				functionalities.put(type, new ArrayList<RDFFunctionality>());
 			}
 			
 			// add functionality
@@ -252,11 +251,12 @@ public class RDFAgentDAO implements AgentDAO
 	
 	/**
 	 * 
+	 * @param agent
+	 * @return
 	 */
-	@Override
-	public List<Component> retrieveAgentInternalComponents(Agent agent) {
+	public List<RDFComponent> retrieveAgentInternalComponents(Agent agent) {
 		// prepare data
-		List<Component> components = new ArrayList<Component>();
+		List<RDFComponent> components = new ArrayList<RDFComponent>();
 		
 		// prepare query
 		String queryString = "SELECT ?c ?label "
@@ -290,11 +290,12 @@ public class RDFAgentDAO implements AgentDAO
 	
 	/**
 	 * 
+	 * @param agent
+	 * @return
 	 */
-	@Override
-	public List<ExternalComponent> retrieveAgentExternalComponents(Agent agent) {
+	public List<RDFExternalComponent> retrieveAgentExternalComponents(Agent agent) {
 		// prepare data
-		List<ExternalComponent> neighbors = new ArrayList<ExternalComponent>();
+		List<RDFExternalComponent> neighbors = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?n ?l "
@@ -324,11 +325,5 @@ public class RDFAgentDAO implements AgentDAO
 		exec.close();
 		// get agent's neighbors
 		return neighbors;
-	}
-
-	@Override
-	public Agent createAgent(String name, AgentType type) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

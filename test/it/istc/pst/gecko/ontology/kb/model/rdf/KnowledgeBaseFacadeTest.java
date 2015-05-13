@@ -1,9 +1,9 @@
-package it.istc.pst.gecko.ontology.kb.model;
+package it.istc.pst.gecko.ontology.kb.model.rdf;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.AgentType;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class KnowledgeBaseFacadeTest
 		System.out.println();
 		
 		// get agents
-		List<Agent> agents = this.facade.getAgents();
+		List<RDFAgent> agents = this.facade.getAgents();
 		Assert.assertNotNull(agents);
 		Assert.assertTrue(agents.size() > 0);
 		System.out.println(agents);
@@ -74,7 +74,7 @@ public class KnowledgeBaseFacadeTest
 		System.out.println();
 		
 		// get agent types
-		List<AgentType> types = this.facade.getAgentTypes();
+		List<RDFAgentType> types = this.facade.getAgentTypes();
 		Assert.assertNotNull(types);
 		Assert.assertTrue(types.size() > 0);
 		System.out.println(types);
@@ -91,7 +91,7 @@ public class KnowledgeBaseFacadeTest
 		System.out.println();
 		
 		// get functionality types
-		List<FunctionalityType> types = this.facade.getFunctionalityTypes();
+		List<RDFFunctionalityType> types = this.facade.getFunctionalityTypes();
 		Assert.assertNotNull(types);
 		Assert.assertTrue(types.size() > 0);
 		System.out.println(types);

@@ -1,12 +1,11 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
-import it.istc.pst.gecko.ontology.model.TemporalConstraint;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFModelFactory;
 import it.istc.pst.gecko.ontology.model.rdf.RDFState;
@@ -27,7 +26,7 @@ import com.hp.hpl.jena.query.QuerySolution;
  * @author alessandroumbrico
  *
  */
-public class RDFFunctionalityDAO implements FunctionalityDAO 
+public class RDFFunctionalityDAO 
 {
 	private RDFDatasetManager manager;
 	private RDFModelFactory factory;
@@ -45,10 +44,9 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 	 * 
 	 * @return
 	 */
-	@Override
-	public List<FunctionalityType> retrieveAllFunctionalityTypes() {
+	public List<RDFFunctionalityType> retrieveAllFunctionalityTypes() {
 		// prepare data
-		List<FunctionalityType> types = new ArrayList<FunctionalityType>();
+		List<RDFFunctionalityType> types = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?type ?label "
@@ -67,7 +65,7 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			FunctionalityType f = this.factory.createFunctionalityType(
+			RDFFunctionalityType f = this.factory.createFunctionalityType(
 						sol.get("?type").asResource().getURI(),
 						sol.get("?label").asLiteral().getLexicalForm());
 			// add 
@@ -84,14 +82,13 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 	 * 
 	 * @return
 	 */
-	@Override
-	public List<Functionality> retrieveAllFunctionalities() {
+	public List<RDFFunctionality> retrieveAllFunctionalities() {
 		// prepare data
-		List<Functionality> functionalities = new ArrayList<Functionality>();
+		List<RDFFunctionality> functionalities = new ArrayList<>();
 		
 		// get functionality types
-		List<FunctionalityType> types = this.retrieveAllFunctionalityTypes();
-		for (FunctionalityType type : types) {
+		List<RDFFunctionalityType> types = this.retrieveAllFunctionalityTypes();
+		for (RDFFunctionalityType type : types) {
 			functionalities.addAll(this.retrieveFunctionalitiesByType(type));
 		}
 		
@@ -104,10 +101,9 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 	 * @param type
 	 * @return
 	 */
-	@Override
-	public List<Functionality> retrieveFunctionalitiesByType(FunctionalityType type) {
+	public List<RDFFunctionality> retrieveFunctionalitiesByType(FunctionalityType type) {
 		// prepare data
-		List<Functionality> funcs = new ArrayList<Functionality>();
+		List<RDFFunctionality> funcs = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?func ?label ?dmin ?dmax "
@@ -128,7 +124,7 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 			// get next
 			QuerySolution sol = it.next();
 			// get information
-			Functionality f = this.factory.createFunctionality(
+			RDFFunctionality f = this.factory.createFunctionality(
 					sol.get("?func").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),
@@ -147,12 +143,11 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 	/**
 	 * 
 	 */
-	@Override
-	public Functionality retrieveFunctionalityById(String id) 
+	public RDFFunctionality retrieveFunctionalityById(String id) 
 			throws RDFResourceNotFoundException 
 	{
 		// prepare data
-		Functionality func = null;
+		RDFFunctionality func = null;
 		// prepare query
 		String queryString = "SELECT ?label ?dmin ?dmax ?type ?typeLabel "
 				+ "WHERE {"
@@ -201,17 +196,16 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 	/**
 	 * 
 	 */
-	@Override
-	public List<FunctionalityImplementation> retrieveFunctionalityImplementations(Functionality f) {
+	public List<RDFFunctionalityImplementation> retrieveFunctionalityImplementations(RDFFunctionality f) {
 		// prepare data
-		List<FunctionalityImplementation> list = new ArrayList<FunctionalityImplementation>();
+		List<RDFFunctionalityImplementation> list = new ArrayList<>();
 		
 		// get functionality's implementation IDs
 		List<String> ids = this.retrieveFuntionalityImplementationResources(f);
 		for (String id : ids) 
 		{
 			// create implementation
-			FunctionalityImplementation impl = this.factory.createFunctionalityImplementation(
+			RDFFunctionalityImplementation impl = this.factory.createFunctionalityImplementation(
 					this.factory.createFunctionality(f.getId(), f.getLabel(), f.getMinDuration(), f.getMaxDuration(), 
 							this.factory.createFunctionalityType(f.getType().getId(), f.getType().getLabel())));
 			
@@ -251,7 +245,7 @@ public class RDFFunctionalityDAO implements FunctionalityDAO
 				// create constraint
 				String constraintId = sol.get("?constraint").asResource().getURI();
 				String label = constraintId.split("#")[1].toUpperCase();
-				TemporalConstraint constraint = this.factory.createTemporalConstraint(constraintId, label, state);
+				RDFTemporalConstraint constraint = this.factory.createTemporalConstraint(constraintId, label, state);
 				// add constraint to implementation
 				impl.addConstraint(constraint);
 			}

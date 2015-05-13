@@ -7,9 +7,11 @@ import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
 import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
 import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
 
 import java.io.BufferedReader;
@@ -25,7 +27,7 @@ public class KbclCLIHandler implements Runnable
 {
 	private static final long HORIZON = 1000;
 	private KnowledgeBaseFacade facade;
-	private Agent agent;
+	private RDFAgent agent;
 	private KbclManager manager;
 	
 	/**
@@ -143,7 +145,7 @@ public class KbclCLIHandler implements Runnable
 						// print agent's functionalities
 						System.out.println("Agent's functionalities");
 						int counter = 0;
-						for (Functionality func : this.agent.getAllFunctionalities()) {
+						for (RDFFunctionality func : this.agent.getAllFunctionalities()) {
 							System.out.println("- (" + counter + ") " + func);
 							counter++;
 						}
@@ -173,7 +175,7 @@ public class KbclCLIHandler implements Runnable
 						// print agent's functionalities
 						System.out.println("Agent's neighbors");
 						int counter = 0;
-						for (ExternalComponent comp : this.agent.getNeighbors()) {
+						for (RDFExternalComponent comp : this.agent.getNeighbors()) {
 							System.out.println("- (" + counter + ") " + comp);
 							counter++;
 						}

@@ -23,7 +23,8 @@ public class OWLDatasetManager
 	 */
 	private OWLDatasetManager() {
 		// create the model
-		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+		OntModel base = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RULE_INF, base);
 		this.model.getDocumentManager().addAltEntry(NS_URL, "file:" + DATASET);
 		
 		// import ONTOLOGY into model
@@ -38,6 +39,14 @@ public class OWLDatasetManager
 			INSTANCE = new OWLDatasetManager();
 		}
 		return INSTANCE;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public OWLRuleBasedReasoner getReasoner() {
+		return new OWLRuleBasedReasoner(this.model);
 	}
 
 	/**

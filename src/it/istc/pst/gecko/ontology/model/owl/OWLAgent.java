@@ -7,8 +7,8 @@ import it.istc.pst.gecko.ontology.model.Agent;
  * @author alessandroumbrico
  *
  */
-public class OWLAgent extends Agent {
-
+public class OWLAgent extends Agent 
+{
 	/**
 	 * 
 	 * @param id

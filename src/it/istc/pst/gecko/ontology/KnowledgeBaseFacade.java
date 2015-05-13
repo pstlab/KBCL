@@ -1,14 +1,14 @@
 package it.istc.pst.gecko.ontology;
 
-import it.istc.pst.gecko.ontology.kb.AgentDAO;
-import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
+import it.istc.pst.gecko.ontology.kb.rdf.RDFAgentDAO;
+import it.istc.pst.gecko.ontology.kb.rdf.RDFFunctionalityDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.AgentType;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class KnowledgeBaseFacade 
 {
-	private List<Agent> agents;
-	private KnowledgeBaseFactory factory;
+	private List<RDFAgent> agents;
+	private RDFKnowledgeBaseFactory factory;
 	
 	private static KnowledgeBaseFacade INSTANCE = null;
 
@@ -51,23 +51,23 @@ public class KnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
-	public List<Agent> getAgents() {
+	public List<RDFAgent> getAgents() {
 		// check list
 		if (this.agents == null) {
 			// load agents
-			AgentDAO dao = this.factory.createAgentDAO();
+			RDFAgentDAO dao = this.factory.createAgentDAO();
 			this.agents = dao.retrieveAllAgents();
 		}
-		return new ArrayList<Agent>(this.agents);
+		return new ArrayList<>(this.agents);
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<AgentType> getAgentTypes() {
+	public List<RDFAgentType> getAgentTypes() {
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		return dao.retrieveAllAgentTypes();
 	}
 	
@@ -75,9 +75,9 @@ public class KnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
-	public List<FunctionalityType> getFunctionalityTypes() {
+	public List<RDFFunctionalityType> getFunctionalityTypes() {
 		// create DAO
-		FunctionalityDAO dao = this.factory.createFunctionalityDAO();
+		RDFFunctionalityDAO dao = this.factory.createFunctionalityDAO();
 		return dao.retrieveAllFunctionalityTypes();
 	}
 
@@ -87,11 +87,11 @@ public class KnowledgeBaseFacade
 	 * @return
 	 * @throws RDFResourceNotFoundException 
 	 */
-	public Agent getAgentById(String agentId) 
+	public RDFAgent getAgentById(String agentId) 
 			throws ResourceNotFoundException 
 	{
 		// create DAO
-		AgentDAO dao = this.factory.createAgentDAO();
+		RDFAgentDAO dao = this.factory.createAgentDAO();
 		return dao.retrieveAgentById(agentId);
 	}
 }

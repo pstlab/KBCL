@@ -1,30 +1,26 @@
 package it.istc.pst.gecko.ontology.kb.owl;
 
-import it.istc.pst.gecko.ontology.kb.AgentDAO;
 import it.istc.pst.gecko.ontology.kb.owl.exception.OWLResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
-import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.owl.OWLAgent;
+import it.istc.pst.gecko.ontology.model.owl.OWLAgentType;
 import it.istc.pst.gecko.ontology.model.owl.OWLModelFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntResource;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class OWLAgentDAO implements AgentDAO 
+public class OWLAgentDAO 
 {
 	private OWLDatasetManager dataset;
 	private OWLModelFactory factory;
@@ -44,8 +40,7 @@ public class OWLAgentDAO implements AgentDAO
 	 * @param type
 	 * @return
 	 */
-	@Override
-	public Agent createAgent(String name, AgentType type) {
+	public OWLAgent createAgent(String name, AgentType type) {
 		// create individual of desired type
 		OntClass agentClass = this.dataset.model.getOntClass(type.getId());
 		// create individual
@@ -59,17 +54,20 @@ public class OWLAgentDAO implements AgentDAO
 	 * 
 	 * @return
 	 */
-	@Override
-	public List<AgentType> retrieveAllAgentTypes() {
-		List<AgentType> list = new ArrayList<>();
+	public List<OWLAgentType> retrieveAllAgentTypes() {
+		List<OWLAgentType> list = new ArrayList<>();
 		
 		// get all agent sub classes
 		OntClass agent = this.dataset.model.getOntClass(OWLDatasetManager.NS + "Agent");
-		Iterator<? extends OntResource> it = agent.listSubClasses();
+		// add root class
+		list.add(this.factory.createAgentType(agent.getURI(), agent.getLocalName()));
+		Iterator<? extends OntResource> it = agent.listSubClasses(false);
 		while (it.hasNext()) {
 			// get subclass
 			OntClass subclass = it.next().asClass();
-			list.add(this.factory.createAgentType(subclass.getURI(), subclass.getLocalName()));
+			if (!subclass.isAnon()) {
+				list.add(this.factory.createAgentType(subclass.getURI(), subclass.getLocalName()));
+			}
 		}
 		
 		// get list of agent types
@@ -81,38 +79,31 @@ public class OWLAgentDAO implements AgentDAO
 	 * 
 	 * @return
 	 */
-	@Override
-	public List<Agent> retrieveAllAgents() {
-		List<Agent> list = new ArrayList<>();
+	public List<OWLAgent> retrieveAllAgents() {
+		List<OWLAgent> list = new ArrayList<>();
 		
-		// get types
-		for (AgentType type : this.retrieveAllAgentTypes()) {
-			// get individuals for current type
-			OntClass at = this.dataset.model.getOntClass(type.getId());
-			Iterator<? extends OntResource> it = at.listInstances();
-			while (it.hasNext()) {
-				// get individual
-				Individual a = it.next().asIndividual();
-				// add agent
-				list.add(this.factory.createAgent(a.getURI(), a.getLocalName(), 
-						this.factory.createAgentType(type.getId(), type.getLabel())));
-			}
+		// get agent types
+		for (OWLAgentType type : this.retrieveAllAgentTypes()) {
+			// get individuals
+			List<OWLAgent> agents = this.retrieveAgentsByType(type);
+			list.addAll(agents);
 		}
-
+		
 		// get list of agents
 		return list;
 	}
 	
 	/**
 	 * 
+	 * @param type
+	 * @return
 	 */
-	@Override
-	public List<Agent> retrieveAgentsByType(AgentType type) {
-		List<Agent> list = new ArrayList<>();
+	public List<OWLAgent> retrieveAgentsByType(AgentType type) {
+		List<OWLAgent> list = new ArrayList<>();
 		
 		// get class
 		OntClass module = this.dataset.model.getOntClass(type.getId());
-		Iterator<? extends OntResource> it = module.listInstances();
+		Iterator<? extends OntResource> it = module.listInstances(false);
 		while (it.hasNext()) {
 			Individual ind = it.next().asIndividual();
 			list.add(this.factory.createAgent(ind.getURI(), ind.getLocalName(), 
@@ -125,40 +116,25 @@ public class OWLAgentDAO implements AgentDAO
 
 	/**
 	 * 
+	 * @param id
+	 * @return
+	 * @throws OWLResourceNotFoundException
 	 */
-	@Override
-	public Agent retrieveAgentById(String id)
+	public OWLAgent retrieveAgentById(String id)
 			throws OWLResourceNotFoundException 
 	{
 		// get individual
-		Individual ind = this.dataset.model.getIndividual(id);
+		Individual a = this.dataset.model.getIndividual(id);
 		// check result 
-		if (ind == null) {
+		if (a == null) {
 			throw new OWLResourceNotFoundException("OWL Individual \"" + id + "\" not found... ");
 		}
-		return null;
+		
+		// get type
+		Resource type = a.getRDFType();
+		// get agent
+		return this.factory.createAgent(a.getURI(), a.getLocalName(), 
+				this.factory.createAgentType(type.getURI(), type.getLocalName()));
 	}
 
-	/**
-	 * 
-	 */
-	@Override
-	public Map<FunctionalityType, List<Functionality>> retrieveAgentFunctionalities(Agent agent) 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Component> retrieveAgentInternalComponents(Agent agent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ExternalComponent> retrieveAgentExternalComponents(Agent agent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

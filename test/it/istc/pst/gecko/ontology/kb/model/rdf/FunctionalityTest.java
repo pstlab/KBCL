@@ -1,10 +1,10 @@
-package it.istc.pst.gecko.ontology.kb.model;
+package it.istc.pst.gecko.ontology.kb.model.rdf;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityImplementation;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityImplementation;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 
 import java.util.List;
 import java.util.Map;
@@ -45,20 +45,20 @@ public class FunctionalityTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
-		Map<FunctionalityType, List<Functionality>> funcs = agent.getFunctionalities();
+		RDFAgent agent = this.facade.getAgents().get(0);
+		Map<RDFFunctionalityType, List<RDFFunctionality>> funcs = agent.getFunctionalities();
 		Assert.assertNotNull(funcs);
 		Assert.assertTrue(funcs.size() > 0);
-		for (FunctionalityType type : funcs.keySet()) {
+		for (RDFFunctionalityType type : funcs.keySet()) {
 			// get a functionality
-			Functionality func = agent.getFunctionalitiesByType(type).get(0);
+			RDFFunctionality func = agent.getFunctionalitiesByType(type).get(0);
 			Assert.assertNotNull(func);
 			System.out.println(func);
 			// get functionality implementation
-			List<FunctionalityImplementation> implementations = func.getImplementations();
+			List<RDFFunctionalityImplementation> implementations = func.getImplementations();
 			Assert.assertNotNull(implementations);
 			Assert.assertTrue(implementations.size() > 0);
-			for (FunctionalityImplementation implementation : implementations) {
+			for (RDFFunctionalityImplementation implementation : implementations) {
 				Assert.assertNotNull(implementation);
 				Assert.assertNotNull(implementation.getConstraints());
 				Assert.assertTrue(implementation.getConstraints().size() > 0);

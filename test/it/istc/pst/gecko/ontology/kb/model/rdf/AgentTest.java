@@ -1,11 +1,11 @@
-package it.istc.pst.gecko.ontology.kb.model;
+package it.istc.pst.gecko.ontology.kb.model.rdf;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.FunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 
 import java.util.List;
 import java.util.Map;
@@ -46,11 +46,11 @@ public class AgentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		
 		// get functionalities
-		Map<FunctionalityType, List<Functionality>> funcs = agent.getFunctionalities();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> funcs = agent.getFunctionalities();
 		Assert.assertNotNull(funcs);
 		Assert.assertTrue(funcs.size() > 0);
 		System.out.println(funcs);
@@ -68,18 +68,18 @@ public class AgentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		
 		// get functionalities
-		Map<FunctionalityType, List<Functionality>> funcs = agent.getFunctionalities();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> funcs = agent.getFunctionalities();
 		Assert.assertNotNull(funcs);
 		Assert.assertTrue(funcs.size() > 0);
 		
 		// check types
-		for (FunctionalityType type : funcs.keySet()) {
+		for (RDFFunctionalityType type : funcs.keySet()) {
 			// get list of functionalities
-			List<Functionality> list = agent.getFunctionalitiesByType(type);
+			List<RDFFunctionality> list = agent.getFunctionalitiesByType(type);
 			Assert.assertNotNull(list);
 			Assert.assertTrue(list.size() > 0);
 			Assert.assertArrayEquals(funcs.get(type).toArray(), list.toArray());
@@ -100,11 +100,11 @@ public class AgentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		
 		// get functionalities
-		List<Component> comps = agent.getComponents();
+		List<RDFComponent> comps = agent.getComponents();
 		Assert.assertNotNull(comps);
 		Assert.assertTrue(comps.size() > 0);
 		System.out.println(agent);
@@ -121,11 +121,11 @@ public class AgentTest
 		System.out.println();
 		
 		// get agents
-		Agent agent = this.facade.getAgents().get(0);
+		RDFAgent agent = this.facade.getAgents().get(0);
 		System.out.println(agent);
 		
 		// get functionalities
-		List<ExternalComponent> list = agent.getNeighbors();
+		List<RDFExternalComponent> list = agent.getNeighbors();
 		Assert.assertNotNull(list);
 		Assert.assertTrue(list.size() > 0);
 		System.out.println(agent);

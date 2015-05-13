@@ -1,40 +1,36 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.AgentDAO;
-import it.istc.pst.gecko.ontology.kb.ComponentDAO;
-import it.istc.pst.gecko.ontology.kb.FunctionalityDAO;
-import it.istc.pst.gecko.ontology.kb.KnowledgeBaseFactory;
 
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class RDFKnowledgeBaseFactory implements KnowledgeBaseFactory 
+public class RDFKnowledgeBaseFactory 
 {
 	/**
 	 * 
+	 * @return
 	 */
-	@Override
-	public AgentDAO createAgentDAO() {
+	public RDFAgentDAO createAgentDAO() {
 		// create DAO
 		return new RDFAgentDAO();
 	}
 	
 	/**
 	 * 
+	 * @return
 	 */
-	@Override
-	public FunctionalityDAO createFunctionalityDAO() {
+	public RDFFunctionalityDAO createFunctionalityDAO() {
 		// create DAO
 		return new RDFFunctionalityDAO();
 	}
 	
 	/**
 	 * 
+	 * @return
 	 */
-	@Override
-	public ComponentDAO createComponentDAO() {
+	public RDFComponentDAO createComponentDAO() {
 		// create DAO
 		return new RDFComponentDAO();
 	}

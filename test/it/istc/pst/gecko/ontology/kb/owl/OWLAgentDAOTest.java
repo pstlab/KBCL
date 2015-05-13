@@ -1,8 +1,9 @@
 package it.istc.pst.gecko.ontology.kb.owl;
 
-import it.istc.pst.gecko.ontology.kb.AgentDAO;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
+import it.istc.pst.gecko.ontology.model.owl.OWLAgent;
+import it.istc.pst.gecko.ontology.model.owl.OWLAgentType;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import org.junit.Test;
  */
 public class OWLAgentDAOTest {
 
-	private AgentDAO dao;
+	private OWLAgentDAO dao;
 	
 	/**
 	 * 
@@ -52,7 +53,7 @@ public class OWLAgentDAOTest {
 		System.out.println();
 		
 		// call DAO method
-		List<AgentType> types = this.dao.retrieveAllAgentTypes();
+		List<OWLAgentType> types = this.dao.retrieveAllAgentTypes();
 		Assert.assertNotNull(types);
 		Assert.assertFalse(types.isEmpty());
 		// print agent types
@@ -70,7 +71,7 @@ public class OWLAgentDAOTest {
 		System.out.println();
 		
 		// get types
-		List<AgentType> types = this.dao.retrieveAllAgentTypes();
+		List<OWLAgentType> types = this.dao.retrieveAllAgentTypes();
 		// create a module instance
 		for (AgentType type : types) {
 			// check type
@@ -79,7 +80,7 @@ public class OWLAgentDAOTest {
 				Agent agent = this.dao.createAgent("t1", type);
 				Assert.assertNotNull(agent);
 				Assert.assertTrue(agent.getType().equals(type));
-				System.out.println(agent);
+				System.out.println("New Individual -> " + agent);
 			}
 		}
 		System.out.println("-----------------------------------------------------------------");
@@ -95,7 +96,7 @@ public class OWLAgentDAOTest {
 		System.out.println();
 		
 		// get types
-		List<AgentType> types = this.dao.retrieveAllAgentTypes();
+		List<OWLAgentType> types = this.dao.retrieveAllAgentTypes();
 		// create a module instance
 		Agent module = null;
 		for (AgentType type : types) {
@@ -103,17 +104,17 @@ public class OWLAgentDAOTest {
 			if (type.getLabel().equals("Module")) {
 				// create agent
 				module = this.dao.createAgent("t1", type);
+				System.out.println("New Individual -> " + module);
 			}
 		}
 		
 		Assert.assertNotNull(module);
 		
 		// get agents
-		List<Agent> list = this.dao.retrieveAllAgents();
+		List<OWLAgent> list = this.dao.retrieveAllAgents();
 		Assert.assertNotNull(list);
 		Assert.assertFalse(list.isEmpty());
 		Assert.assertTrue(list.contains(module));
-		System.out.println("Ok!");
 		System.out.println("-----------------------------------------------------------------");
 	}
 }

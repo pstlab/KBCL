@@ -1,10 +1,10 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.Restriction;
-import it.istc.pst.gecko.ontology.model.State;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFRestriction;
+import it.istc.pst.gecko.ontology.model.rdf.RDFState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,16 +46,16 @@ public class UC2DiscoverAndBuildAgentInternalCompositionTest
 		System.out.println();
 		
 		// get agents in the knowledge base
-		List<Agent> agents = this.facade.getAgents();
-		for (Agent agent : agents) {
+		List<RDFAgent> agents = this.facade.getAgents();
+		for (RDFAgent agent : agents) {
 			// print agent information
 			System.out.println(agent);
 			
 			System.out.println("........... Agent's Internal Components ......");
 			System.out.println();
 			// get agent internal components
-			List<Component> comps = agent.getComponents();
-			for (Component comp : comps) {
+			List<RDFComponent> comps = agent.getComponents();
+			for (RDFComponent comp : comps) {
 				System.out.println(comp);
 			}
 		}
@@ -72,20 +72,20 @@ public class UC2DiscoverAndBuildAgentInternalCompositionTest
 		System.out.println();
 		
 		// get agents
-		List<Agent> agents = this.facade.getAgents();
-		for (Agent agent : agents) {
+		List<RDFAgent> agents = this.facade.getAgents();
+		for (RDFAgent agent : agents) {
 			// print agent's information
 			System.out.println(agent);
 			
 			// get agent internal components 
-			List<Component> comps = agent.getComponents();
+			List<RDFComponent> comps = agent.getComponents();
 			// put values into the state variables
-			for (Component comp : comps) {
+			for (RDFComponent comp : comps) {
 				// initialize internal state variable
 				Map<String, List<String>> sv = new HashMap<String, List<String>>();
 				
 				// put values into the state variable
-				for (State state : comp.getStates()) {
+				for (RDFState state : comp.getStates()) {
 					// add value
 					String value = state.getLabel().replace(" ", "_");
 					sv.put(value, new ArrayList<String>());
@@ -125,20 +125,20 @@ public class UC2DiscoverAndBuildAgentInternalCompositionTest
 		System.out.println();
 		
 		// get agents
-		List<Agent> agents = this.facade.getAgents();
-		for (Agent agent : agents) {
+		List<RDFAgent> agents = this.facade.getAgents();
+		for (RDFAgent agent : agents) {
 			// print agent's information
 			System.out.println(agent);
 			
 			// get agent internal components 
-			List<Component> comps = agent.getComponents();
+			List<RDFComponent> comps = agent.getComponents();
 			// put values into the state variables
-			for (Component comp : comps) {
+			for (RDFComponent comp : comps) {
 				// initialize internal state variable
 				Map<String, List<String>> sv = new HashMap<String, List<String>>();
 				
 				// put values into the state variable
-				for (State state : comp.getStates()) {
+				for (RDFState state : comp.getStates()) {
 					// add value
 					String value = state.getLabel().replace(" ", "_");
 					sv.put(value, new ArrayList<String>());
@@ -155,16 +155,16 @@ public class UC2DiscoverAndBuildAgentInternalCompositionTest
 				}
 				
 				// consider restrictions if any
-				List<Restriction> restrictions = comp.getRestrictions();
-				for (Restriction res : restrictions) {
+				List<RDFRestriction> restrictions = comp.getRestrictions();
+				for (RDFRestriction res : restrictions) {
 					// get states
-					List<State> states = res.getStates();
+					List<RDFState> states = res.getStates();
 					for (int i = 0; i < states.size() - 1; i++) {
-						State si = states.get(i);
+						RDFState si = states.get(i);
 						String vi = si.getLabel().replace(" ", "_");
 						
 						for (int j = i+1; j < states.size(); j++) {
-							State sj = states.get(j);
+							RDFState sj = states.get(j);
 							String vj = sj.getLabel().replace(" ", "_");
 							
 							// remove constraints on state variables

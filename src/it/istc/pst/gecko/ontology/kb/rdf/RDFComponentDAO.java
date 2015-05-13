@@ -1,13 +1,12 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.ComponentDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.Component;
-import it.istc.pst.gecko.ontology.model.ExternalComponent;
-import it.istc.pst.gecko.ontology.model.Restriction;
-import it.istc.pst.gecko.ontology.model.State;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFModelFactory;
+import it.istc.pst.gecko.ontology.model.rdf.RDFRestriction;
+import it.istc.pst.gecko.ontology.model.rdf.RDFState;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,7 +23,7 @@ import com.hp.hpl.jena.query.QuerySolution;
  * @author alessandroumbrico
  *
  */
-public class RDFComponentDAO implements ComponentDAO 
+public class RDFComponentDAO 
 {
 	private RDFDatasetManager manager;
 	private RDFModelFactory factory;
@@ -40,11 +39,11 @@ public class RDFComponentDAO implements ComponentDAO
 	
 	/**
 	 * 
+	 * @return
 	 */
-	@Override
-	public List<Component> retrieveAllInternalComponents() {
+	public List<RDFComponent> retrieveAllInternalComponents() {
 		// prepare data
-		List<Component> components = new ArrayList<Component>();
+		List<RDFComponent> components = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?comp ?label "
@@ -79,9 +78,11 @@ public class RDFComponentDAO implements ComponentDAO
 	
 	/**
 	 * 
+	 * @param id
+	 * @return
+	 * @throws RDFResourceNotFoundException
 	 */
-	@Override
-	public Component retrieveInternalComponentById(String id) 
+	public RDFComponent retrieveInternalComponentById(String id) 
 			throws RDFResourceNotFoundException 
 	{
 		// prepare data
@@ -121,13 +122,15 @@ public class RDFComponentDAO implements ComponentDAO
 	
 	/**
 	 * 
+	 * @param id
+	 * @return
+	 * @throws RDFResourceNotFoundException
 	 */
-	@Override
-	public ExternalComponent retrieveExternalComponentById(String id) 
+	public RDFExternalComponent retrieveExternalComponentById(String id) 
 			throws RDFResourceNotFoundException 
 	{
 		// prepare data
-		ExternalComponent comp = null;
+		RDFExternalComponent comp = null;
 		
 		// prepare query
 		String queryString = "SELECT ?label "
@@ -162,11 +165,12 @@ public class RDFComponentDAO implements ComponentDAO
 	
 	/**
 	 * 
+	 * @param comp
+	 * @return
 	 */
-	@Override
-	public List<State> retrieveComponentStates(Component comp) {
+	public List<RDFState> retrieveComponentStates(Component comp) {
 		// prepare data
-		List<State> states = new ArrayList<State>();
+		List<RDFState> states = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?state ?label ?dmin ?dmax "
@@ -186,7 +190,7 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create State
-			State s = this.factory.createState(
+			RDFState s = this.factory.createState(
 					sol.get("?state").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),
@@ -208,10 +212,9 @@ public class RDFComponentDAO implements ComponentDAO
 	 * @param neighbor
 	 * @return
 	 */
-	@Override
-	public Component retrieveConnectedComponent(ExternalComponent neighbor) {
+	public RDFComponent retrieveConnectedComponent(RDFExternalComponent neighbor) {
 		// prepare data
-		Component c = null;
+		RDFComponent c = null;
 		
 		// prepare query
 		String queryString = "SELECT ?c ?l "
@@ -244,11 +247,12 @@ public class RDFComponentDAO implements ComponentDAO
 	
 	/**
 	 * 
+	 * @param comp
+	 * @return
 	 */
-	@Override
-	public List<Restriction> retrieveComponentRestrictions(Component comp) {
+	public List<RDFRestriction> retrieveComponentRestrictions(Component comp) {
 		// prepare data
-		List<Restriction> restrictions = new ArrayList<Restriction>();
+		List<RDFRestriction> restrictions = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?restriction  "
@@ -266,7 +270,7 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create State
-			Restriction restriction = this.factory.createRestriction(
+			RDFRestriction restriction = this.factory.createRestriction(
 					sol.get("?restriction").asResource().getURI(),
 					this.factory.createComponent(comp.getId(), comp.getLabel()));
 			
@@ -282,11 +286,12 @@ public class RDFComponentDAO implements ComponentDAO
 	
 	/**
 	 * 
+	 * @param restriction
+	 * @return
 	 */
-	@Override
-	public List<State> retrieveRestrictionStates(Restriction restriction) {
+	public List<RDFState> retrieveRestrictionStates(RDFRestriction restriction) {
 		// prepare data
-		List<State> states = new ArrayList<State>();
+		List<RDFState> states = new ArrayList<>();
 		
 		// prepare query
 		String queryString = "SELECT ?state ?label ?dmin ?dmax "
@@ -306,7 +311,7 @@ public class RDFComponentDAO implements ComponentDAO
 			// get next solution
 			QuerySolution sol = it.next();
 			// create State
-			State state = this.factory.createState(
+			RDFState state = this.factory.createState(
 					sol.get("?state").asResource().getURI(),
 					sol.get("?label").asLiteral().getLexicalForm(),
 					sol.get("?dmin").asLiteral().getLexicalForm(),

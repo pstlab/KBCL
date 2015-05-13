@@ -1,7 +1,7 @@
 package it.istc.pst.gecko.ontology.ps.ddl;
 
-import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.Functionality;
+import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.ps.PlanningModel;
 import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
 
@@ -39,7 +39,7 @@ public class DDLPlanningModel extends PlanningModel
 		try 
 		{
 			// get related agent
-			Agent agent = this.facade.getAgentById(agentId);
+			RDFAgent agent = this.facade.getAgentById(agentId);
 			// create processor
 			this.kbProcessor = new DDLKnowledgeBaseProcessor(agent, this.horizon);
 			
