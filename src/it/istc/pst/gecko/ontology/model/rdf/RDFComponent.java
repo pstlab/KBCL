@@ -2,7 +2,6 @@ package it.istc.pst.gecko.ontology.model.rdf;
 
 import it.istc.pst.gecko.ontology.kb.rdf.RDFComponentDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
-import it.istc.pst.gecko.ontology.model.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +11,10 @@ import java.util.List;
  * @author alessandroumbrico
  *
  */
-public class RDFComponent extends Component 
+public class RDFComponent // extends Component 
 {
+	protected String id;
+	protected String label;
 	protected List<RDFState> states;
 	protected List<RDFRestriction> restrictions;
 	
@@ -26,7 +27,8 @@ public class RDFComponent extends Component
 	 * @param label
 	 */
 	protected RDFComponent(String id, String label) {
-		super(id, label);
+		this.id = id;
+		this.label = label;
 		// lazy load approach
 		this.states = null;
 		this.restrictions = null;
@@ -35,6 +37,22 @@ public class RDFComponent extends Component
 		RDFKnowledgeBaseFactory factory = new RDFKnowledgeBaseFactory();
 		// create DAO
 		this.dao = factory.createComponentDAO();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getId() {
+		return id;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getLabel() {
+		return label;
 	}
 	
 	/**
@@ -61,6 +79,22 @@ public class RDFComponent extends Component
 			this. restrictions = this.dao.retrieveComponentRestrictions(this);
 		}
 		return new ArrayList<RDFRestriction>(this.restrictions);
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public int hashCode() {
+		return this.id.hashCode();
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof RDFComponent) && ((RDFComponent) obj).id.equals(this.id);
 	}
 	
 	/**

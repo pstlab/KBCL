@@ -12,7 +12,6 @@ public abstract class Agent
 	protected String label;
 	protected AgentType type;
 
-	
 	/**
 	 * 
 	 * @param id

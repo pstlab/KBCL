@@ -6,6 +6,7 @@ import it.istc.pst.gecko.ontology.model.ElementType;
 import it.istc.pst.gecko.ontology.model.owl.OWLElement;
 import it.istc.pst.gecko.ontology.model.owl.OWLElementType;
 import it.istc.pst.gecko.ontology.model.owl.OWLModelFactory;
+import it.istc.pst.gecko.ontology.model.owl.OWLPort;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +15,10 @@ import java.util.List;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntResource;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 
 /**
  * 
@@ -168,6 +172,49 @@ public class OWLElementDAO
 		// get element
 		return this.factory.createElement(e.getURI(), e.getLocalName(), 
 				this.factory.createElementType(typeClass.getURI(), typeClass.getLocalName()));
+	}
+
+	/**
+	 * FIXME: DA TESTARE!!!
+	 * 
+	 * @param port
+	 * @return
+	 */
+	public OWLElement retrievePortNeighbor(OWLPort port) {
+		// get individual
+		Individual p = this.dataset.model.getIndividual(port.getId());
+		// get property
+		Property prop = this.dataset.model.getProperty(OWLDatasetManager.NS + "connects");
+		Statement stat = p.getProperty(prop);
+		// get neighbor
+		OntResource neighbor = stat.getObject().as(OntResource.class);
+		// get type
+		Resource type = neighbor.getRDFType();
+		return this.factory.createElement(neighbor.getURI(), neighbor.getLocalName(), 
+				this.factory.createElementType(type.getURI(), type.getLocalName()));
+	}
+
+	/**
+	 * FIXME: DA TESTARE!!!
+	 * 
+	 * @param neighbor
+	 * @param port
+	 */
+	public void setPortNeighbor(OWLElement neighbor, OWLPort port) {
+		// get individual
+		Individual p = this.dataset.model.getIndividual(port.getId());
+		// get property
+		Property prop = this.dataset.model.getProperty(OWLDatasetManager.NS + "connect");
+		// get value
+		Resource res = this.dataset.model.getIndividual(neighbor.getId());
+		// check if property exists
+		if (p.hasProperty(prop)) {
+			// remove property
+			p.removeProperty(prop, (RDFNode) null);
+		}
+		
+		// insert property
+		p.addProperty(prop, res);
 	}
 
 }

@@ -1,8 +1,8 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFState;
 
@@ -59,7 +59,7 @@ public class UC3DiscoverAndBuildAgentExternalDpendenciesTest
 			for (RDFExternalComponent comp : comps) {
 				Assert.assertNotNull(comp);
 				// get connection information
-				Component connected = comp.getConnectedBy();
+				RDFComponent connected = comp.getConnectedBy();
 				Assert.assertNotNull(connected);
 				// print data
 				System.out.println(comp);

@@ -5,7 +5,6 @@ import it.istc.pst.gecko.ontology.kb.rdf.RDFAgentDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFFunctionalityDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;

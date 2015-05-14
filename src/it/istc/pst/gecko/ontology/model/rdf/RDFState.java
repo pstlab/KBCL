@@ -1,6 +1,5 @@
 package it.istc.pst.gecko.ontology.model.rdf;
 
-import it.istc.pst.gecko.ontology.model.Component;
 
 /**
  * 
@@ -67,7 +66,7 @@ public class RDFState
 	 * 
 	 * @return
 	 */
-	public Component getComponent() {
+	public RDFComponent getComponent() {
 		return component;
 	}
 	

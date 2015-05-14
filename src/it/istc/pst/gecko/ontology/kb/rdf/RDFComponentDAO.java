@@ -1,7 +1,6 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFModelFactory;
@@ -168,7 +167,7 @@ public class RDFComponentDAO
 	 * @param comp
 	 * @return
 	 */
-	public List<RDFState> retrieveComponentStates(Component comp) {
+	public List<RDFState> retrieveComponentStates(RDFComponent comp) {
 		// prepare data
 		List<RDFState> states = new ArrayList<>();
 		
@@ -250,7 +249,7 @@ public class RDFComponentDAO
 	 * @param comp
 	 * @return
 	 */
-	public List<RDFRestriction> retrieveComponentRestrictions(Component comp) {
+	public List<RDFRestriction> retrieveComponentRestrictions(RDFComponent comp) {
 		// prepare data
 		List<RDFRestriction> restrictions = new ArrayList<>();
 		

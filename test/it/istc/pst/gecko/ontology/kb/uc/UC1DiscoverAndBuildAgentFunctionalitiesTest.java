@@ -1,9 +1,9 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
@@ -184,7 +184,7 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 							RDFState state = con.getTarget();
 							String stateLabel = state.getLabel().replace(" ", "_");
 							// on component
-							Component comp = state.getComponent();
+							RDFComponent comp = state.getComponent();
 							String compLabel = comp.getLabel().replace(" ", "_");
 							
 							// print synchronization
@@ -208,7 +208,7 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 								RDFState to = con.getTarget();
 								String toLabel = to.getLabel().replace(" ", "_");
 								// on component
-								Component toComp = to.getComponent();
+								RDFComponent toComp = to.getComponent();
 								String toCompLabel = toComp.getLabel().replace(" ", "_");
 								
 								// print synchronization

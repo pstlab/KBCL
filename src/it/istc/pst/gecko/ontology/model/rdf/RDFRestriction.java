@@ -2,7 +2,6 @@ package it.istc.pst.gecko.ontology.model.rdf;
 
 import it.istc.pst.gecko.ontology.kb.rdf.RDFComponentDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
-import it.istc.pst.gecko.ontology.model.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,7 @@ public class RDFRestriction
 	 * 
 	 * @return
 	 */
-	public Component getComponent() {
+	public RDFComponent getComponent() {
 		return component;
 	}
 	

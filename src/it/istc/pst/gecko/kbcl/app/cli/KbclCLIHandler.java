@@ -6,10 +6,10 @@ import it.istc.pst.gecko.kbcl.exception.KbclRequestProcessingFailureException;
 import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
-import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
+import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
 import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
@@ -160,7 +160,7 @@ public class KbclCLIHandler implements Runnable
 						// print agent's functionalities
 						System.out.println("Agent's components");
 						int counter = 0;
-						for (Component comp : this.agent.getComponents()) {
+						for (RDFComponent comp : this.agent.getComponents()) {
 							System.out.println("- (" + counter + ") " + comp);
 							counter++;
 						}

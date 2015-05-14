@@ -16,20 +16,24 @@ public class OWLRuleBasedReasoner
 	private InfModel model;
 	
 	// forward rules
-	private static final String RULES = "[r1: (?m " + OWLDatasetManager.NS + "hasElement ?e), (?e " + OWLDatasetManager.NS + "connect ?n) "
-			+ "-> "
-			+ "(?m " + OWLDatasetManager.NS + "hasPort ?e), (?m " + OWLDatasetManager.NS + "hasNeighbor ?n)]\n"
-			+ "[r2: (?f " + OWLDatasetManager.NS + "hasOutput ?a), (?f " + OWLDatasetManager.NS +"hasInput ?b), (?m " + OWLDatasetManager.NS +"hasPort ?a), (?m " + OWLDatasetManager.NS + "hasPort ?b)"
-			+ "->"
-			+ "(?m " + OWLDatasetManager.NS + "hasChannel ?f)]";
+	private static final String[] RULES = new String[] {
+		"[r1: (?m " + OWLDatasetManager.NS + "hasElement ?e), (?e " + OWLDatasetManager.NS + "connect ?n) -> (?m " + OWLDatasetManager.NS + "hasPort ?e)]",
+		"[r2: (?m " + OWLDatasetManager.NS + "hasElement ?e), (?e " + OWLDatasetManager.NS + "connect ?n) -> (?m " + OWLDatasetManager.NS + "hasNeighbor ?n)]",
+		"[r3: (?f " + OWLDatasetManager.NS + "hasOutput ?a), (?f " + OWLDatasetManager.NS +"hasInput ?b), (?m " + OWLDatasetManager.NS +"hasPort ?a), (?m " + OWLDatasetManager.NS + "hasPort ?b) -> (?m " + OWLDatasetManager.NS + "hasChannel ?f)]"
+	};
 	
 	/**
 	 * 
 	 * @param dataset
 	 */
 	protected OWLRuleBasedReasoner(OntModel dataset) {
+		String rules = "";
+		for (String r : RULES) {
+			rules += r + "\n";
+		}
+		
 		// create model
-		this.model = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(RULES)), dataset);
+		this.model = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(rules)), dataset);
 	}
 	
 	/**

@@ -1,7 +1,6 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Component;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
@@ -80,10 +79,10 @@ public class RDFComponentDAOTest
 		RDFComponentDAO dao = this.factory.createComponentDAO();
 		
 		// get an agent
-		Component c1 = dao.retrieveAllInternalComponents().get(0);
+		RDFComponent c1 = dao.retrieveAllInternalComponents().get(0);
 		try {
 			// success expected
-			Component c2 = dao.retrieveInternalComponentById(c1.getId());
+			RDFComponent c2 = dao.retrieveInternalComponentById(c1.getId());
 			Assert.assertNotNull(c2);
 			Assert.assertEquals(c1.getId(), c2.getId());
 			Assert.assertEquals(c1.getLabel(), c2.getLabel());
@@ -97,7 +96,7 @@ public class RDFComponentDAOTest
 		
 		try {
 			// failure expected
-			Component c3 = dao.retrieveInternalComponentById("pippo");
+			RDFComponent c3 = dao.retrieveInternalComponentById("pippo");
 			System.out.println(c3);
 			Assert.assertTrue(false);
 		}
@@ -123,7 +122,7 @@ public class RDFComponentDAOTest
 		// get an agent
 		List<RDFComponent> comps = dao.retrieveAllInternalComponents();
 		// get a component
-		Component c = comps.get(0);
+		RDFComponent c = comps.get(0);
 		System.out.println("\n" + c + "\n");
 		// get agent's functionalities
 		Assert.assertNotNull(c);
@@ -180,7 +179,7 @@ public class RDFComponentDAOTest
 		RDFExternalComponent neighbor = adao.retrieveAgentExternalComponents(agent).get(0);
 		System.out.println(neighbor);
 		// call DAO method
-		Component c = dao.retrieveConnectedComponent(neighbor);
+		RDFComponent c = dao.retrieveConnectedComponent(neighbor);
 		// call DAO method
 		Assert.assertNotNull(c);
 		// print agent types

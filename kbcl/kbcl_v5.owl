@@ -43,6 +43,15 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasActuator -->
+
+    <ObjectProperty rdf:about="&kbcl;hasActuator">
+        <rdfs:subPropertyOf rdf:resource="&kbcl;hasInternalElement"/>
+        <propertyDisjointWith rdf:resource="&kbcl;hasPort"/>
+    </ObjectProperty>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasChannel -->
 
     <ObjectProperty rdf:about="&kbcl;hasChannel">
@@ -69,6 +78,7 @@
         <rdfs:domain rdf:resource="&kbcl;Agent"/>
         <rdfs:range rdf:resource="&kbcl;ExternalElement"/>
         <rdfs:subPropertyOf rdf:resource="&kbcl;hasElement"/>
+        <propertyDisjointWith rdf:resource="&kbcl;hasInternalElement"/>
     </ObjectProperty>
     
 
