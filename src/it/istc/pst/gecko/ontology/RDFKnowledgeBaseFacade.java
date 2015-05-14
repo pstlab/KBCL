@@ -17,17 +17,17 @@ import java.util.List;
  * @author alessandroumbrico
  *
  */
-public class KnowledgeBaseFacade 
+public class RDFKnowledgeBaseFacade 
 {
 	private List<RDFAgent> agents;
 	private RDFKnowledgeBaseFactory factory;
 	
-	private static KnowledgeBaseFacade INSTANCE = null;
+	private static RDFKnowledgeBaseFacade INSTANCE = null;
 
 	/**
 	 * 
 	 */
-	private KnowledgeBaseFacade() {
+	private RDFKnowledgeBaseFacade() {
 		// create factory
 		this.factory = new RDFKnowledgeBaseFactory();
 		
@@ -39,9 +39,9 @@ public class KnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
-	public static KnowledgeBaseFacade getSingletonInstance() {
+	public static RDFKnowledgeBaseFacade getSingletonInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new KnowledgeBaseFacade();
+			INSTANCE = new RDFKnowledgeBaseFacade();
 		}
 		return INSTANCE;
 	}

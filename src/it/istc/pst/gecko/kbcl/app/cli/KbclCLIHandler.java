@@ -3,7 +3,7 @@ package it.istc.pst.gecko.kbcl.app.cli;
 import it.istc.pst.gecko.kbcl.KbclManager;
 import it.istc.pst.gecko.kbcl.exception.KbclInitializationException;
 import it.istc.pst.gecko.kbcl.exception.KbclRequestProcessingFailureException;
-import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
 import it.istc.pst.gecko.ontology.model.Functionality;
@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 public class KbclCLIHandler implements Runnable
 {
 	private static final long HORIZON = 1000;
-	private KnowledgeBaseFacade facade;
+	private RDFKnowledgeBaseFacade facade;
 	private RDFAgent agent;
 	private KbclManager manager;
 	
@@ -34,7 +34,7 @@ public class KbclCLIHandler implements Runnable
 	 * 
 	 */
 	protected KbclCLIHandler() {
-		this.facade = KnowledgeBaseFacade.getSingletonInstance();
+		this.facade = RDFKnowledgeBaseFacade.getSingletonInstance();
 		this.agent = null;
 		this.manager = null;
 	}

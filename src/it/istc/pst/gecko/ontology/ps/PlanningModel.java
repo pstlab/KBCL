@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.ps;
 
-import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 
 /**
  * 
@@ -11,7 +11,7 @@ public abstract class PlanningModel
 {
 	protected String name;
 	protected long horizon;
-	protected KnowledgeBaseFacade facade;
+	protected RDFKnowledgeBaseFacade facade;
 	
 	/**
 	 * 
@@ -22,7 +22,7 @@ public abstract class PlanningModel
 		this.name = name;
 		this.horizon = horizon;
 		// create KB facade
-		this.facade = KnowledgeBaseFacade.getSingletonInstance();
+		this.facade = RDFKnowledgeBaseFacade.getSingletonInstance();
 	}
 	
 	/**

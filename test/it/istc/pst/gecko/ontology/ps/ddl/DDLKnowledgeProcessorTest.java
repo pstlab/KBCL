@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.ps.ddl;
 
-import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class DDLKnowledgeProcessorTest
 	@Before
 	public void init() {
 		// get an agent
-		KnowledgeBaseFacade facade = KnowledgeBaseFacade.getSingletonInstance();
+		RDFKnowledgeBaseFacade facade = RDFKnowledgeBaseFacade.getSingletonInstance();
 		this.processor = new DDLKnowledgeBaseProcessor(facade.getAgents().get(0), 1000);
 		
 		System.out.println("************************************************************");

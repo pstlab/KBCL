@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
-import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
@@ -26,14 +26,14 @@ import org.junit.Test;
  */
 public class UC1DiscoverAndBuildAgentFunctionalitiesTest 
 {
-	private KnowledgeBaseFacade facade;
+	private RDFKnowledgeBaseFacade facade;
 	
 	/**
 	 * 
 	 */
 	@Before
 	public void init() {
-		this.facade = KnowledgeBaseFacade.getSingletonInstance();
+		this.facade = RDFKnowledgeBaseFacade.getSingletonInstance();
 	
 		System.out.println("************************************************************");
 		System.out.println("*********************** Use Case 1 Test ********************");

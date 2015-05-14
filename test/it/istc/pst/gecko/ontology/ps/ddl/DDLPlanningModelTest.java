@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.ps.ddl;
 
-import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
 
@@ -28,7 +28,7 @@ public class DDLPlanningModelTest
 		try
 		{
 			// get facade
-			KnowledgeBaseFacade facade = KnowledgeBaseFacade.getSingletonInstance();
+			RDFKnowledgeBaseFacade facade = RDFKnowledgeBaseFacade.getSingletonInstance();
 			Agent agent = facade.getAgents().get(0);
 			
 			this.model = new DDLPlanningModel(agent.getLabel(), agent.getId(), 1000);

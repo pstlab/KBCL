@@ -1,5 +1,7 @@
 package it.istc.pst.gecko.ontology.model.owl;
 
+import it.istc.pst.gecko.ontology.kb.exception.PropertyNotFoundException;
+
 /**
  * 
  * @author alessandroumbrico
@@ -28,7 +30,13 @@ public class OWLPort extends OWLElement
 	 */
 	public OWLElement getConnectedNeighbor() {
 		if (this.connectedNeighbor == null) {
-			this.connectedNeighbor = this.dao.retrievePortNeighbor(this);
+			try {
+				this.connectedNeighbor = this.dao.retrievePortNeighbor(this);
+			}
+			catch (PropertyNotFoundException ex) {
+				this.connectedNeighbor = null;
+				System.err.println(ex.getLocalizedMessage());
+			}
 		}
 		// get neighbor
 		return this.connectedNeighbor;
@@ -43,5 +51,16 @@ public class OWLPort extends OWLElement
 		this.dao.setPortNeighbor(neighbor, this);
 		// update
 		this.connectedNeighbor = neighbor; 
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return "[Element id=" + this.id +"\n"
+				+ "\tlabel= " + this.label + "\n"
+				+ "\ttype= " + this.type + "\n"
+				+ "\tconnect= " + this.connectedNeighbor + "]\n";
 	}
 }

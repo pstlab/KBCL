@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.kb.model.rdf;
 
-import it.istc.pst.gecko.ontology.KnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
@@ -18,7 +18,7 @@ import org.junit.Test;
  */
 public class KnowledgeBaseFacadeTest 
 {
-	private KnowledgeBaseFacade facade;
+	private RDFKnowledgeBaseFacade facade;
 	
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class KnowledgeBaseFacadeTest
 	@Before
 	public void init() {
 		// get facade
-		this.facade = KnowledgeBaseFacade.getSingletonInstance();
+		this.facade = RDFKnowledgeBaseFacade.getSingletonInstance();
 		
 		System.out.println("************************************************************");
 		System.out.println("*************** Knowledge Base Facade Test *****************");

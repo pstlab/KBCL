@@ -130,7 +130,7 @@ public class OWLModelFactory {
 		List<OWLFunctionalityType> types = this.factory.createFunctionalityDAO().retrieveAllFunctionalityTypes();
 		for (OWLFunctionalityType type : types) {
 			// check type
-			if (type.equals("Channel")) {
+			if (type.getLabel().equals("Channel")) {
 				channelType = type;
 				break;
 			}

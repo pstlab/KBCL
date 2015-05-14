@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.model.owl;
 
-import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
+import it.istc.pst.gecko.ontology.kb.exception.PropertyNotFoundException;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class OWLChannel extends OWLFunctionality
 				// load data
 				this.input = this.dao.retrieveChannelInputPort(this);
 			}
-			catch (ResourceNotFoundException ex) {
+			catch (PropertyNotFoundException ex) {
 				this.input = null;
 				System.err.println(ex.getLocalizedMessage());
 			}
@@ -65,7 +65,7 @@ public class OWLChannel extends OWLFunctionality
 				// load data
 				this.output = this.dao.retrieveChannelOutputPort(this);
 			}
-			catch (ResourceNotFoundException ex) {
+			catch (PropertyNotFoundException ex) {
 				this.output = null;
 				System.err.println(ex.getLocalizedMessage());
 			}

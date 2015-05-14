@@ -1,5 +1,6 @@
 package it.istc.pst.gecko.ontology.kb.owl;
 
+import it.istc.pst.gecko.ontology.kb.exception.PropertyNotFoundException;
 import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
 import it.istc.pst.gecko.ontology.kb.owl.exception.OWLResourceNotFoundException;
 import it.istc.pst.gecko.ontology.model.ElementType;
@@ -16,7 +17,6 @@ import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntResource;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 
@@ -175,17 +175,24 @@ public class OWLElementDAO
 	}
 
 	/**
-	 * FIXME: DA TESTARE!!!
 	 * 
 	 * @param port
 	 * @return
+	 * @throws PropertyNotFoundException
 	 */
-	public OWLElement retrievePortNeighbor(OWLPort port) {
+	public OWLElement retrievePortNeighbor(OWLPort port) 
+			throws PropertyNotFoundException
+	{
 		// get individual
 		Individual p = this.dataset.model.getIndividual(port.getId());
 		// get property
-		Property prop = this.dataset.model.getProperty(OWLDatasetManager.NS + "connects");
+		Property prop = this.dataset.model.getProperty(OWLDatasetManager.NS + "connect");
 		Statement stat = p.getProperty(prop);
+		// check result
+		if (stat == null) {
+			throw new PropertyNotFoundException("Property " + prop.getURI() + " not found for subject " + port.getId());
+		}
+		
 		// get neighbor
 		OntResource neighbor = stat.getObject().as(OntResource.class);
 		// get type
@@ -195,7 +202,6 @@ public class OWLElementDAO
 	}
 
 	/**
-	 * FIXME: DA TESTARE!!!
 	 * 
 	 * @param neighbor
 	 * @param port
@@ -210,7 +216,7 @@ public class OWLElementDAO
 		// check if property exists
 		if (p.hasProperty(prop)) {
 			// remove property
-			p.removeProperty(prop, (RDFNode) null);
+			p.removeProperty(prop, p.getPropertyValue(prop));
 		}
 		
 		// insert property

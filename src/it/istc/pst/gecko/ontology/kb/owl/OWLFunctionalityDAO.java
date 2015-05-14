@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.kb.owl;
 
-import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
+import it.istc.pst.gecko.ontology.kb.exception.PropertyNotFoundException;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
 import it.istc.pst.gecko.ontology.model.owl.OWLChannel;
 import it.istc.pst.gecko.ontology.model.owl.OWLFunctionality;
@@ -16,8 +16,8 @@ import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntResource;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 
 /**
  * 
@@ -126,82 +126,58 @@ public class OWLFunctionalityDAO
 	}
 
 	/**
-	 * FIXME: DA TESTARE!!!
 	 * 
 	 * @param function
 	 * @return
-	 * @throws ResourceNotFoundException
+	 * @throws PropertyNotFoundException
 	 */
 	public OWLPort retrieveChannelInputPort(OWLChannel function) 
-			throws ResourceNotFoundException
+			throws PropertyNotFoundException
 	{
-		List<OWLPort> list = new ArrayList<>();
-		
 		// get subject
-		OntClass c = this.dataset.model.getOntClass(function.getId());
+		Individual c = this.dataset.model.getIndividual(function.getId());
 		// get property
 		Property p = this.dataset.model.getProperty(OWLDatasetManager.NS + "hasInput");
 		// get object
-		
-		Iterator<RDFNode> it = this.dataset.model.listObjectsOfProperty(c, p);
-		while (it.hasNext()) {
-			// get next node
-			OntResource res = it.next().as(OntResource.class);
-			if (!res.isAnon()) {
-				// create element 
-				list.add(this.factory.createPort(res.getURI(), res.getLocalName()));
-			}
-		}
-		
-		// check result
-		if (list.isEmpty()) {
-			throw new ResourceNotFoundException("No Input port found for channel " + function);
+		Statement statement = c.getProperty(p);
+		if (statement == null) {
+			// not property
+			throw new PropertyNotFoundException("Property " + p.getURI() + " not found for subject " + c.getId());
 		}
 		
 		// get port
-		return list.get(0);
+		OntResource res = statement.getObject().as(OntResource.class);
+		// get port
+		return this.factory.createPort(res.getURI(), res.getLocalName());
 	}
 	
 	/**
-	 * FIXME: DA TESTARE!!!
 	 * 
 	 * @param function
 	 * @return
-	 * @throws ResourceNotFoundException
+	 * @throws PropertyNotFoundException
 	 */
 	public OWLPort retrieveChannelOutputPort(OWLChannel function) 
-			throws ResourceNotFoundException
+			throws PropertyNotFoundException
 	{
-		List<OWLPort> list = new ArrayList<>();
-		
 		// get subject
-		OntClass c = this.dataset.model.getOntClass(function.getId());
+		Individual c = this.dataset.model.getIndividual(function.getId());
 		// get property
 		Property p = this.dataset.model.getProperty(OWLDatasetManager.NS + "hasOutput");
 		// get object
-		
-		Iterator<RDFNode> it = this.dataset.model.listObjectsOfProperty(c, p);
-		while (it.hasNext()) {
-			// get next node
-			OntResource res = it.next().as(OntResource.class);
-			if (!res.isAnon()) {
-				// create element 
-				list.add(this.factory.createPort(res.getURI(), res.getLocalName()));
-			}
-		}
-		
-		// check result
-		if (list.isEmpty()) {
-			throw new ResourceNotFoundException("No Output port found for channel " + function);
+		Statement statement = c.getProperty(p);
+		if (statement == null) {
+			// not property
+			throw new PropertyNotFoundException("Property " + p.getURI() + " not found for subject " + c.getId());
 		}
 		
 		// get port
-		return list.get(0);
+		OntResource res = statement.getObject().as(OntResource.class);
+		// get port
+		return this.factory.createPort(res.getURI(), res.getLocalName());
 	}
 
-	
 	/**
-	 * FIXME: DA TESTARE!!!
 	 * 
 	 * @param port
 	 * @param function
@@ -216,7 +192,7 @@ public class OWLFunctionalityDAO
 		// check if has property
 		if (c.hasProperty(p)) {
 			// remove existing association
-			c.removeProperty(p, (RDFNode) null);
+			c.removeProperty(p, c.getPropertyValue(p));
 		}
 		
 		// set new input port
@@ -224,7 +200,6 @@ public class OWLFunctionalityDAO
 	}
 	
 	/**
-	 * FIXME: DA TESTARE!!!
 	 * 
 	 * @param port
 	 * @param function
@@ -239,7 +214,7 @@ public class OWLFunctionalityDAO
 		// check if has property
 		if (c.hasProperty(p)) {
 			// remove existing association
-			c.removeProperty(p, (RDFNode) null);
+			c.removeProperty(p, c.getPropertyValue(p));
 		}
 		
 		// set new input port
