@@ -1,6 +1,11 @@
 package it.istc.pst.gecko.ontology.model.owl;
 
-import it.istc.pst.gecko.ontology.kb.exception.PropertyNotFoundException;
+import it.istc.pst.gecko.ontology.kb.owl.OWLDatasetManager;
+import it.istc.pst.gecko.ontology.kb.owl.OWLInstance;
+import it.istc.pst.gecko.ontology.kb.owl.exception.OWLIndividualNotFoundException;
+import it.istc.pst.gecko.ontology.kb.owl.exception.OWLPropertyNotFoundException;
+
+import java.util.List;
 
 /**
  * 
@@ -9,7 +14,7 @@ import it.istc.pst.gecko.ontology.kb.exception.PropertyNotFoundException;
  */
 public class OWLPort extends OWLElement 
 {
-	private OWLElement connectedNeighbor;
+	private OWLElement neighbor;
 	
 	/**
 	 * 
@@ -19,9 +24,8 @@ public class OWLPort extends OWLElement
 	 */
 	protected OWLPort(String id, String label, OWLElementType type) {
 		super(id, label, type);
-		
 		// lazy approach
-		this.connectedNeighbor = null;
+		this.neighbor = null;
 	}
 	
 	/**
@@ -29,17 +33,36 @@ public class OWLPort extends OWLElement
 	 * @return
 	 */
 	public OWLElement getConnectedNeighbor() {
-		if (this.connectedNeighbor == null) {
+		if (this.neighbor == null) {
 			try {
-				this.connectedNeighbor = this.dao.retrievePortNeighbor(this);
+				// load from data-set
+				List<OWLInstance> ns = this.dataset
+						.retrieveAllInstancesRelatedByProperty(this.label, 
+								OWLDatasetManager.PROPERTY_LABEL_CONNECT);
+				
+				// check list
+				if (!ns.isEmpty()) {
+					// get connected neighbor
+					OWLInstance n = ns.get(0);
+					
+					// TODO : create and set
+					
+					// check size
+					if (ns.size() > 1) {
+						System.err.println("... Warning more than one connected neighbor found for port " + this.id);
+					}
+				}
+				else {
+					System.err.println("... Warning no connected neighbor found for port " + this.id);
+				}
 			}
-			catch (PropertyNotFoundException ex) {
-				this.connectedNeighbor = null;
-				System.err.println(ex.getLocalizedMessage());
+			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+				this.neighbor = null;
+				System.err.println(ex.getMessage());
 			}
 		}
 		// get neighbor
-		return this.connectedNeighbor;
+		return this.neighbor;
 	}
 	
 	/**
@@ -47,10 +70,16 @@ public class OWLPort extends OWLElement
 	 * @param neighbor
 	 */
 	public void setConnectedNeighbor(OWLElement neighbor) {
-		// save relation
-		this.dao.setPortNeighbor(neighbor, this);
-		// update
-		this.connectedNeighbor = neighbor; 
+		try {
+			// save relation
+			this.dataset.assertStatement(this.label, OWLDatasetManager.PROPERTY_LABEL_CONNECT, neighbor.getLabel());
+			// update
+			this.neighbor = neighbor;
+		}
+		catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+			this.neighbor = null;
+			System.err.println(ex.getMessage());
+		}
 	}
 	
 	/**
@@ -61,6 +90,6 @@ public class OWLPort extends OWLElement
 		return "[Element id=" + this.id +"\n"
 				+ "\tlabel= " + this.label + "\n"
 				+ "\ttype= " + this.type + "\n"
-				+ "\tconnect= " + this.connectedNeighbor + "]\n";
+				+ "\tconnect= " + this.neighbor + "]\n";
 	}
 }

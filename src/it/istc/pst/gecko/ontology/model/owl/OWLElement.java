@@ -1,7 +1,6 @@
 package it.istc.pst.gecko.ontology.model.owl;
 
-import it.istc.pst.gecko.ontology.kb.owl.OWLElementDAO;
-import it.istc.pst.gecko.ontology.kb.owl.OWLKnowledgeBaseFactory;
+import it.istc.pst.gecko.ontology.kb.owl.OWLDatasetManager;
 import it.istc.pst.gecko.ontology.model.Element;
 
 /**
@@ -11,7 +10,7 @@ import it.istc.pst.gecko.ontology.model.Element;
  */
 public class OWLElement extends Element 
 {
-	protected OWLElementDAO dao;
+	protected OWLDatasetManager dataset;
 	
 	/**
 	 * 
@@ -21,9 +20,6 @@ public class OWLElement extends Element
 	 */
 	protected OWLElement(String id, String label, OWLElementType type) {
 		super(id, label, type);
-		
-		// get DAO
-		OWLKnowledgeBaseFactory factory = new OWLKnowledgeBaseFactory();
-		this.dao = factory.createElementDAO();
+		this.dataset = OWLDatasetManager.getSingletonInstance();
 	}
 }

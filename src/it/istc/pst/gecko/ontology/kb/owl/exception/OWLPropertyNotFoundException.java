@@ -1,13 +1,11 @@
 package it.istc.pst.gecko.ontology.kb.owl.exception;
 
-import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
-
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class OWLResourceNotFoundException extends ResourceNotFoundException 
+public class OWLPropertyNotFoundException extends Exception 
 {
 	/**
 	 * 
@@ -18,7 +16,7 @@ public class OWLResourceNotFoundException extends ResourceNotFoundException
 	 * 
 	 * @param msg
 	 */
-	public OWLResourceNotFoundException(String msg) {
+	public OWLPropertyNotFoundException(String msg) {
 		super(msg);
 	}
 }

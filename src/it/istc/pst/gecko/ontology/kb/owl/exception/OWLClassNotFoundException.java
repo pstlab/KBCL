@@ -1,11 +1,11 @@
-package it.istc.pst.gecko.ontology.kb.exception;
+package it.istc.pst.gecko.ontology.kb.owl.exception;
 
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class PropertyNotFoundException extends Exception 
+public class OWLClassNotFoundException extends Exception 
 {
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class PropertyNotFoundException extends Exception
 	 * 
 	 * @param msg
 	 */
-	public PropertyNotFoundException(String msg) {
+	public OWLClassNotFoundException(String msg) {
 		super(msg);
 	}
 }

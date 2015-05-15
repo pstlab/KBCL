@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology;
 
-import it.istc.pst.gecko.ontology.kb.exception.ResourceNotFoundException;
+import it.istc.pst.gecko.ontology.kb.owl.exception.OWLClassNotFoundException;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFAgentDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFFunctionalityDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
@@ -87,7 +87,7 @@ public class RDFKnowledgeBaseFacade
 	 * @throws RDFResourceNotFoundException 
 	 */
 	public RDFAgent getAgentById(String agentId) 
-			throws ResourceNotFoundException 
+			throws OWLClassNotFoundException 
 	{
 		// create DAO
 		RDFAgentDAO dao = this.factory.createAgentDAO();

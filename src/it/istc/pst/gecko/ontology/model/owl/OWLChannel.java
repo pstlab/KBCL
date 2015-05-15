@@ -1,6 +1,11 @@
 package it.istc.pst.gecko.ontology.model.owl;
 
-import it.istc.pst.gecko.ontology.kb.exception.PropertyNotFoundException;
+import it.istc.pst.gecko.ontology.kb.owl.OWLDatasetManager;
+import it.istc.pst.gecko.ontology.kb.owl.OWLInstance;
+import it.istc.pst.gecko.ontology.kb.owl.exception.OWLIndividualNotFoundException;
+import it.istc.pst.gecko.ontology.kb.owl.exception.OWLPropertyNotFoundException;
+
+import java.util.List;
 
 /**
  * 
@@ -32,12 +37,28 @@ public class OWLChannel extends OWLFunctionality
 	public OWLPort getInput() {
 		if (this.input == null) {
 			try {
-				// load data
-				this.input = this.dao.retrieveChannelInputPort(this);
+				// load data from data-set
+				List<OWLInstance> ps = this.dataset
+						.retrieveAllInstancesRelatedByProperty(this.label, 
+								OWLDatasetManager.PROPERTY_LABEL_HAS_INPUT_PORT);
+				
+				// check size
+				if (!ps.isEmpty()) {
+					// get input port
+					OWLInstance p = ps.get(0);
+					// TODO : create input port
+					
+					if (ps.size() > 1) {
+						System.err.println("... Warning more than one input port found found for " + this.id);
+					}
+				}
+				else {
+					System.err.println("... Warning no input port found for " +  this.id);
+				}
 			}
-			catch (PropertyNotFoundException ex) {
+			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
 				this.input = null;
-				System.err.println(ex.getLocalizedMessage());
+				System.err.println(ex.getMessage());
 			}
 		}
 		
@@ -45,15 +66,6 @@ public class OWLChannel extends OWLFunctionality
 		return this.input;
 	}
 
-	/**
-	 * 
-	 */
-	public void setInput(OWLPort port) {
-		// save relation
-		this.dao.setInputPortToChannel(port, this);
-		// update
-		this.input = port;
-	}
 	
 	/**
 	 * 
@@ -62,30 +74,34 @@ public class OWLChannel extends OWLFunctionality
 	public OWLPort getOutput() {
 		if (this.output == null) {
 			try {
-				// load data
-				this.output = this.dao.retrieveChannelOutputPort(this);
+				// load data from data-set
+				List<OWLInstance> ps = this.dataset
+						.retrieveAllInstancesRelatedByProperty(this.label, 
+								OWLDatasetManager.PROPERTY_LABEL_HAS_OUTPUT_PORT);
+				
+				// check size
+				if (!ps.isEmpty()) {
+					// get input port
+					OWLInstance p = ps.get(0);
+					// TODO : create input port
+					
+					if (ps.size() > 1) {
+						System.err.println("... Warning more than one output port foudn found for " + this.id);
+					}
+				}
+				else {
+					System.err.println("... Warning no output port found for " +  this.id);
+				}
 			}
-			catch (PropertyNotFoundException ex) {
-				this.output = null;
-				System.err.println(ex.getLocalizedMessage());
+			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+				this.input = null;
+				System.err.println(ex.getMessage());
 			}
 		}
 		
 		// get output port
 		return this.output;
 	}
-	
-	/**
-	 * 
-	 * @param port
-	 */
-	public void setOutput(OWLPort port) {
-		// save relation
-		this.dao.setOutputPortToChannel(port, this);
-		// update
-		this.output = port;
-	}
-	
 	
 	/**
 	 * 
