@@ -1,8 +1,8 @@
 package it.istc.pst.gecko.ontology.ps.ddl;
 
-import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFKnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLComponent;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLPlanningModel;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLSynchronization;
 
 import java.util.List;
 
@@ -23,24 +23,17 @@ public class DDLPlanningModelTest
 	 * 
 	 */
 	@Before
-	public void init() 
-	{
-		try
-		{
+	public void init() {
+		System.out.println("************************************************************");
+		System.out.println("***************** DDL Planning Model Test ******************");
+		System.out.println("************************************************************");
+		try {
 			// get facade
-			RDFKnowledgeBaseFacade facade = RDFKnowledgeBaseFacade.getSingletonInstance();
-			Agent agent = facade.getAgents().get(0);
-			
-			this.model = new DDLPlanningModel(agent.getLabel(), agent.getId(), 1000);
-			
-			System.out.println("************************************************************");
-			System.out.println("***************** DDL Planning Model Test ******************");
-			System.out.println("************************************************************");
+			this.model = new DDLPlanningModel(null, 1000);
 		}
-		catch (DDLPlanningModelInitializationFailureException ex) {
+		catch (Exception ex) {
 			System.err.println(ex.getMessage());
 		}
-		
 	}
 	
 	/**

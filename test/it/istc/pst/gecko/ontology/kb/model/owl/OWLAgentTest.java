@@ -1,10 +1,10 @@
 package it.istc.pst.gecko.ontology.kb.model.owl;
 
-import it.istc.pst.gecko.ontology.model.owl.OWLAgent;
-import it.istc.pst.gecko.ontology.model.owl.OWLElement;
-import it.istc.pst.gecko.ontology.model.owl.OWLFunctionality;
-import it.istc.pst.gecko.ontology.model.owl.OWLKnowledgeBaseFacade;
-import it.istc.pst.gecko.ontology.model.owl.OWLPort;
+import it.istc.pst.kbcl.ontology.model.owl.OWLAgent;
+import it.istc.pst.kbcl.ontology.model.owl.OWLElement;
+import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionality;
+import it.istc.pst.kbcl.ontology.model.owl.OWLKnowledgeBaseFacade;
+import it.istc.pst.kbcl.ontology.model.owl.OWLPort;
 
 import java.util.List;
 
@@ -12,8 +12,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
 
 /**
  * 
@@ -47,26 +45,6 @@ public class OWLAgentTest {
 			this.facade.close();
 		}
 	}
-	
-	/**
-	 * 
-	 */
-	@Test
-	public void focusOnAgentTest() {
-		System.out.println("-----------------------------------------------------------------");
-		System.out.println("-------- focusOnAgentTest()");
-		System.out.println();
-		// get agents
-		List<OWLAgent> agents = this.facade.getAgents();
-		Assert.assertNotNull(agents);
-		Assert.assertFalse(agents.isEmpty());
-		// focus
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
-		Assert.assertNotNull(t1);
-		Assert.assertTrue(t1.getLabel().equals("t1"));
-		System.out.println(t1);
-		System.out.println("-----------------------------------------------------------------");
-	}
 
 	/**
 	 * 
@@ -78,7 +56,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 		
 		// get functionalities
@@ -102,7 +82,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 		
 		// get functionalities
@@ -126,7 +108,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 		
 		// get functionalities
@@ -162,7 +146,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 		
 		// get functionalities
@@ -199,7 +185,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 		
 		// get functionalities
@@ -236,7 +224,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 		
 		// get functionalities
@@ -274,7 +264,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 		
 		// get functionalities
@@ -295,7 +287,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 
 		// get functionalities
@@ -352,7 +346,9 @@ public class OWLAgentTest {
 		System.out.println();
 		// get agents
 		List<OWLAgent> agents = this.facade.getAgents();
-		OWLAgent t1 = this.facade.setFocus(agents.get(0));
+		Assert.assertNotNull(agents);
+		Assert.assertFalse(!agents.isEmpty());
+		OWLAgent t1 = agents.get(0);
 		System.out.println(t1);
 
 		// get functionalities

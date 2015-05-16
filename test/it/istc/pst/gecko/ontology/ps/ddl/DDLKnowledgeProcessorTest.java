@@ -1,6 +1,14 @@
 package it.istc.pst.gecko.ontology.ps.ddl;
 
-import it.istc.pst.gecko.ontology.model.rdf.RDFKnowledgeBaseFacade;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFMappingKnowledgeBaseFacade;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLComponent;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLConstraint;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLExternalComponent;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLFunctionalComponent;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLInternalComponent;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLKnowledgeBaseProcessor;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLSynchronization;
+import it.istc.pst.kbcl.mapping.ps.ddl.DDLValue;
 
 import java.util.List;
 
@@ -22,13 +30,17 @@ public class DDLKnowledgeProcessorTest
 	 */
 	@Before
 	public void init() {
-		// get an agent
-		RDFKnowledgeBaseFacade facade = RDFKnowledgeBaseFacade.getSingletonInstance();
-		this.processor = new DDLKnowledgeBaseProcessor(facade.getAgents().get(0), 1000);
-		
 		System.out.println("************************************************************");
 		System.out.println("*************** DDL Knowledge Processor Test ***************");
 		System.out.println("************************************************************");
+		try {
+			// get an agent
+			RDFMappingKnowledgeBaseFacade facade = new RDFMappingKnowledgeBaseFacade(null);
+			this.processor = new DDLKnowledgeBaseProcessor(facade.getAgent(), 1000);
+		}
+		catch (Exception ex) {
+			System.err.println(ex.getMessage());
+		}
 	}
 	
 	/**
@@ -167,7 +179,7 @@ public class DDLKnowledgeProcessorTest
 				DDLValue target = con.getTarget();
 				Assert.assertNotNull(target);
 				Assert.assertNotNull(target.getComponent());
-				System.out.println("\t" + con.getConstraint().label + " " + target.getValue() + " [" + target.getDmin() + ", " + target.getDmax() + "]");
+				System.out.println("\t" + con.getConstraint() + " " + target.getValue() + " [" + target.getDmin() + ", " + target.getDmax() + "]");
 				// get related component
 				DDLComponent comp = target.getComponent();
 				System.out.println("\t\ton component:  " + comp.getName() + "." + comp.getTimeline());

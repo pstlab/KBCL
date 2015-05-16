@@ -1,14 +1,16 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.owl.exception.OWLClassNotFoundException;
-import it.istc.pst.gecko.ontology.model.Agent;
-import it.istc.pst.gecko.ontology.model.AgentType;
-import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
-import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
-import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
+import it.istc.pst.kbcl.mapping.kb.rdf.RDFAgentDAO;
+import it.istc.pst.kbcl.mapping.kb.rdf.RDFDatasetManager;
+import it.istc.pst.kbcl.mapping.kb.rdf.RDFMappingKnowledgeBaseFactory;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFAgent;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFAgentType;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFComponent;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFExternalComponent;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionality;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionalityType;
+import it.istc.pst.kbcl.model.Agent;
+import it.istc.pst.kbcl.model.AgentType;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +28,7 @@ import org.junit.Test;
 public class RDFAgentDAOTest 
 {
 	protected static final String DEFAULT_DATASET = "ijcai/test.xml";
-	private RDFKnowledgeBaseFactory factory;
+	private RDFMappingKnowledgeBaseFactory factory;
 	
 	/**
 	 * 
@@ -34,7 +36,7 @@ public class RDFAgentDAOTest
 	@Before
 	public void init() {
 		// create factory
-		this.factory = new RDFKnowledgeBaseFactory();
+		this.factory = new RDFMappingKnowledgeBaseFactory();
 		
 		System.out.println("************************************************************");
 		System.out.println("******************* RDF Agent DAO Test *********************");
@@ -156,7 +158,7 @@ public class RDFAgentDAOTest
 			Assert.assertEquals(a1.getId(), a2.getId());
 			Assert.assertEquals(a1.getLabel(), a2.getLabel());
 		}
-		catch (OWLClassNotFoundException ex) {
+		catch (Exception ex) {
 			Assert.assertTrue(false);
 		}
 		
@@ -166,7 +168,7 @@ public class RDFAgentDAOTest
 			System.out.println(a3);
 			Assert.assertTrue(false);
 		}
-		catch (OWLClassNotFoundException ex) {
+		catch (Exception ex) {
 			Assert.assertNotNull(ex);
 			System.out.println("OK!");
 		}

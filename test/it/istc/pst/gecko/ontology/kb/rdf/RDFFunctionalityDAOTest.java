@@ -1,10 +1,13 @@
 package it.istc.pst.gecko.ontology.kb.rdf;
 
-import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.Functionality;
-import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
-import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityImplementation;
-import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
+import it.istc.pst.kbcl.mapping.kb.rdf.RDFDatasetManager;
+import it.istc.pst.kbcl.mapping.kb.rdf.RDFFunctionalityDAO;
+import it.istc.pst.kbcl.mapping.kb.rdf.RDFMappingKnowledgeBaseFactory;
+import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionality;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionalityImplementation;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionalityType;
+import it.istc.pst.kbcl.model.Functionality;
 
 import java.util.List;
 
@@ -21,7 +24,7 @@ import org.junit.Test;
 public class RDFFunctionalityDAOTest 
 {
 	protected static final String DEFAULT_DATASET = "ijcai/test.xml";
-	private RDFKnowledgeBaseFactory factory;
+	private RDFMappingKnowledgeBaseFactory factory;
 	
 	/**
 	 * 
@@ -29,7 +32,7 @@ public class RDFFunctionalityDAOTest
 	@Before
 	public void init() {
 		// create factory
-		this.factory = new RDFKnowledgeBaseFactory();
+		this.factory = new RDFMappingKnowledgeBaseFactory();
 		
 		System.out.println("************************************************************");
 		System.out.println("*************** RDF Functionality DAO Test *****************");

@@ -1,0 +1,11 @@
+PROBLEM t1_Problem (DOMAIN t1_Domain)
+{
+	f0 <fact> t1_Channel.t1_Channel_timeline.Idle() AT [0, 0] [1, +INF] [1, +INF];
+	f1 <fact> t1_Port_R1.t1_Port_R1_timeline.Port_R1_Not_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f2 <fact> t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f3 <fact> t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f4 <fact> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_not_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f5 <fact> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available() AT [0, 0] [1, +INF] [1, +INF];
+
+}
+

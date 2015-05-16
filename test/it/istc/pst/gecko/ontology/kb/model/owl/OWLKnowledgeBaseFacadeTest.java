@@ -1,10 +1,10 @@
 package it.istc.pst.gecko.ontology.kb.model.owl;
 
-import it.istc.pst.gecko.ontology.model.owl.OWLAgent;
-import it.istc.pst.gecko.ontology.model.owl.OWLAgentType;
-import it.istc.pst.gecko.ontology.model.owl.OWLElementType;
-import it.istc.pst.gecko.ontology.model.owl.OWLFunctionalityType;
-import it.istc.pst.gecko.ontology.model.owl.OWLKnowledgeBaseFacade;
+import it.istc.pst.kbcl.ontology.model.owl.OWLAgent;
+import it.istc.pst.kbcl.ontology.model.owl.OWLAgentType;
+import it.istc.pst.kbcl.ontology.model.owl.OWLElementType;
+import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionalityType;
+import it.istc.pst.kbcl.ontology.model.owl.OWLKnowledgeBaseFacade;
 
 import java.util.List;
 
