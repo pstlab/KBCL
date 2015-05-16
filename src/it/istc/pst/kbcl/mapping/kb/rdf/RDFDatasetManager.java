@@ -28,7 +28,7 @@ public class RDFDatasetManager
 	private static final String NS_URL = "http://pst.istc.cnr.it/kbcl/ps/mapping";
 	protected static final String NS = NS_URL + "#";
 
-	private static final String DATASET = "ijcai/dataset/full.xml";
+	private static final String DATASET = "kbcl/mapping.rdf";
 	protected OntModel model;
 	
 	private String label;
