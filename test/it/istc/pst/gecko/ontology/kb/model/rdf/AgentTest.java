@@ -1,11 +1,11 @@
 package it.istc.pst.gecko.ontology.kb.model.rdf;
 
-import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFKnowledgeBaseFacade;
 
 import java.util.List;
 import java.util.Map;

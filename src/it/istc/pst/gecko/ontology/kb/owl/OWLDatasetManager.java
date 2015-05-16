@@ -5,11 +5,15 @@ import it.istc.pst.gecko.ontology.kb.owl.exception.OWLClassNotFoundException;
 import it.istc.pst.gecko.ontology.kb.owl.exception.OWLIndividualNotFoundException;
 import it.istc.pst.gecko.ontology.kb.owl.exception.OWLPropertyNotFoundException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
@@ -33,25 +37,32 @@ import com.hp.hpl.jena.reasoner.rulesys.Rule;
 public class OWLDatasetManager 
 {
 	public static final String PROPERTY_LABEL_HAS_CHANNEL = "hasChannel";
+	public static final String PROPERTY_LABEL_HAS_FUNCTIONALITY = "hasFunctionality";
 	public static final String PROPERTY_LABEL_HAS_ACTUATOR = "hasInternalActuator";
 	public static final String PROPERTY_LABEL_HAS_NEIGHBOR = "hasNeighbor";
 	public static final String PROPERTY_LABEL_HAS_PORT = "hasPort";
 	public static final String PROPERTY_LABEL_HAS_INPUT_PORT = "hasInput";
 	public static final String PROPERTY_LABEL_HAS_OUTPUT_PORT = "hasOutput";
 	public static final String PROPERTY_LABEL_CONNECT = "connect";
+	public static final String PROPERTY_LABEL_HAS_ELEMENT = "hasElement";
+	public static final String PROPERTY_LABEL_HAS_INTERNAL_ELEMENT = "hasInternalElement";
+	public static final String PROPERTY_LABEL_HAS_EXTERNAL_ELEMENT = "hasExternalElement";
 	
 	// module agent ID and type
-	private static final String CONSTANT_MODULE_TYPE = "Module";
+	public static final String CONSTANT_AGENT_TYPE = "Agent";
+	public static final String CONSTANT_MODULE_TYPE = "Module";
 	private static final String CONSTANT_MODULE_ID = "t1";
 	
 	// possible ports
-	private static final String CONSTANT_PORT_TYPE = "Port";
+	public static final String CONSTANT_ELEMENT_TYPE = "Element";
+	public static final String CONSTANT_PORT_TYPE = "Port";
 	private static final String[] CONSTANT_PORTS = new String[] {
 		"portF", "portB", "portR1", "portR2", "portR3", "portL1", "portL2", "portL3"
 	};
 	
 	// possible channels
-	private static final String CONSTANT_CHANNEL_TYPE = "Channel";
+	public static final String CONSTANT_FUNCTIONALITY_TYPE = "Functionality";
+	public static final String CONSTANT_CHANNEL_TYPE = "Channel";
 	private static final String[] CONSTANT_CHANNELS = new String[] {
 		// F
 		"channelFB", "channelFF", "channelFL1", "channelFL2", "channelFL3", "channelFR1", "channelFR2", "channelFR3",
@@ -72,14 +83,10 @@ public class OWLDatasetManager
 	};
 	
 	// possible neighbors
-	private static final String CONSTANT_NEIGHBOR_TYPE = "Neighbor";
+	public static final String CONSTANT_NEIGHBOR_TYPE = "Neighbor";
 	private static final String[] CONSTANT_NEIGHBORS = new String[] {
 		"neighborF", "neighborB", "neighborL", "neighborR"
 	};
-	
-	
-	
-	
 	
 	private static final String NS_URL = "http://pst.istc.cnr.it/ontology/kbcl";
 	private static final String NS = NS_URL + "#";
@@ -87,37 +94,50 @@ public class OWLDatasetManager
 	
 	// inference rules
 	private static final String RULES = ""
-			+ "[r1: (?m " + NS + "hasElement ?e), (?e " + NS + "connect ?n) "
-				+ "-> (?m " + NS + "hasPort ?e)]\n"
-			+ "[r2: (?m " + NS + "hasElement ?e), (?e " + NS + "connect ?n) "
-				+ "-> (?m " + NS + "hasNeighbor ?n)]\n"
-			+ "[r3: (?f " + NS + "hasOutput ?a), (?f " + NS +"hasInput ?b), (?m " + NS +"hasPort ?a), (?m " + NS + "hasPort ?b) "
-				+ "-> (?m " + NS + "hasChannel ?f)]";
+			+ "[r1: (?m " + NS + PROPERTY_LABEL_HAS_ELEMENT + " ?e), (?e " + NS + PROPERTY_LABEL_CONNECT + " ?n) "
+				+ "-> (?m " + NS + PROPERTY_LABEL_HAS_PORT + " ?e)]\n"
+			+ "[r2: (?m " + NS + PROPERTY_LABEL_HAS_ELEMENT + " ?e), (?e " + NS + PROPERTY_LABEL_CONNECT + " ?n) "
+				+ "-> (?m " + NS + PROPERTY_LABEL_HAS_NEIGHBOR + " ?n)]\n"
+			+ "[r3: (?f " + NS + PROPERTY_LABEL_HAS_OUTPUT_PORT + " ?a), (?f " + NS + PROPERTY_LABEL_HAS_INPUT_PORT + " ?b), (?m " + NS + PROPERTY_LABEL_HAS_PORT + " ?a), (?m " + NS + PROPERTY_LABEL_HAS_PORT + " ?b) "
+				+ "-> (?m " + NS + PROPERTY_LABEL_HAS_CHANNEL + " ?f)]";
 	
 	private OntModel model;
 	private InfModel infModel;
 	private String label;
+	private boolean debug;
 	
 	private static OWLDatasetManager INSTANCE = null;
+
 	
 	/**
 	 * 
 	 */
 	private OWLDatasetManager() {
-		// set label
-		this.label = this.getClass().getSimpleName();
-		// create the model
-		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RULE_INF);
-		this.model.getDocumentManager().addAltEntry(NS_URL, "file:" + DATASET);
-		
-		// import ONTOLOGY model
-		this.model.read(NS_URL, "RDF/XML");
-		
-		// setup
-		this.setup();
-		
-		// setup INFERENCE model
-		this.infModel = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(RULES)), this.model);
+		try {
+			// get property file
+			Properties prop = new Properties();
+			prop.load(new FileInputStream(new File("etc/dataManager.properties")));
+			// get debug flag
+			this.debug = prop.getProperty("debug").equals("1") ? true : false;
+			
+			// set label
+			this.label = this.getClass().getSimpleName();
+			// create the model
+			this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RDFS_INF);
+			this.model.getDocumentManager().addAltEntry(NS_URL, "file:" + DATASET);
+			
+			// import ONTOLOGY model
+			this.model.read(NS_URL, "RDF/XML");
+			
+			// setup
+			this.setup();
+			
+			// initialize inference model
+			this.infModel = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(RULES)), this.model);
+		}
+		catch (IOException ex) {
+			System.err.println(ex.getMessage());
+		}
 	}
 	
 	/**
@@ -174,7 +194,9 @@ public class OWLDatasetManager
 		while (it.hasNext()) {
 			// next subclass
 			OntClass sc = it.next();
-			list.add(new OWLClass(sc.getURI(), sc.getLocalName()));
+			if (!sc.isAnon()) {
+				list.add(new OWLClass(sc.getURI(), sc.getLocalName()));
+			}
 		}
 		// get list
 		return list;
@@ -212,11 +234,15 @@ public class OWLDatasetManager
 			// get next statement
 			Statement s = it.next();
 			// get statement's object
-			Individual obj = s.getObject().as(Individual.class);
-			// get class
-			Resource objType = obj.getRDFType();
-			list.add(new OWLInstance(obj.getURI(), obj.getLocalName(), 
-					new OWLClass(objType.getURI(), objType.getLocalName())));
+			Resource obj = s.getObject().asResource();
+			if (!obj.isAnon()) {
+				// find in model
+				Individual n = this.model.getIndividual(obj.getURI());
+				// get class
+				Resource nType = n.getRDFType();
+				list.add(new OWLInstance(n.getURI(), n.getLocalName(), 
+						new OWLClass(nType.getURI(), nType.getLocalName())));
+			}
 		}
 		
 		// get list
@@ -244,7 +270,9 @@ public class OWLDatasetManager
 		while (it.hasNext()) {
 			// next individual
 			Individual i = it.next().asIndividual();
-			list.add(new OWLInstance(i.getURI(), i.getLocalName(), new OWLClass(c.getURI(), c.getLocalName())));
+			if (!i.isAnon()) {
+				list.add(new OWLInstance(i.getURI(), i.getLocalName(), new OWLClass(c.getURI(), c.getLocalName())));
+			}
 		}
 		
 		// get list
@@ -258,6 +286,42 @@ public class OWLDatasetManager
 	 * @param label3
 	 */
 	public void assertStatement(String subjectName, String propertyName, String objectName) 
+			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException 
+	{
+		// get subject individual
+//		Individual subject = this.model.getIndividual(NS + subjectName);
+		Resource subject = this.infModel.getResource(NS + subjectName);
+		if (subject == null) {
+			throw new OWLIndividualNotFoundException("[" + this.label +"]: No Individual found \"" + NS + subjectName + "\"");
+		}
+		
+		// get object individual
+//		Individual object = this.model.getIndividual(NS + objectName);
+		Resource object = this.infModel.getResource(NS + objectName);
+		if (object == null) {
+			throw new OWLIndividualNotFoundException("[" + this.label +"]: No Individual found \"" + NS + objectName + "\"");
+		}
+		
+		// get property
+//		Property p = this.model.getProperty(NS + propertyName);
+		Property p = this.infModel.getProperty(NS + propertyName);
+		if (p == null) {
+			throw new OWLPropertyNotFoundException("[" + this.label + "]: No property found \"" + NS + propertyName + "\"");
+		}
+		
+		// assert property directly into the inference model
+		subject.addProperty(p, object);
+	}
+	
+	/**
+	 * 
+	 * @param subjectName
+	 * @param propertyName
+	 * @param objectName
+	 * @throws OWLIndividualNotFoundException
+	 * @throws OWLPropertyNotFoundException
+	 */
+	public void removeStatement(String subjectName, String propertyName, String objectName) 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException 
 	{
 		// get subject individual
@@ -278,8 +342,10 @@ public class OWLDatasetManager
 			throw new OWLPropertyNotFoundException("[" + this.label + "]: No property found \"" + NS + propertyName + "\"");
 		}
 		
-		// assert property
-		subject.addProperty(p, object);
+		// remove property
+		subject.removeProperty(p, object);
+		// update inference model
+		this.infModel.rebind();
 	}
 	
 	/**
@@ -304,17 +370,31 @@ public class OWLDatasetManager
 	 */
 	private void setup() 
 	{
+		// check debug flag
+		if (this.debug) {
+			System.out.println("Setting up OWLDataManager... ");
+		}
 		// get module agent type
 		OntClass module = this.model.getOntClass(NS + CONSTANT_MODULE_TYPE);
 		// create agent individual
-		module.createIndividual(NS + CONSTANT_MODULE_ID);
+		Individual t = module.createIndividual(NS + CONSTANT_MODULE_ID);
+		if (this.debug) {
+			System.out.println("... Individual " + NS + CONSTANT_MODULE_ID + " successfully created!");
+		}
 		
 		// get neighbor type
 		OntClass neighborType = this.model.getOntClass(NS + CONSTANT_NEIGHBOR_TYPE);
+		// index neighbor
+		Map<String, Individual> indexNeighbor = new HashMap<>();
 		// create constant neighbors
 		for (String neighborName : CONSTANT_NEIGHBORS) {
 			// create individual
-			neighborType.createIndividual(NS + neighborName);
+			Individual n = neighborType.createIndividual(NS + neighborName);
+			if (this.debug) {
+				System.out.println("... Individual " + NS + neighborName + " successfully created!");
+			}
+			// add individual to cache
+			indexNeighbor.put(neighborName, n);
 		}
 		
 		// index of created ports
@@ -325,6 +405,102 @@ public class OWLDatasetManager
 		for (String portName : CONSTANT_PORTS) {
 			// create individual
 			Individual i = portType.createIndividual(NS + portName);
+			if (this.debug) {
+				System.out.println("... Individual " + NS + portName + " successfully created!");
+			}
+			
+			// associate port to module
+			Property he = this.model.getProperty(NS + PROPERTY_LABEL_HAS_ELEMENT);
+			t.addProperty(he, i);
+			if (this.debug) {
+				System.out.println("Statement [" + t.getLocalName() + " " + he.getLocalName() + " " + i.getLocalName() + "] successfully added!");
+			}
+
+			// get connect property
+			Property c = this.model.getProperty(NS + PROPERTY_LABEL_CONNECT);
+			// associate port to neighbor
+			switch (portName) {
+				case "portF" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborF");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+				
+				case "portB" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborB");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+				
+				case "portL1" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborL");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+				
+				case "portL2" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborL");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+				
+				case "portL3" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborL");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+				
+				case "portR1" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborR");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+				
+				case "portR2" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborR");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+				
+				case "portR3" : {
+					// get connected neighbor
+					Individual n = indexNeighbor.get("neighborR");
+					i.addProperty(c, n);
+					if (this.debug) {
+						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
+					}
+				}
+				break;
+			}
+			
 			// add index
 			indexPort.put(portName, i);
 		}
@@ -335,6 +511,10 @@ public class OWLDatasetManager
 		for (String channelName : CONSTANT_CHANNELS) {
 			// create individual
 			Individual c = channelType.createIndividual(NS + channelName);
+			if (this.debug) {
+				System.out.println("... Individual " + NS + channelName + " successfully created!");
+			}
+			
 			// get input/output properties
 			Property ip = this.model.getProperty(NS + PROPERTY_LABEL_HAS_INPUT_PORT);
 			Property op = this.model.getProperty(NS + PROPERTY_LABEL_HAS_OUTPUT_PORT);
@@ -347,7 +527,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portB");
 					// set input and output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -356,7 +542,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -366,7 +558,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -376,7 +574,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break; 
 				
@@ -386,7 +590,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -396,7 +606,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -406,7 +622,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -416,7 +638,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -425,7 +653,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portB");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -435,7 +669,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -445,7 +685,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -455,7 +701,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -465,7 +717,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -475,7 +733,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -485,7 +749,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -495,7 +765,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -505,7 +781,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -515,7 +797,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -524,7 +812,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -534,7 +828,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -544,7 +844,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -554,7 +860,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -564,7 +876,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -574,7 +892,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -584,7 +908,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -594,7 +924,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -604,7 +940,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -613,7 +955,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -623,7 +971,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -633,7 +987,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -643,7 +1003,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -653,7 +1019,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -663,7 +1035,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -673,7 +1051,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -683,7 +1067,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -693,7 +1083,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -702,7 +1098,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break; 
 				
@@ -712,7 +1114,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -722,7 +1130,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -732,7 +1146,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -742,7 +1162,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -752,7 +1178,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -762,7 +1194,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -772,7 +1210,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -782,7 +1226,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -791,7 +1241,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -801,7 +1257,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -811,7 +1273,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -821,7 +1289,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -831,7 +1305,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -841,7 +1321,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -851,7 +1337,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -861,7 +1353,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -871,7 +1369,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -880,7 +1384,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -890,7 +1400,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -900,7 +1416,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -910,7 +1432,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break; 
 				
@@ -920,7 +1448,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -930,7 +1464,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break; 
 				
@@ -940,7 +1480,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -950,7 +1496,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -960,7 +1512,13 @@ public class OWLDatasetManager
 					Individual output = indexPort.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + input.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, output);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + output.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 				
@@ -969,7 +1527,13 @@ public class OWLDatasetManager
 					Individual port = indexPort.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + ip.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 					c.addProperty(op, port);
+					if (this.debug) {
+						System.out.println("Statement [" + c.getLocalName() + " " + op.getLocalName() + " " + port.getLocalName() + "] successfully added!");
+					}
 				}
 				break;
 			}

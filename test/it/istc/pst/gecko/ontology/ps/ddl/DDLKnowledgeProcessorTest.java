@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.ps.ddl;
 
-import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.model.rdf.RDFKnowledgeBaseFacade;
 
 import java.util.List;
 

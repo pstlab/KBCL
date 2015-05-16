@@ -62,7 +62,6 @@ public abstract class FunctionalityType
 	 */
 	@Override
 	public String toString() {
-		return "[FunctionalityType id=" + this.id + "\n"
-				+ "\tlabel= " + this.label + "]\n"; 
+		return "[FunctionalityType id=" + this.id + ", label= " + this.label + "]\n"; 
 	}
 }

@@ -70,8 +70,6 @@ public abstract class Functionality
 	 */
 	@Override
 	public String toString() {
-		return "[Functionality id=" + this.id + "\n"
-				+ "\tlabel= " + this.label + "\n"
-				+ "\ttype= " + this.type + "]\n";
+		return "[Functionality id=" + this.id + ", label= " + this.label + "]\n";
 	}
 }

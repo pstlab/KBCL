@@ -58,7 +58,6 @@ public abstract class ElementType {
 	 */
 	@Override
 	public String toString() {
-		return "[ElementType id=" + this.id +"\n"
-				+ "\tlabel= " + this.label + "]\n";
+		return "[ElementType id=" + this.id +", label= " + this.label + "]\n";
 	}
 }

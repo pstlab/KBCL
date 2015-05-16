@@ -1,6 +1,6 @@
 package it.istc.pst.gecko.ontology.ps;
 
-import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
+import it.istc.pst.gecko.ontology.model.rdf.RDFKnowledgeBaseFacade;
 
 /**
  * 

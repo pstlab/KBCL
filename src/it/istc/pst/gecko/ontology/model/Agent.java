@@ -72,8 +72,6 @@ public abstract class Agent
 	 */
 	@Override
 	public String toString() {
-		return "[Agent id=" + this.id + "\n"
-				+ "\tlabel= " + this.label +"\n"
-				+ "\ttype= " + this.type + "]\n";
+		return "[Agent id=" + this.id + ", label= " + this.label +"]\n";
 	}
 }

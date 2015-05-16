@@ -1,13 +1,10 @@
-package it.istc.pst.gecko.ontology;
+package it.istc.pst.gecko.ontology.model.rdf;
 
 import it.istc.pst.gecko.ontology.kb.owl.exception.OWLClassNotFoundException;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFAgentDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFFunctionalityDAO;
 import it.istc.pst.gecko.ontology.kb.rdf.RDFKnowledgeBaseFactory;
 import it.istc.pst.gecko.ontology.kb.rdf.exception.RDFResourceNotFoundException;
-import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFAgentType;
-import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
 
 import java.util.ArrayList;
 import java.util.List;

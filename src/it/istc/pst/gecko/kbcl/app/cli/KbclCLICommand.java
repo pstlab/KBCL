@@ -28,6 +28,11 @@ public enum KbclCLICommand
 	/**
 	 * 
 	 */
+	REMOVE("remove", "remove an element to remove", new String[] {}),
+	
+	/**
+	 * 
+	 */
 	PLAN("plan", "plan a functional activity", new String[] {}),
 	
 	/**

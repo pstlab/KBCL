@@ -1,12 +1,12 @@
 package it.istc.pst.gecko.ontology.kb.uc;
 
-import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
 import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityImplementation;
 import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionalityType;
+import it.istc.pst.gecko.ontology.model.rdf.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.rdf.RDFState;
 import it.istc.pst.gecko.ontology.model.rdf.RDFTemporalConstraint;
 

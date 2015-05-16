@@ -1,18 +1,13 @@
 package it.istc.pst.gecko.kbcl.app.cli;
 
 import it.istc.pst.gecko.kbcl.KbclManager;
-import it.istc.pst.gecko.kbcl.exception.KbclInitializationException;
-import it.istc.pst.gecko.kbcl.exception.KbclRequestProcessingFailureException;
-import it.istc.pst.gecko.ontology.RDFKnowledgeBaseFacade;
 import it.istc.pst.gecko.ontology.model.Agent;
 import it.istc.pst.gecko.ontology.model.AgentType;
+import it.istc.pst.gecko.ontology.model.Element;
 import it.istc.pst.gecko.ontology.model.Functionality;
 import it.istc.pst.gecko.ontology.model.FunctionalityType;
-import it.istc.pst.gecko.ontology.model.rdf.RDFAgent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFComponent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFExternalComponent;
-import it.istc.pst.gecko.ontology.model.rdf.RDFFunctionality;
-import it.istc.pst.gecko.ontology.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
+import it.istc.pst.gecko.ontology.model.owl.OWLAgent;
+import it.istc.pst.gecko.ontology.model.owl.OWLKnowledgeBaseFacade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,15 +21,17 @@ import java.io.InputStreamReader;
 public class KbclCLIHandler implements Runnable
 {
 	private static final long HORIZON = 1000;
-	private RDFKnowledgeBaseFacade facade;
-	private RDFAgent agent;
+//	private RDFKnowledgeBaseFacade facade;
+//	private RDFAgent agent;
+	private OWLKnowledgeBaseFacade facade;
+	private OWLAgent agent;
 	private KbclManager manager;
 	
 	/**
 	 * 
 	 */
 	protected KbclCLIHandler() {
-		this.facade = RDFKnowledgeBaseFacade.getSingletonInstance();
+		this.facade = OWLKnowledgeBaseFacade.getSingletonInstance();
 		this.agent = null;
 		this.manager = null;
 	}
@@ -94,6 +91,7 @@ public class KbclCLIHandler implements Runnable
 		String[] splits = input.split("\\s");
 		// get command
 		String cmd = splits[0].toUpperCase();
+		
 		// check command
 		if (cmd.equals(KbclCLICommand.HELP.getCmd())) {
 			// help commands
@@ -105,6 +103,26 @@ public class KbclCLIHandler implements Runnable
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.EXIT.getCmd())) {
 			// exit
 			exit = true;
+		}
+		// remove command
+		else if (cmd.equalsIgnoreCase(KbclCLICommand.REMOVE.getCmd())) {
+			String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase().trim() : null;
+			if (parameter != null) {
+				// check if an agent has been selected 
+				if (this.agent != null) {
+					// get index of the element to remove
+					int index = Integer.parseInt(parameter);
+					// select element
+					Element el = this.agent.removeElement(index);
+					System.out.println("Element " + el + " successfully removed!");
+				}
+				else {
+					System.out.println("Select an agent before");
+				}
+			}
+			else {
+				System.out.println("Select an element to remove");
+			}
 		}
 		// show command
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.SHOW.getCmd())) {
@@ -145,7 +163,7 @@ public class KbclCLIHandler implements Runnable
 						// print agent's functionalities
 						System.out.println("Agent's functionalities");
 						int counter = 0;
-						for (RDFFunctionality func : this.agent.getAllFunctionalities()) {
+						for (Functionality func : this.agent.getFunctionalities()) {
 							System.out.println("- (" + counter + ") " + func);
 							counter++;
 						}
@@ -160,8 +178,8 @@ public class KbclCLIHandler implements Runnable
 						// print agent's functionalities
 						System.out.println("Agent's components");
 						int counter = 0;
-						for (RDFComponent comp : this.agent.getComponents()) {
-							System.out.println("- (" + counter + ") " + comp);
+						for (Element el : this.agent.getPorts()) {
+							System.out.println("- (" + counter + ") " + el);
 							counter++;
 						}
 					}
@@ -175,8 +193,8 @@ public class KbclCLIHandler implements Runnable
 						// print agent's functionalities
 						System.out.println("Agent's neighbors");
 						int counter = 0;
-						for (RDFExternalComponent comp : this.agent.getNeighbors()) {
-							System.out.println("- (" + counter + ") " + comp);
+						for (Element n : this.agent.getNeighbors()) {
+							System.out.println("- (" + counter + ") " + n);
 							counter++;
 						}
 					}
@@ -202,25 +220,25 @@ public class KbclCLIHandler implements Runnable
 				int index = Integer.parseInt(parameter);
 				
 				// get agent
-				this.agent = this.facade.getAgents().get(index);
+				this.agent = this.facade.setFocus(index);
 				System.out.println("Selected agent:\n" + this.agent);
 				
-				// start loop - get current time
-				long time = System.currentTimeMillis();
-				try 
-				{
-					// create KBCL manager and start loop
-					this.manager = new KbclManager(this.agent, HORIZON);
-					System.out.println("KBCL succesfully initialized!");
-				}
-				catch (KbclInitializationException | DDLPlanningModelInitializationFailureException ex) {
-					System.err.println(ex.getMessage());
-				}
-				finally {
-					// update time
-					time = System.currentTimeMillis() - time;
-					System.out.println("KBCL initialization done in " + time + " msec");
-				}
+				// FIXME start loop - get current time
+//				long time = System.currentTimeMillis();
+//				try 
+//				{
+//					// create KBCL manager and start loop
+//					this.manager = new KbclManager(this.agent, HORIZON);
+//					System.out.println("KBCL succesfully initialized!");
+//				}
+//				catch (KbclInitializationException | DDLPlanningModelInitializationFailureException ex) {
+//					System.err.println(ex.getMessage());
+//				}
+//				finally {
+//					// update time
+//					time = System.currentTimeMillis() - time;
+//					System.out.println("KBCL initialization done in " + time + " msec");
+//				}
 				
 			}
 			else {
@@ -236,18 +254,19 @@ public class KbclCLIHandler implements Runnable
 					// get functionality index
 					int index = Integer.parseInt(parameter);
 					// select functionality
-					Functionality func = this.agent.getAllFunctionalities().get(index);
+					Functionality func = this.agent.getFunctionalities().get(index);
 					System.out.println("Selected functionality\n" + func);
 					
-					try {
-						// request functionality
-						this.manager.planRequest(func);
-						// print resulting PDB
-						System.out.println(this.manager.getPDBDescription());
-					}
-					catch (KbclRequestProcessingFailureException ex) {
-						System.err.println(ex.getMessage());
-					}
+					// FIXME - COSTRUIRE MODELLO DI PLANNING
+//					try {
+//						// request functionality
+//						this.manager.planRequest(func);
+//						// print resulting PDB
+//						System.out.println(this.manager.getPDBDescription());
+//					}
+//					catch (KbclRequestProcessingFailureException ex) {
+//						System.err.println(ex.getMessage());
+//					}
 				}
 				else {
 					System.out.println("Select agent's functionality index");

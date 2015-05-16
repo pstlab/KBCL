@@ -46,7 +46,8 @@ public class OWLChannel extends OWLFunctionality
 				if (!ps.isEmpty()) {
 					// get input port
 					OWLInstance p = ps.get(0);
-					// TODO : create input port
+					this.input = new OWLPort(p.getUrl(), p.getLabel(),
+							new OWLElementType(p.getType().getUrl(), p.getType().getLabel()));
 					
 					if (ps.size() > 1) {
 						System.err.println("... Warning more than one input port found found for " + this.id);
@@ -83,7 +84,8 @@ public class OWLChannel extends OWLFunctionality
 				if (!ps.isEmpty()) {
 					// get input port
 					OWLInstance p = ps.get(0);
-					// TODO : create input port
+					this.output = new OWLPort(p.getUrl(), p.getLabel(), 
+							new OWLElementType(p.getType().getUrl(), p.getType().getLabel()));
 					
 					if (ps.size() > 1) {
 						System.err.println("... Warning more than one output port foudn found for " + this.id);
@@ -101,17 +103,5 @@ public class OWLChannel extends OWLFunctionality
 		
 		// get output port
 		return this.output;
-	}
-	
-	/**
-	 * 
-	 */
-	@Override
-	public String toString() {
-		return "[Channel id=" + this.id + "\n"
-				+ "\tlabel= " + this.label + "\n"
-				+ "\ttype= " + this.type + "\n"
-				+ "\tinputPort= " + this.input + "\n"
-				+ "\toutputPort= " + this.output +"]\n";
 	}
 }
