@@ -510,6 +510,26 @@ DOMAIN t1_Domain {
 
 	}
 
+	COMP_TYPE SingletonStateVariable t1_Main_ConveyorType (Main_Conveyor_Forward(), Main_Conveyor_Still(), Main_Conveyor_Backward()) {
+
+		VALUE Main_Conveyor_Forward() [1, 1000]
+		MEETS {
+			Main_Conveyor_Still();
+		}
+
+		VALUE Main_Conveyor_Still() [1, 1000]
+		MEETS {
+			Main_Conveyor_Forward();
+			Main_Conveyor_Backward();
+		}
+
+		VALUE Main_Conveyor_Backward() [1, 1000]
+		MEETS {
+			Main_Conveyor_Still();
+		}
+
+	}
+
 	COMP_TYPE SingletonStateVariable t1_Port_L2Type (Port_L2_Available(), Port_L2_Not_Available()) {
 
 		VALUE Port_L2_Available() [1, 1000]
@@ -568,6 +588,26 @@ DOMAIN t1_Domain {
 		VALUE Port_R2_Available() [1, 1000]
 		MEETS {
 			Port_R2_Not_Available();
+		}
+
+	}
+
+	COMP_TYPE SingletonStateVariable t1_Cross_Conveyor_1Type (Cross_Conveyor_1_Still(), Cross_Conveyor_1_Forward(), Cross_Conveyor_1_Backward()) {
+
+		VALUE Cross_Conveyor_1_Still() [1, 1000]
+		MEETS {
+			Cross_Conveyor_1_Forward();
+			Cross_Conveyor_1_Backward();
+		}
+
+		VALUE Cross_Conveyor_1_Forward() [1, 1000]
+		MEETS {
+			Cross_Conveyor_1_Still();
+		}
+
+		VALUE Cross_Conveyor_1_Backward() [1, 1000]
+		MEETS {
+			Cross_Conveyor_1_Still();
 		}
 
 	}
@@ -670,10 +710,12 @@ DOMAIN t1_Domain {
 	COMPONENT t1_Cross_Conveyor_3 { FLEXIBLE t1_Cross_Conveyor_3_timeline(trex_internal_dispatch_asap) } : t1_Cross_Conveyor_3Type;
 	COMPONENT t1_Cross_Transfer_1 { FLEXIBLE t1_Cross_Transfer_1_timeline(trex_internal_dispatch_asap) } : t1_Cross_Transfer_1Type;
 	COMPONENT t1_Port_L3 { FLEXIBLE t1_Port_L3_timeline(trex_internal_dispatch_asap) } : t1_Port_L3Type;
+	COMPONENT t1_Main_Conveyor { FLEXIBLE t1_Main_Conveyor_timeline(trex_internal_dispatch_asap) } : t1_Main_ConveyorType;
 	COMPONENT t1_Port_L2 { FLEXIBLE t1_Port_L2_timeline(trex_internal_dispatch_asap) } : t1_Port_L2Type;
 	COMPONENT t1_Port_F { FLEXIBLE t1_Port_F_timeline(trex_internal_dispatch_asap) } : t1_Port_FType;
 	COMPONENT t1_Cross_Conveyor_2 { FLEXIBLE t1_Cross_Conveyor_2_timeline(trex_internal_dispatch_asap) } : t1_Cross_Conveyor_2Type;
 	COMPONENT t1_Port_R2 { FLEXIBLE t1_Port_R2_timeline(trex_internal_dispatch_asap) } : t1_Port_R2Type;
+	COMPONENT t1_Cross_Conveyor_1 { FLEXIBLE t1_Cross_Conveyor_1_timeline(trex_internal_dispatch_asap) } : t1_Cross_Conveyor_1Type;
 	COMPONENT t1_Port_L1 { FLEXIBLE t1_Port_L1_timeline(trex_internal_dispatch_asap) } : t1_Port_L1Type;
 	COMPONENT t1_Cross_Transfer_3 { FLEXIBLE t1_Cross_Transfer_3_timeline(trex_internal_dispatch_asap) } : t1_Cross_Transfer_3Type;
 	COMPONENT t1_Neighbor_L { FLEXIBLE t1_Neighbor_L_timeline(trex_internal_dispatch_asap) } : t1_Neighbor_LType;

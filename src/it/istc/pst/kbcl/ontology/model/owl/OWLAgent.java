@@ -363,7 +363,7 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 		List<OWLElement> list = new ArrayList<>();
 		List<OWLInstance> acts = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT);
+						OWLDatasetManager.PROPERTY_LABEL_HAS_CROSS_TRANSFER);
 		
 		// create actuator list
 		for (OWLInstance act : acts) {
@@ -392,7 +392,7 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 		List<OWLElement> list = new ArrayList<>();
 		List<OWLInstance> acts = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT);
+						OWLDatasetManager.PROPERTY_LABEL_HAS_CONVEYOR);
 		
 		// create actuator list
 		for (OWLInstance act : acts) {

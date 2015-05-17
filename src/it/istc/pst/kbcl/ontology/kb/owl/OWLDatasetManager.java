@@ -25,8 +25,9 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
-import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
+import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 /**
  * 
@@ -37,15 +38,14 @@ public class OWLDatasetManager
 {
 	public static final String PROPERTY_LABEL_HAS_CHANNEL = "hasChannel";
 	public static final String PROPERTY_LABEL_HAS_FUNCTIONALITY = "hasFunctionality";
-	public static final String PROPERTY_LABEL_HAS_ACTUATOR = "hasInternalActuator";
 	public static final String PROPERTY_LABEL_HAS_NEIGHBOR = "hasNeighbor";
 	public static final String PROPERTY_LABEL_HAS_PORT = "hasPort";
 	public static final String PROPERTY_LABEL_HAS_INPUT_PORT = "hasInput";
 	public static final String PROPERTY_LABEL_HAS_OUTPUT_PORT = "hasOutput";
 	public static final String PROPERTY_LABEL_CONNECT = "connect";
 	public static final String PROPERTY_LABEL_HAS_ELEMENT = "hasElement";
-	public static final String PROPERTY_LABEL_HAS_INTERNAL_ELEMENT = "hasInternalElement";
-	public static final String PROPERTY_LABEL_HAS_EXTERNAL_ELEMENT = "hasExternalElement";
+	public static final String PROPERTY_LABEL_HAS_CROSS_TRANSFER = "hasCrossTransfer";
+	public static final String PROPERTY_LABEL_HAS_CONVEYOR = "hasConveyor";
 	
 	// module agent ID and type
 	public static final String CONSTANT_AGENT_TYPE = "Agent";
@@ -103,15 +103,6 @@ public class OWLDatasetManager
 	private static final String NS = NS_URL + "#";
 	private static final String DATASET = "kbcl/kbcl_v5.owl";
 	
-	// inference rules
-	private static final String RULES = ""
-			+ "[r1: (?m " + NS + PROPERTY_LABEL_HAS_ELEMENT + " ?e), (?e " + NS + PROPERTY_LABEL_CONNECT + " ?n) "
-				+ "-> (?m " + NS + PROPERTY_LABEL_HAS_PORT + " ?e)]\n"
-			+ "[r2: (?m " + NS + PROPERTY_LABEL_HAS_ELEMENT + " ?e), (?e " + NS + PROPERTY_LABEL_CONNECT + " ?n) "
-				+ "-> (?m " + NS + PROPERTY_LABEL_HAS_NEIGHBOR + " ?n)]\n"
-			+ "[r3: (?f " + NS + PROPERTY_LABEL_HAS_OUTPUT_PORT + " ?a), (?f " + NS + PROPERTY_LABEL_HAS_INPUT_PORT + " ?b), (?m " + NS + PROPERTY_LABEL_HAS_PORT + " ?a), (?m " + NS + PROPERTY_LABEL_HAS_PORT + " ?b) "
-				+ "-> (?m " + NS + PROPERTY_LABEL_HAS_CHANNEL + " ?f)]";
-	
 	private OntModel model;
 	private InfModel infModel;
 	private String label;
@@ -119,12 +110,13 @@ public class OWLDatasetManager
 	
 	private static OWLDatasetManager INSTANCE = null;
 
-	
 	/**
 	 * 
 	 */
-	private OWLDatasetManager() {
-		try {
+	private OWLDatasetManager() 
+	{
+		try 
+		{
 			// get property file
 			Properties prop = new Properties();
 			prop.load(new FileInputStream(new File("etc/dataManager.properties")));
@@ -141,8 +133,18 @@ public class OWLDatasetManager
 			// setup
 			this.setup();
 			
+			// set rule reasoner configuration
+			Resource config = this.model.createResource();
+			// get reasoner type from configuration file
+			String reasonerType = prop.getProperty("rule_reasoner_type");
+			config.addProperty(ReasonerVocabulary.PROPruleMode, reasonerType);
+			config.addProperty(ReasonerVocabulary.PROPruleSet, "etc/infRules");
+			// create generic rule reasoner
+			Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(config);
+			
 			// initialize inference model
-			this.infModel = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(RULES)), this.model);
+//			this.infModel = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(RULES)), this.model);
+			this.infModel = ModelFactory.createInfModel(reasoner, this.model);
 		}
 		catch (OWLClassNotFoundException ex) {
 			System.err.println(ex.getMessage());

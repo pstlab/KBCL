@@ -1,0 +1,28 @@
+@prefix rdf:	http://www.w3.org/1999/02/22-rdf-syntax-ns#
+@prefix kbcl:	http://pst.istc.cnr.it/ontology/kbcl#
+
+[modulePorts: 
+	(?m kbcl:hasElement ?e), (?e kbcl:connect ?n)
+	-> 
+	(?m kbcl:hasPort ?e)]
+
+[moduleNeighbors: 
+	(?m kbcl:hasElement ?e), (?e kbcl:connect ?n)
+	->
+	(?m kbcl:hasNeighbor ?n)]
+
+[moduleCrossTransfers: 
+	(?m kbcl:hasElement ?e), (?e rdf:type kbcl:CrossTransferEngine)
+	-> 
+	(?m kbcl:hasCrossTransfer ?e)]
+
+[moduleConveyors: 
+	(?m kbcl:hasElement ?e), (?e rdf:type kbcl:ConveyorEngine) 
+	-> 
+	(?m kbcl:hasConveyor ?e)]
+	
+[moduleChannels: 
+	(?f kbcl:hasOutput ?o), (?f kbcl:hasInput ?i), (?m kbcl:hasPort ?i), (?m kbcl:hasPort ?o)
+	->
+	(?m kbcl:hasChannel ?f)]
+	

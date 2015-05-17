@@ -35,8 +35,7 @@
     <!-- http://pst.istc.cnr.it/ontology/kbcl#connect -->
 
     <ObjectProperty rdf:about="&kbcl;connect">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
         <rdfs:range rdf:resource="&kbcl;ExternalElement"/>
         <rdfs:domain rdf:resource="&kbcl;InternalElement"/>
     </ObjectProperty>
@@ -46,6 +45,9 @@
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasActuator -->
 
     <ObjectProperty rdf:about="&kbcl;hasActuator">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="&kbcl;Actuator"/>
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
         <rdfs:subPropertyOf rdf:resource="&kbcl;hasInternalElement"/>
         <propertyDisjointWith rdf:resource="&kbcl;hasPort"/>
     </ObjectProperty>
@@ -55,9 +57,33 @@
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasChannel -->
 
     <ObjectProperty rdf:about="&kbcl;hasChannel">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
         <rdfs:range rdf:resource="&kbcl;Channel"/>
         <rdfs:domain rdf:resource="&kbcl;Module"/>
         <rdfs:subPropertyOf rdf:resource="&kbcl;hasFunctionality"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasConveyor -->
+
+    <ObjectProperty rdf:about="&kbcl;hasConveyor">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
+        <rdfs:range rdf:resource="&kbcl;ConveyorEngine"/>
+        <rdfs:subPropertyOf rdf:resource="&kbcl;hasActuator"/>
+        <propertyDisjointWith rdf:resource="&kbcl;hasCrossTransfer"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasCrossTransfer -->
+
+    <ObjectProperty rdf:about="&kbcl;hasCrossTransfer">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="&kbcl;Agent"/>
+        <rdfs:range rdf:resource="&kbcl;CrossTransferEngine"/>
+        <rdfs:subPropertyOf rdf:resource="&kbcl;hasActuator"/>
     </ObjectProperty>
     
 
@@ -75,6 +101,7 @@
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasExternalElement -->
 
     <ObjectProperty rdf:about="&kbcl;hasExternalElement">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="&kbcl;Agent"/>
         <rdfs:range rdf:resource="&kbcl;ExternalElement"/>
         <rdfs:subPropertyOf rdf:resource="&kbcl;hasElement"/>
@@ -85,7 +112,9 @@
 
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasFunctionality -->
 
-    <ObjectProperty rdf:about="&kbcl;hasFunctionality"/>
+    <ObjectProperty rdf:about="&kbcl;hasFunctionality">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+    </ObjectProperty>
     
 
 
@@ -93,7 +122,7 @@
 
     <ObjectProperty rdf:about="&kbcl;hasInput">
         <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:domain rdf:resource="&kbcl;Action"/>
+        <rdfs:domain rdf:resource="&kbcl;Channel"/>
         <rdfs:range rdf:resource="&kbcl;InternalElement"/>
     </ObjectProperty>
     
@@ -102,6 +131,7 @@
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasInternalElement -->
 
     <ObjectProperty rdf:about="&kbcl;hasInternalElement">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="&kbcl;Agent"/>
         <rdfs:range rdf:resource="&kbcl;InternalElement"/>
         <rdfs:subPropertyOf rdf:resource="&kbcl;hasElement"/>
@@ -112,6 +142,7 @@
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasNeighbor -->
 
     <ObjectProperty rdf:about="&kbcl;hasNeighbor">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="&kbcl;Agent"/>
         <rdfs:range rdf:resource="&kbcl;Neighbor"/>
         <rdfs:subPropertyOf rdf:resource="&kbcl;hasExternalElement"/>
@@ -123,7 +154,7 @@
 
     <ObjectProperty rdf:about="&kbcl;hasOutput">
         <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:domain rdf:resource="&kbcl;Action"/>
+        <rdfs:domain rdf:resource="&kbcl;Channel"/>
         <rdfs:range rdf:resource="&kbcl;InternalElement"/>
     </ObjectProperty>
     
@@ -132,6 +163,7 @@
     <!-- http://pst.istc.cnr.it/ontology/kbcl#hasPort -->
 
     <ObjectProperty rdf:about="&kbcl;hasPort">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="&kbcl;Agent"/>
         <rdfs:range rdf:resource="&kbcl;Port"/>
         <rdfs:subPropertyOf rdf:resource="&kbcl;hasInternalElement"/>
@@ -347,7 +379,8 @@
                     <rdf:Description rdf:about="&kbcl;Agent"/>
                     <Restriction>
                         <onProperty rdf:resource="&kbcl;hasChannel"/>
-                        <someValuesFrom rdf:resource="&kbcl;Channel"/>
+                        <onClass rdf:resource="&kbcl;Channel"/>
+                        <minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</minQualifiedCardinality>
                     </Restriction>
                 </intersectionOf>
             </Class>
