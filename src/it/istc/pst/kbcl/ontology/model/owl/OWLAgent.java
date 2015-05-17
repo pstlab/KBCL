@@ -243,9 +243,37 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 	@Override
 	public void update(Event event) {
 		switch (event) {
-			case AGENT_ELEMENT_UDPATE_EVENT : 
 			case PORT_CONNECTION_UPDATE_EVENT : {
 				try {
+					// update agent ports
+					this.ports = this.loadAgentPorts();
+					// update agent's neighbors
+					this.neighbors = this.loadAgentNeighbors();
+					// update agent's functionalities
+					this.functionalities = this.loadAgentFunctionalities();
+				}
+				catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+					this.ports = null;
+					this.neighbors = null;
+					this.functionalities = null;
+					System.err.println(ex.getMessage());
+				}
+				finally {
+					// propagate update to agent's observers
+					for (EventObserver o : this.observers) {
+						// notify observers
+						o.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
+					}			
+				}
+			}
+			break;
+			
+			case AGENT_ELEMENT_UDPATE_EVENT : {
+				try {
+					// update conveyors
+					this.conveyors = this.loadAgentConveyors();
+					// update cross transfers
+					this.crossTransfers = this.loadAgentCrossTransfers();
 					// update agent ports
 					this.ports = this.loadAgentPorts();
 					// update agent's neighbors

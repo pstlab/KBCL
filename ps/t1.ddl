@@ -2,7 +2,7 @@ DOMAIN t1_Domain {
 
 	TEMPORAL_MODULE temporal_module = [0, 1000], 500;
 
-	COMP_TYPE SingletonStateVariable t1_ChannelType (Channel_L2_R1(), Channel_L2_R2(), Channel_L2_R3(), Channel_R3_B(), Channel_R3_F(), Channel_R2_F(), Channel_F_L2(), Channel_F_L1(), Channel_R1_F(), Channel_R2_R3(), Channel_R2_R1(), Channel_R2_R2(), Channel_R3_L1(), Channel_L2_F(), Channel_L2_B(), Channel_F_B(), Channel_B_L2(), Channel_R3_L2(), Channel_B_L1(), Channel_L2_L1(), Channel_L2_L2(), Channel_F_F(), Channel_L1_L1(), Channel_L1_L2(), Channel_R2_L1(), Channel_F_R1(), Channel_R2_L2(), Channel_F_R2(), Channel_R1_R2(), Channel_F_R3(), Channel_R1_R3(), Channel_B_B(), Channel_R1_L1(), Channel_R1_R1(), Channel_B_F(), Channel_R1_L2(), Channel_L1_R1(), Channel_L1_R2(), Channel_L1_B(), Channel_L1_R3(), Channel_L1_F(), Channel_B_R1(), Channel_B_R2(), Channel_B_R3(), Channel_R1_B(), Channel_R3_R1(), Channel_R3_R2(), Channel_R3_R3(), Idle(), Channel_R2_B()) {
+	COMP_TYPE SingletonStateVariable t1_ChannelType (Channel_L2_R1(), Channel_L2_R2(), Channel_L2_R3(), Channel_R3_B(), Channel_R3_F(), Channel_R2_F(), Channel_F_L2(), Channel_F_L1(), Channel_B_L3(), Channel_R1_F(), Channel_F_L3(), Channel_R2_R3(), Channel_R2_R1(), Channel_R2_R2(), Channel_R3_L1(), Channel_L3_R2(), Channel_L3_R3(), Channel_L2_F(), Channel_L3_R1(), Channel_L3_B(), Channel_L2_B(), Channel_F_B(), Channel_L3_F(), Channel_L3_L1(), Channel_L3_L2(), Channel_R3_L3(), Channel_B_L2(), Channel_B_L1(), Channel_R3_L2(), Channel_L3_L3(), Channel_L2_L1(), Channel_L2_L2(), Channel_F_F(), Channel_L2_L3(), Channel_L1_L1(), Channel_L1_L3(), Channel_L1_L2(), Channel_F_R1(), Channel_R2_L1(), Channel_R2_L2(), Channel_F_R2(), Channel_R2_L3(), Channel_F_R3(), Channel_R1_R2(), Channel_R1_R3(), Channel_B_B(), Channel_R1_L1(), Channel_R1_R1(), Channel_R1_L3(), Channel_R1_L2(), Channel_B_F(), Channel_L1_R1(), Channel_L1_R2(), Channel_L1_R3(), Channel_L1_B(), Channel_L1_F(), Channel_B_R1(), Channel_B_R2(), Channel_B_R3(), Channel_R1_B(), Channel_R3_R1(), Channel_R3_R2(), Channel_R3_R3(), Idle(), Channel_R2_B()) {
 
 		VALUE Channel_L2_R1() [20, 35]
 		MEETS {
@@ -44,7 +44,17 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
+		VALUE Channel_B_L3() [10, 25]
+		MEETS {
+			Idle();
+		}
+
 		VALUE Channel_R1_F() [10, 25]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_F_L3() [40, 55]
 		MEETS {
 			Idle();
 		}
@@ -69,7 +79,27 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
+		VALUE Channel_L3_R2() [40, 55]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_L3_R3() [10, 20]
+		MEETS {
+			Idle();
+		}
+
 		VALUE Channel_L2_F() [20, 35]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_L3_R1() [40, 55]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_L3_B() [10, 25]
 		MEETS {
 			Idle();
 		}
@@ -84,7 +114,32 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
+		VALUE Channel_L3_F() [40, 55]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_L3_L1() [40, 55]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_L3_L2() [20, 35]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_R3_L3() [10, 20]
+		MEETS {
+			Idle();
+		}
+
 		VALUE Channel_B_L2() [20, 35]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_B_L1() [10, 25]
 		MEETS {
 			Idle();
 		}
@@ -94,7 +149,7 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
-		VALUE Channel_B_L1() [10, 25]
+		VALUE Channel_L3_L3() [10, 20]
 		MEETS {
 			Idle();
 		}
@@ -114,7 +169,17 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
+		VALUE Channel_L2_L3() [20, 35]
+		MEETS {
+			Idle();
+		}
+
 		VALUE Channel_L1_L1() [10, 20]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_L1_L3() [40, 55]
 		MEETS {
 			Idle();
 		}
@@ -124,12 +189,12 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
-		VALUE Channel_R2_L1() [20, 35]
+		VALUE Channel_F_R1() [10, 25]
 		MEETS {
 			Idle();
 		}
 
-		VALUE Channel_F_R1() [10, 25]
+		VALUE Channel_R2_L1() [20, 35]
 		MEETS {
 			Idle();
 		}
@@ -144,12 +209,17 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
-		VALUE Channel_R1_R2() [20, 35]
+		VALUE Channel_R2_L3() [40, 55]
 		MEETS {
 			Idle();
 		}
 
 		VALUE Channel_F_R3() [40, 55]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_R1_R2() [20, 35]
 		MEETS {
 			Idle();
 		}
@@ -174,12 +244,17 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
-		VALUE Channel_B_F() [30, 60]
+		VALUE Channel_R1_L3() [40, 55]
 		MEETS {
 			Idle();
 		}
 
 		VALUE Channel_R1_L2() [20, 35]
+		MEETS {
+			Idle();
+		}
+
+		VALUE Channel_B_F() [30, 60]
 		MEETS {
 			Idle();
 		}
@@ -194,12 +269,12 @@ DOMAIN t1_Domain {
 			Idle();
 		}
 
-		VALUE Channel_L1_B() [10, 25]
+		VALUE Channel_L1_R3() [40, 55]
 		MEETS {
 			Idle();
 		}
 
-		VALUE Channel_L1_R3() [40, 55]
+		VALUE Channel_L1_B() [10, 25]
 		MEETS {
 			Idle();
 		}
@@ -254,38 +329,53 @@ DOMAIN t1_Domain {
 			Channel_R2_F();
 			Channel_F_L2();
 			Channel_F_L1();
+			Channel_B_L3();
 			Channel_R1_F();
+			Channel_F_L3();
 			Channel_R2_R3();
 			Channel_R2_R1();
 			Channel_R2_R2();
 			Channel_R3_L1();
+			Channel_L3_R2();
+			Channel_L3_R3();
 			Channel_L2_F();
+			Channel_L3_R1();
+			Channel_L3_B();
 			Channel_L2_B();
 			Channel_F_B();
+			Channel_L3_F();
+			Channel_L3_L1();
+			Channel_L3_L2();
+			Channel_R3_L3();
 			Channel_B_L2();
-			Channel_R3_L2();
 			Channel_B_L1();
+			Channel_R3_L2();
+			Channel_L3_L3();
 			Channel_L2_L1();
 			Channel_L2_L2();
 			Channel_F_F();
+			Channel_L2_L3();
 			Channel_L1_L1();
+			Channel_L1_L3();
 			Channel_L1_L2();
 			Channel_R2_L1();
 			Channel_F_R1();
 			Channel_R2_L2();
 			Channel_F_R2();
-			Channel_R1_R2();
+			Channel_R2_L3();
 			Channel_F_R3();
-			Channel_B_B();
+			Channel_R1_R2();
 			Channel_R1_R3();
+			Channel_B_B();
 			Channel_R1_L1();
 			Channel_R1_R1();
-			Channel_B_F();
+			Channel_R1_L3();
 			Channel_R1_L2();
+			Channel_B_F();
 			Channel_L1_R1();
 			Channel_L1_R2();
-			Channel_L1_B();
 			Channel_L1_R3();
+			Channel_L1_B();
 			Channel_L1_F();
 			Channel_B_R1();
 			Channel_B_R2();
@@ -406,22 +496,16 @@ DOMAIN t1_Domain {
 
 	}
 
-	COMP_TYPE SingletonStateVariable t1_Main_ConveyorType (Main_Conveyor_Forward(), Main_Conveyor_Still(), Main_Conveyor_Backward()) {
+	COMP_TYPE SingletonStateVariable t1_Port_L3Type (Port_L3_Not_Available(), Port_L3_Available()) {
 
-		VALUE Main_Conveyor_Forward() [1, 1000]
+		VALUE Port_L3_Not_Available() [1, 1000]
 		MEETS {
-			Main_Conveyor_Still();
+			Port_L3_Available();
 		}
 
-		VALUE Main_Conveyor_Still() [1, 1000]
+		VALUE Port_L3_Available() [1, 1000]
 		MEETS {
-			Main_Conveyor_Forward();
-			Main_Conveyor_Backward();
-		}
-
-		VALUE Main_Conveyor_Backward() [1, 1000]
-		MEETS {
-			Main_Conveyor_Still();
+			Port_L3_Not_Available();
 		}
 
 	}
@@ -484,26 +568,6 @@ DOMAIN t1_Domain {
 		VALUE Port_R2_Available() [1, 1000]
 		MEETS {
 			Port_R2_Not_Available();
-		}
-
-	}
-
-	COMP_TYPE SingletonStateVariable t1_Cross_Conveyor_1Type (Cross_Conveyor_1_Still(), Cross_Conveyor_1_Forward(), Cross_Conveyor_1_Backward()) {
-
-		VALUE Cross_Conveyor_1_Still() [1, 1000]
-		MEETS {
-			Cross_Conveyor_1_Forward();
-			Cross_Conveyor_1_Backward();
-		}
-
-		VALUE Cross_Conveyor_1_Forward() [1, 1000]
-		MEETS {
-			Cross_Conveyor_1_Still();
-		}
-
-		VALUE Cross_Conveyor_1_Backward() [1, 1000]
-		MEETS {
-			Cross_Conveyor_1_Still();
 		}
 
 	}
@@ -605,12 +669,11 @@ DOMAIN t1_Domain {
 	COMPONENT t1_Port_R3 { FLEXIBLE t1_Port_R3_timeline(trex_internal_dispatch_asap) } : t1_Port_R3Type;
 	COMPONENT t1_Cross_Conveyor_3 { FLEXIBLE t1_Cross_Conveyor_3_timeline(trex_internal_dispatch_asap) } : t1_Cross_Conveyor_3Type;
 	COMPONENT t1_Cross_Transfer_1 { FLEXIBLE t1_Cross_Transfer_1_timeline(trex_internal_dispatch_asap) } : t1_Cross_Transfer_1Type;
-	COMPONENT t1_Main_Conveyor { FLEXIBLE t1_Main_Conveyor_timeline(trex_internal_dispatch_asap) } : t1_Main_ConveyorType;
+	COMPONENT t1_Port_L3 { FLEXIBLE t1_Port_L3_timeline(trex_internal_dispatch_asap) } : t1_Port_L3Type;
 	COMPONENT t1_Port_L2 { FLEXIBLE t1_Port_L2_timeline(trex_internal_dispatch_asap) } : t1_Port_L2Type;
 	COMPONENT t1_Port_F { FLEXIBLE t1_Port_F_timeline(trex_internal_dispatch_asap) } : t1_Port_FType;
 	COMPONENT t1_Cross_Conveyor_2 { FLEXIBLE t1_Cross_Conveyor_2_timeline(trex_internal_dispatch_asap) } : t1_Cross_Conveyor_2Type;
 	COMPONENT t1_Port_R2 { FLEXIBLE t1_Port_R2_timeline(trex_internal_dispatch_asap) } : t1_Port_R2Type;
-	COMPONENT t1_Cross_Conveyor_1 { FLEXIBLE t1_Cross_Conveyor_1_timeline(trex_internal_dispatch_asap) } : t1_Cross_Conveyor_1Type;
 	COMPONENT t1_Port_L1 { FLEXIBLE t1_Port_L1_timeline(trex_internal_dispatch_asap) } : t1_Port_L1Type;
 	COMPONENT t1_Cross_Transfer_3 { FLEXIBLE t1_Cross_Transfer_3_timeline(trex_internal_dispatch_asap) } : t1_Cross_Transfer_3Type;
 	COMPONENT t1_Neighbor_L { FLEXIBLE t1_Neighbor_L_timeline(trex_internal_dispatch_asap) } : t1_Neighbor_LType;
@@ -633,6 +696,19 @@ DOMAIN t1_Domain {
 
 			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L3_L1() {
+
+			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
 
 		}
 
@@ -713,6 +789,22 @@ DOMAIN t1_Domain {
 
 		}
 
+		VALUE Channel_R3_L3() {
+
+			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
 		VALUE Channel_R2_B() {
 
 			cd0 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
@@ -774,6 +866,32 @@ DOMAIN t1_Domain {
 
 		}
 
+		VALUE Channel_B_L3() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L3_L3() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd1;
+
+		}
+
 		VALUE Channel_F_R3() {
 
 			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
@@ -816,6 +934,38 @@ DOMAIN t1_Domain {
 
 			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
 			DURING [0,+INF] [0,+INF]  cd2;
+
+		}
+
+		VALUE Channel_L3_R2() {
+
+			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_R1_L3() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
 
 		}
 
@@ -893,6 +1043,22 @@ DOMAIN t1_Domain {
 
 			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
 			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L3_B() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
 
 		}
 
@@ -1064,6 +1230,22 @@ DOMAIN t1_Domain {
 
 		}
 
+		VALUE Channel_F_L3() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
 		VALUE Channel_F_R2() {
 
 			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
@@ -1093,19 +1275,6 @@ DOMAIN t1_Domain {
 
 		}
 
-		VALUE Channel_L1_L2() {
-
-			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			ENDS_DURING [0,+INF] [0,+INF]  cd0;
-
-			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
-
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
-
-		}
-
 		VALUE Channel_R1_F() {
 
 			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
@@ -1119,6 +1288,19 @@ DOMAIN t1_Domain {
 
 			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L1_L2() {
+
+			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
 
 		}
 
@@ -1138,22 +1320,6 @@ DOMAIN t1_Domain {
 
 		}
 
-		VALUE Channel_L2_R1() {
-
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			ENDS_DURING [0,+INF] [0,+INF]  cd0;
-
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			ENDS_DURING [0,+INF] [0,+INF]  cd1;
-
-			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
-
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
-
-		}
-
 		VALUE Channel_B_F() {
 
 			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
@@ -1166,6 +1332,22 @@ DOMAIN t1_Domain {
 			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
 			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L2_R1() {
+
+			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			STARTS_DURING [0,+INF] [0,+INF]  cd3;
 
 		}
@@ -1192,6 +1374,22 @@ DOMAIN t1_Domain {
 			DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L3_R3() {
+
+			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
 			DURING [0,+INF] [0,+INF]  cd1;
 
 			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
@@ -1286,6 +1484,38 @@ DOMAIN t1_Domain {
 
 		}
 
+		VALUE Channel_R2_L3() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L3_F() {
+
+			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
 		VALUE Channel_L1_R3() {
 
 			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
@@ -1299,6 +1529,19 @@ DOMAIN t1_Domain {
 
 			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
+		VALUE Channel_L3_L2() {
+
+			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
 
 		}
 
@@ -1328,6 +1571,22 @@ DOMAIN t1_Domain {
 
 		}
 
+		VALUE Channel_L3_R1() {
+
+			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+		}
+
 		VALUE Channel_L1_L1() {
 
 			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
@@ -1335,6 +1594,32 @@ DOMAIN t1_Domain {
 
 			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			DURING [0,+INF] [0,+INF]  cd1;
+
+		}
+
+		VALUE Channel_L1_L3() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+		}
+
+		VALUE Channel_L2_L3() {
+
+			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+
+			cd1 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd2;
 
 		}
 
