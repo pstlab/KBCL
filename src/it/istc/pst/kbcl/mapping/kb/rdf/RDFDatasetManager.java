@@ -3,14 +3,11 @@ package it.istc.pst.kbcl.mapping.kb.rdf;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 
-import java.util.Iterator;
-
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
 
 /**
  * 

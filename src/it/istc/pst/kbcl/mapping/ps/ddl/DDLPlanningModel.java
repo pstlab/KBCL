@@ -1,6 +1,5 @@
 package it.istc.pst.kbcl.mapping.ps.ddl;
 
-import it.istc.pst.kbcl.mapping.kb.rdf.RDFDatasetManager;
 import it.istc.pst.kbcl.mapping.model.rdf.RDFMappingKnowledgeBaseFacade;
 import it.istc.pst.kbcl.mapping.ps.PlanningModel;
 import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
@@ -40,14 +39,18 @@ public class DDLPlanningModel extends PlanningModel
 			throws DDLPlanningModelInitializationFailureException 
 	{
 		super(agent.getLabel(), horizon);
-		try {
+		try 
+		{
 			// setup mapping knowledge base 
 			this.kb = new RDFMappingKnowledgeBaseFacade(agent);
+			
 			// create processor
 			this.processor = new DDLKnowledgeBaseProcessor(this.kb.getAgent(), this.horizon);
 			
 			// lazy approach
 			this.synchronizations = null;
+			
+			// initialize components
 			this.components = new HashMap<DDLComponentType, List<? extends DDLComponent>>();
 		}
 		catch (Exception ex) {
@@ -398,8 +401,5 @@ public class DDLPlanningModel extends PlanningModel
 		}
 		this.components = null;
 		this.synchronizations = null;
-		// close data manager
-		RDFDatasetManager dataset = RDFDatasetManager.getSingletonInstance();
-		dataset.close();
 	}
 }

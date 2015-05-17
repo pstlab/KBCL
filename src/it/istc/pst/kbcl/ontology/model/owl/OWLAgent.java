@@ -20,7 +20,8 @@ import java.util.List;
 public class OWLAgent extends Agent implements EventObserver, EventPublisher
 {
 	private List<OWLFunctionality> functionalities;
-//	private List<OWLElement> internalElements;
+	private List<OWLElement> crossTransfers;
+	private List<OWLElement> conveyors;
 	private List<OWLPort> ports;
 	private List<OWLElement> neighbors;
 	
@@ -38,7 +39,8 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 		
 		// lazy approach
 		this.functionalities = null;
-//		this.internalElements = null;
+		this.crossTransfers = null;
+		this.conveyors = null;
 		this.ports = null;
 		this.neighbors = null;
 		
@@ -47,6 +49,18 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 
 		// initialize observer list
 		this.observers = new ArrayList<>();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<OWLElement> getComponents() {
+		List<OWLElement> list = new ArrayList<>();
+		list.addAll(this.getConveyors());
+		list.addAll(this.getCrossTransfers());
+		list.addAll(this.getPorts());
+		return list;
 	}
 	
 	/**
@@ -68,24 +82,43 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 		return new ArrayList<>(this.functionalities);
 	}
 	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public List<OWLElement> getInternalElements() {
-//		if (this.internalElements == null) {
-//			try {
-//				// load data from data-set
-//				this.internalElements = new ArrayList<>(this.loadAgentInternalElements());
-//			}
-//			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
-//				this.internalElements = null;
-//				System.err.println(ex.getMessage());
-//			}
-//		}
-//		// get engines
-//		return new ArrayList<>(this.internalElements);
-//	}
+	/**
+	 * 
+	 * @return
+	 */
+	public List<OWLElement> getConveyors() {
+		if (this.conveyors == null) {
+			try {
+				// load data from data-set
+				this.conveyors = new ArrayList<>(this.loadAgentConveyors());
+			}
+			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+				this.conveyors = null;
+				System.err.println(ex.getMessage());
+			}
+		}
+		// get engines
+		return new ArrayList<>(this.conveyors);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<OWLElement> getCrossTransfers() {
+		if (this.crossTransfers == null) {
+			try {
+				// load data from data-set
+				this.crossTransfers = new ArrayList<>(this.loadAgentCrossTransfers());
+			}
+			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+				this.crossTransfers = null;
+				System.err.println(ex.getMessage());
+			}
+		}
+		// get engines
+		return new ArrayList<>(this.crossTransfers);
+	}
 	
 	/**
 	 * 
@@ -144,13 +177,16 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 	 * 
 	 * @param index
 	 */
-	public OWLElement removeElement(int index) {
-		// get element to remove
-		OWLElement element = this.ports.get(index);
+	public OWLElement removeComponent(int index) {
+		// get components
+		List<OWLElement> comps = this.getComponents();
+		// get component to remove
+		OWLElement element = comps.get(index);
 		try {
 			// remove property
 			this.dataset.removeStatement(this.getLabel(), 
 					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, element.getLabel());
+			
 			// update agent
 			this.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
 		}
@@ -293,18 +329,52 @@ public class OWLAgent extends Agent implements EventObserver, EventPublisher
 	 * @throws OWLIndividualNotFoundException
 	 * @throws OWLPropertyNotFoundException
 	 */
-	private List<OWLElement> loadAgentInternalElements() 
+	private List<OWLElement> loadAgentCrossTransfers() 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException
 	{
 		List<OWLElement> list = new ArrayList<>();
 		List<OWLInstance> acts = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_INTERNAL_ELEMENT);
+						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT);
 		
 		// create actuator list
 		for (OWLInstance act : acts) {
-			list.add(new OWLElement(act.getUrl(), act.getLabel(), 
-					new OWLElementType(act.getType().getUrl(), act.getType().getLabel())));
+			OWLElement el = new OWLElement(act.getUrl(), act.getLabel(), 
+					new OWLElementType(act.getType().getUrl(), act.getType().getLabel()));
+			// check element type
+			if (el.getType().getLabel().equals(OWLDatasetManager.CONSTANT_CROSS_TRANSFER_TYPE)) {
+				// add element
+				list.add(el);
+			}
+		}
+		
+		// get list
+		return list;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws OWLIndividualNotFoundException
+	 * @throws OWLPropertyNotFoundException
+	 */
+	private List<OWLElement> loadAgentConveyors() 
+			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException
+	{
+		List<OWLElement> list = new ArrayList<>();
+		List<OWLInstance> acts = this.dataset
+				.retrieveAllInstancesRelatedByProperty(this.label, 
+						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT);
+		
+		// create actuator list
+		for (OWLInstance act : acts) {
+			OWLElement el = new OWLElement(act.getUrl(), act.getLabel(), 
+					new OWLElementType(act.getType().getUrl(), act.getType().getLabel()));
+			// check element type
+			if (el.getType().getLabel().equals(OWLDatasetManager.CONSTANT_CONVEYOR_TYPE)) {
+				// add element
+				list.add(el);
+			}
 		}
 		
 		// get list

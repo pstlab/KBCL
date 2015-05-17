@@ -113,7 +113,7 @@ public class KbclCLIHandler implements Runnable
 					int index = Integer.parseInt(parameter);
 					// select element
 					OWLAgent agent = this.kbcl.getFocusedAgent();
-					Element el = agent.removeElement(index);
+					Element el = agent.removeComponent(index);
 					System.out.println("Element " + el + " successfully removed!");
 				}
 				catch (KbclNoAgentSelectedException ex) {
@@ -180,7 +180,7 @@ public class KbclCLIHandler implements Runnable
 						// print agent's functionalities
 						System.out.println("Agent's components");
 						int counter = 0;
-						for (Element el : this.kbcl.getFocusedAgent().getPorts()) {
+						for (Element el : this.kbcl.getFocusedAgent().getComponents()) {
 							System.out.println("- (" + counter + ") " + el);
 							counter++;
 						}

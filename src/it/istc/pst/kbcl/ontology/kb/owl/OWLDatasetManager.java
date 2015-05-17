@@ -1,6 +1,5 @@
 package it.istc.pst.kbcl.ontology.kb.owl;
 
-import it.istc.pst.kbcl.ontology.exception.KBSetupErrorException;
 import it.istc.pst.kbcl.ontology.kb.owl.exception.OWLClassNotFoundException;
 import it.istc.pst.kbcl.ontology.kb.owl.exception.OWLIndividualNotFoundException;
 import it.istc.pst.kbcl.ontology.kb.owl.exception.OWLPropertyNotFoundException;
@@ -53,11 +52,23 @@ public class OWLDatasetManager
 	public static final String CONSTANT_MODULE_TYPE = "Module";
 	private static final String CONSTANT_MODULE_ID = "t1";
 	
-	// possible ports
+	// module ports
 	public static final String CONSTANT_ELEMENT_TYPE = "Element";
 	public static final String CONSTANT_PORT_TYPE = "Port";
 	private static final String[] CONSTANT_PORTS = new String[] {
 		"portF", "portB", "portR1", "portR2", "portR3", "portL1", "portL2", "portL3"
+	};
+	
+	// module conveyors
+	public static final String CONSTANT_CONVEYOR_TYPE = "ConveyorEngine";
+	private static final String[] CONSTANT_CONVEYORS = new String[] {
+		"conveyor0", "conveyor1", "conveyor2", "conveyor3"
+	};
+	
+	// module cross transfers
+	public static final String CONSTANT_CROSS_TRANSFER_TYPE = "CrossTransferEngine";
+	private static final String[] CONSTANT_CROSS_TRANSFERS = new String[] {
+		"cross1", "cross2", "cross3"
 	};
 	
 	// possible channels
@@ -132,6 +143,9 @@ public class OWLDatasetManager
 			
 			// initialize inference model
 			this.infModel = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(RULES)), this.model);
+		}
+		catch (OWLClassNotFoundException ex) {
+			System.err.println(ex.getMessage());
 		}
 		catch (IOException ex) {
 			System.err.println(ex.getMessage());
@@ -287,21 +301,18 @@ public class OWLDatasetManager
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException 
 	{
 		// get subject individual
-//		Individual subject = this.model.getIndividual(NS + subjectName);
 		Resource subject = this.infModel.getResource(NS + subjectName);
 		if (subject == null) {
 			throw new OWLIndividualNotFoundException("[" + this.label +"]: No Individual found \"" + NS + subjectName + "\"");
 		}
 		
 		// get object individual
-//		Individual object = this.model.getIndividual(NS + objectName);
 		Resource object = this.infModel.getResource(NS + objectName);
 		if (object == null) {
 			throw new OWLIndividualNotFoundException("[" + this.label +"]: No Individual found \"" + NS + objectName + "\"");
 		}
 		
 		// get property
-//		Property p = this.model.getProperty(NS + propertyName);
 		Property p = this.infModel.getProperty(NS + propertyName);
 		if (p == null) {
 			throw new OWLPropertyNotFoundException("[" + this.label + "]: No property found \"" + NS + propertyName + "\"");
@@ -364,9 +375,10 @@ public class OWLDatasetManager
 	
 	/**
 	 * 
-	 * @throws KBSetupErrorException
+	 * @throws OWLClassNotFoundException
 	 */
 	private void setup() 
+			throws OWLClassNotFoundException 
 	{
 		// check debug flag
 		if (this.debug) {
@@ -374,16 +386,106 @@ public class OWLDatasetManager
 		}
 		// get module agent type
 		OntClass module = this.model.getOntClass(NS + CONSTANT_MODULE_TYPE);
+		if (module == null) {
+			throw new OWLClassNotFoundException("[" + this.label + "]: Module class " + NS + CONSTANT_MODULE_TYPE + " not found");
+		}
+		
 		// create agent individual
 		Individual t = module.createIndividual(NS + CONSTANT_MODULE_ID);
 		if (this.debug) {
 			System.out.println("... Individual " + NS + CONSTANT_MODULE_ID + " successfully created!");
 		}
 		
+		// add cross transfer constants
+		this.setupCrossTransferConstants(t);
+		// add conveyor constants
+		this.setupConveyorConstants(t);
+		// add neighbor constants
+		Map<String, Individual> neighbors = this.setupNeighborConstants();
+		// add port constants
+		Map<String, Individual> ports = this.setupPortConstants(t, neighbors);
+		// add channel constants
+		this.setupChannelFucntionConstants(ports);
+	}
+	
+	/**
+	 * 
+	 * @param agent
+	 * @throws OWLClassNotFoundException
+	 */
+	private void setupConveyorConstants(Individual agent) 
+			throws OWLClassNotFoundException 
+	{
+		// get class
+		OntClass conveyorType = this.model.getOntClass(NS + CONSTANT_CONVEYOR_TYPE);
+		if (conveyorType == null) {
+			throw new OWLClassNotFoundException("[" + this.label+ "]: Conveyor class " + NS + CONSTANT_CONVEYOR_TYPE +  " not found");
+		}
+		
+		// create individuals
+		for (String conveyorName : CONSTANT_CONVEYORS) {
+			// create individual
+			Individual conveyor = conveyorType.createIndividual(NS + conveyorName);
+			if (this.debug) {
+				System.out.println("... Individual " + NS + conveyorName + " successfully created!");
+			}
+			
+			// associate cross transfer to module
+			Property he = this.model.getProperty(NS + PROPERTY_LABEL_HAS_ELEMENT);
+			agent.addProperty(he, conveyor);
+			if (this.debug) {
+				System.out.println("Statement [" + agent.getLocalName() + " " + he.getLocalName() + " " + conveyor.getLocalName() + "] successfully added!");
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param agent
+	 * @throws OWLClassNotFoundException
+	 */
+	private void setupCrossTransferConstants(Individual agent) 
+			throws OWLClassNotFoundException 
+	{
+		// get class
+		OntClass crossType = this.model.getOntClass(NS + CONSTANT_CROSS_TRANSFER_TYPE);
+		if (crossType == null) {
+			throw new OWLClassNotFoundException("[" + this.label+ "]: Cross Transfer class " + NS + CONSTANT_CROSS_TRANSFER_TYPE +  " not found");
+		}
+		
+		// create individuals
+		for (String crossName : CONSTANT_CROSS_TRANSFERS) {
+			// create individual
+			Individual cross = crossType.createIndividual(NS + crossName);
+			if (this.debug) {
+				System.out.println("... Individual " + NS + crossName + " successfully created!");
+			}
+			
+			// associate cross transfer to module
+			Property he = this.model.getProperty(NS + PROPERTY_LABEL_HAS_ELEMENT);
+			agent.addProperty(he, cross);
+			if (this.debug) {
+				System.out.println("Statement [" + agent.getLocalName() + " " + he.getLocalName() + " " + cross.getLocalName() + "] successfully added!");
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws OWLClassNotFoundException
+	 */
+	private Map<String, Individual> setupNeighborConstants() 
+			throws OWLClassNotFoundException 
+	{
 		// get neighbor type
 		OntClass neighborType = this.model.getOntClass(NS + CONSTANT_NEIGHBOR_TYPE);
+		// check 
+		if (neighborType == null) {
+			throw new OWLClassNotFoundException("[" + this.label + "]: Neighbor class " + NS + CONSTANT_NEIGHBOR_TYPE + " not found");
+		}
 		// index neighbor
-		Map<String, Individual> indexNeighbor = new HashMap<>();
+		Map<String, Individual> neighbors = new HashMap<>();
 		// create constant neighbors
 		for (String neighborName : CONSTANT_NEIGHBORS) {
 			// create individual
@@ -392,13 +494,30 @@ public class OWLDatasetManager
 				System.out.println("... Individual " + NS + neighborName + " successfully created!");
 			}
 			// add individual to cache
-			indexNeighbor.put(neighborName, n);
+			neighbors.put(neighborName, n);
 		}
 		
+		return neighbors;
+	}
+	
+	/**
+	 * 
+	 * @param agent
+	 * @param neighbors
+	 * @return
+	 * @throws OWLClassNotFoundException
+	 */
+	private Map<String, Individual> setupPortConstants(Individual agent, Map<String, Individual> neighbors) 
+			throws OWLClassNotFoundException
+	{
 		// index of created ports
-		Map<String, Individual> indexPort = new HashMap<>();
+		Map<String, Individual> ports = new HashMap<>();
 		// get port type
 		OntClass portType = this.model.getOntClass(NS + CONSTANT_PORT_TYPE);
+		if (portType == null) {
+			throw new OWLClassNotFoundException("[" + this.label + "]: Port class " + NS + CONSTANT_PORT_TYPE + " not found");
+		}
+		
 		// create constant ports
 		for (String portName : CONSTANT_PORTS) {
 			// create individual
@@ -409,9 +528,9 @@ public class OWLDatasetManager
 			
 			// associate port to module
 			Property he = this.model.getProperty(NS + PROPERTY_LABEL_HAS_ELEMENT);
-			t.addProperty(he, i);
+			agent.addProperty(he, i);
 			if (this.debug) {
-				System.out.println("Statement [" + t.getLocalName() + " " + he.getLocalName() + " " + i.getLocalName() + "] successfully added!");
+				System.out.println("Statement [" + agent.getLocalName() + " " + he.getLocalName() + " " + i.getLocalName() + "] successfully added!");
 			}
 
 			// get connect property
@@ -420,7 +539,7 @@ public class OWLDatasetManager
 			switch (portName) {
 				case "portF" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborF");
+					Individual n = neighbors.get("neighborF");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -430,7 +549,7 @@ public class OWLDatasetManager
 				
 				case "portB" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborB");
+					Individual n = neighbors.get("neighborB");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -440,7 +559,7 @@ public class OWLDatasetManager
 				
 				case "portL1" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborL");
+					Individual n = neighbors.get("neighborL");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -450,7 +569,7 @@ public class OWLDatasetManager
 				
 				case "portL2" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborL");
+					Individual n = neighbors.get("neighborL");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -460,7 +579,7 @@ public class OWLDatasetManager
 				
 				case "portL3" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborL");
+					Individual n = neighbors.get("neighborL");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -470,7 +589,7 @@ public class OWLDatasetManager
 				
 				case "portR1" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborR");
+					Individual n = neighbors.get("neighborR");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -480,7 +599,7 @@ public class OWLDatasetManager
 				
 				case "portR2" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborR");
+					Individual n = neighbors.get("neighborR");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -490,7 +609,7 @@ public class OWLDatasetManager
 				
 				case "portR3" : {
 					// get connected neighbor
-					Individual n = indexNeighbor.get("neighborR");
+					Individual n = neighbors.get("neighborR");
 					i.addProperty(c, n);
 					if (this.debug) {
 						System.out.println("Statement [" + i.getLocalName() + " " + c.getLocalName() + " " + n.getLocalName() + "] successfully added!");
@@ -500,11 +619,27 @@ public class OWLDatasetManager
 			}
 			
 			// add index
-			indexPort.put(portName, i);
+			ports.put(portName, i);
 		}
 		
+		// get ports
+		return ports;
+	}
+
+	/**
+	 * 
+	 * @param ports
+	 * @throws OWLClassNotFoundException
+	 */
+	private void setupChannelFucntionConstants(Map<String, Individual> ports) 
+			throws OWLClassNotFoundException
+	{
 		// get function type
 		OntClass channelType = this.model.getOntClass(NS + CONSTANT_CHANNEL_TYPE);
+		if (channelType == null) { 
+			throw new OWLClassNotFoundException("[" + this.label + "]: Channel class " + NS + CONSTANT_CHANNEL_TYPE + " not found");
+		}
+		
 		// create constant channels
 		for (String channelName : CONSTANT_CHANNELS) {
 			// create individual
@@ -521,8 +656,8 @@ public class OWLDatasetManager
 			{
 				case "channelFB" : {
 					// get input/output ports
-					Individual input = indexPort.get("portF");
-					Individual output = indexPort.get("portB");
+					Individual input = ports.get("portF");
+					Individual output = ports.get("portB");
 					// set input and output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -537,7 +672,7 @@ public class OWLDatasetManager
 				
 				case "channelFF" : {
 					// get input/output ports
-					Individual port = indexPort.get("portF");
+					Individual port = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
@@ -552,8 +687,8 @@ public class OWLDatasetManager
 				
 				case "channelFL1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portF");
-					Individual output = indexPort.get("portL1");
+					Individual input = ports.get("portF");
+					Individual output = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -568,8 +703,8 @@ public class OWLDatasetManager
 				
 				case "channelFL2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portF");
-					Individual output = indexPort.get("portL2");
+					Individual input = ports.get("portF");
+					Individual output = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -584,8 +719,8 @@ public class OWLDatasetManager
 				
 				case "channelFL3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portF");
-					Individual output = indexPort.get("portL3");
+					Individual input = ports.get("portF");
+					Individual output = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -600,8 +735,8 @@ public class OWLDatasetManager
 				
 				case "channelFR1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portF");
-					Individual output = indexPort.get("portR1");
+					Individual input = ports.get("portF");
+					Individual output = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -616,8 +751,8 @@ public class OWLDatasetManager
 				
 				case "channelFR2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portF");
-					Individual output = indexPort.get("portR2");
+					Individual input = ports.get("portF");
+					Individual output = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -632,8 +767,8 @@ public class OWLDatasetManager
 				
 				case "channelFR3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portF");
-					Individual output = indexPort.get("portR3");
+					Individual input = ports.get("portF");
+					Individual output = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -648,7 +783,7 @@ public class OWLDatasetManager
 				
 				case "channelBB" : {
 					// get input/output ports
-					Individual port = indexPort.get("portB");
+					Individual port = ports.get("portB");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
@@ -663,8 +798,8 @@ public class OWLDatasetManager
 				
 				case "channelBF" : {
 					// get input/output ports
-					Individual input = indexPort.get("portB");
-					Individual output = indexPort.get("portF");
+					Individual input = ports.get("portB");
+					Individual output = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -679,8 +814,8 @@ public class OWLDatasetManager
 				
 				case "channelBL1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portB");
-					Individual output = indexPort.get("portL1");
+					Individual input = ports.get("portB");
+					Individual output = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -695,8 +830,8 @@ public class OWLDatasetManager
 				
 				case "channelBL2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portB");
-					Individual output = indexPort.get("portL2");
+					Individual input = ports.get("portB");
+					Individual output = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -711,8 +846,8 @@ public class OWLDatasetManager
 				
 				case "channelBL3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portB");
-					Individual output = indexPort.get("portL3");
+					Individual input = ports.get("portB");
+					Individual output = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -727,8 +862,8 @@ public class OWLDatasetManager
 				
 				case "channelBR1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portB");
-					Individual output = indexPort.get("portR1");
+					Individual input = ports.get("portB");
+					Individual output = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -743,8 +878,8 @@ public class OWLDatasetManager
 				
 				case "channelBR2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portB");
-					Individual output = indexPort.get("portR2");
+					Individual input = ports.get("portB");
+					Individual output = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -759,8 +894,8 @@ public class OWLDatasetManager
 				
 				case "channelBR3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portB");
-					Individual output = indexPort.get("portR3");
+					Individual input = ports.get("portB");
+					Individual output = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -775,8 +910,8 @@ public class OWLDatasetManager
 				
 				case "channelL1B" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL1");
-					Individual output = indexPort.get("portB");
+					Individual input = ports.get("portL1");
+					Individual output = ports.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -791,8 +926,8 @@ public class OWLDatasetManager
 				
 				case "channelL1F" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL1");
-					Individual output = indexPort.get("portF");
+					Individual input = ports.get("portL1");
+					Individual output = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -807,7 +942,7 @@ public class OWLDatasetManager
 				
 				case "channelL1L1" : {
 					// get input/output ports
-					Individual port = indexPort.get("portL1");
+					Individual port = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
@@ -822,8 +957,8 @@ public class OWLDatasetManager
 				
 				case "channelL1L2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL1");
-					Individual output = indexPort.get("portL2");
+					Individual input = ports.get("portL1");
+					Individual output = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -838,8 +973,8 @@ public class OWLDatasetManager
 				
 				case "channelL1L3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL1");
-					Individual output = indexPort.get("portL3");
+					Individual input = ports.get("portL1");
+					Individual output = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -854,8 +989,8 @@ public class OWLDatasetManager
 				
 				case "channelL1R1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL1");
-					Individual output = indexPort.get("portR1");
+					Individual input = ports.get("portL1");
+					Individual output = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -870,8 +1005,8 @@ public class OWLDatasetManager
 				
 				case "channelL1R2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL1");
-					Individual output = indexPort.get("portR2");
+					Individual input = ports.get("portL1");
+					Individual output = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -886,8 +1021,8 @@ public class OWLDatasetManager
 				
 				case "channelL1R3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL1");
-					Individual output = indexPort.get("portR3");
+					Individual input = ports.get("portL1");
+					Individual output = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -902,8 +1037,8 @@ public class OWLDatasetManager
 				
 				case "channelL2B" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL2");
-					Individual output = indexPort.get("portB");
+					Individual input = ports.get("portL2");
+					Individual output = ports.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -918,8 +1053,8 @@ public class OWLDatasetManager
 				
 				case "channelL2F" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL2");
-					Individual output = indexPort.get("portF");
+					Individual input = ports.get("portL2");
+					Individual output = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -934,8 +1069,8 @@ public class OWLDatasetManager
 				
 				case "channelL2L1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL2");
-					Individual output = indexPort.get("portL1");
+					Individual input = ports.get("portL2");
+					Individual output = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -950,7 +1085,7 @@ public class OWLDatasetManager
 				
 				case "channelL2L2" : {
 					// get input/output ports
-					Individual port = indexPort.get("portL2");
+					Individual port = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
@@ -965,8 +1100,8 @@ public class OWLDatasetManager
 				
 				case "channelL2L3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL2");
-					Individual output = indexPort.get("portL3");
+					Individual input = ports.get("portL2");
+					Individual output = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -981,8 +1116,8 @@ public class OWLDatasetManager
 				
 				case "channelL2R1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL2");
-					Individual output = indexPort.get("portR1");
+					Individual input = ports.get("portL2");
+					Individual output = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -997,8 +1132,8 @@ public class OWLDatasetManager
 				
 				case "channelL2R2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL2");
-					Individual output = indexPort.get("portR2");
+					Individual input = ports.get("portL2");
+					Individual output = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1013,8 +1148,8 @@ public class OWLDatasetManager
 				
 				case "channelL2R3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL2");
-					Individual output = indexPort.get("portR3");
+					Individual input = ports.get("portL2");
+					Individual output = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1029,8 +1164,8 @@ public class OWLDatasetManager
 				
 				case "channelL3B" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL3");
-					Individual output = indexPort.get("portB");
+					Individual input = ports.get("portL3");
+					Individual output = ports.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1045,8 +1180,8 @@ public class OWLDatasetManager
 				
 				case "channelL3F" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL3");
-					Individual output = indexPort.get("portF");
+					Individual input = ports.get("portL3");
+					Individual output = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1061,8 +1196,8 @@ public class OWLDatasetManager
 				
 				case "channelL3L1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL3");
-					Individual output = indexPort.get("portL1");
+					Individual input = ports.get("portL3");
+					Individual output = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1077,8 +1212,8 @@ public class OWLDatasetManager
 				
 				case "channelL3L2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL3");
-					Individual output = indexPort.get("portL2");
+					Individual input = ports.get("portL3");
+					Individual output = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1093,7 +1228,7 @@ public class OWLDatasetManager
 				
 				case "channelL3L3" : {
 					// get input/output ports
-					Individual port = indexPort.get("portL3");
+					Individual port = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
@@ -1108,8 +1243,8 @@ public class OWLDatasetManager
 				
 				case "channelL3R1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL3");
-					Individual output = indexPort.get("portR1");
+					Individual input = ports.get("portL3");
+					Individual output = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1124,8 +1259,8 @@ public class OWLDatasetManager
 				
 				case "channelL3R2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL3");
-					Individual output = indexPort.get("portR2");
+					Individual input = ports.get("portL3");
+					Individual output = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1140,8 +1275,8 @@ public class OWLDatasetManager
 				
 				case "channelL3R3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portL3");
-					Individual output = indexPort.get("portR3");
+					Individual input = ports.get("portL3");
+					Individual output = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1156,8 +1291,8 @@ public class OWLDatasetManager
 				
 				case "channelR1B" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR1");
-					Individual output = indexPort.get("portB");
+					Individual input = ports.get("portR1");
+					Individual output = ports.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1172,8 +1307,8 @@ public class OWLDatasetManager
 				
 				case "channelR1F" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR1");
-					Individual output = indexPort.get("portF");
+					Individual input = ports.get("portR1");
+					Individual output = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1188,8 +1323,8 @@ public class OWLDatasetManager
 				
 				case "channelR1L1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR1");
-					Individual output = indexPort.get("portL1");
+					Individual input = ports.get("portR1");
+					Individual output = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1204,8 +1339,8 @@ public class OWLDatasetManager
 				
 				case "channelR1L2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR1");
-					Individual output = indexPort.get("portL2");
+					Individual input = ports.get("portR1");
+					Individual output = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1220,8 +1355,8 @@ public class OWLDatasetManager
 				
 				case "channelR1L3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR1");
-					Individual output = indexPort.get("portL3");
+					Individual input = ports.get("portR1");
+					Individual output = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1236,7 +1371,7 @@ public class OWLDatasetManager
 				
 				case "channelR1R1" : {
 					// get input/output ports
-					Individual port = indexPort.get("portR1");
+					Individual port = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
@@ -1251,8 +1386,8 @@ public class OWLDatasetManager
 				
 				case "channelR1R2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR1");
-					Individual output = indexPort.get("portR2");
+					Individual input = ports.get("portR1");
+					Individual output = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1267,8 +1402,8 @@ public class OWLDatasetManager
 				
 				case "channelR1R3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR1");
-					Individual output = indexPort.get("portR3");
+					Individual input = ports.get("portR1");
+					Individual output = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1283,8 +1418,8 @@ public class OWLDatasetManager
 				
 				case "channelR2B" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR2");
-					Individual output = indexPort.get("portB");
+					Individual input = ports.get("portR2");
+					Individual output = ports.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1299,8 +1434,8 @@ public class OWLDatasetManager
 				
 				case "channelR2F" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR2");
-					Individual output = indexPort.get("portF");
+					Individual input = ports.get("portR2");
+					Individual output = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1315,8 +1450,8 @@ public class OWLDatasetManager
 				
 				case "channelR2L1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR2");
-					Individual output = indexPort.get("portL1");
+					Individual input = ports.get("portR2");
+					Individual output = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1331,8 +1466,8 @@ public class OWLDatasetManager
 				
 				case "channelR2L2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR2");
-					Individual output = indexPort.get("portL2");
+					Individual input = ports.get("portR2");
+					Individual output = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1347,8 +1482,8 @@ public class OWLDatasetManager
 				
 				case "channelR2L3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR2");
-					Individual output = indexPort.get("portL3");
+					Individual input = ports.get("portR2");
+					Individual output = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1363,8 +1498,8 @@ public class OWLDatasetManager
 				
 				case "channelR2R1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR2");
-					Individual output = indexPort.get("portR1");
+					Individual input = ports.get("portR2");
+					Individual output = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1379,7 +1514,7 @@ public class OWLDatasetManager
 				
 				case "channelR2R2" : {
 					// get input/output ports
-					Individual port = indexPort.get("portR2");
+					Individual port = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
@@ -1394,8 +1529,8 @@ public class OWLDatasetManager
 				
 				case "channelR2R3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR2");
-					Individual output = indexPort.get("portR3");
+					Individual input = ports.get("portR2");
+					Individual output = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1410,8 +1545,8 @@ public class OWLDatasetManager
 				
 				case "channelR3B" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR3");
-					Individual output = indexPort.get("portB");
+					Individual input = ports.get("portR3");
+					Individual output = ports.get("portB");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1426,8 +1561,8 @@ public class OWLDatasetManager
 				
 				case "channelR3F" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR3");
-					Individual output = indexPort.get("portF");
+					Individual input = ports.get("portR3");
+					Individual output = ports.get("portF");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1442,8 +1577,8 @@ public class OWLDatasetManager
 				
 				case "channelR3L1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR3");
-					Individual output = indexPort.get("portL1");
+					Individual input = ports.get("portR3");
+					Individual output = ports.get("portL1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1458,8 +1593,8 @@ public class OWLDatasetManager
 				
 				case "channelR3L2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR3");
-					Individual output = indexPort.get("portL2");
+					Individual input = ports.get("portR3");
+					Individual output = ports.get("portL2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1474,8 +1609,8 @@ public class OWLDatasetManager
 				
 				case "channelR3L3" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR3");
-					Individual output = indexPort.get("portL3");
+					Individual input = ports.get("portR3");
+					Individual output = ports.get("portL3");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1490,8 +1625,8 @@ public class OWLDatasetManager
 				
 				case "channelR3R1" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR3");
-					Individual output = indexPort.get("portR1");
+					Individual input = ports.get("portR3");
+					Individual output = ports.get("portR1");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1506,8 +1641,8 @@ public class OWLDatasetManager
 				
 				case "channelR3R2" : {
 					// get input/output ports
-					Individual input = indexPort.get("portR3");
-					Individual output = indexPort.get("portR2");
+					Individual input = ports.get("portR3");
+					Individual output = ports.get("portR2");
 					// set input/output ports
 					c.addProperty(ip, input);
 					if (this.debug) {
@@ -1522,7 +1657,7 @@ public class OWLDatasetManager
 				
 				case "channelR3R3" : {
 					// get input/output ports
-					Individual port = indexPort.get("portR3");
+					Individual port = ports.get("portR3");
 					// set input/output ports
 					c.addProperty(ip, port);
 					if (this.debug) {
