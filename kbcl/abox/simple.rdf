@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:kbcl="http://pst.istc.cnr.it/ontology/kbcl#">
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#neighborF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Neighbor" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#neighborB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Neighbor" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#portF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Port" />
+		
+		<kbcl:connect rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#neighborF" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#portB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Port" />
+		
+		<kbcl:connect rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#neighborB" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#conveyor0">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#ConveyorEngine" />
+	</rdf:Description>
+
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#cross1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#CrossTransferEngine" />
+	</rdf:Description>
+
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#cross2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#CrossTransferEngine" />
+	</rdf:Description>
+
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#cross3">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#CrossTransferEngine" />
+	</rdf:Description>
+
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#channelFB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Channel" />
+		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portF" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portB" />
+	</rdf:Description>
+
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#channelBF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Channel" />
+		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portB" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portF" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#t1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Module" />
+		
+		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#conveyor0" />
+		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#cross1" />
+		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#cross2" />
+		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#cross3" />
+		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portF" />
+		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portB" />
+		
+	</rdf:Description>
+	
+	
+</rdf:RDF>

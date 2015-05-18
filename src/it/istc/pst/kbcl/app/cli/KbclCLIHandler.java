@@ -3,7 +3,9 @@ package it.istc.pst.kbcl.app.cli;
 import it.istc.pst.kbcl.KbclManager;
 import it.istc.pst.kbcl.exception.KbclNoAgentSelectedException;
 import it.istc.pst.kbcl.exception.KbclRequestProcessingFailureException;
+import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
 import it.istc.pst.kbcl.model.Agent;
 import it.istc.pst.kbcl.model.AgentType;
 import it.istc.pst.kbcl.model.Element;
@@ -110,11 +112,19 @@ public class KbclCLIHandler implements Runnable
 					int index = Integer.parseInt(parameter);
 					// select element
 					OWLAgent agent = this.kbcl.getFocusedAgent();
-					Element el = agent.removeComponent(index);
-					System.out.println("Element " + el + " successfully removed!");
+					if (index >= agent.getComponents().size()) {
+						System.out.println("No component found at index " + index);
+					}
+					else {
+						Element el = agent.removeComponent(index);
+						System.out.println("Element " + el + " successfully removed!");
+					}
 				}
 				catch (KbclNoAgentSelectedException ex) {
 					System.out.println(ex.getMessage());
+				}
+				catch (NumberFormatException ex) {
+					System.out.println("Specify a valid component to remove\n- help= " +  KbclCLICommand.REMOVE.getHelp());
 				}
 			}
 			else {
@@ -227,20 +237,30 @@ public class KbclCLIHandler implements Runnable
 			// get parameter
 			String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase().trim() : null;
 			if (parameter != null) {
-				// parse index
-				int index = Integer.parseInt(parameter);
 				try 
 				{
-					// get agent
-					OWLAgent agent = this.kbcl.setFocus(index);
-					System.out.println("Selected agent:\n" + agent);
-					
-					// initialize mapping 
-					this.kbcl.initialize(agent);
+					// parse index
+					int index = Integer.parseInt(parameter);
+					if (index >= this.kbcl.getAgents().size()) {
+						System.out.println("No agent found at index " + index);
+					}
+					else {
+						// get agent
+						OWLAgent agent = this.kbcl.setFocus(index);
+						System.out.println("Selected agent:\n" + agent);
+						
+						// initialize mapping 
+						this.kbcl.initialize(agent);
+					}
 				}
-				catch (Exception ex) {
-					System.err.println(ex.getMessage());
-					ex.printStackTrace();
+				catch (NumberFormatException ex) {
+					System.err.println("Specify a valid agent to select\n- help= " + KbclCLICommand.SELECT.getHelp());
+				}
+				catch (RDFResourceNotFoundException | RDFPropertyNotFoundException ex) {
+					System.err.println("Error while retrieving KB's resources\n" + ex.getMessage());
+				}
+				catch (DDLPlanningModelInitializationFailureException ex) {
+					System.err.println("Error while building planning model\n" + ex.getMessage());
 				}
 			}
 			else {
@@ -253,19 +273,28 @@ public class KbclCLIHandler implements Runnable
 				// get index of selected functionality to plan with
 				String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase().trim() : null;
 				if (parameter != null) {
-					// get functionality index
-					int index = Integer.parseInt(parameter);
-					// get agent
-					OWLAgent agent = this.kbcl.getFocusedAgent();
-					// select functionality
-					OWLFunctionality func = agent.getFunctionalities().get(index);
-					System.out.println("Selected functionality\n" + func);
-					
 					try {
-						// request functionality
-						this.kbcl.planRequest(func);
-						// print resulting PDB
-						System.out.println(this.kbcl.getPDBDescription());
+						// get functionality index
+						int index = Integer.parseInt(parameter);
+						// get agent
+						OWLAgent agent = this.kbcl.getFocusedAgent();
+						// check index
+						if (index >= agent.getFunctionalities().size()) {
+							System.out.println("No functionality found at index " + index);
+						}
+						else {
+							// select functionality
+							OWLFunctionality func = agent.getFunctionalities().get(index);
+							System.out.println("Selected functionality\n" + func);
+							
+							// request functionality
+							this.kbcl.planRequest(func);
+							// print resulting PDB
+							System.out.println(this.kbcl.getPDBDescription());
+						}
+					}
+					catch (NumberFormatException ex) {
+						System.err.println("Specify a valid index for the selected functionality\n- help= " + KbclCLICommand.PLAN.getHelp());
 					}
 					catch (KbclRequestProcessingFailureException | RDFResourceNotFoundException ex) {
 						System.err.println(ex.getMessage());

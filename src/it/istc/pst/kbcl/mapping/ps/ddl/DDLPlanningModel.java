@@ -396,7 +396,10 @@ public class DDLPlanningModel extends PlanningModel
 		for (DDLComponent comp : comps) {
 			// print component's initial fact
 			pdl += "\tf" + factCounter + " <fact> ";
-			pdl+= comp.getName() + "." + comp.getTimeline() + "." + comp.getInitialValue().getValue() + "() AT [0, 0] [1, +INF] [1, +INF];\n";
+			pdl+= comp.getName() + "." + comp.getTimeline() + "." + comp.getInitialValue().getValue() + "() "
+					+ "AT [0, 0] "
+					+ (comp.isExternal() ? "[" + this.getHorizon() +"," + this.getHorizon() + "] " : "[1, +INF] ")  + ""
+					+ (comp.isExternal() ? "[" + this.getHorizon() + "," + this.getHorizon() + "];" : "[1, +INF];") + "\n";
 			factCounter++;
 		}
 		pdl += "\n";

@@ -1,25 +1,14 @@
 PROBLEM t1_Problem (DOMAIN t1_Domain)
 {
 	f0 <fact> t1_Channel.t1_Channel_timeline.Idle() AT [0, 0] [1, +INF] [1, +INF];
-	f1 <fact> t1_Port_R1.t1_Port_R1_timeline.Port_R1_Not_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f2 <fact> t1_Port_B.t1_Port_B_timeline.Port_B_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f1 <fact> t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down() AT [0, 0] [1, +INF] [1, +INF];
+	f2 <fact> t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Still() AT [0, 0] [1, +INF] [1, +INF];
 	f3 <fact> t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down() AT [0, 0] [1, +INF] [1, +INF];
-	f4 <fact> t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f5 <fact> t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Still() AT [0, 0] [1, +INF] [1, +INF];
-	f6 <fact> t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down() AT [0, 0] [1, +INF] [1, +INF];
-	f7 <fact> t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f8 <fact> t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Still() AT [0, 0] [1, +INF] [1, +INF];
-	f9 <fact> t1_Port_L2.t1_Port_L2_timeline.Port_L2_Not_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f10 <fact> t1_Port_F.t1_Port_F_timeline.Port_F_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f11 <fact> t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Still() AT [0, 0] [1, +INF] [1, +INF];
-	f12 <fact> t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f13 <fact> t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Still() AT [0, 0] [1, +INF] [1, +INF];
-	f14 <fact> t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f15 <fact> t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down() AT [0, 0] [1, +INF] [1, +INF];
-	f16 <fact> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f17 <fact> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_not_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f18 <fact> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available() AT [0, 0] [1, +INF] [1, +INF];
-	f19 <fact> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_not_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f4 <fact> t1_Port_B.t1_Port_B_timeline.Port_B_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f5 <fact> t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down() AT [0, 0] [1, +INF] [1, +INF];
+	f6 <fact> t1_Port_F.t1_Port_F_timeline.Port_F_Available() AT [0, 0] [1, +INF] [1, +INF];
+	f7 <fact> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available() AT [0, 0] [1000,1000] [1000,1000];
+	f8 <fact> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_not_Available() AT [0, 0] [1000,1000] [1000,1000];
 
 }
 
