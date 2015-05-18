@@ -10,7 +10,6 @@ import it.istc.pst.kbcl.mapping.model.rdf.RDFRestriction;
 import it.istc.pst.kbcl.mapping.model.rdf.RDFState;
 import it.istc.pst.kbcl.mapping.model.rdf.RDFTemporalConstraint;
 import it.istc.pst.kbcl.mapping.ps.KnowledgeProcessor;
-import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.model.FunctionalityType;
 
 import java.util.ArrayList;
@@ -283,7 +282,7 @@ public class DDLKnowledgeBaseProcessor implements KnowledgeProcessor<DDLFunction
 	 * @param func
 	 * @return
 	 */
-	public DDLValue getDDLValue(Functionality func) {
+	public DDLValue getDDLValue(RDFFunctionality func) {
 		if (this.functionalBuilt) {
 			// build functional components
 			this.extractFunctionalComponents();

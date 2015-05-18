@@ -107,6 +107,8 @@ public class OWLDatasetManager
 	private InfModel infModel;
 	private String label;
 	private boolean debug;
+	private long totalTime;
+	private long maxTime;
 	
 	private static OWLDatasetManager INSTANCE = null;
 
@@ -117,6 +119,8 @@ public class OWLDatasetManager
 	{
 		try 
 		{
+			// get start time
+			long start = System.currentTimeMillis();
 			// get property file
 			Properties prop = new Properties();
 			prop.load(new FileInputStream(new File("etc/dataManager.properties")));
@@ -143,8 +147,10 @@ public class OWLDatasetManager
 			Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(config);
 			
 			// initialize inference model
-//			this.infModel = ModelFactory.createInfModel(new GenericRuleReasoner(Rule.parseRules(RULES)), this.model);
 			this.infModel = ModelFactory.createInfModel(reasoner, this.model);
+			// set inference time
+			this.totalTime = System.currentTimeMillis() - start;
+			this.maxTime = this.totalTime;
 		}
 		catch (OWLClassNotFoundException ex) {
 			System.err.println(ex.getMessage());
@@ -162,6 +168,22 @@ public class OWLDatasetManager
 			INSTANCE = new OWLDatasetManager();
 		}
 		return INSTANCE;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getTotalInferenceTime() {
+		return this.totalTime;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaxInferenceTime() {
+		return this.maxTime;
 	}
 	
 	/**
@@ -196,9 +218,17 @@ public class OWLDatasetManager
 	public List<OWLClass> retrieveAllSubclasses(String className) 
 			throws OWLClassNotFoundException
 	{
+		// list of subclasses 
 		List<OWLClass> list = new ArrayList<>();
+		// start time
+		long start = System.currentTimeMillis();
 		// get class
 		OntClass c = this.model.getOntClass(NS + className);
+		// update inference time
+		long time = System.currentTimeMillis() - start;
+		this.totalTime += time;
+		// set max time
+		this.maxTime = Math.max(this.maxTime, time);
 		if (c == null) {
 			throw new OWLClassNotFoundException("[" + this.label + "]: Class not found \"" + NS + className + "\"");
 		}
@@ -227,7 +257,10 @@ public class OWLDatasetManager
 	public List<OWLInstance> retrieveAllInstancesRelatedByProperty(String subjectName, String propertyName) 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException
 	{
+		// list of individuals
 		List<OWLInstance> list = new ArrayList<>();
+		// get start time
+		long start = System.currentTimeMillis();
 		// get subject individual
 		Individual subject = this.model.getIndividual(NS + subjectName);
 		if (subject == null) {
@@ -244,6 +277,10 @@ public class OWLDatasetManager
 		
 		// list statements
 		Iterator<Statement> it = this.infModel.listStatements(subject, p, (RDFNode) null);
+		// update inference time
+		long time = System.currentTimeMillis() - start;
+		this.totalTime += time;
+		this.maxTime = Math.max(this.maxTime, time);
 		while (it.hasNext()) {
 			// get next statement
 			Statement s = it.next();
@@ -272,7 +309,9 @@ public class OWLDatasetManager
 	public List<OWLInstance> retrieveAllInstancesOfClass(String className) 
 			throws OWLClassNotFoundException
 	{
+		// list instances
 		List<OWLInstance> list = new ArrayList<>();
+		long start = System.currentTimeMillis();
 		// get class
 		OntClass c = this.model.getOntClass(NS + className);
 		if (c == null) {
@@ -281,6 +320,10 @@ public class OWLDatasetManager
 		
 		// get individuals
 		Iterator<? extends OntResource> it = c.listInstances(false);
+		// update inference time
+		long time = System.currentTimeMillis() - start;
+		this.totalTime += time;
+		this.maxTime = Math.max(this.maxTime, time);
 		while (it.hasNext()) {
 			// next individual
 			Individual i = it.next().asIndividual();
@@ -302,6 +345,8 @@ public class OWLDatasetManager
 	public void assertStatement(String subjectName, String propertyName, String objectName) 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException 
 	{
+		// start time
+		long start = System.currentTimeMillis();
 		// get subject individual
 		Resource subject = this.infModel.getResource(NS + subjectName);
 		if (subject == null) {
@@ -322,6 +367,10 @@ public class OWLDatasetManager
 		
 		// assert property directly into the inference model
 		subject.addProperty(p, object);
+		// update inference time
+		long time = System.currentTimeMillis() - start;
+		this.totalTime += time;
+		this.maxTime = Math.max(this.maxTime, time);
 	}
 	
 	/**
@@ -355,8 +404,14 @@ public class OWLDatasetManager
 		
 		// remove property
 		subject.removeProperty(p, object);
+		// start time
+		long start = System.currentTimeMillis();
 		// update inference model
 		this.infModel.rebind();
+		// update inference time
+		long time = System.currentTimeMillis() - start;
+		this.totalTime += time;
+		this.maxTime = Math.max(this.maxTime, time);
 	}
 	
 	/**

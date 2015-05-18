@@ -727,226 +727,457 @@ DOMAIN t1_Domain {
 
 		VALUE Channel_L2_R2() {
 
-			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			cd0 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
 			DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			cd1 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
 			DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd3 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
 
 		}
 
 		VALUE Channel_L3_L1() {
 
-			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			cd0 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd8;
+
+			cd9  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_B_R2() {
 
-			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			cd0  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R2_R1() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 
 		VALUE Channel_R2_L1() {
 
-			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			cd0 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd1 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_L2_B() {
 
-			cd0 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R2_F() {
 
-			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			cd0 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R3_L3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
 			DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
 			DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd2 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
 			DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd3 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
 
 		}
 
 		VALUE Channel_R2_B() {
 
-			cd0 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			cd0 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R1_R2() {
 
-			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			cd0 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 
 		VALUE Channel_B_L2() {
 
-			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			cd0 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd1 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_F_R1() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
 		VALUE Channel_B_L3() {
 
-			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
 		VALUE Channel_L3_L3() {
 
-			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
 		VALUE Channel_F_R3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			cd0 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
@@ -955,14 +1186,32 @@ DOMAIN t1_Domain {
 			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
@@ -971,59 +1220,131 @@ DOMAIN t1_Domain {
 			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd8;
+
+			cd9  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_L3_R2() {
 
-			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			cd0  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R1_L3() {
 
-			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_F_L1() {
 
-			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
@@ -1032,85 +1353,187 @@ DOMAIN t1_Domain {
 			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R3_L1() {
 
-			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_L2_R3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			cd0 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R1_B() {
 
-			cd0 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			cd0  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_L3_B() {
 
-			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
 		VALUE Channel_R2_R2() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
@@ -1119,124 +1542,250 @@ DOMAIN t1_Domain {
 			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 
 		VALUE Channel_R2_L2() {
 
-			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			cd0 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
 			DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			cd1 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
 			DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd3 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
 
 		}
 
 		VALUE Channel_L1_B() {
 
-			cd0 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			cd0  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_R3_F() {
 
-			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			cd0  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_B_B() {
 
-			cd0 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
 		VALUE Channel_R2_R3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			cd0 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 
 		VALUE Channel_F_F() {
 
-			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
 		VALUE Channel_B_R3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
 		VALUE Channel_R3_B() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
@@ -1254,53 +1803,122 @@ DOMAIN t1_Domain {
 			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
 			STARTS_DURING [0,+INF] [0,+INF]  cd3;
 
+			cd4 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			DURING [0,+INF] [0,+INF]  cd7;
+
 		}
 
 		VALUE Channel_F_L2() {
 
-			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			cd0  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd1 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_F_L3() {
 
-			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			cd0  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_F_R2() {
 
-			cd0 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			cd0  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
@@ -1309,27 +1927,57 @@ DOMAIN t1_Domain {
 			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 
 		VALUE Channel_R1_F() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
@@ -1338,27 +1986,57 @@ DOMAIN t1_Domain {
 			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 
 		VALUE Channel_L1_F() {
 
-			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			DURING [0,+INF] [0,+INF]  cd7;
 
 		}
 
@@ -1376,69 +2054,117 @@ DOMAIN t1_Domain {
 			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
 			STARTS_DURING [0,+INF] [0,+INF]  cd3;
 
+			cd4 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			DURING [0,+INF] [0,+INF]  cd7;
+
 		}
 
 		VALUE Channel_L2_R1() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_L1_R1() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
 			DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
 			DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd2 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
 			DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd3 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
 
 		}
 
 		VALUE Channel_R1_L1() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
 			DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			cd1 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
 			DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd2 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
 			DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd3 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
 
 		}
 
 		VALUE Channel_L3_R3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
 			DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
 			DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd2 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
 			DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd3 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
 			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd5;
 
 		}
 
@@ -1450,11 +2176,29 @@ DOMAIN t1_Domain {
 			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
@@ -1466,63 +2210,138 @@ DOMAIN t1_Domain {
 			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R1_R1() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
 		VALUE Channel_R3_L2() {
 
-			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_R3_R3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
 		VALUE Channel_B_L1() {
 
-			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			cd0 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			cd1 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
@@ -1534,82 +2353,190 @@ DOMAIN t1_Domain {
 			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_R2.t1_Port_R2_timeline.Port_R2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_L3_F() {
 
-			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			cd0 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_L1_R3() {
 
-			cd0 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			cd0 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_R3.t1_Port_R3_timeline.Port_R3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_L3_L2() {
 
-			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			cd0 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 
 		VALUE Channel_B_R1() {
 
-			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_L2_L2() {
 
-			cd0 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
@@ -1618,50 +2545,119 @@ DOMAIN t1_Domain {
 			cd0 t1_Port_R1.t1_Port_R1_timeline.Port_R1_Available();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			cd1 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
 
-			cd3  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			cd3  <?> t1_Neighbor_R.t1_Neighbor_R_timeline.Neighbor_R_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd7;
+
+			cd8 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
+			CONTAINS [0,+INF] [0,+INF]  cd9;
+
+			cd10 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd10;
 
 		}
 
 		VALUE Channel_L1_L1() {
 
-			cd0 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			DURING [0,+INF] [0,+INF]  cd0;
+			cd0 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Backward();
+			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+
+			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd4;
 
 		}
 
 		VALUE Channel_L1_L3() {
 
-			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L1.t1_Port_L1_timeline.Port_L1_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Conveyor_1.t1_Cross_Conveyor_1_timeline.Cross_Conveyor_1_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
+
+			cd9 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Down();
+			DURING [0,+INF] [0,+INF]  cd9;
 
 		}
 
 		VALUE Channel_L2_L3() {
 
-			cd0 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			cd0 t1_Cross_Conveyor_3.t1_Cross_Conveyor_3_timeline.Cross_Conveyor_3_Backward();
 			ENDS_DURING [0,+INF] [0,+INF]  cd0;
 
-			cd1 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			cd1 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Up();
+			ENDS_DURING [0,+INF] [0,+INF]  cd1;
 
-			cd2  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
-			DURING [0,+INF] [0,+INF]  cd2;
+			cd2 t1_Port_L3.t1_Port_L3_timeline.Port_L3_Available();
+			ENDS_DURING [0,+INF] [0,+INF]  cd2;
+
+			cd3 t1_Cross_Conveyor_2.t1_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Forward();
+			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+
+			cd4 t1_Port_L2.t1_Port_L2_timeline.Port_L2_Available();
+			STARTS_DURING [0,+INF] [0,+INF]  cd4;
+
+			cd5 t1_Cross_Transfer_2.t1_Cross_Transfer_2_timeline.Cross_2_Up();
+			STARTS_DURING [0,+INF] [0,+INF]  cd5;
+
+			cd6 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
+			CONTAINS [0,+INF] [0,+INF]  cd6;
+
+			cd7 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
+			CONTAINS [0,+INF] [0,+INF]  cd7;
+
+			cd8  <?> t1_Neighbor_L.t1_Neighbor_L_timeline.Neighbor_L_Available();
+			DURING [0,+INF] [0,+INF]  cd8;
 
 		}
 

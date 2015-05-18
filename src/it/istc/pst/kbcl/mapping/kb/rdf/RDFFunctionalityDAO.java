@@ -139,6 +139,19 @@ public class RDFFunctionalityDAO
 		// get agent types
 		return funcs;
 	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 * @throws RDFResourceNotFoundException
+	 */
+	public RDFFunctionality retrieveFunctionalityByName(String name) 
+			throws RDFResourceNotFoundException
+	{
+		// retrieve functionality
+		return this.retrieveFunctionalityById(RDFDatasetManager.NS + name);
+	}
 
 	/**
 	 * 

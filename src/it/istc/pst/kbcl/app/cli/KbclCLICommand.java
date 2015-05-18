@@ -28,6 +28,11 @@ public enum KbclCLICommand
 	/**
 	 * 
 	 */
+	STATS("stats", "print statistics about inference and mapping time", new String[] {}),
+	
+	/**
+	 * 
+	 */
 	REMOVE("remove", "remove an element to remove", new String[] {}),
 	
 	/**

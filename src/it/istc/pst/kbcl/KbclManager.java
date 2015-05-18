@@ -18,14 +18,15 @@ import it.istc.pst.kbcl.exception.KbclNoAgentSelectedException;
 import it.istc.pst.kbcl.exception.KbclRequestProcessingFailureException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionality;
 import it.istc.pst.kbcl.mapping.ps.ddl.DDLPlanningModel;
 import it.istc.pst.kbcl.mapping.ps.ddl.DDLValue;
 import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
 import it.istc.pst.kbcl.model.Event;
 import it.istc.pst.kbcl.model.EventObserver;
-import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.ontology.model.owl.OWLAgent;
 import it.istc.pst.kbcl.ontology.model.owl.OWLAgentType;
+import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionality;
 import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionalityType;
 import it.istc.pst.kbcl.ontology.model.owl.OWLKnowledgeBaseFacade;
 
@@ -40,6 +41,7 @@ import java.util.List;
  */
 public class KbclManager implements EventObserver
 {
+	// ontology
 	private String label;
 	private OWLKnowledgeBaseFacade facade;
 	private OWLAgent focus;
@@ -54,6 +56,11 @@ public class KbclManager implements EventObserver
 	private EPSLEmbeddedPlanner planner;
 	private EPSLLanguageFactory factory;
 	private EPSLLanguageQueryFactory queryFactory;
+	
+	private long time;
+	private long maxTime;
+	private long planningTime;
+	private long maxPlanningTime;
 	
 	/**
 	 * 
@@ -78,6 +85,38 @@ public class KbclManager implements EventObserver
 	{
 		// setup manager
 		this.setup(agent);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMappingTime() {
+		return this.time;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaxMappingTime() {
+		return this.maxTime;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getTotalInferenceTime() {
+		return this.facade.getTotalInferenceTime();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaxInferenceTime() {
+		return this.facade.getMaxInferenceTime();
 	}
 	
 	/**
@@ -118,6 +157,22 @@ public class KbclManager implements EventObserver
 	 */
 	public List<OWLFunctionalityType> getFunctionalityTypes() {
 		return this.facade.getFunctionalityTypes();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getTotalPlanningTime() {
+		return this.planningTime;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaximumPlanningTime() {
+		return this.maxPlanningTime;
 	}
 	
 	/**
@@ -168,12 +223,15 @@ public class KbclManager implements EventObserver
 	 * 
 	 * @param func
 	 * @throws KbclRequestProcessingFailureException
+	 * @throws RDFResourceNotFoundException
 	 */
-	public void planRequest(Functionality func) 
-			throws KbclRequestProcessingFailureException 
+	public void planRequest(OWLFunctionality func) 
+			throws KbclRequestProcessingFailureException, RDFResourceNotFoundException
 	{
+		// get functionality from model
+		RDFFunctionality f = this.model.getFunctionality(func);
 		// get the related DDLValue
-		DDLValue value = this.model.getDDLValue(func);
+		DDLValue value = this.model.getDDLValue(f);
 
 		// create timeline descriptor
 		EPSLTimelineDescriptor tl = this.factory.createTimelineDescriptor(value.getComponent().getName(), value.getComponent().getTimeline(), false);
@@ -213,6 +271,7 @@ public class KbclManager implements EventObserver
 			throw new EPSLPlannerInitializationException("Planner Not Initialized yet!");
 		}
 		
+		long start = System.currentTimeMillis();
 		try {
 			// run planner
 			this.planner.plan(goal);
@@ -220,6 +279,12 @@ public class KbclManager implements EventObserver
 		catch (InterruptedException ex) {
 			// interrupted
 			System.err.println(ex.getMessage());
+		}
+		finally {
+			// update planning time
+			long time = System.currentTimeMillis() - start;
+			this.planningTime += time;
+			this.maxPlanningTime = Math.max(this.maxPlanningTime, time);
 		}
 	}
 	
@@ -282,6 +347,8 @@ public class KbclManager implements EventObserver
 	private void setup(OWLAgent agent) 
 			throws RDFResourceNotFoundException, RDFPropertyNotFoundException, DDLPlanningModelInitializationFailureException 
 	{
+		// get start time
+		long start = System.currentTimeMillis();
 		try {
 			// create domain model
 			this.model = new DDLPlanningModel(agent, HORIZON);
@@ -298,6 +365,12 @@ public class KbclManager implements EventObserver
 		}
 		catch (FileNotFoundException | UnsupportedEncodingException ex) {
 			System.err.println(ex.getMessage());
+		}
+		finally {
+			// set mapping time
+			this.time = System.currentTimeMillis() - start;
+			// update max
+			this.maxTime = Math.max(this.maxTime, this.time);
 		}
 	}
 }

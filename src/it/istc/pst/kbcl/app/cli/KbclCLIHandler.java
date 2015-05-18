@@ -2,12 +2,15 @@ package it.istc.pst.kbcl.app.cli;
 
 import it.istc.pst.kbcl.KbclManager;
 import it.istc.pst.kbcl.exception.KbclNoAgentSelectedException;
+import it.istc.pst.kbcl.exception.KbclRequestProcessingFailureException;
+import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.kbcl.model.Agent;
 import it.istc.pst.kbcl.model.AgentType;
 import it.istc.pst.kbcl.model.Element;
 import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.model.FunctionalityType;
 import it.istc.pst.kbcl.ontology.model.owl.OWLAgent;
+import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionality;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,18 +23,12 @@ import java.io.InputStreamReader;
  */
 public class KbclCLIHandler implements Runnable
 {
-//	private RDFKnowledgeBaseFacade facade;
-//	private RDFAgent agent;
-//	private OWLKnowledgeBaseFacade facade;
-//	private OWLAgent agent;
 	private KbclManager kbcl;
 	
 	/**
 	 * 
 	 */
 	protected KbclCLIHandler() {
-//		this.facade = OWLKnowledgeBaseFacade.getSingletonInstance();
-//		this.agent = null;
 		this.kbcl = new KbclManager();
 	}
 	
@@ -216,13 +213,24 @@ public class KbclCLIHandler implements Runnable
 				System.out.println("- [" + KbclCLICommand.SHOW.getCmd() + "] - " + KbclCLICommand.SHOW.getHelp());
 			}
 		}
+		else if (cmd.equalsIgnoreCase(KbclCLICommand.STATS.getCmd())) {
+			// print statistics
+			System.out.println("KBCL Statistics:");
+			System.out.println("- Total inference time: " + this.kbcl.getTotalInferenceTime() + " msecs");
+			System.out.println("- Maximum time spent for inferring data after operation: " + this.kbcl.getMaxInferenceTime() + " msecs");
+			System.out.println("- Planning Domain synthesis time: " + this.kbcl.getMappingTime() + " msecs");
+			System.out.println("- Maximum Planning Domain synthesis time: " + this.kbcl.getMaxMappingTime() + " msecs");
+			System.out.println("- Total Planning time: " + this.kbcl.getTotalPlanningTime() + " msecs");
+			System.out.println("- Maximum Planning time for a request: " + this.kbcl.getMaximumPlanningTime() + " msecs");
+		}
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.SELECT.getCmd())) {
 			// get parameter
 			String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase().trim() : null;
 			if (parameter != null) {
 				// parse index
 				int index = Integer.parseInt(parameter);
-				try {
+				try 
+				{
 					// get agent
 					OWLAgent agent = this.kbcl.setFocus(index);
 					System.out.println("Selected agent:\n" + agent);
@@ -234,25 +242,6 @@ public class KbclCLIHandler implements Runnable
 					System.err.println(ex.getMessage());
 					ex.printStackTrace();
 				}
-				
-				
-				// FIXME start loop - get current time
-//				long time = System.currentTimeMillis();
-//				try 
-//				{
-//					// create KBCL manager and start loop
-//					this.manager = new KbclManager(this.agent, HORIZON);
-//					System.out.println("KBCL succesfully initialized!");
-//				}
-//				catch (KbclInitializationException | DDLPlanningModelInitializationFailureException ex) {
-//					System.err.println(ex.getMessage());
-//				}
-//				finally {
-//					// update time
-//					time = System.currentTimeMillis() - time;
-//					System.out.println("KBCL initialization done in " + time + " msec");
-//				}
-				
 			}
 			else {
 				System.out.println("Select agent index");
@@ -269,19 +258,18 @@ public class KbclCLIHandler implements Runnable
 					// get agent
 					OWLAgent agent = this.kbcl.getFocusedAgent();
 					// select functionality
-					Functionality func = agent.getFunctionalities().get(index);
+					OWLFunctionality func = agent.getFunctionalities().get(index);
 					System.out.println("Selected functionality\n" + func);
 					
-					// FIXME - COSTRUIRE MODELLO DI PLANNING
-//					try {
-//						// request functionality
-//						this.manager.planRequest(func);
-//						// print resulting PDB
-//						System.out.println(this.manager.getPDBDescription());
-//					}
-//					catch (KbclRequestProcessingFailureException ex) {
-//						System.err.println(ex.getMessage());
-//					}
+					try {
+						// request functionality
+						this.kbcl.planRequest(func);
+						// print resulting PDB
+						System.out.println(this.kbcl.getPDBDescription());
+					}
+					catch (KbclRequestProcessingFailureException | RDFResourceNotFoundException ex) {
+						System.err.println(ex.getMessage());
+					}
 				}
 				else {
 					System.out.println("Select agent's functionality index");

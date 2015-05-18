@@ -1,10 +1,12 @@
 package it.istc.pst.kbcl.mapping.ps.ddl;
 
+import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionality;
 import it.istc.pst.kbcl.mapping.model.rdf.RDFMappingKnowledgeBaseFacade;
 import it.istc.pst.kbcl.mapping.ps.PlanningModel;
 import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
-import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.ontology.model.owl.OWLAgent;
+import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionality;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -80,8 +82,21 @@ public class DDLPlanningModel extends PlanningModel
 	 * @param func
 	 * @return
 	 */
-	public DDLValue getDDLValue(Functionality func) {
+	public DDLValue getDDLValue(RDFFunctionality func) {
 		return this.processor.getDDLValue(func);
+	}
+
+	/**
+	 * 
+	 * @param func
+	 * @return
+	 * @throws RDFResourceNotFoundException
+	 */
+	public RDFFunctionality getFunctionality(OWLFunctionality func) 
+			throws RDFResourceNotFoundException 
+	{
+		// get functionality
+		return this.kb.getFunctionality(func);
 	}
 	
 	/**

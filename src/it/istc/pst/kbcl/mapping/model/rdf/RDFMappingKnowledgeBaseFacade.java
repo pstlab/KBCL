@@ -2,6 +2,7 @@ package it.istc.pst.kbcl.mapping.model.rdf;
 
 import it.istc.pst.kbcl.mapping.kb.rdf.RDFAgentDAO;
 import it.istc.pst.kbcl.mapping.kb.rdf.RDFDatasetManager;
+import it.istc.pst.kbcl.mapping.kb.rdf.RDFFunctionalityDAO;
 import it.istc.pst.kbcl.mapping.kb.rdf.RDFMappingKnowledgeBaseFactory;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
@@ -16,6 +17,7 @@ import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionality;
  */
 public class RDFMappingKnowledgeBaseFacade 
 {
+	private RDFDatasetManager dataset;
 	private RDFMappingKnowledgeBaseFactory factory;
 	private RDFAgent agent;
 
@@ -28,6 +30,8 @@ public class RDFMappingKnowledgeBaseFacade
 	public RDFMappingKnowledgeBaseFacade(OWLAgent data) 
 			throws RDFResourceNotFoundException, RDFPropertyNotFoundException
 	{
+		// get data set
+		this.dataset = RDFDatasetManager.getSingletonInstance();
 		// create factory
 		this.factory = new RDFMappingKnowledgeBaseFactory();
 		RDFAgentDAO dao = this.factory.createAgentDAO();
@@ -56,15 +60,29 @@ public class RDFMappingKnowledgeBaseFacade
 	public RDFAgent getAgent() {
 		return this.agent;
 	}
+	
+	/**
+	 * 
+	 * @param func
+	 * @return
+	 * @throws RDFResourceNotFoundException
+	 */
+	public RDFFunctionality getFunctionality(OWLFunctionality func) 
+			throws RDFResourceNotFoundException 
+	{
+		// get DAO
+		RDFFunctionalityDAO dao = this.factory.createFunctionalityDAO();
+		return dao.retrieveFunctionalityByName(func.getLabel());
+	}
 
 	/**
 	 * 
 	 */
 	public void close() {
+		if (this.dataset != null) {
+			this.dataset.close();
+		}
 		this.factory = null;
 		this.agent = null;
-		// close data manager
-		RDFDatasetManager dataset = RDFDatasetManager.getSingletonInstance();
-		dataset.close();
 	}
 }

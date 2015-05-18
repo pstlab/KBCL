@@ -47,6 +47,22 @@ public class OWLKnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
+	public long getTotalInferenceTime() {
+		return this.dataset.getTotalInferenceTime();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaxInferenceTime() {
+		return this.dataset.getMaxInferenceTime();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<OWLAgentType> getAgentTypes() {
 		if (this.agentTypes == null) {
 			try {
@@ -208,5 +224,5 @@ public class OWLKnowledgeBaseFacade
 		INSTANCE = null;
 		System.gc();
 	}
-
+	
 }
