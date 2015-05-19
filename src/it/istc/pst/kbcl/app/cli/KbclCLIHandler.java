@@ -3,6 +3,8 @@ package it.istc.pst.kbcl.app.cli;
 import it.istc.pst.kbcl.KbclManager;
 import it.istc.pst.kbcl.exception.KbclNoAgentSelectedException;
 import it.istc.pst.kbcl.exception.KbclRequestProcessingFailureException;
+import it.istc.pst.kbcl.inference.model.owl.OWLAgent;
+import it.istc.pst.kbcl.inference.model.owl.OWLFunctionality;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
@@ -11,8 +13,6 @@ import it.istc.pst.kbcl.model.AgentType;
 import it.istc.pst.kbcl.model.Element;
 import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.model.FunctionalityType;
-import it.istc.pst.kbcl.ontology.model.owl.OWLAgent;
-import it.istc.pst.kbcl.ontology.model.owl.OWLFunctionality;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -101,6 +101,24 @@ public class KbclCLIHandler implements Runnable
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.EXIT.getCmd())) {
 			// exit
 			exit = true;
+		}
+		// add command
+		else if (cmd.equalsIgnoreCase(KbclCLICommand.ADD.getCmd())) {
+			// get element label
+			String elementLabel = (splits != null && splits.length > 1) ? splits[1].trim() : null;
+			if (elementLabel != null) {
+				try {
+					// get agent
+					OWLAgent agent = this.kbcl.getFocusedAgent();
+					agent.addElement(elementLabel);
+				}
+				catch (KbclNoAgentSelectedException ex) {
+					System.out.println(ex.getLocalizedMessage());
+				}
+			}
+			else {
+				System.out.println("Specify a valid element to add to the module" );
+			}
 		}
 		// remove command
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.REMOVE.getCmd())) {
@@ -246,11 +264,10 @@ public class KbclCLIHandler implements Runnable
 					}
 					else {
 						// get agent
-						OWLAgent agent = this.kbcl.setFocus(index);
-						System.out.println("Selected agent:\n" + agent);
-						
+						OWLAgent agent = this.kbcl.getAgents().get(index); // this.kbcl.setFocus(index);
 						// initialize mapping 
-						this.kbcl.initialize(agent);
+						this.kbcl.setup(agent);
+						System.out.println("Selected agent:\n" + agent);
 					}
 				}
 				catch (NumberFormatException ex) {
@@ -288,7 +305,7 @@ public class KbclCLIHandler implements Runnable
 							System.out.println("Selected functionality\n" + func);
 							
 							// request functionality
-							this.kbcl.planRequest(func);
+							this.kbcl.plan(func);
 							// print resulting PDB
 							System.out.println(this.kbcl.getPDBDescription());
 						}

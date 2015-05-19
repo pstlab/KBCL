@@ -57,6 +57,20 @@
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portF" />
 	</rdf:Description>
 	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#channelFF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Channel" />
+		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portF" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portF" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#channelBB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Channel" />
+		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portB" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/ontology/kbcl/simple#portB" />
+	</rdf:Description>
+	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/ontology/kbcl/simple#t1">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/ontology/kbcl#Module" />
 		

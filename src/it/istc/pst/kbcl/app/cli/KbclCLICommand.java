@@ -33,6 +33,11 @@ public enum KbclCLICommand
 	/**
 	 * 
 	 */
+	ADD("add", "add an element to the current agent", new String[] {}),
+	
+	/**
+	 * 
+	 */
 	REMOVE("remove", "remove an element to remove", new String[] {}),
 	
 	/**

@@ -15,5 +15,10 @@ public enum Event
 	/**
 	 * 
 	 */
-	AGENT_ELEMENT_UDPATE_EVENT
+	AGENT_ELEMENT_UDPATE_EVENT,
+	
+	/**
+	 * 
+	 */
+	MAPPING_KNOWLEDGE_UPDATE_EVENT
 }

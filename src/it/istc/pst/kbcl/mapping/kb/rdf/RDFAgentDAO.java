@@ -143,6 +143,19 @@ public class RDFAgentDAO
 		// get agents
 		return agents;
 	}
+	
+	/**
+	 * 
+	 * @param label
+	 * @return
+	 * @throws RDFResourceNotFoundException
+	 */
+	public RDFAgent retrieveAgentByLabel(String label) 
+			throws RDFResourceNotFoundException 
+	{
+		// retrieve agent
+		return this.retrieveAgentById(RDFDatasetManager.NS + label);
+	}
 
 	/**
 	 * 

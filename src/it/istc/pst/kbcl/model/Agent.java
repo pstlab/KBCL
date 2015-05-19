@@ -1,16 +1,21 @@
 package it.istc.pst.kbcl.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public abstract class Agent 
+public abstract class Agent implements EventPublisher 
 {
 	protected String id;
 	protected String label;
 	protected AgentType type;
+	
+	protected List<EventObserver> observers;
 
 	/**
 	 * 
@@ -22,7 +27,7 @@ public abstract class Agent
 		this.id = id;
 		this.label = label;
 		this.type = type;
-		
+		this.observers = new ArrayList<>();
 	}
 	
 	/**
@@ -49,7 +54,26 @@ public abstract class Agent
 		return type;
 	}
 	
+	/**
+	 * 
+	 * @param observer
+	 */
+	@Override
+	public void subscribe(EventObserver observer) {
+		// add observer
+		this.observers.add(observer);
+	}
 	
+	/**
+	 * 
+	 */
+	@Override
+	public void unSubscribe(EventObserver observer) {
+		if (this.observers.contains(observer)) {
+			// remove 
+			this.observers.remove(observer);
+		}
+	}
 	
 	/**
 	 * 
