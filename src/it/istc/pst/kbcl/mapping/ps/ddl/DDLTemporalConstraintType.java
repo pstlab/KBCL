@@ -52,7 +52,7 @@ public enum DDLTemporalConstraintType {
 	 */
 	DURING("DURING");
 	
-	String label;
+	private String label;
 	
 	/**
 	 * 
@@ -60,6 +60,14 @@ public enum DDLTemporalConstraintType {
 	 */
 	private DDLTemporalConstraintType(String label) {
 		this.label = label;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getLabel() {
+		return this.label;
 	}
 	 
 	/**
@@ -128,7 +136,7 @@ public enum DDLTemporalConstraintType {
 	 */
 	@Override
 	public String toString() {
-		String description = this.name();
+		String description = this.label;
 		// check type
 		switch (this) {
 		

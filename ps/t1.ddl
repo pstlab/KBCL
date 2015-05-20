@@ -177,24 +177,24 @@ DOMAIN t1_Domain {
 	COMPONENT t1_Port_B { FLEXIBLE t1_Port_B_timeline(trex_internal_dispatch_asap) } : t1_Port_BType;
 	COMPONENT t1_Cross_Transfer_1 { FLEXIBLE t1_Cross_Transfer_1_timeline(trex_internal_dispatch_asap) } : t1_Cross_Transfer_1Type;
 	COMPONENT t1_Port_F { FLEXIBLE t1_Port_F_timeline(trex_internal_dispatch_asap) } : t1_Port_FType;
-	COMPONENT t1_Neighbor_F { FLEXIBLE t1_Neighbor_F_timeline(trex_internal_dispatch_asap) } : t1_Neighbor_FType;
-	COMPONENT t1_Neighbor_B { FLEXIBLE t1_Neighbor_B_timeline(trex_internal_dispatch_asap) } : t1_Neighbor_BType;
+	COMPONENT t1_Neighbor_F { FLEXIBLE t1_Neighbor_F_timeline(uncontrollable) } : t1_Neighbor_FType;
+	COMPONENT t1_Neighbor_B { FLEXIBLE t1_Neighbor_B_timeline(uncontrollable) } : t1_Neighbor_BType;
 
 	SYNCHRONIZE t1_Channel.t1_Channel_timeline {
 
 		VALUE Channel_B_F() {
 
 			cd0 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+			ENDS-DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+			ENDS-DURING [0,+INF] [0,+INF]  cd1;
 
 			cd2 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			STARTS-DURING [0,+INF] [0,+INF]  cd2;
 
 			cd3  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			STARTS-DURING [0,+INF] [0,+INF]  cd3;
 
 			cd4 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
 			DURING [0,+INF] [0,+INF]  cd4;
@@ -213,10 +213,10 @@ DOMAIN t1_Domain {
 		VALUE Channel_F_F() {
 
 			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
-			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+			ENDS-DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			STARTS-DURING [0,+INF] [0,+INF]  cd1;
 
 			cd2 t1_Cross_Transfer_1.t1_Cross_Transfer_1_timeline.Cross_1_Down();
 			DURING [0,+INF] [0,+INF]  cd2;
@@ -232,16 +232,16 @@ DOMAIN t1_Domain {
 		VALUE Channel_F_B() {
 
 			cd0 t1_Port_B.t1_Port_B_timeline.Port_B_Available();
-			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+			ENDS-DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1  <?> t1_Neighbor_B.t1_Neighbor_B_timeline.Neighbor_B_Available();
-			ENDS_DURING [0,+INF] [0,+INF]  cd1;
+			ENDS-DURING [0,+INF] [0,+INF]  cd1;
 
 			cd2 t1_Port_F.t1_Port_F_timeline.Port_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd2;
+			STARTS-DURING [0,+INF] [0,+INF]  cd2;
 
 			cd3  <?> t1_Neighbor_F.t1_Neighbor_F_timeline.Neighbor_F_Available();
-			STARTS_DURING [0,+INF] [0,+INF]  cd3;
+			STARTS-DURING [0,+INF] [0,+INF]  cd3;
 
 			cd4 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
 			DURING [0,+INF] [0,+INF]  cd4;
@@ -260,10 +260,10 @@ DOMAIN t1_Domain {
 		VALUE Channel_B_B() {
 
 			cd0 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Backward();
-			ENDS_DURING [0,+INF] [0,+INF]  cd0;
+			ENDS-DURING [0,+INF] [0,+INF]  cd0;
 
 			cd1 t1_Main_Conveyor.t1_Main_Conveyor_timeline.Main_Conveyor_Forward();
-			STARTS_DURING [0,+INF] [0,+INF]  cd1;
+			STARTS-DURING [0,+INF] [0,+INF]  cd1;
 
 			cd2 t1_Cross_Transfer_3.t1_Cross_Transfer_3_timeline.Cross_3_Down();
 			DURING [0,+INF] [0,+INF]  cd2;

@@ -126,11 +126,12 @@ public abstract class DDLComponent
 		DDLValue val = null;
 		// check component name
 		for (DDLValue v : this.values.keySet()) {
-			// check value
+			// check value 
+			// FIXME - RENDERE PARAMETRICO
 			if (v.getValue().contains("Still") ||
 					v.getValue().contains("Idle") ||
 					v.getValue().contains("Down") || 
-					v.getValue().contains("Available")) 
+					(v.getValue().contains("Available") && !v.getValue().contains("not"))) 
 			{
 				// found
 				val = v;

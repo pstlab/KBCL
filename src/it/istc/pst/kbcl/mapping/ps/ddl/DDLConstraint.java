@@ -52,7 +52,7 @@ public class DDLConstraint
 	 */
 	@Override
 	public int hashCode() {
-		return this.reference.hashCode() + this.target.hashCode() + this.constraint.label.hashCode();
+		return this.reference.hashCode() + this.target.hashCode() + this.constraint.getLabel().hashCode();
 	}
 	
 	/**

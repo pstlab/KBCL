@@ -460,7 +460,12 @@ public class DDLPlanningManager extends PlanningManager implements EventObserver
 		
 		// print component instances
 		for (DDLComponent comp : comps) {
-			ddl += "\tCOMPONENT " + comp.getName() + " { FLEXIBLE " + comp.getTimeline() + "(trex_internal_dispatch_asap) } : " + comp.getName() + "Type;\n";
+			ddl += "\tCOMPONENT " + comp.getName() + " "
+					+ "{ "
+					+ "FLEXIBLE " + comp.getTimeline() + "(" + (comp.isExternal() ? "uncontrollable" 
+							:  "trex_internal_dispatch_asap") + 
+							") "
+					+ "} : " + comp.getName() + "Type;\n";
 		}
 		ddl += "\n";
 		return ddl;
@@ -584,8 +589,8 @@ public class DDLPlanningManager extends PlanningManager implements EventObserver
 			pdl += "\tf" + factCounter + " <fact> ";
 			pdl+= comp.getName() + "." + comp.getTimeline() + "." + comp.getInitialValue().getValue() + "() "
 					+ "AT [0, 0] "
-					+ (comp.isExternal() ? "[" + this.getHorizon() +"," + this.getHorizon() + "] " : "[1, +INF] ")  + ""
-					+ (comp.isExternal() ? "[" + this.getHorizon() + "," + this.getHorizon() + "];" : "[1, +INF];") + "\n";
+					+ (comp.isExternal() ? "[" + this.horizon +"," + this.horizon + "] " : "[1, " + this.horizon +"] ")  + ""
+					+ (comp.isExternal() ? "[" + this.horizon + "," + this.horizon + "];" : "[1, " + this.horizon + "];") + "\n";
 			factCounter++;
 		}
 		pdl += "\n";
