@@ -24,7 +24,7 @@ import com.hp.hpl.jena.query.QuerySolution;
  */
 public class RDFComponentDAO 
 {
-	private RDFDatasetManager manager;
+	private RDFDatasetManager dataset;
 	private RDFModelFactory factory;
 	
 	/**
@@ -32,7 +32,7 @@ public class RDFComponentDAO
 	 */
 	protected RDFComponentDAO() {
 		// get data set reference
-		this.manager = RDFDatasetManager.getSingletonInstance();
+		this.dataset = RDFDatasetManager.getSingletonInstance();
 		this.factory = RDFModelFactory.getSingletonInstance();
 	}
 	
@@ -47,15 +47,15 @@ public class RDFComponentDAO
 		// prepare query
 		String queryString = "SELECT ?comp ?label "
 				+ "WHERE {"
-				+ "	?type <" + RDFDatasetManager.NS_RDFS + "subClassOf>+ <" + RDFDatasetManager.NS + "component> . "
+				+ "	?type <" + RDFDatasetManager.NS_RDFS + "subClassOf>+ <" + this.dataset.NS + "component> . "
 				+ " ?comp a ?type . "
-				+ " ?comp <" + RDFDatasetManager.NS + "ID> ?label  ."
+				+ " ?comp <" + this.dataset.NS + "ID> ?label  ."
 				+ "}";
 		
 		// execute query
 		Query query = QueryFactory.create(queryString);
 		// execute query and build result
-		QueryExecution exec = QueryExecutionFactory.create(query, this.manager.model);
+		QueryExecution exec = QueryExecutionFactory.create(query, this.dataset.model);
 		Iterator<QuerySolution> it = exec.execSelect();
 		while (it.hasNext()) {
 			// get next solution
@@ -91,15 +91,15 @@ public class RDFComponentDAO
 		String queryString = "SELECT ?label "
 				+ "WHERE {"
 				+ " <" + id + "> a ?t . "
-				+ " ?t <" + RDFDatasetManager.NS_RDFS +"subClassOf>* <" + RDFDatasetManager.NS + "component> . "
-				+ " <" + id + "> <" + RDFDatasetManager.NS + "ID> ?label . "
+				+ " ?t <" + RDFDatasetManager.NS_RDFS +"subClassOf>* <" + this.dataset.NS + "component> . "
+				+ " <" + id + "> <" + this.dataset.NS + "ID> ?label . "
 				
 				+ "}";
 		
 		// execute query
 		Query query = QueryFactory.create(queryString);
 		// execute query and build result
-		QueryExecution exec = QueryExecutionFactory.create(query, this.manager.model);
+		QueryExecution exec = QueryExecutionFactory.create(query, this.dataset.model);
 		Iterator<QuerySolution> it = exec.execSelect();
 		while (it.hasNext()) {
 			// next solution
@@ -135,14 +135,14 @@ public class RDFComponentDAO
 		String queryString = "SELECT ?label "
 				+ "WHERE {"
 				+ " <" + id + "> a ?t . "
-				+ " ?t <" + RDFDatasetManager.NS_RDFS + "subClassOf>* <" + RDFDatasetManager.NS+ "neighbor> . "
-				+ " <" + id + "> <" + RDFDatasetManager.NS + "ID> ?label . "
+				+ " ?t <" + RDFDatasetManager.NS_RDFS + "subClassOf>* <" + this.dataset.NS+ "neighbor> . "
+				+ " <" + id + "> <" + this.dataset.NS + "ID> ?label . "
 				+ "}";
 		
 		// execute query
 		Query query = QueryFactory.create(queryString);
 		// execute query and build result
-		QueryExecution exec = QueryExecutionFactory.create(query, this.manager.model);
+		QueryExecution exec = QueryExecutionFactory.create(query, this.dataset.model);
 		Iterator<QuerySolution> it = exec.execSelect();
 		while (it.hasNext()) {
 			// next solution
@@ -174,16 +174,16 @@ public class RDFComponentDAO
 		// prepare query
 		String queryString = "SELECT ?state ?label ?dmin ?dmax "
 				+ "WHERE { "
-				+ " <" + comp.getId() + "> <" + RDFDatasetManager.NS + "hasState> ?state . "
-				+ " ?state <" + RDFDatasetManager.NS + "ID> ?label . "
-				+ " ?state <" + RDFDatasetManager.NS +"minDuration> ?dmin . "
-				+ " ?state <" + RDFDatasetManager.NS + "maxDuration> ?dmax . "
+				+ " <" + comp.getId() + "> <" + this.dataset.NS + "hasState> ?state . "
+				+ " ?state <" + this.dataset.NS + "ID> ?label . "
+				+ " ?state <" + this.dataset.NS +"minDuration> ?dmin . "
+				+ " ?state <" + this.dataset.NS + "maxDuration> ?dmax . "
 				+ "}";
 		
 		// execute query
 		Query query = QueryFactory.create(queryString);
 		// execute query and build result
-		QueryExecution exec = QueryExecutionFactory.create(query, this.manager.model);
+		QueryExecution exec = QueryExecutionFactory.create(query, this.dataset.model);
 		Iterator<QuerySolution> it = exec.execSelect();
 		while (it.hasNext()) {
 			// get next solution
@@ -219,15 +219,15 @@ public class RDFComponentDAO
 		String queryString = "SELECT ?c ?l "
 				+ "WHERE { "
 				+ " <" + neighbor.getId() + "> a ?type . "
-				+ " ?type <" + RDFDatasetManager.NS_RDFS + "subClassOf>* <" + RDFDatasetManager.NS + "neighbor> . "
-				+ " <" + neighbor.getId() + "> <" + RDFDatasetManager.NS + "connectedBy> ?c . "
-				+ " ?c <" + RDFDatasetManager.NS + "ID> ?l ."
+				+ " ?type <" + RDFDatasetManager.NS_RDFS + "subClassOf>* <" + this.dataset.NS + "neighbor> . "
+				+ " <" + neighbor.getId() + "> <" + this.dataset.NS + "connectedBy> ?c . "
+				+ " ?c <" + this.dataset.NS + "ID> ?l ."
 				+ "}";
 		
 		// execute query
 		Query query = QueryFactory.create(queryString);
 		// execute query and build result
-		QueryExecution exec = QueryExecutionFactory.create(query, this.manager.model);
+		QueryExecution exec = QueryExecutionFactory.create(query, this.dataset.model);
 		Iterator<QuerySolution> it = exec.execSelect();
 		while (it.hasNext()) {
 			// get next solution
@@ -256,14 +256,14 @@ public class RDFComponentDAO
 		// prepare query
 		String queryString = "SELECT ?restriction  "
 				+ "WHERE { "
-				+ " <" + comp.getId() + "> <" + RDFDatasetManager.NS + "hasRestriction> ?restriction . "
-				+ " ?restriction a <" + RDFDatasetManager.NS + "restriction> . "
+				+ " <" + comp.getId() + "> <" + this.dataset.NS + "hasRestriction> ?restriction . "
+				+ " ?restriction a <" + this.dataset.NS + "restriction> . "
 				+ "}";
 		
 		// execute query
 		Query query = QueryFactory.create(queryString);
 		// execute query and build result
-		QueryExecution exec = QueryExecutionFactory.create(query, this.manager.model);
+		QueryExecution exec = QueryExecutionFactory.create(query, this.dataset.model);
 		Iterator<QuerySolution> it = exec.execSelect();
 		while (it.hasNext()) {
 			// get next solution
@@ -295,16 +295,16 @@ public class RDFComponentDAO
 		// prepare query
 		String queryString = "SELECT ?state ?label ?dmin ?dmax "
 				+ "WHERE { "
-				+ " <" + restriction.getId() + "> <" + RDFDatasetManager.NS + "hasState> ?state . "
-				+ " ?state <" + RDFDatasetManager.NS + "ID> ?label . "
-				+ " ?state <" + RDFDatasetManager.NS + "minDuration> ?dmin . "
-				+ " ?state <" + RDFDatasetManager.NS + "maxDuration> ?dmax . "
+				+ " <" + restriction.getId() + "> <" + this.dataset.NS + "hasState> ?state . "
+				+ " ?state <" + this.dataset.NS + "ID> ?label . "
+				+ " ?state <" + this.dataset.NS + "minDuration> ?dmin . "
+				+ " ?state <" + this.dataset.NS + "maxDuration> ?dmax . "
 				+ "}";
 		
 		// execute query
 		Query query = QueryFactory.create(queryString);
 		// execute query and build result
-		QueryExecution exec = QueryExecutionFactory.create(query, this.manager.model);
+		QueryExecution exec = QueryExecutionFactory.create(query, this.dataset.model);
 		Iterator<QuerySolution> it = exec.execSelect();
 		while (it.hasNext()) {
 			// get next solution

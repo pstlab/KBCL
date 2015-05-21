@@ -55,8 +55,8 @@ public class RDFAgentDAO
 		// prepare query
 		String queryString = "SELECT ?type ?label "
 				+ "WHERE {"
-				+ " ?type <" + RDFDatasetManager.NS + "subClassOf>+ <" + RDFDatasetManager.NS + "agent> ."
-				+ " ?type <" + RDFDatasetManager.NS + "label> ?label ."
+				+ " ?type <" + this.dataset.NS + "subClassOf>+ <" + this.dataset.NS + "agent> ."
+				+ " ?type <" + this.dataset.NS + "label> ?label ."
 				+ "}";
 		
 		// execute query
@@ -117,7 +117,7 @@ public class RDFAgentDAO
 		String queryString = "SELECT ?agent ?label "
 				+ "WHERE {"
 				+ " ?agent a <" + type.getId() + "> ."
-				+ " ?agent <" + RDFDatasetManager.NS + "ID> ?label ."
+				+ " ?agent <" + this.dataset.NS + "ID> ?label ."
 				+ "} ";
 			
 		// execute query
@@ -154,7 +154,7 @@ public class RDFAgentDAO
 			throws RDFResourceNotFoundException 
 	{
 		// retrieve agent
-		return this.retrieveAgentById(RDFDatasetManager.NS + label);
+		return this.retrieveAgentById(this.dataset.NS + label);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class RDFAgentDAO
 		// prepare query
 		String queryString = "SELECT ?label ?type ?typeLabel "
 				+ "WHERE {"
-				+ " <" + id + "> <" + RDFDatasetManager.NS + "ID> ?label ."
+				+ " <" + id + "> <" + this.dataset.NS + "ID> ?label ."
 				+ " <" + id + "> a ?type . "
 				+ " ?type <" + RDFDatasetManager.NS_RDFS + "label> ?typeLabel ." 
 				+ "} ";
@@ -221,10 +221,10 @@ public class RDFAgentDAO
 		// prepare query
 		String queryString = "SELECT ?func ?label ?dmin ?dmax ?type ?typeLabel "
 				+ "WHERE { "
-				+ " <" + agent.getId() +  "> <" + RDFDatasetManager.NS + "hasFunctionality> ?func . "
-				+ " ?func <" + RDFDatasetManager.NS + "ID> ?label . "
-				+ " ?func <" + RDFDatasetManager.NS + "minDuration> ?dmin . "
-				+ " ?func <" + RDFDatasetManager.NS + "maxDuration> ?dmax . "
+				+ " <" + agent.getId() +  "> <" + this.dataset.NS + "hasFunctionality> ?func . "
+				+ " ?func <" + this.dataset.NS + "ID> ?label . "
+				+ " ?func <" + this.dataset.NS + "minDuration> ?dmin . "
+				+ " ?func <" + this.dataset.NS + "maxDuration> ?dmax . "
 				+ " ?func a ?type . "
 				+ " ?type <" + RDFDatasetManager.NS_RDFS + "label> ?typeLabel . "
 				+ "}";
@@ -276,8 +276,8 @@ public class RDFAgentDAO
 		// prepare query
 		String queryString = "SELECT ?c ?label "
 				+ "WHERE { "
-				+ " <" + agent.getId() + "> <" + RDFDatasetManager.NS + "hasComponent> ?c . "
-				+ " ?c <" + RDFDatasetManager.NS + "ID> ?label ."
+				+ " <" + agent.getId() + "> <" + this.dataset.NS + "hasComponent> ?c . "
+				+ " ?c <" + this.dataset.NS + "ID> ?label ."
 				+ "}";
 		
 		// execute query
@@ -315,8 +315,8 @@ public class RDFAgentDAO
 		// prepare query
 		String queryString = "SELECT ?n ?l "
 				+ "WHERE { "
-				+ " <" + agent.getId() + "> <" + RDFDatasetManager.NS + "hasNeighbor> ?n . "
-				+ " ?n <" + RDFDatasetManager.NS + "ID> ?l ."
+				+ " <" + agent.getId() + "> <" + this.dataset.NS + "hasNeighbor> ?n . "
+				+ " ?n <" + this.dataset.NS + "ID> ?l ."
 				+ "}";
 		
 		// execute query

@@ -56,6 +56,43 @@ public abstract class Agent implements EventPublisher
 	
 	/**
 	 * 
+	 * @return
+	 */
+	public abstract List<Functionality> getFunctionalities();
+	
+	/**
+	 * 
+	 * @param label
+	 * @return
+	 */
+	public abstract Functionality getFunctionality(String label);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract List<Element> getComponents();
+	
+	/**
+	 * 
+	 * @param label
+	 */
+	public abstract void addComponent(String label);
+	
+	/**
+	 * 
+	 * @param label
+	 */
+	public abstract boolean removeComponent(String label);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract List<Element> getNeighbors();
+	
+	/**
+	 * 
 	 * @param observer
 	 */
 	@Override

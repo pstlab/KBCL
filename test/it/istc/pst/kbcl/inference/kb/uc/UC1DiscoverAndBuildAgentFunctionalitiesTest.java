@@ -61,7 +61,7 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 		System.out.println();
 
 		// get agent functionalities
-		Map<RDFFunctionalityType, List<RDFFunctionality>> functionalities = agent.getFunctionalities();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> functionalities = agent.getFunctionalityIndex();
 		Assert.assertNotNull(functionalities);
 		Assert.assertTrue(functionalities.size() > 0);
 		for (FunctionalityType type : functionalities.keySet()) {
@@ -86,7 +86,7 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 		// get agents
 		RDFAgent agent = this.facade.getAgent();
 		// get agent functionalities
-		Map<RDFFunctionalityType, List<RDFFunctionality>> type2funcs = agent.getFunctionalities();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> type2funcs = agent.getFunctionalityIndex();
 		Assert.assertNotNull(type2funcs);
 		Assert.assertTrue(type2funcs.size() > 0);
 		for (FunctionalityType type : type2funcs.keySet()) 
@@ -146,7 +146,7 @@ public class UC1DiscoverAndBuildAgentFunctionalitiesTest
 		System.out.println("..... Agent's Synchronizations");
 		
 		// get agent's functionalities
-		Map<RDFFunctionalityType, List<RDFFunctionality>> type2funcs = agent.getFunctionalities();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> type2funcs = agent.getFunctionalityIndex();
 		for (RDFFunctionalityType type : type2funcs.keySet()) 
 		{
 			// get functionalities by type

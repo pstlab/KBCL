@@ -1,5 +1,10 @@
 package it.istc.pst.kbcl.mapping.kb.rdf;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 
@@ -22,25 +27,47 @@ public class RDFDatasetManager
 	protected static final String CONSTANT_RDF_PROPERTY_LABEL_HAS_NEIGHBOR = "hasNeighbor";
 	
 	protected static final String NS_RDFS = "http://www.w3.org/2000/01/rdf-schema#";
-	private static final String NS_URL = "http://pst.istc.cnr.it/kbcl/ps/mapping";
-	protected static final String NS = NS_URL + "#";
-
-	private static final String DATASET = "kbcl/mapping.rdf";
+	
+	private final String DATASET;
+	private final String MAPPING_URL;
+	protected final String NS;
+	
 	protected OntModel model;
 	
 	private String label;
+
 	private static RDFDatasetManager INSTANCE = null;
+	public static RDFDatasetManager getSingletonInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new RDFDatasetManager();
+		}
+		return INSTANCE;
+	}
 	
 	/**
 	 * 
 	 */
-	private RDFDatasetManager() {
-		// set label
-		this.label = this.getClass().getSimpleName();
-		// create a default model
-		this.model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
-		this.model.getDocumentManager().addAltEntry(NS_URL, "file:" + DATASET);
-		this.model.read(NS_URL, "RDF/XML");
+	private RDFDatasetManager() 
+	{
+		try 
+		{
+			Properties prop = new Properties();
+			prop.load(new FileInputStream(new File("etc/psModuleCfg.properties")));
+			// get knowledge base path
+			this.DATASET = prop.getProperty("mapping_kb");
+			this.MAPPING_URL = prop.getProperty("mapping_url");
+			this.NS = this.MAPPING_URL + "#";
+		
+			// set label
+			this.label = this.getClass().getSimpleName();
+			// create a default model
+			this.model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
+			this.model.getDocumentManager().addAltEntry(this.MAPPING_URL, "file:" + DATASET);
+			this.model.read(this.MAPPING_URL, "RDF/XML");
+		}
+		catch (IOException ex) {
+			throw new RuntimeException(ex.getLocalizedMessage());
+		}
 	}
 	
 	/**
@@ -55,17 +82,17 @@ public class RDFDatasetManager
 			throws RDFResourceNotFoundException, RDFPropertyNotFoundException
 	{
 		// get resource
-		Resource s = this.model.getResource(NS + subjectName);
+		Resource s = this.model.getResource(this.NS + subjectName);
 		if (s == null) {
 			throw new RDFResourceNotFoundException("[" + this.label + "]: RDF resource " + subjectName + " not found");
 		}
 		// get property
-		Property p = this.model.getProperty(NS + propertyName);
+		Property p = this.model.getProperty(this.NS + propertyName);
 		if (p == null) {
 			throw new RDFPropertyNotFoundException("[" + this.label + "]: RDF property " + propertyName + " not found");
 		}
 		// get object
-		Resource o = this.model.getResource(NS + objectName);
+		Resource o = this.model.getResource(this.NS + objectName);
 		if (o == null) {
 			throw new RDFResourceNotFoundException("[" + this.label + "]: RDF resource " + objectName + " not found");
 		}
@@ -84,13 +111,13 @@ public class RDFDatasetManager
 			throws RDFResourceNotFoundException
 	{
 		// get resource type
-		Resource type = this.model.getResource(NS + typeName);
+		Resource type = this.model.getResource(this.NS + typeName);
 		if (type == null) {
 			throw new RDFResourceNotFoundException("[" + this.label + "]: RDF resource " + typeName + " not found");
 		}
 		
 		// insert resource
-		Resource res = this.model.createResource(NS + resName, type);
+		Resource res = this.model.createResource(this.NS + resName, type);
 		return res;
 	}
 	
@@ -103,7 +130,7 @@ public class RDFDatasetManager
 	public Resource retrieveResource(String name) 
 			throws RDFResourceNotFoundException 
 	{
-		Resource res = this.model.getResource(NS + name);
+		Resource res = this.model.getResource(this.NS + name);
 		if (res == null) {
 			throw new RDFResourceNotFoundException("[" + this.label + "]: RDF resource " + name + " not found");
 		}
@@ -120,16 +147,5 @@ public class RDFDatasetManager
 			this.model = null;
 		}
 		INSTANCE = null;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static RDFDatasetManager getSingletonInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new RDFDatasetManager();
-		}
-		return INSTANCE;
 	}
 }

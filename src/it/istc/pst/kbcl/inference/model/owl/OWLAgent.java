@@ -5,11 +5,15 @@ import it.istc.pst.kbcl.inference.kb.owl.OWLInstance;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLIndividualNotFoundException;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLPropertyNotFoundException;
 import it.istc.pst.kbcl.model.Agent;
+import it.istc.pst.kbcl.model.Element;
 import it.istc.pst.kbcl.model.Event;
 import it.istc.pst.kbcl.model.EventObserver;
+import it.istc.pst.kbcl.model.Functionality;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -18,11 +22,11 @@ import java.util.List;
  */
 public class OWLAgent extends Agent implements EventObserver
 {
-	private List<OWLFunctionality> functionalities;
-	private List<OWLElement> crossTransfers;
-	private List<OWLElement> conveyors;
-	private List<OWLPort> ports;
-	private List<OWLElement> neighbors;
+	private Map<String, OWLFunctionality> functionalities;
+	private Map<String, OWLElement> crossTransfers;
+	private Map<String, OWLElement> conveyors;
+	private Map<String, OWLPort> ports;
+	private Map<String, OWLElement> neighbors;
 	
 	private OWLDatasetManager dataset;
 	
@@ -50,8 +54,9 @@ public class OWLAgent extends Agent implements EventObserver
 	 * 
 	 * @return
 	 */
-	public List<OWLElement> getComponents() {
-		List<OWLElement> list = new ArrayList<>();
+	@Override
+	public List<Element> getComponents() {
+		List<Element> list = new ArrayList<>();
 		list.addAll(this.getConveyors());
 		list.addAll(this.getCrossTransfers());
 		list.addAll(this.getPorts());
@@ -62,7 +67,8 @@ public class OWLAgent extends Agent implements EventObserver
 	 * 
 	 * @return
 	 */
-	public List<OWLFunctionality> getFunctionalities() {
+	@Override
+	public List<Functionality> getFunctionalities() {
 		if (this.functionalities == null) {
 			try {
 				// load data from data-set
@@ -74,18 +80,37 @@ public class OWLAgent extends Agent implements EventObserver
 			}
 		}
 		// get channels
-		return new ArrayList<>(this.functionalities);
+		return new ArrayList<Functionality>(this.functionalities.values());
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public Functionality getFunctionality(String label) {
+		if (this.functionalities == null) {
+			try {
+				// load data from data-set
+				this.functionalities = this.loadAgentFunctionalities();
+			}
+			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+				this.functionalities = null;
+				System.err.println(ex.getMessage());
+			}
+		}
+		// get functionality
+		return this.functionalities.get(label);
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<OWLElement> getConveyors() {
+	public List<Element> getConveyors() {
 		if (this.conveyors == null) {
 			try {
 				// load data from data-set
-				this.conveyors = new ArrayList<>(this.loadAgentConveyors());
+				this.conveyors = this.loadAgentConveyors();
 			}
 			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
 				this.conveyors = null;
@@ -93,18 +118,18 @@ public class OWLAgent extends Agent implements EventObserver
 			}
 		}
 		// get engines
-		return new ArrayList<>(this.conveyors);
+		return new ArrayList<Element>(this.conveyors.values());
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<OWLElement> getCrossTransfers() {
+	public List<Element> getCrossTransfers() {
 		if (this.crossTransfers == null) {
 			try {
 				// load data from data-set
-				this.crossTransfers = new ArrayList<>(this.loadAgentCrossTransfers());
+				this.crossTransfers = this.loadAgentCrossTransfers();
 			}
 			catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
 				this.crossTransfers = null;
@@ -112,7 +137,7 @@ public class OWLAgent extends Agent implements EventObserver
 			}
 		}
 		// get engines
-		return new ArrayList<>(this.crossTransfers);
+		return new ArrayList<Element>(this.crossTransfers.values());
 	}
 	
 	/**
@@ -131,18 +156,19 @@ public class OWLAgent extends Agent implements EventObserver
 			}
 		}
 		// get ports
-		return new ArrayList<>(this.ports);
+		return new ArrayList<>(this.ports.values());
 	}
 	
 	/**
 	 * 
 	 * @param elementName
 	 */
-	public void addElement(OWLElement element) {
+	@Override
+	public void addComponent(String label) {
 		try {
 			// assert property
 			this.dataset.assertStatement(this.getLabel(), 
-					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, element.getLabel());
+					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, label);
 			// update agent
 			this.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
 		}
@@ -153,71 +179,32 @@ public class OWLAgent extends Agent implements EventObserver
 	
 	/**
 	 * 
-	 * @param elementName
+	 * @param label
 	 */
-	public void removeElement(OWLElement element) {
+	@Override
+	public boolean removeComponent(String label) {
+		boolean removed = true;
 		try {
 			// remove property
 			this.dataset.removeStatement(this.getLabel(), 
 					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, 
-					element.getLabel());
+					label);
 			
 			// update agent
 			this.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
 		}
 		catch (OWLPropertyNotFoundException | OWLIndividualNotFoundException ex) {
+			removed = false;
 			System.err.println(ex.getMessage());
 		}
-	}
-	
-	/**
-	 * 
-	 * @param elementLabel
-	 */
-	public void addElement(String elementLabel) {
-		try {
-			// find element
-			this.dataset.assertStatement(this.getLabel(), 
-					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, 
-					elementLabel);
-			
-			// update agent
-			this.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
-		}
-		catch (OWLPropertyNotFoundException | OWLIndividualNotFoundException ex) {
-			System.err.println(ex.getMessage());
-		}
-	}
-	
-	/**
-	 * 
-	 * @param index
-	 */
-	public OWLElement removeComponent(int index) {
-		// get components
-		List<OWLElement> comps = this.getComponents();
-		// get component to remove
-		OWLElement element = comps.get(index);
-		try {
-			// remove property
-			this.dataset.removeStatement(this.getLabel(), 
-					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, element.getLabel());
-			
-			// update agent
-			this.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
-		}
-		catch (OWLPropertyNotFoundException | OWLIndividualNotFoundException ex) {
-			System.err.println(ex.getMessage());
-		}
-		// get removed element
-		return element;
+		return removed;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<OWLElement> getNeighbors() {
+	public List<Element> getNeighbors() {
 		if (this.neighbors == null) {
 			try {
 				// load data from data-set
@@ -229,7 +216,7 @@ public class OWLAgent extends Agent implements EventObserver
 			}
 		}
 		// get neighbors
-		return new ArrayList<>(this.neighbors);
+		return new ArrayList<Element>(this.neighbors.values());
 	}
 	
 	/**
@@ -305,10 +292,11 @@ public class OWLAgent extends Agent implements EventObserver
 	 * @throws OWLIndividualNotFoundException
 	 * @throws OWLPropertyNotFoundException
 	 */
-	private List<OWLPort> loadAgentPorts() 
+	private Map<String, OWLPort> loadAgentPorts() 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException 
 	{
-		List<OWLPort> list = new ArrayList<>();
+		// initialize index
+		Map<String, OWLPort> index = new HashMap<>();
 		List<OWLInstance> ps = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
 						OWLDatasetManager.PROPERTY_LABEL_HAS_PORT);
@@ -320,11 +308,11 @@ public class OWLAgent extends Agent implements EventObserver
 					new OWLElementType(p.getType().getUrl(), p.getType().getLabel()));
 			// subscribe
 			i.subscribe(this);
-			// add 
-			list.add(i);
+			// add entry to index
+			index.put(i.getLabel(), i);
 		}
-		// get list
-		return list;
+		// get index
+		return index;
 	}
 
 	/**
@@ -333,10 +321,11 @@ public class OWLAgent extends Agent implements EventObserver
 	 * @throws OWLIndividualNotFoundException
 	 * @throws OWLPropertyNotFoundException
 	 */
-	private List<OWLElement> loadAgentNeighbors() 
+	private Map<String, OWLElement> loadAgentNeighbors() 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException 
 	{
-		List<OWLElement> list = new ArrayList<>();
+		// initialize index
+		Map<String, OWLElement> index = new HashMap<>();
 		List<OWLInstance> ns = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
 						OWLDatasetManager.PROPERTY_LABEL_HAS_NEIGHBOR);
@@ -344,11 +333,13 @@ public class OWLAgent extends Agent implements EventObserver
 		// create neighbor list
 		for (OWLInstance n : ns) {
 			// add neighbor
-			list.add(new OWLElement(n.getUrl(), n.getLabel(), 
-					new OWLElementType(n.getType().getUrl(), n.getType().getLabel())));
+			OWLElement el = new OWLElement(n.getUrl(), n.getLabel(), 
+					new OWLElementType(n.getType().getUrl(), n.getType().getLabel()));
+			// add entry to index
+			index.put(el.getLabel(), el);
 		}
-		// get list
-		return list;
+		// get index
+		return index;
 	}
 	
 	/**
@@ -357,10 +348,11 @@ public class OWLAgent extends Agent implements EventObserver
 	 * @throws OWLIndividualNotFoundException
 	 * @throws OWLPropertyNotFoundException
 	 */
-	private List<OWLElement> loadAgentCrossTransfers() 
+	private Map<String, OWLElement> loadAgentCrossTransfers() 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException
 	{
-		List<OWLElement> list = new ArrayList<>();
+		// initialize index
+		Map<String, OWLElement> index = new HashMap<>();
 		List<OWLInstance> acts = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
 						OWLDatasetManager.PROPERTY_LABEL_HAS_CROSS_TRANSFER);
@@ -371,13 +363,13 @@ public class OWLAgent extends Agent implements EventObserver
 					new OWLElementType(act.getType().getUrl(), act.getType().getLabel()));
 			// check element type
 			if (el.getType().getLabel().equals(OWLDatasetManager.CONSTANT_CROSS_TRANSFER_TYPE)) {
-				// add element
-				list.add(el);
+				// add entry to index
+				index.put(el.getLabel(), el);
 			}
 		}
 		
-		// get list
-		return list;
+		// get index
+		return index;
 	}
 	
 	/**
@@ -386,10 +378,11 @@ public class OWLAgent extends Agent implements EventObserver
 	 * @throws OWLIndividualNotFoundException
 	 * @throws OWLPropertyNotFoundException
 	 */
-	private List<OWLElement> loadAgentConveyors() 
+	private Map<String, OWLElement> loadAgentConveyors() 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException
 	{
-		List<OWLElement> list = new ArrayList<>();
+		// initialize index
+		Map<String, OWLElement> index = new HashMap<>();
 		List<OWLInstance> acts = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
 						OWLDatasetManager.PROPERTY_LABEL_HAS_CONVEYOR);
@@ -400,13 +393,13 @@ public class OWLAgent extends Agent implements EventObserver
 					new OWLElementType(act.getType().getUrl(), act.getType().getLabel()));
 			// check element type
 			if (el.getType().getLabel().equals(OWLDatasetManager.CONSTANT_CONVEYOR_TYPE)) {
-				// add element
-				list.add(el);
+				// add entry to index
+				index.put(el.getLabel(), el);
 			}
 		}
 		
-		// get list
-		return list;
+		// get index
+		return index;
 	}
 
 	/**
@@ -415,10 +408,11 @@ public class OWLAgent extends Agent implements EventObserver
 	 * @throws OWLIndividualNotFoundException
 	 * @throws OWLPropertyNotFoundException
 	 */
-	private List<OWLFunctionality> loadAgentFunctionalities() 
+	private Map<String, OWLFunctionality> loadAgentFunctionalities() 
 			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException
 	{
-		List<OWLFunctionality> list = new ArrayList<>();
+		// initialize index
+		Map<String, OWLFunctionality> index = new HashMap<>();
 		List<OWLInstance> funcs =  this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
 						OWLDatasetManager.PROPERTY_LABEL_HAS_CHANNEL);
@@ -426,11 +420,13 @@ public class OWLAgent extends Agent implements EventObserver
 		// create channel list
 		for (OWLInstance f : funcs) {
 			// add functionality
-			list.add(new OWLFunctionality(f.getUrl(), f.getLabel(), 
-					new OWLFunctionalityType(f.getType().getUrl(), f.getType().getLabel())));
+			OWLFunctionality func = new OWLFunctionality(f.getUrl(), f.getLabel(), 
+					new OWLFunctionalityType(f.getType().getUrl(), f.getType().getLabel()));
+			// add entry to index
+			index.put(func.getLabel(), func);
 		}
 		
-		// get list
-		return list;
+		// get index
+		return index;
 	}
 }

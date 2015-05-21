@@ -5,16 +5,17 @@ import it.istc.pst.epsl.microkernel.lang.query.EPSLQuery;
 import it.istc.pst.kbcl.exception.KbclInitializationException;
 import it.istc.pst.kbcl.exception.KbclNoAgentSelectedException;
 import it.istc.pst.kbcl.exception.KbclRequestProcessingFailureException;
-import it.istc.pst.kbcl.inference.model.owl.OWLAgent;
-import it.istc.pst.kbcl.inference.model.owl.OWLAgentType;
-import it.istc.pst.kbcl.inference.model.owl.OWLFunctionality;
-import it.istc.pst.kbcl.inference.model.owl.OWLFunctionalityType;
 import it.istc.pst.kbcl.inference.model.owl.OWLKnowledgeBaseFacade;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.kbcl.mapping.ps.ddl.DDLPlanningManager;
 import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
+import it.istc.pst.kbcl.model.Agent;
+import it.istc.pst.kbcl.model.AgentType;
+import it.istc.pst.kbcl.model.Functionality;
+import it.istc.pst.kbcl.model.FunctionalityType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class KbclManager
 	
 	// inference knowledge base
 	private OWLKnowledgeBaseFacade kbInference;
-	private OWLAgent focus;
+	private Agent focus;
 	
 	// planning domain generator
 	private DDLPlanningManager planningManager;
@@ -57,7 +58,7 @@ public class KbclManager
 	 * @throws RDFPropertyNotFoundException
 	 * @throws RDFResourceNotFoundException
 	 */
-	public void setup(OWLAgent agent) 
+	public void setup(Agent agent) 
 			throws DDLPlanningModelInitializationFailureException, KbclInitializationException, RDFPropertyNotFoundException, RDFResourceNotFoundException
 	{
 		// get start time
@@ -116,15 +117,30 @@ public class KbclManager
 	 * 
 	 * @return
 	 */
-	public List<OWLAgent> getAgents() {
-		return this.kbInference.getAgents();
+	public List<Agent> getAgents() {
+		return new ArrayList<>(this.kbInference.getAgents());
+	}
+	
+	/**
+	 * 
+	 * @param label
+	 * @return
+	 */
+	public Agent getAgent(String label) {
+		Agent agent = null;
+		for (Agent a : this.kbInference.getAgents()) {
+			if (a.getLabel().equals(label)) {
+				agent = a;
+			}
+		}
+		return agent;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<OWLAgentType> getAgentTypes() {
+	public List<AgentType> getAgentTypes() {
 		return this.kbInference.getAgentTypes();
 	}
 	
@@ -132,7 +148,7 @@ public class KbclManager
 	 * 
 	 * @return
 	 */
-	public List<OWLFunctionalityType> getFunctionalityTypes() {
+	public List<FunctionalityType> getFunctionalityTypes() {
 		return this.kbInference.getFunctionalityTypes();
 	}
 	
@@ -157,7 +173,7 @@ public class KbclManager
 	 * @return
 	 * @throws KbclNoAgentSelectedException
 	 */
-	public OWLAgent getFocusedAgent() 
+	public Agent getFocusedAgent() 
 			throws KbclNoAgentSelectedException
 	{
 		// check if agent has been selected
@@ -182,7 +198,7 @@ public class KbclManager
 	 * @throws KbclRequestProcessingFailureException
 	 * @throws RDFResourceNotFoundException
 	 */
-	public void plan(OWLFunctionality func) 
+	public void plan(Functionality func) 
 			throws KbclRequestProcessingFailureException, RDFResourceNotFoundException
 	{
 		long start = System.currentTimeMillis();
@@ -207,40 +223,4 @@ public class KbclManager
 		// propagate query 
 		this.planningManager.query(query);
 	}
-
-//	/**
-//	 * 
-//	 */
-//	@Override
-//	public void update(Event event) {
-//		// check event
-//		switch (event) {
-//			case AGENT_ELEMENT_UDPATE_EVENT : {
-//				try {
-//					// close mapping model
-////					this.psModelGenerator.close();
-//					
-//					// update 
-//					
-//					// FIXME update mapping KB
-////					this.psModelGenerator = new RDFMappingKnowledgeBaseFacade(this.focus);
-//					
-//					
-//					// update focusing agent information
-////					this.setup(this.kbMapping.getAgent());
-//				}
-//				catch (Exception ex) {
-//					System.err.println(ex.getMessage());
-//					ex.printStackTrace();
-//				}
-//			}
-//			break;
-//			
-//			default : {
-//				// ignore other events
-//			}
-//			break;
-//		}
-//	}
-	
 }

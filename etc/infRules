@@ -1,13 +1,18 @@
 @prefix rdf:	http://www.w3.org/1999/02/22-rdf-syntax-ns#
-@prefix kbcl:	http://pst.istc.cnr.it/ontology/kbcl#
+@prefix kbcl:	http://pst.istc.cnr.it/kbcl/ontology#
+
+[usableElements:
+	(?m kbcl:hasElement ?e1), (?m kbcl:hasElement ?e2), (?e1 kbcl:enable ?e2)
+	->
+	(?m kbcl:canUse ?e2)]
 
 [modulePorts: 
-	(?m kbcl:hasElement ?e), (?e kbcl:connect ?n)
+	(?m kbcl:hasElement ?e), (?m kbcl:canUse ?e), (?e kbcl:connect ?n)
 	-> 
 	(?m kbcl:hasPort ?e)]
 
 [moduleNeighbors: 
-	(?m kbcl:hasElement ?e), (?e kbcl:connect ?n)
+	(?m kbcl:hasPort ?e), (?e kbcl:connect ?n)
 	->
 	(?m kbcl:hasNeighbor ?n)]
 
@@ -22,7 +27,9 @@
 	(?m kbcl:hasConveyor ?e)]
 	
 [moduleChannels: 
-	(?f kbcl:hasOutput ?o), (?f kbcl:hasInput ?i), (?m kbcl:hasPort ?i), (?m kbcl:hasPort ?o)
+	(?f kbcl:hasOutput ?o), (?f kbcl:hasInput ?i), 
+	(?m kbcl:hasPort ?i), (?m kbcl:canUse ?i), 
+	(?m kbcl:hasPort ?o), (?m kbcl:canUse ?o)
 	->
 	(?m kbcl:hasChannel ?f)]
 	

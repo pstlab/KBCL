@@ -4,7 +4,7 @@
 <!DOCTYPE rdf:RDF [
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
-    <!ENTITY kbcl "http://pst.istc.cnr.it/ontology/kbcl#" >
+    <!ENTITY kbcl "http://pst.istc.cnr.it/kbcl/ontology#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
 ]>
@@ -12,12 +12,12 @@
 
 <rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
      xml:base="http://www.w3.org/2002/07/owl"
-     xmlns:kbcl="http://pst.istc.cnr.it/ontology/kbcl#"
+     xmlns:kbcl="http://pst.istc.cnr.it/kbcl/ontology#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <Ontology rdf:about="http://pst.istc.cnr.it/ontology/kbcl"/>
+    <Ontology rdf:about="http://pst.istc.cnr.it/kbcl/ontology"/>
     
 
 
@@ -32,7 +32,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#connect -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#connect -->
 
     <ObjectProperty rdf:about="&kbcl;connect">
         <rdf:type rdf:resource="&owl;TransitiveProperty"/>
@@ -42,7 +42,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasActuator -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasActuator -->
 
     <ObjectProperty rdf:about="&kbcl;hasActuator">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -54,7 +54,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasChannel -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasChannel -->
 
     <ObjectProperty rdf:about="&kbcl;hasChannel">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -65,7 +65,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasConveyor -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasConveyor -->
 
     <ObjectProperty rdf:about="&kbcl;hasConveyor">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -77,7 +77,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasCrossTransfer -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasCrossTransfer -->
 
     <ObjectProperty rdf:about="&kbcl;hasCrossTransfer">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -88,7 +88,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasElement -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasElement -->
 
     <ObjectProperty rdf:about="&kbcl;hasElement">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -98,7 +98,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasExternalElement -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasExternalElement -->
 
     <ObjectProperty rdf:about="&kbcl;hasExternalElement">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -110,7 +110,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasFunctionality -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasFunctionality -->
 
     <ObjectProperty rdf:about="&kbcl;hasFunctionality">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -118,7 +118,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasInput -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasInput -->
 
     <ObjectProperty rdf:about="&kbcl;hasInput">
         <rdf:type rdf:resource="&owl;FunctionalProperty"/>
@@ -128,7 +128,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasInternalElement -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasInternalElement -->
 
     <ObjectProperty rdf:about="&kbcl;hasInternalElement">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -139,7 +139,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasNeighbor -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasNeighbor -->
 
     <ObjectProperty rdf:about="&kbcl;hasNeighbor">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -150,7 +150,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasOutput -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasOutput -->
 
     <ObjectProperty rdf:about="&kbcl;hasOutput">
         <rdf:type rdf:resource="&owl;FunctionalProperty"/>
@@ -160,7 +160,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#hasPort -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasPort -->
 
     <ObjectProperty rdf:about="&kbcl;hasPort">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
@@ -182,7 +182,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Action -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Action -->
 
     <Class rdf:about="&kbcl;Action">
         <rdfs:subClassOf rdf:resource="&kbcl;Functionality"/>
@@ -199,7 +199,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Actuator -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Actuator -->
 
     <Class rdf:about="&kbcl;Actuator">
         <rdfs:subClassOf rdf:resource="&kbcl;InternalElement"/>
@@ -216,7 +216,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Agent -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Agent -->
 
     <Class rdf:about="&kbcl;Agent">
         <rdfs:subClassOf>
@@ -231,7 +231,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#ChangeOver -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ChangeOver -->
 
     <Class rdf:about="&kbcl;ChangeOver">
         <rdfs:subClassOf rdf:resource="&kbcl;Action"/>
@@ -240,7 +240,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Channel -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Channel -->
 
     <Class rdf:about="&kbcl;Channel">
         <equivalentClass>
@@ -265,7 +265,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Communication -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Communication -->
 
     <Class rdf:about="&kbcl;Communication">
         <rdfs:subClassOf rdf:resource="&kbcl;Functionality"/>
@@ -281,7 +281,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#ConveyorEngine -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine -->
 
     <Class rdf:about="&kbcl;ConveyorEngine">
         <rdfs:subClassOf rdf:resource="&kbcl;Actuator"/>
@@ -290,7 +290,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#CrossTransferEngine -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine -->
 
     <Class rdf:about="&kbcl;CrossTransferEngine">
         <rdfs:subClassOf rdf:resource="&kbcl;Actuator"/>
@@ -298,7 +298,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Element -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Element -->
 
     <Class rdf:about="&kbcl;Element">
         <rdfs:subClassOf>
@@ -313,7 +313,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#ExternalElement -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ExternalElement -->
 
     <Class rdf:about="&kbcl;ExternalElement">
         <rdfs:subClassOf rdf:resource="&kbcl;Element"/>
@@ -322,7 +322,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Functionality -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Functionality -->
 
     <Class rdf:about="&kbcl;Functionality">
         <rdfs:subClassOf>
@@ -337,7 +337,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Information -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Information -->
 
     <Class rdf:about="&kbcl;Information">
         <rdfs:subClassOf rdf:resource="&kbcl;InternalElement"/>
@@ -345,7 +345,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#InternalElement -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#InternalElement -->
 
     <Class rdf:about="&kbcl;InternalElement">
         <rdfs:subClassOf rdf:resource="&kbcl;Element"/>
@@ -361,7 +361,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Machine -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Machine -->
 
     <Class rdf:about="&kbcl;Machine">
         <rdfs:subClassOf rdf:resource="&kbcl;Agent"/>
@@ -370,7 +370,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Module -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Module -->
 
     <Class rdf:about="&kbcl;Module">
         <equivalentClass>
@@ -390,7 +390,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Neighbor -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Neighbor -->
 
     <Class rdf:about="&kbcl;Neighbor">
         <rdfs:subClassOf rdf:resource="&kbcl;ExternalElement"/>
@@ -398,7 +398,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Port -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Port -->
 
     <Class rdf:about="&kbcl;Port">
         <rdfs:subClassOf rdf:resource="&kbcl;Information"/>
@@ -406,7 +406,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Receive -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Receive -->
 
     <Class rdf:about="&kbcl;Receive">
         <rdfs:subClassOf rdf:resource="&kbcl;Communication"/>
@@ -415,7 +415,7 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontology/kbcl#Send -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Send -->
 
     <Class rdf:about="&kbcl;Send">
         <rdfs:subClassOf rdf:resource="&kbcl;Communication"/>

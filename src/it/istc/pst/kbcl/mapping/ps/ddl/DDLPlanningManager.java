@@ -14,17 +14,19 @@ import it.istc.pst.epsl.microkernel.lang.query.EPSLQuery;
 import it.istc.pst.epsl.microkernel.lang.query.EPSLQueryTypes;
 import it.istc.pst.epsl.microkernel.lang.query.get.EPSLGetFlexibleTimelinesQuery;
 import it.istc.pst.kbcl.exception.KbclRequestProcessingFailureException;
-import it.istc.pst.kbcl.inference.model.owl.OWLAgent;
-import it.istc.pst.kbcl.inference.model.owl.OWLFunctionality;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.kbcl.mapping.model.rdf.RDFFunctionality;
 import it.istc.pst.kbcl.mapping.model.rdf.RDFMappingKnowledgeBaseFacade;
 import it.istc.pst.kbcl.mapping.ps.PlanningManager;
 import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
+import it.istc.pst.kbcl.model.Agent;
 import it.istc.pst.kbcl.model.Event;
 import it.istc.pst.kbcl.model.EventObserver;
+import it.istc.pst.kbcl.model.Functionality;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -32,22 +34,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Properties;
 
 /**
  * 
  * @author alessandroumbrico
  *
  */
-public class DDLPlanningManager extends PlanningManager implements EventObserver
+public class DDLPlanningManager implements PlanningManager, EventObserver
 {
-	private static final long HORIZON = 1000;
-	private static final String PS_FOLDER = "ps";
-	
 	// mapping knowledge base
 	private RDFMappingKnowledgeBaseFacade kbMapping;
+	private long horizon;
+	private String psPath;
 	// the observed agent
-	private OWLAgent agent;
+	private Agent agent;
 	
 	private DDLKnowledgeBaseProcessor processor;
 	private Map<DDLComponentType, List<? extends DDLComponent>> components;
@@ -64,12 +65,17 @@ public class DDLPlanningManager extends PlanningManager implements EventObserver
 	 * @param agent
 	 * @throws DDLPlanningModelInitializationFailureException
 	 */
-	public DDLPlanningManager(OWLAgent agent)
+	public DDLPlanningManager(Agent agent)
 			throws DDLPlanningModelInitializationFailureException 
 	{
-		super(HORIZON);
-		try 
-		{
+		try {
+			// get property file
+			Properties prop = new Properties();
+			prop.load(new FileInputStream(new File("etc/psModuleCfg.properties")));
+			// read properties
+			this.horizon = Long.parseLong(prop.getProperty("horizon"));
+			this.psPath = prop.getProperty("ps_folder");
+			
 			// set observed agent
 			this.agent = agent;
 			
@@ -198,7 +204,7 @@ public class DDLPlanningManager extends PlanningManager implements EventObserver
 	 * @throws KbclRequestProcessingFailureException
 	 * @throws RDFResourceNotFoundException
 	 */
-	public void plan(OWLFunctionality func) 
+	public void plan(Functionality func) 
 			throws KbclRequestProcessingFailureException, RDFResourceNotFoundException
 	{
 		// get functionality from model
@@ -374,7 +380,7 @@ public class DDLPlanningManager extends PlanningManager implements EventObserver
 			throws FileNotFoundException, UnsupportedEncodingException 
 	{
 		// DDL file path
-		String ddlpath = PS_FOLDER + "/" + this.getModelName() + ".ddl";
+		String ddlpath = this.psPath + "/" + this.getModelName() + ".ddl";
 		// create writer
 		PrintWriter writer = new PrintWriter(ddlpath, "UTF-8");
 		// writer header
@@ -397,7 +403,7 @@ public class DDLPlanningManager extends PlanningManager implements EventObserver
 			throws FileNotFoundException, UnsupportedEncodingException
 	{
 		// DDL file path
-		String pdlPath = PS_FOLDER + "/" + this.getModelName() + ".pdl";
+		String pdlPath = this.psPath + "/" + this.getModelName() + ".pdl";
 		// create writer
 		PrintWriter writer = new PrintWriter(pdlPath, "UTF-8");
 		// writer header

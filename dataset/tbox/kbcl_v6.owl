@@ -1,0 +1,466 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY kbcl "http://pst.istc.cnr.it/ontology/kbcl#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:kbcl="http://pst.istc.cnr.it/ontology/kbcl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <Ontology rdf:about="http://pst.istc.cnr.it/kbcl/ontology"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canUse -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canUse">
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Element"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#connect -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#connect">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ExternalElement"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#enable -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#enable">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Element"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Element"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasActuator -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasActuator">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Actuator"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasInternalElement"/>
+        <propertyDisjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasPort"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasChannel -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasChannel">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Module"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasFunctionality"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasConveyor -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasConveyor">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasActuator"/>
+        <propertyDisjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasCrossTransfer"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasCrossTransfer -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasCrossTransfer">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasActuator"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasElement -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasElement">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Element"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasExternalElement -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasExternalElement">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ExternalElement"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasElement"/>
+        <propertyDisjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasInternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasFunctionality -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasFunctionality">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasInput -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasInput">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasInternalElement -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasInternalElement">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasNeighbor -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasNeighbor">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Neighbor"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasExternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasOutput -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasOutput">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasPort -->
+
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasPort">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Port"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasInternalElement"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Action -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Action">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Functionality"/>
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ChangeOver"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+        <disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Actuator -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Actuator">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+        <disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Information"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Agent -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Agent">
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Machine"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Module"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ChangeOver -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ChangeOver">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+        <disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Channel -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Channel">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+                    <Restriction>
+                        <onProperty rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasInput"/>
+                        <onClass rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Port"/>
+                        <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                    </Restriction>
+                    <Restriction>
+                        <onProperty rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasOutput"/>
+                        <onClass rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Port"/>
+                        <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Communication -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Communication">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Functionality"/>
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Receive"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Send"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Actuator"/>
+        <disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Actuator"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Element -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Element">
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ExternalElement"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ExternalElement -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ExternalElement">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Element"/>
+        <disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Functionality -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Functionality">
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Information -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Information">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#InternalElement -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#InternalElement">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Element"/>
+        <rdfs:subClassOf>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Actuator"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Information"/>
+                </unionOf>
+            </Class>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Machine -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Machine">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+        <disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Module"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Module -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Module">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+                    <Restriction>
+                        <onProperty rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasChannel"/>
+                        <onClass rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+                        <minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</minQualifiedCardinality>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Neighbor -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Neighbor">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ExternalElement"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Port -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Port">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Information"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Receive -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Receive">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+        <disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Send"/>
+    </Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Send -->
+
+    <Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Send">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Agent"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Element"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Functionality"/>
+        </members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

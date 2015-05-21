@@ -1,10 +1,10 @@
 package it.istc.pst.kbcl.inference.kb.model.owl;
 
-import it.istc.pst.kbcl.inference.model.owl.OWLAgent;
-import it.istc.pst.kbcl.inference.model.owl.OWLAgentType;
-import it.istc.pst.kbcl.inference.model.owl.OWLElementType;
-import it.istc.pst.kbcl.inference.model.owl.OWLFunctionalityType;
 import it.istc.pst.kbcl.inference.model.owl.OWLKnowledgeBaseFacade;
+import it.istc.pst.kbcl.model.Agent;
+import it.istc.pst.kbcl.model.AgentType;
+import it.istc.pst.kbcl.model.ElementType;
+import it.istc.pst.kbcl.model.FunctionalityType;
 
 import java.util.List;
 
@@ -70,10 +70,10 @@ public class OWLKnowledgeBaseFacadeTest
 		// create factory
 		this.facade = OWLKnowledgeBaseFacade.getSingletonInstance();
 		// get agent types
-		List<OWLAgentType> types = this.facade.getAgentTypes();
+		List<AgentType> types = this.facade.getAgentTypes();
 		Assert.assertNotNull(types);
 		Assert.assertTrue(!types.isEmpty());
-		for (OWLAgentType type : types) {
+		for (AgentType type : types) {
 			Assert.assertNotNull(type);
 			System.out.println(type);
 		}
@@ -91,10 +91,10 @@ public class OWLKnowledgeBaseFacadeTest
 		// create factory
 		this.facade = OWLKnowledgeBaseFacade.getSingletonInstance();
 		// get agent types
-		List<OWLFunctionalityType> types = this.facade.getFunctionalityTypes();
+		List<FunctionalityType> types = this.facade.getFunctionalityTypes();
 		Assert.assertNotNull(types);
 		Assert.assertTrue(!types.isEmpty());
-		for (OWLFunctionalityType type : types) {
+		for (FunctionalityType type : types) {
 			Assert.assertNotNull(type);
 			System.out.println(type);
 		}
@@ -112,10 +112,10 @@ public class OWLKnowledgeBaseFacadeTest
 		// create factory
 		this.facade = OWLKnowledgeBaseFacade.getSingletonInstance();
 		// get agent types
-		List<OWLElementType> types = this.facade.getElementTypes();
+		List<ElementType> types = this.facade.getElementTypes();
 		Assert.assertNotNull(types);
 		Assert.assertTrue(!types.isEmpty());
-		for (OWLElementType type : types) {
+		for (ElementType type : types) {
 			Assert.assertNotNull(type);
 			System.out.println(type);
 		}
@@ -133,11 +133,11 @@ public class OWLKnowledgeBaseFacadeTest
 		// create factory
 		this.facade = OWLKnowledgeBaseFacade.getSingletonInstance();
 		// get agent types
-		List<OWLAgent> agents = this.facade.getAgents();
+		List<Agent> agents = this.facade.getAgents();
 		Assert.assertNotNull(agents);
 		Assert.assertTrue(!agents.isEmpty());
 		Assert.assertTrue(agents.size() == 1);
-		for (OWLAgent agent : agents) {
+		for (Agent agent : agents) {
 			Assert.assertNotNull(agent);
 			System.out.println(agent);
 		}

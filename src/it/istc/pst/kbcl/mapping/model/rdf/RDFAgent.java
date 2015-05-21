@@ -6,6 +6,8 @@ import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.kbcl.model.Agent;
 import it.istc.pst.kbcl.model.AgentType;
+import it.istc.pst.kbcl.model.Element;
+import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.model.FunctionalityType;
 
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public final class RDFAgent extends Agent
 	 * 
 	 * @return
 	 */
-	public Map<RDFFunctionalityType, List<RDFFunctionality>> getFunctionalities() {
+	public Map<RDFFunctionalityType, List<RDFFunctionality>> getFunctionalityIndex() {
 		// check functionalities
 		if (this.functionalities == null) {
 			// load functionalities
@@ -57,6 +59,36 @@ public final class RDFAgent extends Agent
 		}
 		// get all functionalities
 		return new HashMap<RDFFunctionalityType, List<RDFFunctionality>>(this.functionalities);
+	}
+	
+	@Override
+	public Functionality getFunctionality(String label) {
+		System.exit(1);
+		return null;
+	}
+
+	@Override
+	public boolean removeComponent(String label) {
+		System.exit(1);
+		return false;
+	}
+	
+	@Override
+	public List<Functionality> getFunctionalities() {
+		System.exit(1);
+		return null;
+	}
+	
+	@Override
+	public List<Element> getComponents() {
+		System.exit(1);
+		return null;
+	}
+
+	@Override
+	public List<Element> getNeighbors() {
+		System.exit(1);
+		return null;
 	}
 	
 	/**
@@ -75,28 +107,22 @@ public final class RDFAgent extends Agent
 		this.functionalities = this.dao.retrieveAgentFunctionalities(this);
 	}
 	
-	public void addComponent(String compName) 
-			throws RDFResourceNotFoundException, RDFPropertyNotFoundException
-	{
-		// assert statement
-		this.dao.addComponent(this.label, compName);
-		// update components
-		this.components = this.dao.retrieveAgentInternalComponents(this);
-		
-	}
-	
 	/**
 	 * 
-	 * @return
 	 */
-	public List<RDFFunctionality> getAllFunctionalities() {
-		List<RDFFunctionality> list = new ArrayList<>();
-		for (RDFFunctionalityType type : this.getFunctionalities().keySet()) {
-			for (RDFFunctionality func : this.getFunctionalities().get(type)) {
-				list.add(func);
-			}
+	@Override
+	public void addComponent(String compName) 
+	{
+		try {
+			// assert statement
+			this.dao.addComponent(this.label, compName);
+			// update components
+			this.components = this.dao.retrieveAgentInternalComponents(this);
 		}
-		return list;
+		catch (RDFPropertyNotFoundException | RDFResourceNotFoundException ex) {
+			System.err.println(ex.getMessage());
+		}
+		
 	}
 	
 	/**
@@ -118,7 +144,7 @@ public final class RDFAgent extends Agent
 	 * 
 	 * @return
 	 */
-	public List<RDFComponent> getComponents() {
+	public List<RDFComponent> getRDFComponents() {
 		// check components
 		if (this.components == null) {
 			// load components
@@ -131,7 +157,7 @@ public final class RDFAgent extends Agent
 	 * 
 	 * @return
 	 */
-	public List<RDFExternalComponent> getNeighbors() {
+	public List<RDFExternalComponent> getRDFNeighbors() {
 		// check neighbors
 		if (this.neighbors == null) {
 			// load data

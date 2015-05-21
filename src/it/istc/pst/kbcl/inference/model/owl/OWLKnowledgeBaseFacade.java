@@ -4,6 +4,10 @@ import it.istc.pst.kbcl.inference.kb.owl.OWLClass;
 import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager;
 import it.istc.pst.kbcl.inference.kb.owl.OWLInstance;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLClassNotFoundException;
+import it.istc.pst.kbcl.model.Agent;
+import it.istc.pst.kbcl.model.AgentType;
+import it.istc.pst.kbcl.model.ElementType;
+import it.istc.pst.kbcl.model.FunctionalityType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +19,10 @@ import java.util.List;
  */
 public class OWLKnowledgeBaseFacade
 {
-	private List<OWLAgentType> agentTypes;
-	private List<OWLFunctionalityType> functionTypes;
-	private List<OWLElementType> elementTypes;
-	private List<OWLAgent> agents;
+	private List<AgentType> agentTypes;
+	private List<FunctionalityType> functionTypes;
+	private List<ElementType> elementTypes;
+	private List<Agent> agents;
 	
 	private OWLDatasetManager dataset;
 	
@@ -63,7 +67,7 @@ public class OWLKnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
-	public List<OWLAgentType> getAgentTypes() {
+	public List<AgentType> getAgentTypes() {
 		if (this.agentTypes == null) {
 			try {
 				// load data from data-set
@@ -82,7 +86,7 @@ public class OWLKnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
-	public List<OWLFunctionalityType> getFunctionalityTypes() {
+	public List<FunctionalityType> getFunctionalityTypes() {
 		if (this.functionTypes == null) {
 			try {
 				// load data from data-set
@@ -101,7 +105,7 @@ public class OWLKnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
-	public List<OWLElementType> getElementTypes() {
+	public List<ElementType> getElementTypes() {
 		if (this.elementTypes == null) {
 			try {
 				// load data from data-set
@@ -120,7 +124,7 @@ public class OWLKnowledgeBaseFacade
 	 * 
 	 * @return
 	 */
-	public List<OWLAgent> getAgents() {
+	public List<Agent> getAgents() {
 		if (this.agents == null) {
 			try {
 				// load data from data-set
@@ -140,10 +144,10 @@ public class OWLKnowledgeBaseFacade
 	 * @return
 	 * @throws OWLClassNotFoundException
 	 */
-	private List<OWLAgentType> loadAgentTypes() 
+	private List<AgentType> loadAgentTypes() 
 			throws OWLClassNotFoundException
 	{
-		List<OWLAgentType> list = new ArrayList<>();
+		List<AgentType> list = new ArrayList<>();
 		// load types
 		List<OWLClass> types = this.dataset
 				.retrieveAllSubclasses(OWLDatasetManager.CONSTANT_AGENT_TYPE);
@@ -159,10 +163,10 @@ public class OWLKnowledgeBaseFacade
 	 * @return
 	 * @throws OWLClassNotFoundException
 	 */
-	private List<OWLFunctionalityType> loadFunctionalityTypes() 
+	private List<FunctionalityType> loadFunctionalityTypes() 
 			throws OWLClassNotFoundException 
 	{
-		List<OWLFunctionalityType> list = new ArrayList<>();
+		List<FunctionalityType> list = new ArrayList<>();
 		// load types
 		List<OWLClass> types = this.dataset
 				.retrieveAllSubclasses(OWLDatasetManager.CONSTANT_FUNCTIONALITY_TYPE);
@@ -178,10 +182,10 @@ public class OWLKnowledgeBaseFacade
 	 * @return
 	 * @throws OWLClassNotFoundException
 	 */
-	private List<OWLElementType> loadElementTypes() 
+	private List<ElementType> loadElementTypes() 
 			throws OWLClassNotFoundException 
 	{
-		List<OWLElementType> list = new ArrayList<>();
+		List<ElementType> list = new ArrayList<>();
 		// load types
 		List<OWLClass> types = this.dataset
 				.retrieveAllSubclasses(OWLDatasetManager.CONSTANT_ELEMENT_TYPE);
@@ -197,9 +201,9 @@ public class OWLKnowledgeBaseFacade
 	 * @return
 	 * @throws OWLClassNotFoundException
 	 */
-	private List<OWLAgent> loadAgents() throws OWLClassNotFoundException 
+	private List<Agent> loadAgents() throws OWLClassNotFoundException 
 	{
-		List<OWLAgent> list = new ArrayList<>();
+		List<Agent> list = new ArrayList<>();
 		// load agents
 		List<OWLInstance> as = this.dataset
 				.retrieveAllInstancesOfClass(OWLDatasetManager.CONSTANT_AGENT_TYPE);

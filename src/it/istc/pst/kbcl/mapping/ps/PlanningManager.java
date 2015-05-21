@@ -6,42 +6,41 @@ package it.istc.pst.kbcl.mapping.ps;
  * @author alessandroumbrico
  *
  */
-public abstract class PlanningManager 
+public interface PlanningManager 
 {
-	protected long horizon;
-	
-	/**
-	 * 
-	 * @param name
-	 * @param horizon
-	 */
-	protected PlanningManager(long horizon) {
-		this.horizon = horizon;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public long getHorizon() {
-		return horizon;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public abstract String getModelName();
+//	protected long horizon;
+//	
+//	/**
+//	 * 
+//	 * @param name
+//	 * @param horizon
+//	 */
+//	protected PlanningManager() {
+//		}
+//	
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public long getHorizon() {
+//		return horizon;
+//	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public abstract String getPlanningDomainDescription();
+	public String getModelName();
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public abstract String getPlanningProblemDescription();
+	public String getPlanningDomainDescription();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getPlanningProblemDescription();
 }

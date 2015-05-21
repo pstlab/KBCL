@@ -1,17 +1,17 @@
 package it.istc.pst.kbcl.mapping.model.rdf;
 
-import it.istc.pst.kbcl.inference.model.owl.OWLAgent;
-import it.istc.pst.kbcl.inference.model.owl.OWLElement;
-import it.istc.pst.kbcl.inference.model.owl.OWLFunctionality;
 import it.istc.pst.kbcl.mapping.kb.rdf.RDFAgentDAO;
 import it.istc.pst.kbcl.mapping.kb.rdf.RDFDatasetManager;
 import it.istc.pst.kbcl.mapping.kb.rdf.RDFFunctionalityDAO;
 import it.istc.pst.kbcl.mapping.kb.rdf.RDFMappingKnowledgeBaseFactory;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
+import it.istc.pst.kbcl.model.Agent;
+import it.istc.pst.kbcl.model.Element;
 import it.istc.pst.kbcl.model.Event;
 import it.istc.pst.kbcl.model.EventObserver;
 import it.istc.pst.kbcl.model.EventPublisher;
+import it.istc.pst.kbcl.model.Functionality;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class RDFMappingKnowledgeBaseFacade implements EventObserver, EventPublis
 {
 	private RDFDatasetManager dataset;
 	private RDFMappingKnowledgeBaseFactory factory;
-	private OWLAgent agent;
+	private Agent agent;
 	private RDFAgent rdfAgent;
 	
 	private List<EventObserver> observers;
@@ -36,7 +36,7 @@ public class RDFMappingKnowledgeBaseFacade implements EventObserver, EventPublis
 	 * @throws RDFResourceNotFoundException
 	 * @throws RDFPropertyNotFoundException
 	 */
-	public RDFMappingKnowledgeBaseFacade(OWLAgent agent) 
+	public RDFMappingKnowledgeBaseFacade(Agent agent) 
 			throws RDFResourceNotFoundException, RDFPropertyNotFoundException
 	{
 		// get observed agent
@@ -53,16 +53,16 @@ public class RDFMappingKnowledgeBaseFacade implements EventObserver, EventPublis
 		this.rdfAgent = dao.createAgent(this.agent.getLabel());
 		
 		// insert agent's functionalities
-		for (OWLFunctionality f : this.agent.getFunctionalities()) {
+		for (Functionality f : this.agent.getFunctionalities()) {	//getFunctionalityIndex()) {
 			dao.addFunctionality(this.agent.getLabel(), f.getLabel());
 		}
 		
-		for (OWLElement e : this.agent.getComponents()) {
+		for (Element e : this.agent.getComponents()) {
 			dao.addComponent(this.agent.getLabel(), e.getLabel());
 		}
 		
 		// insert agent's neighbors
-		for (OWLElement n : this.agent.getNeighbors()) {
+		for (Element n : this.agent.getNeighbors()) {
 			dao.addNeighbor(this.agent.getLabel(), n.getLabel());
 		}
 	}
@@ -111,16 +111,16 @@ public class RDFMappingKnowledgeBaseFacade implements EventObserver, EventPublis
 					this.rdfAgent = dao.createAgent(this.agent.getLabel());
 					
 					// insert agent's functionalities
-					for (OWLFunctionality f : this.agent.getFunctionalities()) {
+					for (Functionality f : this.agent.getFunctionalities()) {	//.getFunctionalityIndex()) {
 						dao.addFunctionality(this.agent.getLabel(), f.getLabel());
 					}
 					
-					for (OWLElement e : this.agent.getComponents()) {
+					for (Element e : this.agent.getComponents()) {
 						dao.addComponent(this.agent.getLabel(), e.getLabel());
 					}
 					
 					// insert agent's neighbors
-					for (OWLElement n : this.agent.getNeighbors()) {
+					for (Element n : this.agent.getNeighbors()) {
 						dao.addNeighbor(this.agent.getLabel(), n.getLabel());
 					}
 				}
@@ -149,7 +149,7 @@ public class RDFMappingKnowledgeBaseFacade implements EventObserver, EventPublis
 	 * @return
 	 * @throws RDFResourceNotFoundException
 	 */
-	public RDFFunctionality getFunctionality(OWLFunctionality func) 
+	public RDFFunctionality getFunctionality(Functionality func) 
 			throws RDFResourceNotFoundException 
 	{
 		// get DAO

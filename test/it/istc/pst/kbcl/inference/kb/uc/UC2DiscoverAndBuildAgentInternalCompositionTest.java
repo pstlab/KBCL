@@ -58,7 +58,7 @@ public class UC2DiscoverAndBuildAgentInternalCompositionTest
 		System.out.println("........... Agent's Internal Components ......");
 		System.out.println();
 		// get agent internal components
-		List<RDFComponent> comps = agent.getComponents();
+		List<RDFComponent> comps = agent.getRDFComponents();
 		for (RDFComponent comp : comps) {
 			System.out.println(comp);
 		}
@@ -80,7 +80,7 @@ public class UC2DiscoverAndBuildAgentInternalCompositionTest
 		System.out.println(agent);
 		
 		// get agent internal components 
-		List<RDFComponent> comps = agent.getComponents();
+		List<RDFComponent> comps = agent.getRDFComponents();
 		// put values into the state variables
 		for (RDFComponent comp : comps) {
 			// initialize internal state variable
@@ -131,7 +131,7 @@ public class UC2DiscoverAndBuildAgentInternalCompositionTest
 		System.out.println(agent);
 		
 		// get agent internal components 
-		List<RDFComponent> comps = agent.getComponents();
+		List<RDFComponent> comps = agent.getRDFComponents();
 		// put values into the state variables
 		for (RDFComponent comp : comps) {
 			// initialize internal state variable

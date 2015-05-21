@@ -58,7 +58,7 @@ public class UC3DiscoverAndBuildAgentExternalDpendenciesTest
 		System.out.println("........... Agent's External Dependencies ......");
 		System.out.println();
 		// get agent external components
-		List<RDFExternalComponent> comps = agent.getNeighbors();
+		List<RDFExternalComponent> comps = agent.getRDFNeighbors();
 		for (RDFExternalComponent comp : comps) {
 			Assert.assertNotNull(comp);
 			// get connection information
@@ -85,7 +85,7 @@ public class UC3DiscoverAndBuildAgentExternalDpendenciesTest
 		System.out.println(agent);
 		
 		// get agent external components 
-		List<RDFExternalComponent> comps = agent.getNeighbors();
+		List<RDFExternalComponent> comps = agent.getRDFNeighbors();
 		// put values into the state variables
 		for (RDFExternalComponent comp : comps) {
 			// initialize internal state variable

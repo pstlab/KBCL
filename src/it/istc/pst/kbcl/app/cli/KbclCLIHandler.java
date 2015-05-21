@@ -3,8 +3,6 @@ package it.istc.pst.kbcl.app.cli;
 import it.istc.pst.kbcl.KbclManager;
 import it.istc.pst.kbcl.exception.KbclNoAgentSelectedException;
 import it.istc.pst.kbcl.exception.KbclRequestProcessingFailureException;
-import it.istc.pst.kbcl.inference.model.owl.OWLAgent;
-import it.istc.pst.kbcl.inference.model.owl.OWLFunctionality;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFPropertyNotFoundException;
 import it.istc.pst.kbcl.mapping.kb.rdf.exception.RDFResourceNotFoundException;
 import it.istc.pst.kbcl.mapping.ps.ddl.exception.DDLPlanningModelInitializationFailureException;
@@ -109,8 +107,8 @@ public class KbclCLIHandler implements Runnable
 			if (elementLabel != null) {
 				try {
 					// get agent
-					OWLAgent agent = this.kbcl.getFocusedAgent();
-					agent.addElement(elementLabel);
+					Agent agent = this.kbcl.getFocusedAgent();
+					agent.addComponent(elementLabel);
 				}
 				catch (KbclNoAgentSelectedException ex) {
 					System.out.println(ex.getLocalizedMessage());
@@ -122,109 +120,96 @@ public class KbclCLIHandler implements Runnable
 		}
 		// remove command
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.REMOVE.getCmd())) {
-			String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase().trim() : null;
-			if (parameter != null) {
+			String label = (splits != null && splits.length > 1) ? splits[1].trim() : null;
+			if (label != null) {
 				// check if an agent has been selected 
 				try {
-					// get index of the element to remove
-					int index = Integer.parseInt(parameter);
 					// select element
-					OWLAgent agent = this.kbcl.getFocusedAgent();
-					if (index >= agent.getComponents().size()) {
-						System.out.println("No component found at index " + index);
-					}
-					else {
-						Element el = agent.removeComponent(index);
-						System.out.println("Element " + el + " successfully removed!");
+					Agent agent = this.kbcl.getFocusedAgent();
+					if (!agent.removeComponent(label)) {
+						System.out.println("No Component found with label " + label);
 					}
 				}
 				catch (KbclNoAgentSelectedException ex) {
 					System.out.println(ex.getMessage());
 				}
-				catch (NumberFormatException ex) {
-					System.out.println("Specify a valid component to remove\n- help= " +  KbclCLICommand.REMOVE.getHelp());
-				}
 			}
 			else {
-				System.out.println("Select an element to remove");
+				System.out.println("Specify the label of the element to remove from module");
 			}
 		}
 		// show command
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.SHOW.getCmd())) {
 			// get command's parameter
 			String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase() : null;
-			if (parameter != null) {
+			if (parameter != null) 
+			{
 				// check parameter
 				if (parameter.equalsIgnoreCase("agents")) {
 					// print agents
 					System.out.println("Agents in the Knowledge Base");
-					int counter = 0;
-					for (Agent agent : this.kbcl.getAgents()) {
-						System.out.println("- (" + counter + ") " + agent);
-						counter++;
+					// get agents
+					for (Agent a : this.kbcl.getAgents()) {
+						System.out.println("- (" + a.getLabel() + ") -> " + a);
 					}
 				}
-				else if (parameter.equalsIgnoreCase("agent-types")) {
+				else if (parameter.equalsIgnoreCase("agent-types")) 
+				{
 					// print agent types
 					System.out.println("Agent types");
-					int counter = 0;
 					for (AgentType type : this.kbcl.getAgentTypes()) {
-						System.out.println("- (" + counter + ") " + type);
-						counter++;
+						System.out.println("- (" + type.getLabel() + ") -> " + type);
 					}
 				}
-				else if (parameter.equalsIgnoreCase("functionality-types")) {
+				else if (parameter.equalsIgnoreCase("functionality-types")) 
+				{
 					// print functionality types
-					System.out.println("Functionality types in the KB");
-					int counter = 0;
+					System.out.println("Functionality types");
 					for (FunctionalityType type : this.kbcl.getFunctionalityTypes()) {
-						System.out.println("- (" + counter + ") " + type);
-						counter++;
+						System.out.println("- (" + type.getLabel() + ") -> " + type);
 					}
 				}
-				else if (parameter.equalsIgnoreCase("functionalities")) {
+				else if (parameter.equalsIgnoreCase("functionalities")) 
+				{
 					// check if an agent has been selected
 					try {
 						// print agent's functionalities
 						System.out.println("Agent's functionalities");
-						int counter = 0;
 						// get focus agent
-						OWLAgent agent = this.kbcl.getFocusedAgent();
-						for (Functionality func : agent.getFunctionalities()) {
-							System.out.println("- (" + counter + ") " + func);
-							counter++;
+						Agent agent = this.kbcl.getFocusedAgent();
+						for (Functionality func : agent.getFunctionalities()) {		//.getFunctionalityIndex()) {
+							System.out.println("- (" + func.getLabel() + ") -> " + func);
 						}
 					}
 					catch (KbclNoAgentSelectedException ex) {
 						System.out.println(ex.getMessage());
 					}
 				}
-				else if (parameter.equalsIgnoreCase("components")) {
+				else if (parameter.equalsIgnoreCase("components")) 
+				{
 					// check if an agent has been selected
 					try {
 						// print agent's functionalities
 						System.out.println("Agent's components");
-						int counter = 0;
-						for (Element el : this.kbcl.getFocusedAgent().getComponents()) {
-							System.out.println("- (" + counter + ") " + el);
-							counter++;
+						Agent agent = this.kbcl.getFocusedAgent();
+						for (Element el : agent.getComponents()) {
+							System.out.println("- (" + el.getLabel() + ") -> " + el);
 						}
 					}
 					catch (KbclNoAgentSelectedException ex) {
 						System.out.println(ex.getMessage());
 					}
 				}
-				else if (parameter.equalsIgnoreCase("neighbors")) {
+				else if (parameter.equalsIgnoreCase("neighbors")) 
+				{
 					// check if an agent has been selected
 					try {
 						// print agent's functionalities
 						System.out.println("Agent's neighbors");
-						int counter = 0;
 						// get focused agent
-						OWLAgent agent = this.kbcl.getFocusedAgent();
+						Agent agent = this.kbcl.getFocusedAgent();
 						for (Element n : agent.getNeighbors()) {
-							System.out.println("- (" + counter + ") " + n);
-							counter++;
+							System.out.println("- (" + n.getLabel() + ") " + n);
 						}
 					}
 					catch (KbclNoAgentSelectedException ex) {
@@ -253,25 +238,20 @@ public class KbclCLIHandler implements Runnable
 		}
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.SELECT.getCmd())) {
 			// get parameter
-			String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase().trim() : null;
-			if (parameter != null) {
+			String label = (splits != null && splits.length > 1) ? splits[1].trim() : null;
+			if (label != null) {
 				try 
 				{
-					// parse index
-					int index = Integer.parseInt(parameter);
-					if (index >= this.kbcl.getAgents().size()) {
-						System.out.println("No agent found at index " + index);
-					}
-					else {
-						// get agent
-						OWLAgent agent = this.kbcl.getAgents().get(index); // this.kbcl.setFocus(index);
+					// get agent by label
+					Agent agent = this.kbcl.getAgent(label);
+					if (agent != null) {
 						// initialize mapping 
 						this.kbcl.setup(agent);
 						System.out.println("Selected agent:\n" + agent);
 					}
-				}
-				catch (NumberFormatException ex) {
-					System.err.println("Specify a valid agent to select\n- help= " + KbclCLICommand.SELECT.getHelp());
+					else {
+						System.out.println("No agent found with label " + label);
+					}
 				}
 				catch (RDFResourceNotFoundException | RDFPropertyNotFoundException ex) {
 					System.err.println("Error while retrieving KB's resources\n" + ex.getMessage());
@@ -281,27 +261,21 @@ public class KbclCLIHandler implements Runnable
 				}
 			}
 			else {
-				System.out.println("Select agent index");
+				System.out.println("Select agent's label");
 			}
 		}
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.PLAN.getCmd())) {
 			// check if agent has been selected
 			try {
 				// get index of selected functionality to plan with
-				String parameter = (splits != null && splits.length > 1) ? splits[1].toUpperCase().trim() : null;
-				if (parameter != null) {
+				String funcLabel = (splits != null && splits.length > 1) ? splits[1].trim() : null;
+				if (funcLabel != null) {
 					try {
-						// get functionality index
-						int index = Integer.parseInt(parameter);
 						// get agent
-						OWLAgent agent = this.kbcl.getFocusedAgent();
-						// check index
-						if (index >= agent.getFunctionalities().size()) {
-							System.out.println("No functionality found at index " + index);
-						}
-						else {
-							// select functionality
-							OWLFunctionality func = agent.getFunctionalities().get(index);
+						Agent agent = this.kbcl.getFocusedAgent();
+						// select functionality
+						Functionality func = agent.getFunctionality(funcLabel);
+						if (func != null) {
 							System.out.println("Selected functionality\n" + func);
 							
 							// request functionality
@@ -309,9 +283,9 @@ public class KbclCLIHandler implements Runnable
 							// print resulting PDB
 							System.out.println(this.kbcl.getPDBDescription());
 						}
-					}
-					catch (NumberFormatException ex) {
-						System.err.println("Specify a valid index for the selected functionality\n- help= " + KbclCLICommand.PLAN.getHelp());
+						else {
+							System.out.println("No functionality found with label " + funcLabel);
+						}
 					}
 					catch (KbclRequestProcessingFailureException | RDFResourceNotFoundException ex) {
 						System.err.println(ex.getMessage());

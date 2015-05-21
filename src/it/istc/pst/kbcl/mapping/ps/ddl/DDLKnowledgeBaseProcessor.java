@@ -59,7 +59,7 @@ public class DDLKnowledgeBaseProcessor implements KnowledgeProcessor<DDLFunction
 		List<DDLFunctionalComponent> list = new ArrayList<DDLFunctionalComponent>();
 		
 		// get agent's functionalities
-		Map<RDFFunctionalityType, List<RDFFunctionality>> functionalities  = this.agent.getFunctionalities();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> functionalities  = this.agent.getFunctionalityIndex();
 		// for each type of functionality build a state variable
 		for (FunctionalityType type : functionalities.keySet())
 		{
@@ -102,7 +102,7 @@ public class DDLKnowledgeBaseProcessor implements KnowledgeProcessor<DDLFunction
 		List<DDLInternalComponent> list = new ArrayList<DDLInternalComponent>();
 
 		// get agent's internal components
-		List<RDFComponent> components = this.agent.getComponents();
+		List<RDFComponent> components = this.agent.getRDFComponents();
 		// create a state variable for each internal component
 		for (RDFComponent component : components) {
 			// create a supporting data structure
@@ -167,7 +167,7 @@ public class DDLKnowledgeBaseProcessor implements KnowledgeProcessor<DDLFunction
 		List<DDLExternalComponent> list = new ArrayList<DDLExternalComponent>();
 
 		// get agent's neighbors
-		List<RDFExternalComponent> components = this.agent.getNeighbors();
+		List<RDFExternalComponent> components = this.agent.getRDFNeighbors();
 		// create a state variable for each external component
 		for (RDFExternalComponent component : components) {
 			// create DDLComponent
@@ -223,7 +223,7 @@ public class DDLKnowledgeBaseProcessor implements KnowledgeProcessor<DDLFunction
 		List<DDLSynchronization> list = new ArrayList<DDLSynchronization>();
 		
 		// get agent's functionalities
-		Map<RDFFunctionalityType, List<RDFFunctionality>> funcs = this.agent.getFunctionalities();
+		Map<RDFFunctionalityType, List<RDFFunctionality>> funcs = this.agent.getFunctionalityIndex();
 		for (RDFFunctionalityType type : funcs.keySet()) {
 			// get functionalities by type
 			for (RDFFunctionality func : funcs.get(type)) 
