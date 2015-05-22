@@ -44,7 +44,6 @@
     <!-- http://pst.istc.cnr.it/kbcl/ontology#connect -->
 
     <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#connect">
-        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ExternalElement"/>
         <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
     </ObjectProperty>
@@ -140,7 +139,6 @@
     <!-- http://pst.istc.cnr.it/kbcl/ontology#hasInput -->
 
     <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasInput">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
     </ObjectProperty>
@@ -172,7 +170,6 @@
     <!-- http://pst.istc.cnr.it/kbcl/ontology#hasOutput -->
 
     <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasOutput">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
     </ObjectProperty>

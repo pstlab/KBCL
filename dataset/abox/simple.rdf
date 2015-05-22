@@ -136,6 +136,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	
@@ -144,6 +145,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFL1">
@@ -151,6 +153,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFL2">
@@ -158,6 +161,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFL3">
@@ -165,6 +169,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFR1">
@@ -172,6 +177,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFR2">
@@ -179,6 +185,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFR3">
@@ -186,6 +193,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
+		
 	</rdf:Description>
 	
 	
@@ -194,6 +202,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBF">
@@ -201,6 +210,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBL1">
@@ -208,6 +218,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBL2">
@@ -215,6 +226,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBL3">
@@ -222,6 +234,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBR1">
@@ -229,6 +242,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBR2">
@@ -236,6 +250,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBR3">
@@ -243,6 +258,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1B">
@@ -250,6 +266,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	
@@ -258,6 +275,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1L1">
@@ -272,6 +290,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1L3">
@@ -279,9 +298,10 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
+		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBR1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1R1">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
@@ -293,6 +313,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1R3">
@@ -300,6 +321,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2B">
@@ -307,6 +329,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	
@@ -315,6 +338,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2L1">
@@ -322,6 +346,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2L2">
@@ -336,6 +361,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2R1">
@@ -343,6 +369,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2R2">
@@ -357,6 +384,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
+		
 	</rdf:Description>
 
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL3B">
@@ -364,6 +392,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	
@@ -372,6 +401,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL3L1">
@@ -379,6 +409,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL3L2">
@@ -386,6 +417,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL3L3">
@@ -400,6 +432,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL3R2">
@@ -407,6 +440,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL3R3">
@@ -421,6 +455,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1F">
@@ -428,6 +463,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1L1">
@@ -442,6 +478,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1L3">
@@ -449,6 +486,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1R1">
@@ -463,6 +501,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1R3">
@@ -470,6 +509,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2B">
@@ -477,6 +517,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2F">
@@ -484,6 +525,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2L1">
@@ -491,6 +533,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2L2">
@@ -505,6 +548,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2R1">
@@ -512,6 +556,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2R2">
@@ -526,6 +571,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
+		
 	</rdf:Description>
 	
 	
@@ -536,6 +582,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		
 	</rdf:Description>
 	
 	
@@ -544,6 +591,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR3L1">
@@ -551,6 +599,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR3L2">
@@ -558,6 +607,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR3L3">
@@ -572,6 +622,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR3R2">
@@ -579,6 +630,7 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR3R3">
@@ -586,9 +638,8 @@
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
-	</rdf:Description>
-	
-	
+	</rdf:Description>	
+
 	
 	<!-- MODULE INDIVIDUAL AND RELATIONS -->
 	

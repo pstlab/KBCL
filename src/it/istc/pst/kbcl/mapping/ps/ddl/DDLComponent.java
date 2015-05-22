@@ -131,7 +131,7 @@ public abstract class DDLComponent
 			if (v.getValue().contains("Still") ||
 					v.getValue().contains("Idle") ||
 					v.getValue().contains("Down") || 
-					(v.getValue().contains("Available") && !v.getValue().contains("not"))) 
+					(v.getValue().contains("Available") && !(v.getValue().contains("not") || v.getValue().contains("Not")))) 
 			{
 				// found
 				val = v;
