@@ -43,6 +43,7 @@ public class OWLDatasetManager
 	public static final String PROPERTY_LABEL_HAS_ELEMENT = "hasElement";
 	public static final String PROPERTY_LABEL_HAS_CROSS_TRANSFER = "hasCrossTransfer";
 	public static final String PROPERTY_LABEL_HAS_CONVEYOR = "hasConveyor";
+	public static final String PROPERTY_LABEL_CONTAINS = "contains";
 	
 	// module agent ID and type
 	public static final String CONSTANT_AGENT_TYPE = "Agent";
@@ -351,6 +352,52 @@ public class OWLDatasetManager
 	
 	/**
 	 * 
+	 * @param propertyLabel
+	 * @param label
+	 * @return
+	 */
+	public List<String> removeStatementWithTarget(String propertyLabel, String objectLabel) 
+			throws OWLIndividualNotFoundException, OWLPropertyNotFoundException
+	{
+		// get object individual
+		Individual object = this.model.getIndividual(this.ABOX_NS + objectLabel);
+		if (object == null) {
+			throw new OWLIndividualNotFoundException("[" + this.label + "]: No individual found \"" + this.ABOX_NS + objectLabel + "\"");
+		}
+		
+		// get property
+		Property p = this.model.getProperty(this.TBOX_NS + propertyLabel);
+		if (p == null) {
+			throw new OWLPropertyNotFoundException("[" + this.label + "]: No property found \"" + this.TBOX_NS + propertyLabel + "\"");
+		}
+
+		// get affected subject list
+		List<String> subjects = new ArrayList<>();
+		// found subject
+		Iterator<Resource> it = this.model.listResourcesWithProperty(p, object);
+		while (it.hasNext()) {
+			// get subject
+			Individual subject = it.next().as(Individual.class);
+			subject.removeProperty(p, object);
+			subjects.add(subject.getLocalName());
+			System.out.println("Statement  \"" + subject.getLocalName() + " " + propertyLabel + " " +objectLabel + "\" successfully removed");
+		}
+		
+		// start time
+		long start = System.currentTimeMillis();
+		// update inference model
+		this.infModel.rebind();
+		// update inference time
+		long time = System.currentTimeMillis() - start;
+		this.totalTime += time;
+		this.maxTime = Math.max(this.maxTime, time);
+		
+		// get list
+		return subjects;
+	}
+	
+	/**
+	 * 
 	 * @param subjectName
 	 * @param propertyName
 	 * @param objectName
@@ -379,16 +426,22 @@ public class OWLDatasetManager
 		}
 		
 		// remove property
-		subject.removeProperty(p, object);
-		
-		// start time
-		long start = System.currentTimeMillis();
-		// update inference model
-		this.infModel.rebind();
-		// update inference time
-		long time = System.currentTimeMillis() - start;
-		this.totalTime += time;
-		this.maxTime = Math.max(this.maxTime, time);
+		if (subject.hasProperty(p, object)) {
+			subject.removeProperty(p, object);
+			
+			// start time
+			long start = System.currentTimeMillis();
+			// update inference model
+			this.infModel.rebind();
+			// update inference time
+			long time = System.currentTimeMillis() - start;
+			this.totalTime += time;
+			this.maxTime = Math.max(this.maxTime, time);
+		}
+		else {
+			// no property related 
+			throw new OWLPropertyNotFoundException("[" + this.label + "]: Statement \"" +  subjectName + " " + propertyName + " " + objectName + "\" not found");
+		}
 	}
 	
 	/**
@@ -405,4 +458,5 @@ public class OWLDatasetManager
 		}
 		INSTANCE = null;
 	}
+	
 }

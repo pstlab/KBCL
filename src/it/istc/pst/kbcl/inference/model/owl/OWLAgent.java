@@ -30,6 +30,8 @@ public class OWLAgent extends Agent implements EventObserver
 	
 	private OWLDatasetManager dataset;
 	
+	private Map<String, String> removedSubelements;
+	
 	/**
 	 * 
 	 * @param id
@@ -45,6 +47,8 @@ public class OWLAgent extends Agent implements EventObserver
 		this.conveyors = null;
 		this.ports = null;
 		this.neighbors = null;
+		
+		this.removedSubelements = new HashMap<>();
 		
 		// get OWL data-set manager
 		this.dataset = OWLDatasetManager.getSingletonInstance();
@@ -166,9 +170,23 @@ public class OWLAgent extends Agent implements EventObserver
 	@Override
 	public void addComponent(String label) {
 		try {
-			// assert property
-			this.dataset.assertStatement(this.getLabel(), 
-					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, label);
+			
+			// check element
+			if (this.removedSubelements.containsKey(label)) {
+				// sub-element to add
+				String subject = this.removedSubelements.get(label);
+				// add property
+				this.dataset.assertStatement(subject, 
+						OWLDatasetManager.PROPERTY_LABEL_CONTAINS, 
+						label);
+			}
+			else {
+			
+				// element to add
+				this.dataset.assertStatement(this.getLabel(), 
+						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, label);
+			}
+			
 			// update agent
 			this.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
 		}
@@ -185,10 +203,26 @@ public class OWLAgent extends Agent implements EventObserver
 	public boolean removeComponent(String label) {
 		boolean removed = true;
 		try {
-			// remove property
-			this.dataset.removeStatement(this.getLabel(), 
-					OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, 
-					label);
+			// check element to remove
+			try {
+				// remove property
+				this.dataset.removeStatement(this.getLabel(), 
+						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, 
+						label);
+			}
+			catch (OWLPropertyNotFoundException ex) {
+				System.out.println(ex.getMessage());
+				
+				// remove sub-element element
+				List<String> subjects = this.dataset.removeStatementWithTarget(
+						OWLDatasetManager.PROPERTY_LABEL_CONTAINS,
+						label);
+				
+				// update removed sub-elements
+				for (String subject : subjects) {
+					this.removedSubelements.put(label, subject);
+				}
+			}
 			
 			// update agent
 			this.update(Event.AGENT_ELEMENT_UDPATE_EVENT);

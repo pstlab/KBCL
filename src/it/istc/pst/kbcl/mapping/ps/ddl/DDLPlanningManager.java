@@ -518,19 +518,25 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 						
 						// get target constraint
 						DDLValue target = ddlconstraint.getTarget();
-						ddl += "\t\t\tcd" + counter + " ";
-						// check if external component
-						if (target.getComponent().isExternal()) {
-							// add control knowledge
-							ddl += " <?> ";
+						if (target != null) {
+							ddl += "\t\t\tcd" + counter + " ";
+							// check if external component
+							if (target.getComponent().isExternal()) {
+								// add control knowledge
+								ddl += " <?> ";
+							}
+							
+							ddl	+= target.getComponent().getName() + "."
+								+ "" + target.getComponent().getTimeline() + "."
+								+ "" + target.getValue() + "();\n";
+							
+							// print constraint
+							ddl += "\t\t\t" + ddlconstraint.getConstraint() + " cd" + counter + ";\n\n";
 						}
-						
-						ddl	+= target.getComponent().getName() + "."
-							+ "" + target.getComponent().getTimeline() + "."
-							+ "" + target.getValue() + "();\n";
-						
-						// print constraint
-						ddl += "\t\t\t" + ddlconstraint.getConstraint() + " cd" + counter + ";\n\n";
+						else {
+//							WARNING
+//							System.err.println("DDLConstraint target does not exist " + ddlconstraint);
+						}
 					}
 					else 
 					{
@@ -548,25 +554,32 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 							+ "" + resReference.getComponent().getTimeline() + "."
 							+ "" + resReference.getValue() + "();\n";
 						
-						// update counter 
-						counter++;
-						int targetCdId = counter;
-						
 						// get target constraint
 						DDLValue target = ddlconstraint.getTarget();
-						ddl += "\t\t\tcd" + targetCdId + " ";
-						// check if external component
-						if (target.getComponent().isExternal()) {
-							// add control knowledge
-							ddl += " <?> ";
+						// check target
+						if (target != null) {
+							// update counter 
+							counter++;
+							int targetCdId = counter;
+							
+							ddl += "\t\t\tcd" + targetCdId + " ";
+							// check if external component
+							if (target.getComponent().isExternal()) {
+								// add control knowledge
+								ddl += " <?> ";
+							}
+							
+							ddl	+= target.getComponent().getName() + "."
+								+ "" + target.getComponent().getTimeline() + "."
+								+ "" + target.getValue() + "();\n";
+							
+							// print constraint
+							ddl += "\t\t\tcd" + refCdId +  " " + ddlconstraint.getConstraint() + " cd" + targetCdId + ";\n\n";
 						}
-						
-						ddl	+= target.getComponent().getName() + "."
-							+ "" + target.getComponent().getTimeline() + "."
-							+ "" + target.getValue() + "();\n";
-						
-						// print constraint
-						ddl += "\t\t\tcd" + refCdId +  " " + ddlconstraint.getConstraint() + " cd" + targetCdId + ";\n\n";
+						else {
+//							WARNING
+//							System.err.println("DDLConstraint target does not exist -> " + ddlconstraint);
+						}
 					}
 					
 					// update counter
