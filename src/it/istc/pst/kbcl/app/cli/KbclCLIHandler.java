@@ -147,11 +147,14 @@ public class KbclCLIHandler implements Runnable
 				// check parameter
 				if (parameter.equalsIgnoreCase("agents")) {
 					// print agents
-					System.out.println("Agents in the Knowledge Base");
+					System.out.println("Agents in the Knowledge Base\n");
 					// get agents
+					int counter = 0;
 					for (Agent a : this.kbcl.getAgents()) {
+						counter++;
 						System.out.println("- (" + a.getLabel() + ") -> " + a);
 					}
+					System.out.println("- " + counter + " agents found");
 				}
 				else if (parameter.equalsIgnoreCase("agent-types")) 
 				{
@@ -174,12 +177,15 @@ public class KbclCLIHandler implements Runnable
 					// check if an agent has been selected
 					try {
 						// print agent's functionalities
-						System.out.println("Agent's functionalities");
+						System.out.println("Agent's functionalities\n");
 						// get focus agent
 						Agent agent = this.kbcl.getFocusedAgent();
-						for (Functionality func : agent.getFunctionalities()) {		//.getFunctionalityIndex()) {
+						int counter = 0;
+						for (Functionality func : agent.getFunctionalities()) {
+							counter++;
 							System.out.println("- (" + func.getLabel() + ") -> " + func);
 						}
+						System.out.println("- " + counter + " functionalities found");
 					}
 					catch (KbclNoAgentSelectedException ex) {
 						System.out.println(ex.getMessage());
@@ -190,11 +196,14 @@ public class KbclCLIHandler implements Runnable
 					// check if an agent has been selected
 					try {
 						// print agent's functionalities
-						System.out.println("Agent's components");
+						System.out.println("Agent's components\n");
 						Agent agent = this.kbcl.getFocusedAgent();
+						int counter = 0;
 						for (Element el : agent.getComponents()) {
+							counter++;
 							System.out.println("- (" + el.getLabel() + ") -> " + el);
 						}
+						System.out.println("- " + counter + " components found");
 					}
 					catch (KbclNoAgentSelectedException ex) {
 						System.out.println(ex.getMessage());
@@ -205,12 +214,15 @@ public class KbclCLIHandler implements Runnable
 					// check if an agent has been selected
 					try {
 						// print agent's functionalities
-						System.out.println("Agent's neighbors");
+						System.out.println("Agent's neighbors\n");
 						// get focused agent
 						Agent agent = this.kbcl.getFocusedAgent();
+						int counter = 0;
 						for (Element n : agent.getNeighbors()) {
+							counter++;
 							System.out.println("- (" + n.getLabel() + ") " + n);
 						}
+						System.out.println("- " + counter + " neighbors found");
 					}
 					catch (KbclNoAgentSelectedException ex) {
 						System.out.println(ex.getMessage());

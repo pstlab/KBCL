@@ -177,7 +177,7 @@ public class OWLAgent extends Agent implements EventObserver
 				String subject = this.removedSubelements.get(label);
 				// add property
 				this.dataset.assertStatement(subject, 
-						OWLDatasetManager.PROPERTY_LABEL_CONTAINS, 
+						OWLDatasetManager.PROPERTY_LABEL_ENABLE, 
 						label);
 			}
 			else {
@@ -215,7 +215,7 @@ public class OWLAgent extends Agent implements EventObserver
 				
 				// remove sub-element element
 				List<String> subjects = this.dataset.removeStatementWithTarget(
-						OWLDatasetManager.PROPERTY_LABEL_CONTAINS,
+						OWLDatasetManager.PROPERTY_LABEL_ENABLE,
 						label);
 				
 				// update removed sub-elements

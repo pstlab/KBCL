@@ -2,7 +2,7 @@
 @prefix kbcl:	http://pst.istc.cnr.it/kbcl/ontology#
 
 [elements:
-	(?m kbcl:hasElement ?e), (?e kbcl:contains ?ex)
+	(?m kbcl:hasElement ?e), (?e kbcl:enable ?ex)
 	->
 	(?m kbcl:hasElement ?ex)]
 

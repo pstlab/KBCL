@@ -82,32 +82,32 @@
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#conveyor0">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine" />
 		
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#conveyor1">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine" />
 		
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#conveyor2">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine" />
 		
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		
 	</rdf:Description>
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#conveyor3">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ConveyorEngine" />
 		
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR3" />
 		
 	</rdf:Description>
 	
@@ -116,21 +116,21 @@
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#cross1">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine" />
 		
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor1" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor1" />
 		
 	</rdf:Description>
 
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#cross2">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine" />
 		
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor2" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor2" />
 		
 	</rdf:Description>
 
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#cross3">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine" />
 		
-		<kbcl:contains rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
+		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	

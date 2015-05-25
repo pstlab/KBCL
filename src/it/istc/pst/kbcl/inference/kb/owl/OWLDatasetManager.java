@@ -43,7 +43,7 @@ public class OWLDatasetManager
 	public static final String PROPERTY_LABEL_HAS_ELEMENT = "hasElement";
 	public static final String PROPERTY_LABEL_HAS_CROSS_TRANSFER = "hasCrossTransfer";
 	public static final String PROPERTY_LABEL_HAS_CONVEYOR = "hasConveyor";
-	public static final String PROPERTY_LABEL_CONTAINS = "contains";
+	public static final String PROPERTY_LABEL_ENABLE = "enable";
 	
 	// module agent ID and type
 	public static final String CONSTANT_AGENT_TYPE = "Agent";

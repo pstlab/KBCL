@@ -41,9 +41,9 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/kbcl/ontology#contains -->
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#enable -->
 
-    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#contains">
+    <ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#enable">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
         <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#InternalElement"/>
