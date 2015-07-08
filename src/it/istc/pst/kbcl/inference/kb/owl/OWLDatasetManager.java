@@ -69,6 +69,7 @@ public class OWLDatasetManager
 	private InfModel infModel;
 	private String label;
 	
+	private long time;
 	private long totalTime;
 	private long maxTime;
 	
@@ -127,8 +128,9 @@ public class OWLDatasetManager
 			// initialize inference model
 			this.infModel = ModelFactory.createInfModel(reasoner, this.model);
 			// set inference time
-			this.totalTime = System.currentTimeMillis() - start;
-			this.maxTime = this.totalTime;
+			this.time = System.currentTimeMillis() - start;
+			this.maxTime = this.time;
+			this.totalTime = this.time;
 		}
 		catch (IOException ex) {
 			System.err.println(ex.getMessage());
@@ -151,6 +153,14 @@ public class OWLDatasetManager
 	 */
 	public long getTotalInferenceTime() {
 		return this.totalTime;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public long getLastInferenceTime() {
+		return this.time;
 	}
 	
 	/**
@@ -200,10 +210,10 @@ public class OWLDatasetManager
 		// get class
 		OntClass c = this.model.getOntClass(TBOX_NS + className);
 		// update inference time
-		long time = System.currentTimeMillis() - start;
-		this.totalTime += time;
+		this.time = System.currentTimeMillis() - start;
+		this.totalTime += this.time;
 		// set max time
-		this.maxTime = Math.max(this.maxTime, time);
+		this.maxTime = Math.max(this.maxTime, this.time);
 		if (c == null) {
 			throw new OWLClassNotFoundException("[" + this.label + "]: Class not found \"" + TBOX_NS + className + "\"");
 		}
@@ -253,9 +263,9 @@ public class OWLDatasetManager
 		// list statements
 		Iterator<Statement> it = this.infModel.listStatements(subject, p, (RDFNode) null);
 		// update inference time
-		long time = System.currentTimeMillis() - start;
-		this.totalTime += time;
-		this.maxTime = Math.max(this.maxTime, time);
+		this.time = System.currentTimeMillis() - start;
+		this.totalTime += this.time;
+		this.maxTime = Math.max(this.maxTime, this.time);
 		while (it.hasNext()) {
 			// get next statement
 			Statement s = it.next();
@@ -296,9 +306,9 @@ public class OWLDatasetManager
 		// get individuals
 		Iterator<? extends OntResource> it = c.listInstances(false);
 		// update inference time
-		long time = System.currentTimeMillis() - start;
-		this.totalTime += time;
-		this.maxTime = Math.max(this.maxTime, time);
+		this.time = System.currentTimeMillis() - start;
+		this.totalTime += this.time;
+		this.maxTime = Math.max(this.maxTime, this.time);
 		while (it.hasNext()) {
 			// next individual
 			Individual i = it.next().asIndividual();
@@ -345,9 +355,9 @@ public class OWLDatasetManager
 		// update inference model
 		this.infModel.rebind();
 		// update inference time
-		long time = System.currentTimeMillis() - start;
-		this.totalTime += time;
-		this.maxTime = Math.max(this.maxTime, time);
+		this.time = System.currentTimeMillis() - start;
+		this.totalTime += this.time;
+		this.maxTime = Math.max(this.maxTime, this.time);
 	}
 	
 	/**
@@ -388,9 +398,9 @@ public class OWLDatasetManager
 		// update inference model
 		this.infModel.rebind();
 		// update inference time
-		long time = System.currentTimeMillis() - start;
-		this.totalTime += time;
-		this.maxTime = Math.max(this.maxTime, time);
+		this.time = System.currentTimeMillis() - start;
+		this.totalTime += this.time;
+		this.maxTime = Math.max(this.maxTime, this.time);
 		
 		// get list
 		return subjects;
@@ -434,9 +444,9 @@ public class OWLDatasetManager
 			// update inference model
 			this.infModel.rebind();
 			// update inference time
-			long time = System.currentTimeMillis() - start;
-			this.totalTime += time;
-			this.maxTime = Math.max(this.maxTime, time);
+			this.time = System.currentTimeMillis() - start;
+			this.totalTime += this.time;
+			this.maxTime = Math.max(this.maxTime, this.time);
 		}
 		else {
 			// no property related 

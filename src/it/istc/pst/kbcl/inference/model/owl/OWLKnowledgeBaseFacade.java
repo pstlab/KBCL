@@ -54,6 +54,14 @@ public class OWLKnowledgeBaseFacade
 	public long getTotalInferenceTime() {
 		return this.dataset.getTotalInferenceTime();
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getLastInferenceTime() {
+		return this.dataset.getLastInferenceTime();
+	}
 
 	/**
 	 * 

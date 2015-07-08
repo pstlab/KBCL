@@ -240,13 +240,19 @@ public class KbclCLIHandler implements Runnable
 		}
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.STATS.getCmd())) {
 			// print statistics
-			System.out.println("KBCL Statistics:");
+			System.out.println("[KBCL Statistics]:");
+			System.out.println("------------------");
 			System.out.println("- Total inference time: " + this.kbcl.getTotalInferenceTime() + " msecs");
+			System.out.println("- Last inference activity time: " + this.kbcl.getLastInferenceTime() + " msecs" );  
 			System.out.println("- Maximum time spent for inferring data after operation: " + this.kbcl.getMaxInferenceTime() + " msecs");
+			System.out.println("------------------");
 			System.out.println("- Planning Domain synthesis time: " + this.kbcl.getMappingTime() + " msecs");
 			System.out.println("- Maximum Planning Domain synthesis time: " + this.kbcl.getMaxMappingTime() + " msecs");
+			System.out.println("------------------");
 			System.out.println("- Total Planning time: " + this.kbcl.getTotalPlanningTime() + " msecs");
+			System.out.println("- Last Planning time: " + this.kbcl.getLastPlanningTime() + " msecs");
 			System.out.println("- Maximum Planning time for a request: " + this.kbcl.getMaximumPlanningTime() + " msecs");
+			System.out.println("------------------");
 		}
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.SELECT.getCmd())) {
 			// get parameter

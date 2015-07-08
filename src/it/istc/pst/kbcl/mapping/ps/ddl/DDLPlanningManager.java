@@ -1,10 +1,10 @@
 package it.istc.pst.kbcl.mapping.ps.ddl;
 
 import it.istc.pst.epsl.app.EPSLApplicationBuilder;
-import it.istc.pst.epsl.app.EPSLEmbeddedPlanner;
-import it.istc.pst.epsl.app.apsi.APSIEmbeddedPlanner;
+import it.istc.pst.epsl.app.EPSLRuntimeAbstractApplicationPlanner;
 import it.istc.pst.epsl.app.exception.EPSLPlannerInitializationException;
 import it.istc.pst.epsl.app.exception.EPSLUnsolvableGoalException;
+import it.istc.pst.epsl.app.run.EPSLRuntimeApplicationPlanner;
 import it.istc.pst.epsl.microkernel.lang.EPSLLanguageFactory;
 import it.istc.pst.epsl.microkernel.lang.EPSLParameterTypes;
 import it.istc.pst.epsl.microkernel.lang.EPSLTimelineDescriptor;
@@ -55,8 +55,8 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 	private List<DDLSynchronization> synchronizations;
 	
 	// planner 
-	private static final Class<APSIEmbeddedPlanner> EPSL_APP_CLASS = APSIEmbeddedPlanner.class;
-	private EPSLEmbeddedPlanner planner;
+	private static final Class<EPSLRuntimeApplicationPlanner> EPSL_APP_CLASS = EPSLRuntimeApplicationPlanner.class;
+	private EPSLRuntimeAbstractApplicationPlanner planner;
 	private EPSLLanguageFactory factory;
 	private EPSLLanguageQueryFactory queryFactory;
 	

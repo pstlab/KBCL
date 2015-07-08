@@ -34,10 +34,12 @@ public class KbclManager
 	// planning domain generator
 	private DDLPlanningManager planningManager;
 	
-	// statistics
+	// statistics - mapping
 	private long time;
 	private long maxTime;
+	// statistics - planning
 	private long planningTime;
+	private long totalPlanningTime;
 	private long maxPlanningTime;
 	
 	/**
@@ -101,6 +103,14 @@ public class KbclManager
 	 * 
 	 * @return
 	 */
+	public long getLastInferenceTime() {
+		return this.kbInference.getLastInferenceTime();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public long getTotalInferenceTime() {
 		return this.kbInference.getTotalInferenceTime();
 	}
@@ -111,6 +121,30 @@ public class KbclManager
 	 */
 	public long getMaxInferenceTime() {
 		return this.kbInference.getMaxInferenceTime();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getTotalPlanningTime() {
+		return this.totalPlanningTime;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getLastPlanningTime() {
+		return this.planningTime;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaximumPlanningTime() {
+		return this.maxPlanningTime;
 	}
 	
 	/**
@@ -155,22 +189,6 @@ public class KbclManager
 	/**
 	 * 
 	 * @return
-	 */
-	public long getTotalPlanningTime() {
-		return this.planningTime;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public long getMaximumPlanningTime() {
-		return this.maxPlanningTime;
-	}
-	
-	/**
-	 * 
-	 * @return
 	 * @throws KbclNoAgentSelectedException
 	 */
 	public Agent getFocusedAgent() 
@@ -208,9 +226,9 @@ public class KbclManager
 		}
 		finally {
 			// update planning time
-			long time = System.currentTimeMillis() - start;
-			this.planningTime += time;
-			this.maxPlanningTime = Math.max(this.maxPlanningTime, time);
+			this.planningTime = System.currentTimeMillis() - start;
+			this.totalPlanningTime += this.planningTime;
+			this.maxPlanningTime = Math.max(this.maxPlanningTime, this.time);
 		}
 	}
 	
