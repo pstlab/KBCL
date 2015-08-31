@@ -236,6 +236,29 @@ public class OWLAgent extends Agent implements EventObserver
 	
 	/**
 	 * 
+	 */
+	@Override
+	public boolean disconnectNeighbor(String label) {
+		boolean removed = true;
+		try {
+			// remove properties
+			this.dataset.removeStatementWithTarget(
+					OWLDatasetManager.PROPERTY_LABEL_CONNECT, 
+					label);
+			
+			// notify subscribers
+			this.update(Event.NEIGHBOR_UPDATE_EVENT);
+		}
+		catch (OWLPropertyNotFoundException | OWLIndividualNotFoundException ex) {
+			System.out.println(ex.getMessage());
+			removed = false;
+		}
+
+		return removed;
+	}
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public List<Element> getNeighbors() {
@@ -259,7 +282,32 @@ public class OWLAgent extends Agent implements EventObserver
 	@Override
 	public void update(Event event) {
 		switch (event) {
-			case PORT_CONNECTION_UPDATE_EVENT : {
+//			case PORT_CONNECTION_UPDATE_EVENT : {
+//				try {
+//					// update agent ports
+//					this.ports = this.loadAgentPorts();
+//					// update agent's neighbors
+//					this.neighbors = this.loadAgentNeighbors();
+//					// update agent's functionalities
+//					this.functionalities = this.loadAgentFunctionalities();
+//				}
+//				catch (OWLIndividualNotFoundException | OWLPropertyNotFoundException ex) {
+//					this.ports = null;
+//					this.neighbors = null;
+//					this.functionalities = null;
+//					System.err.println(ex.getMessage());
+//				}
+//				finally {
+//					// propagate update to agent's observers
+//					for (EventObserver o : this.observers) {
+//						// notify observers
+//						o.update(Event.PORT_CONNECTION_UPDATE_EVENT);
+//					}			
+//				}
+//			}
+//			break;
+			
+			case NEIGHBOR_UPDATE_EVENT : {
 				try {
 					// update agent ports
 					this.ports = this.loadAgentPorts();
@@ -278,7 +326,7 @@ public class OWLAgent extends Agent implements EventObserver
 					// propagate update to agent's observers
 					for (EventObserver o : this.observers) {
 						// notify observers
-						o.update(Event.AGENT_ELEMENT_UDPATE_EVENT);
+						o.update(Event.NEIGHBOR_UPDATE_EVENT);
 					}			
 				}
 			}

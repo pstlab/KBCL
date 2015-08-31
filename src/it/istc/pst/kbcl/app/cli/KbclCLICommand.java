@@ -18,37 +18,50 @@ public enum KbclCLICommand
 	/**
 	 * show domain information
 	 */
-	SHOW("show", "show KB's information - options {agents, agent-types, functionality-types, functionalities, components, neighbors}", new String[] {"agents", "agent-types", "functionality-types", "functionalities", "components", "neighbors"}),
+	SHOW("show", "show KB's information - options {agents, agent-types, functionality-types, functionalities, components, neighbors}", 
+			new String[] {"agents", "agent-types", "functionality-types", "functionalities", "components", "neighbors"}),
 	
 	/**
 	 * select an agent on which to initialize the KBCL
 	 */
-	SELECT("select", "select an agent on which to initialize the KBCL", new String[] {}),
+	SELECT("select", "select an agent on which to initialize the KBCL", 
+			new String[] {}),
 	
 	/**
 	 * 
 	 */
-	STATS("stats", "print statistics about inference and mapping time", new String[] {}),
+	STATS("stats", "print statistics about inference and mapping time", 
+			new String[] {}),
 	
 	/**
 	 * 
 	 */
-	ADD("add", "add an element to the current agent", new String[] {}),
+	ADD("add", "add an element to the current agent", 
+			new String[] {}),
 	
 	/**
 	 * 
 	 */
-	REMOVE("remove", "remove an element to remove", new String[] {}),
+	REMOVE("remove", "remove a component of the module", 
+			new String[] {}),
 	
 	/**
 	 * 
 	 */
-	PLAN("plan", "plan a functional activity", new String[] {}),
+	EVENT("event", "an exogenous event concerning module's neighbors - options {neighbor-off, port-off, component-off}", 
+			new String[] {"neighbor-off", "port-off", "component-off"}),
+	
+	/**
+	 * 
+	 */
+	PLAN("plan", "plan a functional activity", 
+			new String[] {}),
 	
 	/**
 	 * exit command
 	 */
-	EXIT("exit", "close CLI client", new String[] {});
+	EXIT("exit", "close CLI client", 
+			new String[] {});
 	
 	private String cmd;
 	private String usage;

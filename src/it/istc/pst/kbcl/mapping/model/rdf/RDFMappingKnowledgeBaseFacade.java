@@ -98,7 +98,9 @@ public class RDFMappingKnowledgeBaseFacade implements EventObserver, EventPublis
 	public void update(Event event) {
 		// check event
 		switch (event) {
-			case AGENT_ELEMENT_UDPATE_EVENT : {
+			case AGENT_ELEMENT_UDPATE_EVENT :
+			case NEIGHBOR_UPDATE_EVENT :
+			{
 				try {
 					// update knowledge base
 					this.dataset.close();
@@ -138,6 +140,7 @@ public class RDFMappingKnowledgeBaseFacade implements EventObserver, EventPublis
 			
 			default : {
 				// ignore
+				System.err.println("[RDFMappingKnowledge:141] Controllare");
 			}
 			break;
 		}

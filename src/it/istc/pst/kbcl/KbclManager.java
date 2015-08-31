@@ -35,8 +35,8 @@ public class KbclManager
 	private DDLPlanningManager planningManager;
 	
 	// statistics - mapping
-	private long time;
-	private long maxTime;
+//	private long time;
+//	private long maxTime;
 	// statistics - planning
 	private long planningTime;
 	private long totalPlanningTime;
@@ -64,7 +64,7 @@ public class KbclManager
 			throws DDLPlanningModelInitializationFailureException, KbclInitializationException, RDFPropertyNotFoundException, RDFResourceNotFoundException
 	{
 		// get start time
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
 		try 
 		{
 			// set focus and subscribe
@@ -75,12 +75,12 @@ public class KbclManager
 		catch (DDLPlanningModelInitializationFailureException ex) {
 			System.err.println(ex.getMessage());
 		}
-		finally {
-			// set mapping time
-			this.time = System.currentTimeMillis() - start;
-			// update max
-			this.maxTime = Math.max(this.maxTime, this.time);
-		}
+//		finally {
+//			// set mapping time
+//			this.time = System.currentTimeMillis() - start;
+//			// update max
+//			this.maxTime = Math.max(this.maxTime, this.time);
+//		}
 	}
 	
 	/**
@@ -88,7 +88,7 @@ public class KbclManager
 	 * @return
 	 */
 	public long getMappingTime() {
-		return this.time;
+		return (this.planningManager != null) ?  this.planningManager.getMappingTime() : 0;
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class KbclManager
 	 * @return
 	 */
 	public long getMaxMappingTime() {
-		return this.maxTime;
+		return (this.planningManager != null) ? this.planningManager.getMaxMappingTime() : 0;
 	}
 	
 	/**
@@ -228,7 +228,7 @@ public class KbclManager
 			// update planning time
 			this.planningTime = System.currentTimeMillis() - start;
 			this.totalPlanningTime += this.planningTime;
-			this.maxPlanningTime = Math.max(this.maxPlanningTime, this.time);
+			this.maxPlanningTime = Math.max(this.maxPlanningTime, this.planningTime);
 		}
 	}
 	

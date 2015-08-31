@@ -74,6 +74,12 @@ public final class RDFAgent extends Agent
 	}
 	
 	@Override
+	public boolean disconnectNeighbor(String label) {
+		System.exit(1);
+		return false;
+	}
+	
+	@Override
 	public List<Functionality> getFunctionalities() {
 		System.exit(1);
 		return null;

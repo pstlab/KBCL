@@ -10,7 +10,7 @@ public enum Event
 	/**
 	 * 
 	 */
-	PORT_CONNECTION_UPDATE_EVENT,
+//	PORT_CONNECTION_UPDATE_EVENT,
 	
 	/**
 	 * 
@@ -20,5 +20,10 @@ public enum Event
 	/**
 	 * 
 	 */
-	MAPPING_KNOWLEDGE_UPDATE_EVENT
+	MAPPING_KNOWLEDGE_UPDATE_EVENT, 
+	
+	/**
+	 * 
+	 */
+	NEIGHBOR_UPDATE_EVENT
 }

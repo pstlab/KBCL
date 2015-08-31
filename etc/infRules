@@ -5,12 +5,7 @@
 	(?m kbcl:hasElement ?e), (?e kbcl:enable ?ex)
 	->
 	(?m kbcl:hasElement ?ex)]
-
-[modulePortsAndNeighbors: 
-	(?m kbcl:hasElement ?e), (?e kbcl:connect ?n)
-	-> 
-	(?m kbcl:hasPort ?e), (?m kbcl:hasNeighbor ?n)]
-
+	
 [moduleCrossTransfers: 
 	(?m kbcl:hasElement ?e), (?e rdf:type kbcl:CrossTransferEngine)
 	-> 
@@ -21,9 +16,19 @@
 	-> 
 	(?m kbcl:hasConveyor ?e)]
 	
+[modulePorts:
+	(?m kbcl:hasElement ?p), (?p rdf:type kbcl:Port)
+	->
+	(?m kbcl:hasPort ?p)]
+
+[moduleNeighbors: 
+	(?m kbcl:hasPort ?p), (?p kbcl:connect ?n), (?n rdf:type kbcl:Neighbor)
+	-> 
+	(?m kbcl:hasNeighbor ?n)]
+	
 [moduleChannels: 
-	(?f kbcl:hasOutput ?o), (?m kbcl:hasPort ?o),
-	(?f kbcl:hasInput ?i), (?m kbcl:hasPort ?i),
+	(?f kbcl:hasOutput ?o), (?m kbcl:hasPort ?o), (?o kbcl:connect ?n1), (?m kbcl:hasNeighbor ?n1),
+	(?f kbcl:hasInput ?i), (?m kbcl:hasPort ?i), (?i kbcl:connect ?n2), (?m kbcl:hasNeighbor ?n2),
 	(?f kbcl:require ?e), (?m kbcl:hasElement ?e)
 	->
 	(?m kbcl:hasChannel ?f)]

@@ -60,6 +60,9 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 	private EPSLLanguageFactory factory;
 	private EPSLLanguageQueryFactory queryFactory;
 	
+	private long time;
+	private long maxTime;
+	
 	/**
 	 * 
 	 * @param agent
@@ -85,6 +88,7 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 			this.kbMapping.subscribe(this);
 			
 			
+			long start = System.currentTimeMillis();
 			// create processor
 			this.processor = new DDLKnowledgeBaseProcessor(this.kbMapping.getAgent(), this.horizon);
 
@@ -105,6 +109,9 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 			// create query factory
 			this.queryFactory = EPSLLanguageQueryFactory.getSingletonInstance();
 			
+			// update statistics
+			this.time = System.currentTimeMillis() - start;
+			this.maxTime = this.time;
 		}
 		catch (RDFResourceNotFoundException | RDFPropertyNotFoundException ex) {
 			// throws exception
@@ -114,6 +121,22 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 			// throws exception
 			throw new DDLPlanningModelInitializationFailureException(ex.getMessage());
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMappingTime() {
+		return this.time;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaxMappingTime() {
+		return this.maxTime;
 	}
 	
 	/**
@@ -132,10 +155,12 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 		// check event
 		switch (event) {
 			// agent update
-			case MAPPING_KNOWLEDGE_UPDATE_EVENT : 
+			case MAPPING_KNOWLEDGE_UPDATE_EVENT :
+			case NEIGHBOR_UPDATE_EVENT : 
 			{
 				try 
 				{
+					long start = System.currentTimeMillis();
 					// create processor
 					this.processor = new DDLKnowledgeBaseProcessor(this.kbMapping.getAgent(), this.horizon);
 
@@ -155,6 +180,11 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 					this.factory = EPSLLanguageFactory.getSingletonInstance(this.horizon);
 					// create query factory
 					this.queryFactory = EPSLLanguageQueryFactory.getSingletonInstance();
+					
+					this.time = System.currentTimeMillis() - start;
+					this.maxTime = Math.max(this.maxTime, this.time);
+					
+					System.err.println(" OOOOOOOOO ");
 				}
 				catch (Exception ex) {
 					// throws exception
@@ -165,6 +195,7 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 			
 			default : {
 				// ignore
+				System.err.println("[DDLPlanningManager:179] - Controllare");
 			}
 			break;
 		}

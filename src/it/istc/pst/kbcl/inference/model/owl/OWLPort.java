@@ -105,7 +105,7 @@ public class OWLPort extends OWLElement implements EventPublisher
 			// notify observers
 			for (EventObserver o : this.observers) {
 				// notify
-				o.update(Event.PORT_CONNECTION_UPDATE_EVENT);
+				o.update(Event.NEIGHBOR_UPDATE_EVENT);
 			}
 		}
 	}
@@ -128,7 +128,7 @@ public class OWLPort extends OWLElement implements EventPublisher
 			// notify observers
 			for (EventObserver o : this.observers) {
 				// notify
-				o.update(Event.PORT_CONNECTION_UPDATE_EVENT);
+				o.update(Event.NEIGHBOR_UPDATE_EVENT);
 			}
 		}
 	}

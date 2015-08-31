@@ -138,6 +138,36 @@ public class KbclCLIHandler implements Runnable
 				System.out.println("Specify the label of the element to remove from module");
 			}
 		}
+		// event command
+		else if (cmd.equalsIgnoreCase(KbclCLICommand.EVENT.getCmd())) {
+			// get parameters
+			String option  = (splits != null && splits.length > 1) ? splits[1].trim() : null;
+			if (option != null) {
+				// check option
+				if (option.equalsIgnoreCase("neighbor-off")) {
+					// get neighbor's label
+					String neighborLabel = (splits != null && splits.length > 2) ? splits[2].trim() : null;
+					if (neighborLabel != null) 
+					{
+						try {
+							// get current agent
+							Agent agent = this.kbcl.getFocusedAgent();
+							// disconnect neighbor from the agent
+							agent.disconnectNeighbor(neighborLabel);
+						}
+						catch (KbclNoAgentSelectedException ex) {
+							System.out.println(ex.getMessage());
+						}
+					}
+					else {
+						System.out.println("Specify a neighbor concerning the event");
+					}
+				}
+			}
+			else {
+				System.out.println("Specify an option " + KbclCLICommand.EVENT.getHelp());
+			}
+		}
 		// show command
 		else if (cmd.equalsIgnoreCase(KbclCLICommand.SHOW.getCmd())) {
 			// get command's parameter

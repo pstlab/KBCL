@@ -1,13 +1,17 @@
 PROBLEM single_Problem (DOMAIN single_Domain)
 {
 	f0 <fact> single_Channel.single_Channel_timeline.Idle() AT [0, 0] [1, 1000] [1, 1000];
-	f1 <fact> single_Main_Conveyor.single_Main_Conveyor_timeline.Main_Conveyor_Still() AT [0, 0] [1, 1000] [1, 1000];
-	f2 <fact> single_Port_L2.single_Port_L2_timeline.Port_L2_Available() AT [0, 0] [1, 1000] [1, 1000];
-	f3 <fact> single_Cross_Transfer_2.single_Cross_Transfer_2_timeline.Cross_2_Down() AT [0, 0] [1, 1000] [1, 1000];
-	f4 <fact> single_Port_F.single_Port_F_timeline.Port_F_Available() AT [0, 0] [1, 1000] [1, 1000];
-	f5 <fact> single_Cross_Conveyor_2.single_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Still() AT [0, 0] [1, 1000] [1, 1000];
-	f6 <fact> single_Neighbor_F.single_Neighbor_F_timeline.Neighbor_F_Available() AT [0, 0] [1000,1000] [1000,1000];
-	f7 <fact> single_Neighbor_L.single_Neighbor_L_timeline.Neighbor_L_Available() AT [0, 0] [1000,1000] [1000,1000];
+	f1 <fact> single_Port_R2.single_Port_R2_timeline.Port_R2_Available() AT [0, 0] [1, 1000] [1, 1000];
+	f2 <fact> single_Main_Conveyor.single_Main_Conveyor_timeline.Main_Conveyor_Still() AT [0, 0] [1, 1000] [1, 1000];
+	f3 <fact> single_Port_B.single_Port_B_timeline.Port_B_Available() AT [0, 0] [1, 1000] [1, 1000];
+	f4 <fact> single_Port_L2.single_Port_L2_timeline.Port_L2_Available() AT [0, 0] [1, 1000] [1, 1000];
+	f5 <fact> single_Cross_Transfer_2.single_Cross_Transfer_2_timeline.Cross_2_Down() AT [0, 0] [1, 1000] [1, 1000];
+	f6 <fact> single_Port_F.single_Port_F_timeline.Port_F_Available() AT [0, 0] [1, 1000] [1, 1000];
+	f7 <fact> single_Cross_Conveyor_2.single_Cross_Conveyor_2_timeline.Cross_Conveyor_2_Still() AT [0, 0] [1, 1000] [1, 1000];
+	f8 <fact> single_Neighbor_B.single_Neighbor_B_timeline.Neighbor_B_Available() AT [0, 0] [1000,1000] [1000,1000];
+	f9 <fact> single_Neighbor_F.single_Neighbor_F_timeline.Neighbor_F_Available() AT [0, 0] [1000,1000] [1000,1000];
+	f10 <fact> single_Neighbor_L.single_Neighbor_L_timeline.Neighbor_L_Available() AT [0, 0] [1000,1000] [1000,1000];
+	f11 <fact> single_Neighbor_R.single_Neighbor_R_timeline.Neighbor_R_Available() AT [0, 0] [1000,1000] [1000,1000];
 
 }
 

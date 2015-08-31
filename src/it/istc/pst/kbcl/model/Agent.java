@@ -87,6 +87,13 @@ public abstract class Agent implements EventPublisher
 	
 	/**
 	 * 
+	 * @param label
+	 * @return
+	 */
+	public abstract boolean disconnectNeighbor(String label);
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public abstract List<Element> getNeighbors();
