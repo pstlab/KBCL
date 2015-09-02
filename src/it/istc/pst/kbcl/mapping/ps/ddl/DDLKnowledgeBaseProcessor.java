@@ -230,45 +230,59 @@ public class DDLKnowledgeBaseProcessor implements KnowledgeProcessor<DDLFunction
 			{
 				// get functionality implementations
 				List<RDFFunctionalityImplementation> implementations = func.getImplementations();
-				for (RDFFunctionalityImplementation impl : implementations) {
+				for (RDFFunctionalityImplementation impl : implementations) 
+				{
 					// create a synchronization
-					// get the DDLValue related to the functionality
-					DDLValue reference = this.findex.get(func);
-					// create a synchronization for the current functionality
-					DDLSynchronization ddlsync = new DDLSynchronization(reference);
-					// add constraints to synchronization
-					for (RDFTemporalConstraint tc : impl.getConstraints()) {
-						// get required state
-						RDFState state = tc.getTarget();
-						// get related DDLValue
-						DDLValue target = this.sindex.get(state);
-						// get constraint label
-						String label = tc.getLabel().toUpperCase().trim();
-						
-						// create constraint
-						DDLConstraint cons = new DDLConstraint(reference, target, DDLTemporalConstraintType.getType(label));
-						// add constraint to synchronization
-						ddlsync.addConstraint(cons);
-					}
-					
-					// add restrictions
-					for (RDFState s : impl.getRestrictions().keySet()) {
-						// create related value
-						DDLValue from = this.sindex.get(s);
-						for (RDFTemporalConstraint c : impl.getRestrictions().get(s)) {
-							// get required value
-							DDLValue to = this.sindex.get(c.getTarget());
+					try 
+					{
+						// get the DDLValue related to the functionality
+						DDLValue reference = this.findex.get(func);
+						// create a synchronization for the current functionality
+						DDLSynchronization ddlsync = new DDLSynchronization(reference);
+						// add constraints to synchronization
+						for (RDFTemporalConstraint tc : impl.getConstraints()) {
+							// get required state
+							RDFState state = tc.getTarget();
+							
+							// check state and related component
+							if (!this.sindex.containsKey(state) || this.sindex.get(state).getComponent() == null) {
+								throw new Exception();
+							}
+							
+							// get related DDLValue
+							DDLValue target = this.sindex.get(state);
 							// get constraint label
-							String label = c.getLabel().toUpperCase().trim();
+							String label = tc.getLabel().toUpperCase().trim();
+							
 							// create constraint
-							DDLConstraint cons = new DDLConstraint(from, to, DDLTemporalConstraintType.getType(label));
+							DDLConstraint cons = new DDLConstraint(reference, target, DDLTemporalConstraintType.getType(label));
 							// add constraint to synchronization
 							ddlsync.addConstraint(cons);
 						}
+						
+						// add restrictions
+						for (RDFState s : impl.getRestrictions().keySet()) {
+							// create related value
+							DDLValue from = this.sindex.get(s);
+							for (RDFTemporalConstraint c : impl.getRestrictions().get(s)) {
+								// get required value
+								DDLValue to = this.sindex.get(c.getTarget());
+								// get constraint label
+								String label = c.getLabel().toUpperCase().trim();
+								// create constraint
+								DDLConstraint cons = new DDLConstraint(from, to, DDLTemporalConstraintType.getType(label));
+								// add constraint to synchronization
+								ddlsync.addConstraint(cons);
+							}
+						}
+						
+						// add synchronization
+						list.add(ddlsync);
 					}
-					
-					// add synchronization
-					list.add(ddlsync);
+					catch (Exception ex) {
+						// the implementation is not valid
+						System.err.println("... Not valid implementation found...");
+					}
 				}
 			}
 		}

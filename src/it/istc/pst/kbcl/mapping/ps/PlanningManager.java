@@ -8,24 +8,6 @@ package it.istc.pst.kbcl.mapping.ps;
  */
 public interface PlanningManager 
 {
-//	protected long horizon;
-//	
-//	/**
-//	 * 
-//	 * @param name
-//	 * @param horizon
-//	 */
-//	protected PlanningManager() {
-//		}
-//	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public long getHorizon() {
-//		return horizon;
-//	}
-	
 	/**
 	 * 
 	 * @return

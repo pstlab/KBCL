@@ -128,571 +128,212 @@
 	
 	<!-- CHANNEL INDIVIDUALS -->
 
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1B1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFB">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
+		
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1B2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
 		
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1F1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFF">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1F2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
 		
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1L1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFL">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />		
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
+				
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelFR">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
+		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />		
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />		
+		
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
+				
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
+		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />		
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />		
+		
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1L2">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBB">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
+		
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
+		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBL">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
+		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1R1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelBR">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />		
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF1R2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
 
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2B1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />				
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2B2">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelLF">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2F1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2F2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		
+
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />				
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2L1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelLB">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />		
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
+
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />				
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2L2">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelLL">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />		
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />		
 		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2R1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelF2R2">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelLR">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />		
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1"/>
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2"/>
 
-	</rdf:Description>
-	
-	
-	
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1B1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />				
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1B2">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelRF">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1F1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1F2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1L1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
 
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1L2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1R1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelRB">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelB1R2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1B1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />		
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1B2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1F1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1F2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1L1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor1" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1L2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1R1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL1R2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2B1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2B2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2F1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
 
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2F2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />		
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2L1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelRL">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />		
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2L2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
 		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor2" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2R1">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelRR">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
 		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
+		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
+		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
 		
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelL2R2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1B1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1B2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1F1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1F2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1L1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor1" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1L2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1R1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor1" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR1R2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2B1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-		<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2B2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2F1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2F2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portF2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2L1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2L2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor2" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2R1">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR1" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
-		
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#channelR2R2">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel" />
-		
-		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portR2" />
-		
-		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor2" />
-		
-	</rdf:Description>	
 	
 	<!-- MODULE INDIVIDUAL AND RELATIONS -->
 	

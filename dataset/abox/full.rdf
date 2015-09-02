@@ -467,6 +467,8 @@
 		<kbcl:hasInput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portL3" />
 		<kbcl:hasOutput rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portB" />
 		
+		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
+		
 	</rdf:Description>
 	
 	

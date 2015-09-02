@@ -34,10 +34,7 @@ public class KbclManager
 	// planning domain generator
 	private DDLPlanningManager planningManager;
 	
-	// statistics - mapping
-//	private long time;
-//	private long maxTime;
-	// statistics - planning
+	// statistics
 	private long planningTime;
 	private long totalPlanningTime;
 	private long maxPlanningTime;
@@ -63,10 +60,7 @@ public class KbclManager
 	public void setup(Agent agent) 
 			throws DDLPlanningModelInitializationFailureException, KbclInitializationException, RDFPropertyNotFoundException, RDFResourceNotFoundException
 	{
-		// get start time
-//		long start = System.currentTimeMillis();
-		try 
-		{
+		try {
 			// set focus and subscribe
 			this.focus = agent;
 			// create planning manager
@@ -75,12 +69,6 @@ public class KbclManager
 		catch (DDLPlanningModelInitializationFailureException ex) {
 			System.err.println(ex.getMessage());
 		}
-//		finally {
-//			// set mapping time
-//			this.time = System.currentTimeMillis() - start;
-//			// update max
-//			this.maxTime = Math.max(this.maxTime, this.time);
-//		}
 	}
 	
 	/**
