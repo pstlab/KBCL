@@ -135,6 +135,38 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 	 * 
 	 * @return
 	 */
+	public int getNumberOfSynchronizations() {
+		return (this.synchronizations != null) ? this.synchronizations.size() : 0;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfFunctionalities() {
+		return this.agent.getFunctionalities().size();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfInternalComponents() {
+		return this.agent.getComponents().size();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfExternalComponents() {
+		return this.agent.getNeighbors().size();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public long getMaxMappingTime() {
 		return this.maxTime;
 	}
@@ -183,8 +215,6 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 					
 					this.time = System.currentTimeMillis() - start;
 					this.maxTime = Math.max(this.maxTime, this.time);
-					
-					System.err.println(" OOOOOOOOO ");
 				}
 				catch (Exception ex) {
 					// throws exception

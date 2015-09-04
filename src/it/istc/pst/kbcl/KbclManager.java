@@ -91,6 +91,38 @@ public class KbclManager
 	 * 
 	 * @return
 	 */
+	public int getNumberOfSynchronizations() {
+		return (this.planningManager != null) ? this.planningManager.getNumberOfSynchronizations() : 0;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfFunctionalities() {
+		return (this.planningManager != null) ? this.planningManager.getNumberOfFunctionalities() : 0;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfInternalComponents() {
+		return (this.planningManager != null) ? this.planningManager.getNumberOfInternalComponents() : 0;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfExternalComponents() {
+		return (this.planningManager != null) ? this.planningManager.getNumberOfExternalComponents() : 0;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public long getLastInferenceTime() {
 		return this.kbInference.getLastInferenceTime();
 	}

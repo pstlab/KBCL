@@ -278,6 +278,10 @@ public class KbclCLIHandler implements Runnable
 			System.out.println("------------------");
 			System.out.println("- Planning Domain synthesis time: " + this.kbcl.getMappingTime() + " msecs");
 			System.out.println("- Maximum Planning Domain synthesis time: " + this.kbcl.getMaxMappingTime() + " msecs");
+			System.out.println("- Number of Functionalities: " + this.kbcl.getNumberOfFunctionalities() + "");
+			System.out.println("- Number of Synchronizations: " + this.kbcl.getNumberOfSynchronizations() + "");
+			System.out.println("- Number of Internal Components: " + this.kbcl.getNumberOfInternalComponents() + "");
+			System.out.println("- Number of External Components: " + this.kbcl.getNumberOfExternalComponents() + "");
 			System.out.println("------------------");
 			System.out.println("- Total Planning time: " + this.kbcl.getTotalPlanningTime() + " msecs");
 			System.out.println("- Last Planning time: " + this.kbcl.getLastPlanningTime() + " msecs");

@@ -804,7 +804,6 @@
 		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
 		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portF1available" />
 		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL2available" />
-		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
 		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
 		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />		
 		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
@@ -814,7 +813,7 @@
 	
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelFL">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
-		<gecko:ID>Channel F1 L1</gecko:ID>
+		<gecko:ID>ChannelFL</gecko:ID>
 		<gecko:minDuration>10</gecko:minDuration>
 		<gecko:maxDuration>25</gecko:maxDuration>
 		<!-- implementation -->
@@ -860,5 +859,405 @@
 		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelFRimplementation2" />		
 	</rdf:Description>
 	
+	<!-- CHANNEL-B-B -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBBimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB2available" />		
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:contains rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2forward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0forward" />	
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelBB</gecko:ID>
+		<gecko:minDuration>10</gecko:minDuration>
+		<gecko:maxDuration>20</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBBimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL-B-F -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBFimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborFavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portF1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBFimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborFavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portF2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelBF</gecko:ID>
+		<gecko:minDuration>30</gecko:minDuration>
+		<gecko:maxDuration>60</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBFimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBFimplementation2" />
+	</rdf:Description>
+	
+	<!-- CHANNEL-B-L -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBLimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL2available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0forward" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBLimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0forward" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBL">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelBL</gecko:ID>
+		<gecko:minDuration>10</gecko:minDuration>
+		<gecko:maxDuration>25</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBLimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBLimplementation2" />		
+	</rdf:Description>
+	
+	<!-- CHANNEL-B-R -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBRimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3forward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBRimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3forward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />				
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBR">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelBR</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBRimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelBRimplementation2" />		
+	</rdf:Description>
+	
+	<!-- CHANNEL-L-F -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLFimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborFavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portF1available" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0forward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />		
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLFimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborFavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portF1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL2available" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0forward" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />						
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2forward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelLF</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLFimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLFimplementation2" />		
+	</rdf:Description>
+	
+	<!-- CHANNEL-L-R -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLRimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1forward" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLRimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2forward" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLR">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelLR</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLRimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLRimplementation2" />		
+	</rdf:Description>
+	
+	<!-- CHANNEL-L-B -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLBimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB1available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1forward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLBimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB1available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2forward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0backward" />		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelLB</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLBimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLBimplementation2" />		
+	</rdf:Description>
+	
+	<!-- CHANNEL-L-L -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLLimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL2available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1forward" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2backward" />		
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />		
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />				
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor0backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLL">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelLL</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelLLimplementation1" />
+	</rdf:Description>
+	
+	
+	<!-- CHANNEL-R-F -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRFimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborFavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portF2available" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3forward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />		
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRFimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborFavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portF1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR2available" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3forward" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />						
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2backward" />	
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRF">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelLF</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRFimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRFimplementation2" />		
+	</rdf:Description>
+	
+	<!-- CHANNEL-R-R -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRRimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3backward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />	
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2forward" />		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRR">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelRR</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRRimplementation1" />
+	</rdf:Description>
+	
+	<!-- CHANNEL-R-B -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRBimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB2available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1backward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />		
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3backward" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRBimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborBavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portB2available" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2backward" />
+		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2down" />
+		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor3backward" />		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRB">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelRB</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRBimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRBimplementation2" />		
+	</rdf:Description>
+	
+	<!-- CHANNEL-R-L -->
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRLimplementation1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />		
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor1backward" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross1up" />				
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRLimplementation2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
+		<!-- constraints -->
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborLavailable" />		
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portL2available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2backward" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />				
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRL">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channel" />
+		<gecko:ID>ChannelRL</gecko:ID>
+		<gecko:minDuration>20</gecko:minDuration>
+		<gecko:maxDuration>35</gecko:maxDuration>
+		<!-- implementation -->
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRLimplementation1" />
+		<gecko:hasImplementation rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#channelRLimplementation1" />		
+	</rdf:Description>
 	
 </rdf:RDF>
