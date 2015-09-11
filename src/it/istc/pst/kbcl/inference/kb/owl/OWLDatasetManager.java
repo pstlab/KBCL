@@ -7,10 +7,13 @@ import it.istc.pst.kbcl.inference.kb.owl.exception.OWLPropertyNotFoundException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
@@ -89,8 +92,12 @@ public class OWLDatasetManager
 	{
 		try 
 		{
+			// get thread CPU time in nanoseconds
+			ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 			// get start time
-			long start = System.currentTimeMillis();
+//			long start = System.currentTimeMillis();
+			long start = bean.getCurrentThreadUserTime();
+			
 			// get property file
 			Properties prop = new Properties();
 			prop.load(new FileInputStream(new File("etc/infCfg.properties")));
@@ -128,7 +135,8 @@ public class OWLDatasetManager
 			// initialize inference model
 			this.infModel = ModelFactory.createInfModel(reasoner, this.model);
 			// set inference time
-			this.time = System.currentTimeMillis() - start;
+//			this.time = System.currentTimeMillis() - start;
+			this.time = bean.getCurrentThreadUserTime() - start;
 			this.maxTime = this.time;
 			this.totalTime = this.time;
 		}
@@ -152,7 +160,8 @@ public class OWLDatasetManager
 	 * @return
 	 */
 	public long getTotalInferenceTime() {
-		return this.totalTime;
+		// convert from nanoseconds to milliseconds
+		return TimeUnit.NANOSECONDS.toMillis(this.totalTime);
 	}
 
 	/**
@@ -160,7 +169,7 @@ public class OWLDatasetManager
 	 * @return
 	 */
 	public long getLastInferenceTime() {
-		return this.time;
+		return TimeUnit.NANOSECONDS.toMillis(this.time);
 	}
 	
 	/**
@@ -168,7 +177,7 @@ public class OWLDatasetManager
 	 * @return
 	 */
 	public long getMaxInferenceTime() {
-		return this.maxTime;
+		return TimeUnit.NANOSECONDS.toMillis(this.maxTime);
 	}
 	
 	/**
@@ -205,12 +214,18 @@ public class OWLDatasetManager
 	{
 		// list of subclasses 
 		List<OWLClass> list = new ArrayList<>();
+		// get thread CPU time in nanoseconds
+		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		// start time
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
+		long start = bean.getCurrentThreadUserTime();
+		
 		// get class
 		OntClass c = this.model.getOntClass(TBOX_NS + className);
 		// update inference time
-		this.time = System.currentTimeMillis() - start;
+//		this.time = System.currentTimeMillis() - start;
+		this.time = bean.getCurrentThreadUserTime() - start;
+		
 		this.totalTime += this.time;
 		// set max time
 		this.maxTime = Math.max(this.maxTime, this.time);
@@ -244,8 +259,12 @@ public class OWLDatasetManager
 	{
 		// list of individuals
 		List<OWLInstance> list = new ArrayList<>();
+		// get thread CPU time in nanoseconds
+		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		// get start time
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
+		long start = bean.getCurrentThreadUserTime(); 
+				
 		// get subject individual
 		Individual subject = this.model.getIndividual(this.ABOX_NS + subjectName);
 		if (subject == null) {
@@ -263,7 +282,8 @@ public class OWLDatasetManager
 		// list statements
 		Iterator<Statement> it = this.infModel.listStatements(subject, p, (RDFNode) null);
 		// update inference time
-		this.time = System.currentTimeMillis() - start;
+//		this.time = System.currentTimeMillis() - start;
+		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
 		while (it.hasNext()) {
@@ -296,7 +316,10 @@ public class OWLDatasetManager
 	{
 		// list instances
 		List<OWLInstance> list = new ArrayList<>();
-		long start = System.currentTimeMillis();
+		// get thread CPU time in nanoseconds
+		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+//		long start = System.currentTimeMillis();
+		long start = bean.getCurrentThreadUserTime(); 
 		// get class
 		OntClass c = this.model.getOntClass(TBOX_NS + className);
 		if (c == null) {
@@ -306,7 +329,8 @@ public class OWLDatasetManager
 		// get individuals
 		Iterator<? extends OntResource> it = c.listInstances(false);
 		// update inference time
-		this.time = System.currentTimeMillis() - start;
+//		this.time = System.currentTimeMillis() - start;
+		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
 		while (it.hasNext()) {
@@ -350,12 +374,16 @@ public class OWLDatasetManager
 		
 		// assert property directly into the inference model
 		subject.addProperty(p, object);
+		// get thread CPU time in nanoseconds
+		ThreadMXBean bean = ManagementFactory.getThreadMXBean();		
 		// start time
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
+		long start = bean.getCurrentThreadUserTime(); 
 		// update inference model
 		this.infModel.rebind();
 		// update inference time
-		this.time = System.currentTimeMillis() - start;
+//		this.time = System.currentTimeMillis() - start;
+		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
 	}
@@ -393,12 +421,16 @@ public class OWLDatasetManager
 			System.out.println("Statement  \"" + subject.getLocalName() + " " + propertyLabel + " " +objectLabel + "\" successfully removed");
 		}
 		
+		// get thread CPU time in nanoseconds
+		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		// start time
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
+		long start = bean.getCurrentThreadUserTime();
 		// update inference model
 		this.infModel.rebind();
 		// update inference time
-		this.time = System.currentTimeMillis() - start;
+//		this.time = System.currentTimeMillis() - start;
+		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
 		
@@ -439,12 +471,17 @@ public class OWLDatasetManager
 		if (subject.hasProperty(p, object)) {
 			subject.removeProperty(p, object);
 			
+			// get thread CPU time in nanoseconds
+			ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 			// start time
-			long start = System.currentTimeMillis();
+//			long start = System.currentTimeMillis();
+			long start = bean.getCurrentThreadUserTime();
+			
 			// update inference model
 			this.infModel.rebind();
 			// update inference time
-			this.time = System.currentTimeMillis() - start;
+//			this.time = System.currentTimeMillis() - start;
+			this.time = bean.getCurrentThreadUserTime() - start;
 			this.totalTime += this.time;
 			this.maxTime = Math.max(this.maxTime, this.time);
 		}

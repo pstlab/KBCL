@@ -15,8 +15,11 @@ import it.istc.pst.kbcl.model.AgentType;
 import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.model.FunctionalityType;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -148,7 +151,7 @@ public class KbclManager
 	 * @return
 	 */
 	public long getTotalPlanningTime() {
-		return this.totalPlanningTime;
+		return TimeUnit.NANOSECONDS.toMillis(this.totalPlanningTime);
 	}
 	
 	/**
@@ -156,7 +159,7 @@ public class KbclManager
 	 * @return
 	 */
 	public long getLastPlanningTime() {
-		return this.planningTime;
+		return TimeUnit.NANOSECONDS.toMillis(this.planningTime);
 	}
 
 	/**
@@ -164,7 +167,7 @@ public class KbclManager
 	 * @return
 	 */
 	public long getMaximumPlanningTime() {
-		return this.maxPlanningTime;
+		return TimeUnit.NANOSECONDS.toMillis(this.maxPlanningTime);
 	}
 	
 	/**
@@ -239,14 +242,17 @@ public class KbclManager
 	public void plan(Functionality func) 
 			throws KbclRequestProcessingFailureException, RDFResourceNotFoundException
 	{
-		long start = System.currentTimeMillis();
+		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+//		long start = System.currentTimeMillis();
+		long start = bean.getCurrentThreadUserTime();
 		try {
 			// propagate planning request
 			this.planningManager.plan(func);
 		}
 		finally {
 			// update planning time
-			this.planningTime = System.currentTimeMillis() - start;
+//			this.planningTime = System.currentTimeMillis() - start;
+			this.planningTime = bean.getCurrentThreadUserTime() - start;
 			this.totalPlanningTime += this.planningTime;
 			this.maxPlanningTime = Math.max(this.maxPlanningTime, this.planningTime);
 		}

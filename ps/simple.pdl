@@ -1,5 +1,14 @@
 PROBLEM simple_Problem (DOMAIN simple_Domain)
 {
+	f0 <fact> simple_Channel.simple_Channel_timeline.Idle() AT [0, 0] [1, 1000] [1, 1000];
+	f1 <fact> simple_Cross_Transfer_2.simple_Cross_Transfer_2_timeline.Cross_2_Down() AT [0, 0] [1, 1000] [1, 1000];
+	f2 <fact> simple_Cross_Transfer_3.simple_Cross_Transfer_3_timeline.Cross_3_Down() AT [0, 0] [1, 1000] [1, 1000];
+	f3 <fact> simple_Port_B.simple_Port_B_timeline.Port_B_Available() AT [0, 0] [1, 1000] [1, 1000];
+	f4 <fact> simple_Port_F.simple_Port_F_timeline.Port_F_Available() AT [0, 0] [1, 1000] [1, 1000];
+	f5 <fact> simple_Cross_Transfer_1.simple_Cross_Transfer_1_timeline.Cross_1_Down() AT [0, 0] [1, 1000] [1, 1000];
+	f6 <fact> simple_Main_Conveyor.simple_Main_Conveyor_timeline.Main_Conveyor_Still() AT [0, 0] [1, 1000] [1, 1000];
+	f7 <fact> simple_Neighbor_F.simple_Neighbor_F_timeline.Neighbor_F_Available() AT [0, 0] [1000,1000] [1000,1000];
+	f8 <fact> simple_Neighbor_B.simple_Neighbor_B_timeline.Neighbor_B_Available() AT [0, 0] [1000,1000] [1000,1000];
 
 }
 

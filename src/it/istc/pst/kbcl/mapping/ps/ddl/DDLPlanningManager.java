@@ -30,11 +30,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -88,7 +91,9 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 			this.kbMapping.subscribe(this);
 			
 			
-			long start = System.currentTimeMillis();
+			ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+//			long start = System.currentTimeMillis();
+			long start = bean.getCurrentThreadUserTime();
 			// create processor
 			this.processor = new DDLKnowledgeBaseProcessor(this.kbMapping.getAgent(), this.horizon);
 
@@ -110,7 +115,8 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 			this.queryFactory = EPSLLanguageQueryFactory.getSingletonInstance();
 			
 			// update statistics
-			this.time = System.currentTimeMillis() - start;
+			this.time = bean.getCurrentThreadUserTime() - start;
+//			this.time = System.currentTimeMillis() - start;
 			this.maxTime = this.time;
 		}
 		catch (RDFResourceNotFoundException | RDFPropertyNotFoundException ex) {
@@ -128,7 +134,15 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 	 * @return
 	 */
 	public long getMappingTime() {
-		return this.time;
+		return TimeUnit.NANOSECONDS.toMillis(this.time);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getMaxMappingTime() {
+		return TimeUnit.NANOSECONDS.toMillis(this.maxTime);
 	}
 	
 	/**
@@ -165,14 +179,6 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 	
 	/**
 	 * 
-	 * @return
-	 */
-	public long getMaxMappingTime() {
-		return this.maxTime;
-	}
-	
-	/**
-	 * 
 	 */
 	@Override
 	public String getModelName() {
@@ -192,7 +198,9 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 			{
 				try 
 				{
-					long start = System.currentTimeMillis();
+					ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+//					long start = System.currentTimeMillis();
+					long start = bean.getCurrentThreadUserTime();
 					// create processor
 					this.processor = new DDLKnowledgeBaseProcessor(this.kbMapping.getAgent(), this.horizon);
 
@@ -213,7 +221,8 @@ public class DDLPlanningManager implements PlanningManager, EventObserver
 					// create query factory
 					this.queryFactory = EPSLLanguageQueryFactory.getSingletonInstance();
 					
-					this.time = System.currentTimeMillis() - start;
+//					this.time = System.currentTimeMillis() - start;
+					this.time = bean.getCurrentThreadUserTime() - start;
 					this.maxTime = Math.max(this.maxTime, this.time);
 				}
 				catch (Exception ex) {

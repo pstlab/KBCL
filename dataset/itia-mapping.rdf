@@ -2079,7 +2079,7 @@
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#implementation" />
 		<!-- constraints -->
 		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#neighborRavailable" />
-		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR1available" />
+		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#portR2available" />
 		<gecko:during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#cross2up" />
 		<gecko:starts-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2backward" />	
 		<gecko:ends-during rdf:resource="http://pst.istc.cnr.it/kbcl/ps/mapping#conveyor2forward" />
