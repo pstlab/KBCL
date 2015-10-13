@@ -1,6 +1,6 @@
 package it.istc.pst.kbcl.inference.model.owl;
 
-import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager;
+import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager_v1;
 import it.istc.pst.kbcl.inference.kb.owl.OWLInstance;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLIndividualNotFoundException;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLPropertyNotFoundException;
@@ -40,7 +40,7 @@ public class OWLChannel extends OWLFunctionality
 				// load data from data-set
 				List<OWLInstance> ps = this.dataset
 						.retrieveAllInstancesRelatedByProperty(this.label, 
-								OWLDatasetManager.PROPERTY_LABEL_HAS_INPUT_PORT);
+								OWLDatasetManager_v1.PROPERTY_LABEL_HAS_INPUT_PORT);
 				
 				// check size
 				if (!ps.isEmpty()) {
@@ -78,7 +78,7 @@ public class OWLChannel extends OWLFunctionality
 				// load data from data-set
 				List<OWLInstance> ps = this.dataset
 						.retrieveAllInstancesRelatedByProperty(this.label, 
-								OWLDatasetManager.PROPERTY_LABEL_HAS_OUTPUT_PORT);
+								OWLDatasetManager_v1.PROPERTY_LABEL_HAS_OUTPUT_PORT);
 				
 				// check size
 				if (!ps.isEmpty()) {

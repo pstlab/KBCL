@@ -1,6 +1,6 @@
 package it.istc.pst.kbcl.inference.model.owl;
 
-import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager;
+import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager_v1;
 import it.istc.pst.kbcl.inference.kb.owl.OWLInstance;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLIndividualNotFoundException;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLPropertyNotFoundException;
@@ -34,7 +34,7 @@ public class OWLPort extends OWLElement implements EventPublisher
 			// load from data-set
 			List<OWLInstance> ns = this.dataset
 					.retrieveAllInstancesRelatedByProperty(this.label, 
-							OWLDatasetManager.PROPERTY_LABEL_CONNECT);
+							OWLDatasetManager_v1.PROPERTY_LABEL_CONNECT);
 			
 			// check list
 			if (!ns.isEmpty()) {
@@ -93,7 +93,7 @@ public class OWLPort extends OWLElement implements EventPublisher
 	public void connectTo(OWLElement neighbor) {
 		try {
 			// save relation
-			this.dataset.assertStatement(this.label, OWLDatasetManager.PROPERTY_LABEL_CONNECT, neighbor.getLabel());
+			this.dataset.assertStatement(this.label, OWLDatasetManager_v1.PROPERTY_LABEL_CONNECT, neighbor.getLabel());
 			// update
 			this.neighbor = neighbor;
 		}
@@ -117,7 +117,7 @@ public class OWLPort extends OWLElement implements EventPublisher
 		try {
 			if (this.neighbor != null) {
 				// remove connection property
-				this.dataset.removeStatement(this.label, OWLDatasetManager.PROPERTY_LABEL_CONNECT, this.neighbor.getLabel());
+				this.dataset.removeStatement(this.label, OWLDatasetManager_v1.PROPERTY_LABEL_CONNECT, this.neighbor.getLabel());
 				this.neighbor = null;
 			}
 		}

@@ -1,7 +1,7 @@
 package it.istc.pst.kbcl.inference.model.owl;
 
 import it.istc.pst.kbcl.inference.kb.owl.OWLClass;
-import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager;
+import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager_v1;
 import it.istc.pst.kbcl.inference.kb.owl.OWLInstance;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLClassNotFoundException;
 import it.istc.pst.kbcl.model.Agent;
@@ -26,7 +26,7 @@ public class OWLKnowledgeBaseFacade
 	private List<ElementType> elementTypes;
 	private List<Agent> agents;
 	
-	private OWLDatasetManager dataset;
+	private OWLDatasetManager_v1 dataset;
 	
 	private static OWLKnowledgeBaseFacade INSTANCE = null;
 	
@@ -68,7 +68,7 @@ public class OWLKnowledgeBaseFacade
 		this.elementTypes = null;
 		this.agents = null;
 		// get data set
-		this.dataset = OWLDatasetManager.getSingletonInstance();
+		this.dataset = OWLDatasetManager_v1.getSingletonInstance();
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class OWLKnowledgeBaseFacade
 		this.elementTypes = null;
 		this.agents = null;
 		// get data set
-		this.dataset = OWLDatasetManager.getSingletonInstance(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
+		this.dataset = OWLDatasetManager_v1.getSingletonInstance(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
 	}
 	
 	/**
@@ -201,7 +201,7 @@ public class OWLKnowledgeBaseFacade
 		List<AgentType> list = new ArrayList<>();
 		// load types
 		List<OWLClass> types = this.dataset
-				.retrieveAllSubclasses(OWLDatasetManager.CONSTANT_AGENT_TYPE);
+				.retrieveAllSubclasses(OWLDatasetManager_v1.CONSTANT_AGENT_TYPE);
 		for (OWLClass type : types) {
 			list.add(new OWLAgentType(type.getUrl(), type.getLabel()));
 		}
@@ -220,7 +220,7 @@ public class OWLKnowledgeBaseFacade
 		List<FunctionalityType> list = new ArrayList<>();
 		// load types
 		List<OWLClass> types = this.dataset
-				.retrieveAllSubclasses(OWLDatasetManager.CONSTANT_FUNCTIONALITY_TYPE);
+				.retrieveAllSubclasses(OWLDatasetManager_v1.CONSTANT_FUNCTIONALITY_TYPE);
 		for (OWLClass type : types) {
 			list.add(new OWLFunctionalityType(type.getUrl(), type.getLabel()));
 		}
@@ -239,7 +239,7 @@ public class OWLKnowledgeBaseFacade
 		List<ElementType> list = new ArrayList<>();
 		// load types
 		List<OWLClass> types = this.dataset
-				.retrieveAllSubclasses(OWLDatasetManager.CONSTANT_ELEMENT_TYPE);
+				.retrieveAllSubclasses(OWLDatasetManager_v1.CONSTANT_ELEMENT_TYPE);
 		for (OWLClass type : types) {
 			list.add(new OWLElementType(type.getUrl(), type.getLabel()));
 		}
@@ -257,7 +257,7 @@ public class OWLKnowledgeBaseFacade
 		List<Agent> list = new ArrayList<>();
 		// load agents
 		List<OWLInstance> as = this.dataset
-				.retrieveAllInstancesOfClass(OWLDatasetManager.CONSTANT_AGENT_TYPE);
+				.retrieveAllInstancesOfClass(OWLDatasetManager_v1.CONSTANT_AGENT_TYPE);
 		for (OWLInstance a : as) {
 			list.add(new OWLAgent(a.getUrl(), a.getLabel(),
 					new OWLAgentType(a.getType().getUrl(), a.getType().getLabel())));

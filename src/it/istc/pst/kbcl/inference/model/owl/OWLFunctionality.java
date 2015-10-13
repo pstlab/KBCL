@@ -1,6 +1,6 @@
 package it.istc.pst.kbcl.inference.model.owl;
 
-import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager;
+import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager_v1;
 import it.istc.pst.kbcl.model.Functionality;
 import it.istc.pst.kbcl.model.FunctionalityType;
 
@@ -11,7 +11,7 @@ import it.istc.pst.kbcl.model.FunctionalityType;
  */
 public class OWLFunctionality extends Functionality 
 {
-	protected OWLDatasetManager dataset;
+	protected OWLDatasetManager_v1 dataset;
 	
 	/**
 	 * 
@@ -22,6 +22,6 @@ public class OWLFunctionality extends Functionality
 	protected OWLFunctionality(String id, String label, FunctionalityType type) {
 		super(id, label, type);
 		// get data-set manager
-		this.dataset = OWLDatasetManager.getSingletonInstance();
+		this.dataset = OWLDatasetManager_v1.getSingletonInstance();
 	}
 }

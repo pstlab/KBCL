@@ -1,6 +1,6 @@
 package it.istc.pst.kbcl.inference.model.owl;
 
-import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager;
+import it.istc.pst.kbcl.inference.kb.owl.OWLDatasetManager_v1;
 import it.istc.pst.kbcl.inference.kb.owl.OWLInstance;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLIndividualNotFoundException;
 import it.istc.pst.kbcl.inference.kb.owl.exception.OWLPropertyNotFoundException;
@@ -28,7 +28,7 @@ public class OWLAgent extends Agent implements EventObserver
 	private Map<String, OWLPort> ports;
 	private Map<String, OWLElement> neighbors;
 	
-	private OWLDatasetManager dataset;
+	private OWLDatasetManager_v1 dataset;
 	
 	private Map<String, String> removedSubelements;
 	
@@ -51,7 +51,7 @@ public class OWLAgent extends Agent implements EventObserver
 		this.removedSubelements = new HashMap<>();
 		
 		// get OWL data-set manager
-		this.dataset = OWLDatasetManager.getSingletonInstance();
+		this.dataset = OWLDatasetManager_v1.getSingletonInstance();
 	}
 	
 	/**
@@ -177,14 +177,14 @@ public class OWLAgent extends Agent implements EventObserver
 				String subject = this.removedSubelements.get(label);
 				// add property
 				this.dataset.assertStatement(subject, 
-						OWLDatasetManager.PROPERTY_LABEL_ENABLE, 
+						OWLDatasetManager_v1.PROPERTY_LABEL_ENABLE, 
 						label);
 			}
 			else {
 			
 				// element to add
 				this.dataset.assertStatement(this.getLabel(), 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, label);
+						OWLDatasetManager_v1.PROPERTY_LABEL_HAS_ELEMENT, label);
 			}
 			
 			// update agent
@@ -207,7 +207,7 @@ public class OWLAgent extends Agent implements EventObserver
 			try {
 				// remove property
 				this.dataset.removeStatement(this.getLabel(), 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_ELEMENT, 
+						OWLDatasetManager_v1.PROPERTY_LABEL_HAS_ELEMENT, 
 						label);
 			}
 			catch (OWLPropertyNotFoundException ex) {
@@ -215,7 +215,7 @@ public class OWLAgent extends Agent implements EventObserver
 				
 				// remove sub-element element
 				List<String> subjects = this.dataset.removeStatementWithTarget(
-						OWLDatasetManager.PROPERTY_LABEL_ENABLE,
+						OWLDatasetManager_v1.PROPERTY_LABEL_ENABLE,
 						label);
 				
 				// update removed sub-elements
@@ -243,7 +243,7 @@ public class OWLAgent extends Agent implements EventObserver
 		try {
 			// remove properties
 			this.dataset.removeStatementWithTarget(
-					OWLDatasetManager.PROPERTY_LABEL_CONNECT, 
+					OWLDatasetManager_v1.PROPERTY_LABEL_CONNECT, 
 					label);
 			
 			// notify subscribers
@@ -381,7 +381,7 @@ public class OWLAgent extends Agent implements EventObserver
 		Map<String, OWLPort> index = new HashMap<>();
 		List<OWLInstance> ps = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_PORT);
+						OWLDatasetManager_v1.PROPERTY_LABEL_HAS_PORT);
 		
 		// create port list
 		for (OWLInstance p : ps) {
@@ -410,7 +410,7 @@ public class OWLAgent extends Agent implements EventObserver
 		Map<String, OWLElement> index = new HashMap<>();
 		List<OWLInstance> ns = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_NEIGHBOR);
+						OWLDatasetManager_v1.PROPERTY_LABEL_HAS_NEIGHBOR);
 		
 		// create neighbor list
 		for (OWLInstance n : ns) {
@@ -437,14 +437,14 @@ public class OWLAgent extends Agent implements EventObserver
 		Map<String, OWLElement> index = new HashMap<>();
 		List<OWLInstance> acts = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_CROSS_TRANSFER);
+						OWLDatasetManager_v1.PROPERTY_LABEL_HAS_CROSS_TRANSFER);
 		
 		// create actuator list
 		for (OWLInstance act : acts) {
 			OWLElement el = new OWLElement(act.getUrl(), act.getLabel(), 
 					new OWLElementType(act.getType().getUrl(), act.getType().getLabel()));
 			// check element type
-			if (el.getType().getLabel().equals(OWLDatasetManager.CONSTANT_CROSS_TRANSFER_TYPE)) {
+			if (el.getType().getLabel().equals(OWLDatasetManager_v1.CONSTANT_CROSS_TRANSFER_TYPE)) {
 				// add entry to index
 				index.put(el.getLabel(), el);
 			}
@@ -467,14 +467,14 @@ public class OWLAgent extends Agent implements EventObserver
 		Map<String, OWLElement> index = new HashMap<>();
 		List<OWLInstance> acts = this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_CONVEYOR);
+						OWLDatasetManager_v1.PROPERTY_LABEL_HAS_CONVEYOR);
 		
 		// create actuator list
 		for (OWLInstance act : acts) {
 			OWLElement el = new OWLElement(act.getUrl(), act.getLabel(), 
 					new OWLElementType(act.getType().getUrl(), act.getType().getLabel()));
 			// check element type
-			if (el.getType().getLabel().equals(OWLDatasetManager.CONSTANT_CONVEYOR_TYPE)) {
+			if (el.getType().getLabel().equals(OWLDatasetManager_v1.CONSTANT_CONVEYOR_TYPE)) {
 				// add entry to index
 				index.put(el.getLabel(), el);
 			}
@@ -497,7 +497,7 @@ public class OWLAgent extends Agent implements EventObserver
 		Map<String, OWLFunctionality> index = new HashMap<>();
 		List<OWLInstance> funcs =  this.dataset
 				.retrieveAllInstancesRelatedByProperty(this.label, 
-						OWLDatasetManager.PROPERTY_LABEL_HAS_CHANNEL);
+						OWLDatasetManager_v1.PROPERTY_LABEL_HAS_CHANNEL);
 
 		// create channel list
 		for (OWLInstance f : funcs) {

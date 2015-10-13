@@ -35,7 +35,7 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
  * @author alessandroumbrico
  *
  */
-public class OWLDatasetManager 
+public class OWLDatasetManager_v2 
 {
 	public static final String PROPERTY_LABEL_HAS_CHANNEL = "hasChannel";
 	public static final String PROPERTY_LABEL_HAS_NEIGHBOR = "hasNeighbor";
@@ -87,7 +87,7 @@ public class OWLDatasetManager
 	private String ABOX_URL;
 	private String ABOX_NS;
 	
-	private static OWLDatasetManager INSTANCE = null;
+	private static OWLDatasetManager_v2 INSTANCE = null;
 	
 	/**
 	 * 
@@ -98,7 +98,7 @@ public class OWLDatasetManager
 	 * @param tboxPath
 	 * @param tboxURL
 	 */
-	private OWLDatasetManager(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
+	private OWLDatasetManager_v2(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
 		// get thread CPU time in nanoseconds
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		// get start time
@@ -142,7 +142,7 @@ public class OWLDatasetManager
 	/**
 	 * 
 	 */
-	private OWLDatasetManager() 
+	private OWLDatasetManager_v2() 
 	{
 		try 
 		{
@@ -200,9 +200,9 @@ public class OWLDatasetManager
 	/**
 	 * 
 	 */
-	public static OWLDatasetManager getSingletonInstance() {
+	public static OWLDatasetManager_v2 getSingletonInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new OWLDatasetManager();
+			INSTANCE = new OWLDatasetManager_v2();
 		}
 		return INSTANCE;
 	}
@@ -217,9 +217,9 @@ public class OWLDatasetManager
 	 * @param tboxURL
 	 * @return
 	 */
-	public static OWLDatasetManager getSingletonInstance(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
+	public static OWLDatasetManager_v2 getSingletonInstance(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
 		if (INSTANCE == null) {
-			INSTANCE = new OWLDatasetManager(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
+			INSTANCE = new OWLDatasetManager_v2(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
 		}
 		return INSTANCE;
 	}
