@@ -1,0 +1,54 @@
+@prefix rdf:	http://www.w3.org/1999/02/22-rdf-syntax-ns#
+@prefix kbcl:	http://pst.istc.cnr.it/kbcl/ontology#
+
+[cross:
+	(?m kbcl:hasDevice ?d), (?d kbcl:hasPerformance ?p), (?p rdf:type kbcl:Operative),
+	(?d rdf:type kbcl:CrossTransfer)
+	->
+	(?m kbcl:hasCrossTransfer ?d)]
+	
+[conveyor:
+	(?m kbcl:hasDevice ?d), (?d kbcl:hasPerformance ?p), (?p rdf:type kbcl:Operative),
+	(?d rdf:type kbcl:Conveyor)
+	->
+	(?m kbcl:hasConveyor ?d)]
+	
+[ports:
+	(?m kbcl:hasDevice ?d), (?d kbcl:hasPerformance ?p), (?p rdf:type kbcl:Operative),
+	(?d rdf:type kbcl:Port)
+	-> 
+	(?m kbcl:hasPort ?d)]
+
+[collaborators:
+	(?m kbcl:hasPort ?p), (?p kbcl:hasLocation ?l1),
+	(?r rdf:type kbcl:Robot), (?r kbcl:hasPerformance ?per), 
+	(?per rdf:type kbcl:Operative), (?r kbcl:hasLocation ?l2), 
+	(?l1 kbcl:connection ?l2)
+	-> 
+	(?m kbcl:hasCollaborator ?r)]
+
+[change-overs:
+	(?m kbcl:hasComponent ?c), (?c kbcl:hasLocation ?l1), (?c kbcl:hasLocation ?l2), 
+	makeTemp(?f)
+	-> 
+	(?f rdf:type kbcl:ChangeOver), (?m kbcl:canDoChangeOver ?f), 
+	(?f kbcl:target ?c), (?l1 kbcl:connection ?l2)]
+	
+[primitive-channels:
+	(?m kbcl:hasComponent ?c1), (?m kbcl:hasComponent ?c2),
+	(?c1 kbcl:hasLocation ?l1), (?c2 kbcl:hasLocation ?l2),
+	(?l2 kbcl:connection ?l1), (?l2 kbcl:connection ?l3), 
+	makeTemp(?f)
+	->
+	(?f rdf:type kbcl:Channel), (?f kbcl:startLocation ?l1), (?f kbcl:endLocation ?l2)]
+
+[channels:
+	(?m kbcl:hasCollaborator ?c1), (?m kbcl:hasCollaborator ?c2),
+	(?c1 kbcl:hasLocation ?lc1), (?lc1 kbcl:connection ?l1),
+	(?c2 kbcl:hasLocation ?lc2), (?lc2 kbcl:connection ?l2),
+	(?f rdf:type kbcl:Channel), (?f kbcl:startLocation ?l1), (?f kbcl:endLocation ?l2)
+	-> 
+	(?m kbcl:hasChannel ?f)]
+	
+
+

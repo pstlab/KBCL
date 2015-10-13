@@ -116,8 +116,6 @@
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#cross1">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine" />
 		
-		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor1" />
-		
 	</rdf:Description>
 
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#cross2">
@@ -127,8 +125,6 @@
 
 	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#cross3">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransferEngine" />
-		
-		<kbcl:enable rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
 	</rdf:Description>
 	
@@ -777,17 +773,18 @@
 		
 		<kbcl:require rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor3" />
 		
-	</rdf:Description>
+	</rdf:Description>	
+
 	
 	<!-- MODULE INDIVIDUAL AND RELATIONS -->
 	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#double">
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#simple">
 		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Module" />
 		
 		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor0" />
 		
 		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/kbcl/instance#cross1" />
-		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/kbcl/instance#cross2" />		
+		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/kbcl/instance#cross2" />
 		<kbcl:hasElement rdf:resource="http://pst.istc.cnr.it/kbcl/instance#cross3" />
 		
 	</rdf:Description>

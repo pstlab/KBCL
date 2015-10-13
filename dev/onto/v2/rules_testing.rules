@@ -1,0 +1,58 @@
+@prefix kbcl: http://pst.istc.cnr.it/kbcl/ontology#
+
+[components:
+	(?m kbcl:hasDevice ?d), (?d kbcl:hasPerformance ?p), (?p rdf:type kbcl:Operative)
+	->
+	(?m kbcl:hasComponent ?d)]
+
+[cross:
+	(?m kbcl:hasComponent ?d), 
+	(?d rdf:type kbcl:CrossTransfer)
+	->
+	(?m kbcl:hasCrossTransfer ?d)]
+	
+[conveyor:
+	(?m kbcl:hasComponent ?d),
+	(?d rdf:type kbcl:Conveyor),
+	->
+	(?m kbcl:hasConveyor ?d)]
+	
+[ports:
+	(?m kbcl:hasComponent ?d),
+	(?d rdf:type kbcl:Port)
+	-> 
+	(?m kbcl:hasPort ?d)]
+	
+[collaborators:
+	(?m kbcl:hasComponent ?p), (?p kbcl:hasLocation ?l1),
+	(?r rdf:type kbcl:Robot), (?r kbcl:hasPerformance ?per), (?per rdf:type kbcl:Operative), 
+	(?r kbcl:hasLocation ?l2), (?l1 kbcl:connection ?l2)
+	-> 
+	(?m kbcl:hasCollaborator ?r)]
+	
+[primitive-channels:
+	(?m kbcl:hasComponent ?c1), (?m kbcl:hasComponent ?c2),
+	(?c1 kbcl:hasLocation ?x1), (?c2 kbcl:hasLocation ?x2),
+	(?x1 kbcl:connection ?x2),
+	makeTemp(?f), notEqual(?c1, ?c2)
+	->
+	(?f rdf:type kbcl:Channel), (?f kbcl:startLocation ?x1), (?f kbcl:endLocation ?x2)]
+	
+[connection-transitive-closure-bychannel:
+	(?f1 rdf:type kbcl:Channel), (?f2 rdf:type kbcl:Channel),
+	(?f1 kbcl:startLocation ?s1), (?f1 kbcl:endLocation ?e1),
+	(?f2 kbcl:startLocation ?s2), (?f2 kbcl:endLocation ?e2),
+	notEqual(?f1, ?f2), equal(?e1, ?s2)
+	->
+	(?s1 kbcl:connection ?e2)]
+
+[available-channels:
+	(?m kbcl:hasCollaborator ?r1), (?m kbcl:hasCollaborator ?r2)
+	(?r1 kbcl:hasLocation ?xr1), (?r2 kbcl:hasLocation ?xr2),
+	(?m kbcl:hasComponent ?c1), (?c1 kbcl:hasLocation ?s),
+	(?m kbcl:hasComponent ?c2), (?c2 kbcl:hasLocation ?e),
+	(?xr1 kbcl:connection ?s), (?xr2 kbcl:connection ?e), (?s kbcl:connection ?e),
+	notEqual(?c1, ?c2), makeTemp(?f)
+	->
+	(?m kbcl:canDoChannel ?f), (?f kbcl:startLocation ?s), (?f kbcl:endLocation ?e)]
+	

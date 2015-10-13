@@ -1,0 +1,1461 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://pst.istc.cnr.it/kbcl/ontology#"
+     xml:base="http://pst.istc.cnr.it/kbcl/ontology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://pst.istc.cnr.it/kbcl/ontology">
+        <owl:versionIRI rdf:resource="http://pst.istc.cnr.it/kbcl/ontology/version/2.0.1"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoAction -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoAction">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoFunction"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoChangeOver -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoChangeOver">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ChangeOver"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoAction"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoChannel -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoChannel">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoAction"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoCommunication -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoCommunication">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoFunction"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoFunction -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoFunction">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoReceive -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoReceive">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Receive"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoCommunication"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoSend -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoSend">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Send"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoCommunication"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoSensing -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoSensing">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Sensing"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoTest"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#canDoTest -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#canDoTest">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Test"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#canDoFunction"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#connection -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#connection">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#connection"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#endLocation -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#endLocation">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasAbstractQuality -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasAbstractQuality">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#AbstractQuality"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasQuality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasActuator -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasActuator">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Actuator"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasComponent"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isActuatorOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isComponentOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasBehavior -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasBehavior">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Behavior"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasAbstractQuality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasCollaborator -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasCollaborator">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasComponent -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasComponent">
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Component"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasDevice"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isDeviceOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasConveyor -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasConveyor">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Conveyor"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasEngine"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isEngineOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasCrossTransfer -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasCrossTransfer">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#CrossTransfer"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasEngine"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isEngineOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasDevice -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasDevice">
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Device"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isDeviceOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasEngine -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasEngine">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasActuator"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isEngineOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isActuatorOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasLocation -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasLocation">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasPhysicalQuality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasPerformance -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasPerformance">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasPhysicalQuality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasPhysicalQuality -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasPhysicalQuality">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasQuality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasPort -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasPort">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Port"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasSensor"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isPortOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isSensorOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasQuality -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasQuality">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasSensor -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasSensor">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Sensor"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasComponent"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isComponentOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#hasTool -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasTool">
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Tool"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasDevice"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isDeviceOf"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isActuatorOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isActuatorOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isComponentOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasComponent"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isCollaboratorOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isCollaboratorOf">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasCollaborator"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isComponentOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isComponentOf">
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasComponent"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isDeviceOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasDevice"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isConveyorOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isConveyorOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasConveyor"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isEngineOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasEngine"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isCrossTransferOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isCrossTransferOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasCrossTransfer"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isEngineOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasEngine"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isDeviceOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isDeviceOf"/>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isEngineOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isEngineOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isActuatorOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasActuator"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isPortOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isPortOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isSensorOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasSensor"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#isSensorOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#isSensorOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasSensor"/>
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#isComponentOf"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#hasComponent"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#startLocation -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#startLocation">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#target -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#target">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#ChangeOver"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Device"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Abstract -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Abstract">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Particular"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Region"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Set"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#AbstractQuality -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractQuality">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#AbstractRegion -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractRegion">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Accomplishment -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Accomplishment">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Achievement -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Achievement">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Action -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Action">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Branch"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ChangeMagnitude"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ChangeOver"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Channel"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Collect"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Convert"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Decrease"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Join"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Reclassify"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Release"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Stabilize"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Store"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Actuator -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Actuator">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Component"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Agent-likeBehavior -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Agent-likeBehavior">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Behavior"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#AgentiveSocialObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentiveSocialObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SocialObject"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#SocialAgent"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Society"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#AmountOfMatter -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AmountOfMatter">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ArbitrarySum -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ArbitrarySum">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Artifact -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Artifact">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-agentivePhysicalObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Behavior -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Behavior">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#AbstractQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Branch -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Branch">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ChangeMagnitude -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ChangeMagnitude">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#ChangeOver -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ChangeOver">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Channel -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Channel">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Collect -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Collect">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Communication -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Communication">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Receive"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Send"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Component -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Component">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Device"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Actuator"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Sensor"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Convert -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Convert">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Conveyor -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Conveyor">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#CrossTransfer -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#CrossTransfer">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Decrease -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Decrease">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Device -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Device">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Artifact"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Endurant -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Endurant">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Particular"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ArbitrarySum"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalEndurant"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Engine -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Engine">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Actuator"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Conveyor"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#CrossTransfer"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Event -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Event">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Perdurant"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Accomplishment"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Achievement"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Fact -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Fact">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Abstract"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Failure -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Failure">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Feature -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Feature">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Function -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Function">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Test"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Increase -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Increase">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Join -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Join">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Maintenance -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Maintenance">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#MentalObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#MentalObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Non-agentivePhysicalObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-agentivePhysicalObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Non-agentiveSocialObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-agentiveSocialObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SocialObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Non-physicalEndurant -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalEndurant">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Non-physicalObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalEndurant"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#MentalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#SocialObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Operative -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Operative">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Particular -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Particular">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Abstract"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Perdurant"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Perdurant -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Perdurant">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Particular"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Stative"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Performance -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Performance">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Operative"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AmountOfMatter"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#PhysicalObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentivePhysicalObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-agentivePhysicalObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#PhysicalRegion -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalRegion">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Port -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Port">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Sensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Process -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Process">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Stative"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Quality -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Quality">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Particular"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractQuality"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalQuality"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Receive -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Receive">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Reclassify -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Reclassify">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Region -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Region">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Abstract"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractRegion"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalRegion"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Release -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Release">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Robot -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Robot">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Artifact"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Send -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Send">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Sensing -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Sensing">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Test"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Sensor -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Sensor">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Component"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Set -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Set">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Abstract"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#SocialAgent -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#SocialAgent">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#AgentiveSocialObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#SocialObject -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#SocialObject">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalObject"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AgentiveSocialObject"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-agentiveSocialObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Society -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Society">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#AgentiveSocialObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Stabilize -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Stabilize">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#State -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#State">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Stative"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Stative -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Stative">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Perdurant"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Process"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#State"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Store -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Store">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#TemporalLocation -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalLocation">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#TemporalQuality -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalQuality">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Region"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRelation"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInstant"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInterval"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#TemporalRelation -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRelation">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Test -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Test">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#TimeInstant -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInstant">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#TimeInterval -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInterval">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#Tool -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Tool">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#TransportationModule -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TransportationModule">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#failure -->
+
+    <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/kbcl/ontology#failure">
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Particular"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#maintenance -->
+
+    <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/kbcl/ontology#maintenance">
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Particular"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#operative -->
+
+    <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/kbcl/ontology#operative">
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Operative"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Particular"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Quality"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

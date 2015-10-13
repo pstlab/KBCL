@@ -12,6 +12,8 @@ import it.istc.pst.kbcl.model.FunctionalityType;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hp.hpl.jena.ontology.OntModelSpec;
+
 /**
  * 
  * @author alessandroumbrico
@@ -27,9 +29,31 @@ public class OWLKnowledgeBaseFacade
 	private OWLDatasetManager dataset;
 	
 	private static OWLKnowledgeBaseFacade INSTANCE = null;
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public static final OWLKnowledgeBaseFacade getSingletonInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new OWLKnowledgeBaseFacade();
+		}
+		return INSTANCE;
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @param rulesPath
+	 * @param aboxPath
+	 * @param aboxURL
+	 * @param tboxPath
+	 * @param tboxURL
+	 * @return
+	 */
+	public static final OWLKnowledgeBaseFacade getSingletonInstance(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
+		if (INSTANCE == null) {
+			INSTANCE = new OWLKnowledgeBaseFacade(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
 		}
 		return INSTANCE;
 	}
@@ -45,6 +69,25 @@ public class OWLKnowledgeBaseFacade
 		this.agents = null;
 		// get data set
 		this.dataset = OWLDatasetManager.getSingletonInstance();
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @param rulesPath
+	 * @param aboxPath
+	 * @param aboxURL
+	 * @param tboxPath
+	 * @param tboxURL
+	 */
+	protected OWLKnowledgeBaseFacade(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
+		// lazy approach
+		this.agentTypes = null;
+		this.functionTypes = null;
+		this.elementTypes = null;
+		this.agents = null;
+		// get data set
+		this.dataset = OWLDatasetManager.getSingletonInstance(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
 	}
 	
 	/**

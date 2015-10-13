@@ -1,0 +1,44 @@
+@prefix rdf:	http://www.w3.org/1999/02/22-rdf-syntax-ns#
+@prefix kbcl:	http://pst.istc.cnr.it/kbcl/ontology#
+
+[component:
+	(?m kbcl:hasDevice ?d), (?d kbcl:hasPerformance ?p), (?p rdf:type kbcl:Operative)
+	-> 
+	(?m kbcl:hasComponent ?d)]
+
+[cross:
+	(?m kbcl:hasComponent ?d), (?d rdf:type kbcl:CrossTransfer)
+	->
+	(?m kbcl:hasCrossTransfer ?d)]
+	
+[conveyor:
+	(?m kbcl:hasComponent ?d), (?d rdf:type kbcl:Conveyor)
+	->
+	(?m kbcl:hasConveyor ?d)]
+	
+[ports:
+	(?m kbcl:hasComponent ?d), (?d rdf:type kbcl:Port)
+	-> 
+	(?m kbcl:hasPort ?d)]
+	
+[collaborators:
+	(?m kbcl:hasPort ?p), (?p kbcl:hasLocation ?l1),
+	(?r rdf:type kbcl:Robot), (?r kbcl:hasPerformance ?per), 
+	(?per rdf:type kbcl:Operative), (?r kbcl:hasLocation ?l2), 
+	(?l1 kbcl:connection ?l2)
+	-> 
+	(?m kbcl:hasCollaborator ?r)]
+	
+[primitive-channels:
+	(?m kbcl:hasComponent ?c1), (?c1 kbcl:hasLocation ?x1),
+	(?m kbcl:hasComponent ?c2), (?c2 kbcl:hasLocation ?x2),
+	(?m kbcl:hasComponent ?c3), (?c3 kbcl:hasLocation ?x3),
+	(?x1 kbcl:connection ?x2), (?x2 kbcl:connection ?x3),
+	makeTemp(?f) 
+	-> 
+	(?f rdf:type kbcl:Channel), (?f kbcl:startLocation ?x1), (?f kbcl:endLocation ?x3)]
+	
+[channels-as-blank-nodes:
+	(?f rdf:type kbcl:Channel), (?f kbcl:startLocation ?x1), (?f kbcl:endLocation ?x2)
+	->
+	print(?f, ?x1, ?x2)]

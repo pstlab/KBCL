@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:kbcl="http://pst.istc.cnr.it/kbcl/ontology#">
+	
+	<!-- OPERATIVE PHYSICAL QUALITIES -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#operative">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Operative" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#failure">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure" />
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#maintenance">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Maintenance" />
+	</rdf:Description>
+	
+		
+	<!-- LOCATION INDIVIDUALS -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#lr1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation" />
+		
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportf" />
+		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#lr2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation" />	
+
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportb" />		
+		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#lportf">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation" />
+		
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lr1" />
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lconveyor" />		
+		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#lportb">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation" />
+		
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lr2" />
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lconveyor" />		
+		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#lconveyor">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation" />
+		
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportf" />
+		<kbcl:connection rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportb" />				
+		
+	</rdf:Description>
+	
+	<!-- ROBOT INDIVIDUALS -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#r1">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot" />
+		
+		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lr1" />
+		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#r2">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot" />
+		
+		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lr2" />
+		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		
+	</rdf:Description>
+		
+	<!-- PORT INDIVIDUALS -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#portf">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Port" />
+		
+		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportf" />
+		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#portb">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Port" />
+		
+		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportb" />
+		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		
+	</rdf:Description>
+	
+	<!-- CONVEYOR INDIVIDUAL -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#conveyor">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Conveyor" />
+		
+		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lconveyor" />
+		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		
+	</rdf:Description>
+	
+	<!-- TRANSPORTATION MODULE INDIVIDUAL -->
+	
+	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#module">
+		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TransportationModule" />
+
+		<kbcl:hasDevice rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portf" />
+		<kbcl:hasDevice rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portb" />				
+		<kbcl:hasDevice rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor" />
+		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />
+		
+	</rdf:Description>
+	
+	
+</rdf:RDF>

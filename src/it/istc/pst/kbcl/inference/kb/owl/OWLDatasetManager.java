@@ -52,21 +52,25 @@ public class OWLDatasetManager
 	public static final String CONSTANT_AGENT_TYPE = "Agent";
 	
 	// module ports
-	public static final String CONSTANT_ELEMENT_TYPE = "Element";
+//	public static final String CONSTANT_ELEMENT_TYPE = "Element";
+	public static final String CONSTANT_ELEMENT_TYPE = "Component";
 	public static final String CONSTANT_PORT_TYPE = "Port";
 	
 	// module conveyors
-	public static final String CONSTANT_CONVEYOR_TYPE = "ConveyorEngine";
+//	public static final String CONSTANT_CONVEYOR_TYPE = "ConveyorEngine";
+	public static final String CONSTANT_CONVEYOR_TYPE = "Conveyor";
 	
 	// module cross transfers
-	public static final String CONSTANT_CROSS_TRANSFER_TYPE = "CrossTransferEngine";
+//	public static final String CONSTANT_CROSS_TRANSFER_TYPE = "CrossTransferEngine";
+	public static final String CONSTANT_CROSS_TRANSFER_TYPE = "CrossTransfer";
 	
 	// possible channels
-	public static final String CONSTANT_FUNCTIONALITY_TYPE = "Functionality";
+//	public static final String CONSTANT_FUNCTIONALITY_TYPE = "Functionality";
+	public static final String CONSTANT_FUNCTIONALITY_TYPE = "Function";
 	public static final String CONSTANT_CHANNEL_TYPE = "Channel";
 	
 	// possible neighbors
-	public static final String CONSTANT_NEIGHBOR_TYPE = "Neighbor";
+//	public static final String CONSTANT_NEIGHBOR_TYPE = "Neighbor";
 	
 	private OntModel model;
 	private InfModel infModel;
@@ -84,6 +88,56 @@ public class OWLDatasetManager
 	private String ABOX_NS;
 	
 	private static OWLDatasetManager INSTANCE = null;
+	
+	/**
+	 * 
+	 * @param model
+	 * @param rulesPath
+	 * @param aboxPath
+	 * @param aboxURL
+	 * @param tboxPath
+	 * @param tboxURL
+	 */
+	private OWLDatasetManager(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
+		// get thread CPU time in nanoseconds
+		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+		// get start time
+		long start = bean.getCurrentThreadUserTime();
+		
+		// set label
+		this.label = this.getClass().getSimpleName();
+		// create the model
+		this.model = ModelFactory.createOntologyModel(model);
+		
+		// get TBOX
+		this.TBOX_URL = tboxURL;
+		this.TBOX_NS = this.TBOX_URL + "#";
+		// load TBOX
+		this.model.getDocumentManager().addAltEntry(TBOX_URL, "file:" + tboxPath);
+		this.model.read(TBOX_URL, "RDF/XML");
+		
+		// get ABOX
+		this.ABOX_URL = aboxURL;
+		this.ABOX_NS = this.ABOX_URL + "#";
+		// load ABOX
+		this.model.getDocumentManager().addAltEntry(this.ABOX_URL, "file:" + aboxPath);
+		this.model.read(this.ABOX_URL, "RDF/XML");
+		
+		// set rule reasoner configuration
+		Resource config = this.model.createResource();
+		// get reasoner type from configuration file
+		config.addProperty(ReasonerVocabulary.PROPruleMode, "forwardRETE");
+		config.addProperty(ReasonerVocabulary.PROPruleSet, rulesPath);
+		// create generic rule reasoner
+		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(config);
+		
+		// initialize inference model
+		this.infModel = ModelFactory.createInfModel(reasoner, this.model);
+		// set inference time
+		this.time = bean.getCurrentThreadUserTime() - start;
+		this.maxTime = this.time;
+		this.totalTime = this.time;
+	}
 
 	/**
 	 * 
@@ -95,7 +149,6 @@ public class OWLDatasetManager
 			// get thread CPU time in nanoseconds
 			ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 			// get start time
-//			long start = System.currentTimeMillis();
 			long start = bean.getCurrentThreadUserTime();
 			
 			// get property file
@@ -135,7 +188,6 @@ public class OWLDatasetManager
 			// initialize inference model
 			this.infModel = ModelFactory.createInfModel(reasoner, this.model);
 			// set inference time
-//			this.time = System.currentTimeMillis() - start;
 			this.time = bean.getCurrentThreadUserTime() - start;
 			this.maxTime = this.time;
 			this.totalTime = this.time;
@@ -151,6 +203,23 @@ public class OWLDatasetManager
 	public static OWLDatasetManager getSingletonInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new OWLDatasetManager();
+		}
+		return INSTANCE;
+	}
+
+	/**
+	 * 
+	 * @param model
+	 * @param rulesPath
+	 * @param aboxPath
+	 * @param aboxURL
+	 * @param tboxPath
+	 * @param tboxURL
+	 * @return
+	 */
+	public static OWLDatasetManager getSingletonInstance(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
+		if (INSTANCE == null) {
+			INSTANCE = new OWLDatasetManager(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
 		}
 		return INSTANCE;
 	}
@@ -217,13 +286,11 @@ public class OWLDatasetManager
 		// get thread CPU time in nanoseconds
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		// start time
-//		long start = System.currentTimeMillis();
 		long start = bean.getCurrentThreadUserTime();
 		
 		// get class
 		OntClass c = this.model.getOntClass(TBOX_NS + className);
 		// update inference time
-//		this.time = System.currentTimeMillis() - start;
 		this.time = bean.getCurrentThreadUserTime() - start;
 		
 		this.totalTime += this.time;
@@ -262,7 +329,6 @@ public class OWLDatasetManager
 		// get thread CPU time in nanoseconds
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		// get start time
-//		long start = System.currentTimeMillis();
 		long start = bean.getCurrentThreadUserTime(); 
 				
 		// get subject individual
@@ -282,7 +348,6 @@ public class OWLDatasetManager
 		// list statements
 		Iterator<Statement> it = this.infModel.listStatements(subject, p, (RDFNode) null);
 		// update inference time
-//		this.time = System.currentTimeMillis() - start;
 		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
@@ -318,7 +383,6 @@ public class OWLDatasetManager
 		List<OWLInstance> list = new ArrayList<>();
 		// get thread CPU time in nanoseconds
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
-//		long start = System.currentTimeMillis();
 		long start = bean.getCurrentThreadUserTime(); 
 		// get class
 		OntClass c = this.model.getOntClass(TBOX_NS + className);
@@ -329,7 +393,6 @@ public class OWLDatasetManager
 		// get individuals
 		Iterator<? extends OntResource> it = c.listInstances(false);
 		// update inference time
-//		this.time = System.currentTimeMillis() - start;
 		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
@@ -377,12 +440,10 @@ public class OWLDatasetManager
 		// get thread CPU time in nanoseconds
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();		
 		// start time
-//		long start = System.currentTimeMillis();
 		long start = bean.getCurrentThreadUserTime(); 
 		// update inference model
 		this.infModel.rebind();
 		// update inference time
-//		this.time = System.currentTimeMillis() - start;
 		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
@@ -424,12 +485,10 @@ public class OWLDatasetManager
 		// get thread CPU time in nanoseconds
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		// start time
-//		long start = System.currentTimeMillis();
 		long start = bean.getCurrentThreadUserTime();
 		// update inference model
 		this.infModel.rebind();
 		// update inference time
-//		this.time = System.currentTimeMillis() - start;
 		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
 		this.maxTime = Math.max(this.maxTime, this.time);
@@ -474,13 +533,11 @@ public class OWLDatasetManager
 			// get thread CPU time in nanoseconds
 			ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 			// start time
-//			long start = System.currentTimeMillis();
 			long start = bean.getCurrentThreadUserTime();
 			
 			// update inference model
 			this.infModel.rebind();
 			// update inference time
-//			this.time = System.currentTimeMillis() - start;
 			this.time = bean.getCurrentThreadUserTime() - start;
 			this.totalTime += this.time;
 			this.maxTime = Math.max(this.maxTime, this.time);
