@@ -18,16 +18,19 @@ import java.util.concurrent.TimeUnit;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntResource;
 import com.hp.hpl.jena.rdf.model.InfModel;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.reasoner.Reasoner;
-import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
+import com.hp.hpl.jena.reasoner.ReasonerRegistry;
+import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.vocabulary.OWL;
+import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 /**
@@ -37,73 +40,21 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
  */
 public class OWLDatasetManager_v2 
 {
-	private OntModel model;
-	private InfModel infModel;
+	private OntModel tbox;
+	private Model abox;
+	private InfModel inf;
 	private String label;
 	
 	private long time;
 	private long totalTime;
 	private long maxTime;
 	
-	// TBox
-	private String TBOX_URL;
-	private String TBOX_NS;
 	// ABox
 	private String ABOX_URL;
 	private String ABOX_NS;
 	
 	private static OWLDatasetManager_v2 INSTANCE = null;
 	
-	/**
-	 * 
-	 * @param model
-	 * @param rulesPath
-	 * @param aboxPath
-	 * @param aboxURL
-	 * @param tboxPath
-	 * @param tboxURL
-	 */
-	private OWLDatasetManager_v2(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
-		// get thread CPU time in nanoseconds
-		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
-		// get start time
-		long start = bean.getCurrentThreadUserTime();
-		
-		// set label
-		this.label = this.getClass().getSimpleName();
-		// create the model
-		this.model = ModelFactory.createOntologyModel(model);
-		
-		// get TBOX
-		this.TBOX_URL = tboxURL;
-		this.TBOX_NS = this.TBOX_URL + "#";
-		// load TBOX
-		this.model.getDocumentManager().addAltEntry(TBOX_URL, "file:" + tboxPath);
-		this.model.read(TBOX_URL, "RDF/XML");
-		
-		// get ABOX
-		this.ABOX_URL = aboxURL;
-		this.ABOX_NS = this.ABOX_URL + "#";
-		// load ABOX
-		this.model.getDocumentManager().addAltEntry(this.ABOX_URL, "file:" + aboxPath);
-		this.model.read(this.ABOX_URL, "RDF/XML");
-		
-		// set rule reasoner configuration
-		Resource config = this.model.createResource();
-		// get reasoner type from configuration file
-		config.addProperty(ReasonerVocabulary.PROPruleMode, "forwardRETE");
-		config.addProperty(ReasonerVocabulary.PROPruleSet, rulesPath);
-		// create generic rule reasoner
-		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(config);
-		
-		// initialize inference model
-		this.infModel = ModelFactory.createInfModel(reasoner, this.model);
-		// set inference time
-		this.time = bean.getCurrentThreadUserTime() - start;
-		this.maxTime = this.time;
-		this.totalTime = this.time;
-	}
-
 	/**
 	 * 
 	 */
@@ -118,40 +69,33 @@ public class OWLDatasetManager_v2
 			
 			// get property file
 			Properties prop = new Properties();
-			prop.load(new FileInputStream(new File("etc/infCfg.properties")));
+			prop.load(new FileInputStream(new File("etc/reasoner_v2.properties")));
+			
+			
+			// get schema path
+			String tboxPath = prop.getProperty(OWLDatasetCfg.PROPERTY_TBOX_PATH.getValue());
+			// create the model schema (TBox)
+			this.tbox = ModelFactory.createOntologyModel();
+			// read the schema from a file
+			this.tbox.getDocumentManager().addAltEntry(KBCLVocabulary_v2.ONTOLOGY_URL.getValue(), "file:" + tboxPath);
+			this.tbox.read(KBCLVocabulary_v2.ONTOLOGY_URL.getValue(), "RDF/XML");
+			
+			// create reasoner
+			Reasoner reasoner = ReasonerRegistry.getOWLMicroReasoner();
+			reasoner.setParameter(ReasonerVocabulary.PROPruleSet, prop.getProperty(OWLDatasetCfg.PROPERTY_RULES_PATH.getValue()));
+			// specialize the reasoner by setting the schema
+			reasoner = reasoner.bindSchema(this.tbox);
+			
+			// create data model (ABox)
+			this.ABOX_URL = prop.getProperty(OWLDatasetCfg.PROPERTY_ABOX_URL.getValue());
+			this.ABOX_NS = this.ABOX_URL + "#";
+			this.abox = FileManager.get().loadModel(this.ABOX_URL, prop.getProperty(OWLDatasetCfg.PROPERTY_ABOX_URL.getValue()), "RDF/XML");
+			
+			// bind the reasoner on data
+			this.inf = ModelFactory.createInfModel(reasoner, this.abox);
 			
 			// set label
 			this.label = this.getClass().getSimpleName();
-			// create the model
-			this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RDFS_INF);
-			
-			// get TBOX
-			String tboxPath = prop.getProperty("tbox");
-			this.TBOX_URL = prop.getProperty("tbox_url");
-			this.TBOX_NS = this.TBOX_URL + "#";
-			// load TBOX
-			this.model.getDocumentManager().addAltEntry(TBOX_URL, "file:" + tboxPath);
-			this.model.read(TBOX_URL, "RDF/XML");
-			
-			// get ABOX
-			String aboxPath = prop.getProperty("abox");
-			this.ABOX_URL = prop.getProperty("abox_url");
-			this.ABOX_NS = this.ABOX_URL + "#";
-			// load ABOX
-			this.model.getDocumentManager().addAltEntry(this.ABOX_URL, "file:" + aboxPath);
-			this.model.read(this.ABOX_URL, "RDF/XML");
-			
-			// set rule reasoner configuration
-			Resource config = this.model.createResource();
-			// get reasoner type from configuration file
-			String reasonerType = prop.getProperty("rule_reasoner_type");
-			config.addProperty(ReasonerVocabulary.PROPruleMode, reasonerType);
-			config.addProperty(ReasonerVocabulary.PROPruleSet, "etc/infRules");
-			// create generic rule reasoner
-			Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(config);
-			
-			// initialize inference model
-			this.infModel = ModelFactory.createInfModel(reasoner, this.model);
 			// set inference time
 			this.time = bean.getCurrentThreadUserTime() - start;
 			this.maxTime = this.time;
@@ -172,23 +116,6 @@ public class OWLDatasetManager_v2
 		return INSTANCE;
 	}
 
-	/**
-	 * 
-	 * @param model
-	 * @param rulesPath
-	 * @param aboxPath
-	 * @param aboxURL
-	 * @param tboxPath
-	 * @param tboxURL
-	 * @return
-	 */
-	public static OWLDatasetManager_v2 getSingletonInstance(OntModelSpec model, String rulesPath, String aboxPath, String aboxURL, String tboxPath, String tboxURL) {
-		if (INSTANCE == null) {
-			INSTANCE = new OWLDatasetManager_v2(model, rulesPath, aboxPath, aboxURL, tboxPath, tboxURL);
-		}
-		return INSTANCE;
-	}
-	
 	/**
 	 * 
 	 * @return
@@ -222,19 +149,18 @@ public class OWLDatasetManager_v2
 	 * @throws OWLClassNotFoundException
 	 */
 	public OWLInstance createIndividual(String id, String className) 
-			throws OWLClassNotFoundException
-	{
-		// get class
-		OntClass ic = this.model.getOntClass(TBOX_NS + className);
+			throws OWLClassNotFoundException {
+		// get type
+		OntClass type = this.tbox.getOntClass(KBCLVocabulary_v2.ONTOLOGY_URL + "#" + className);
 		// check if class exists
-		if (ic == null) {
-			throw new OWLClassNotFoundException("[" + this.label + "]: No class found \"" + TBOX_NS + className + "\"");
+		if (type == null) {
+			throw new OWLClassNotFoundException("[" + this.label + "]: No class found \"" + KBCLVocabulary_v2.ONTOLOGY_URL + "#" + className + "\"");
 		}
 		
-		// create individual
-		Individual i = ic.createIndividual(this.ABOX_NS + id);
-		// return owl element
-		return new OWLInstance(i.getURI(), i.getLocalName(), new OWLClass(ic.getURI(), ic.getLocalName()));
+		// create resource
+		Resource res = this.inf.createResource(id, type);
+		// get instance
+		return new OWLInstance(res.getURI(), res.getLocalName(), new OWLClass(type.getURI(), type.getLocalName()));
 	}
 	
 	/**
@@ -254,7 +180,7 @@ public class OWLDatasetManager_v2
 		long start = bean.getCurrentThreadUserTime();
 		
 		// get class
-		OntClass c = this.model.getOntClass(TBOX_NS + className);
+		OntClass c = this.tbox.getOntClass(KBCLVocabulary_v2.ONTOLOGY_URL + "#" + className);
 		// update inference time
 		this.time = bean.getCurrentThreadUserTime() - start;
 		
@@ -262,7 +188,7 @@ public class OWLDatasetManager_v2
 		// set max time
 		this.maxTime = Math.max(this.maxTime, this.time);
 		if (c == null) {
-			throw new OWLClassNotFoundException("[" + this.label + "]: Class not found \"" + TBOX_NS + className + "\"");
+			throw new OWLClassNotFoundException("[" + this.label + "]: Class not found \"" + KBCLVocabulary_v2.ONTOLOGY_URL + "#" + className + "\"");
 		}
 		
 		// list subclasses
@@ -274,6 +200,7 @@ public class OWLDatasetManager_v2
 				list.add(new OWLClass(sc.getURI(), sc.getLocalName()));
 			}
 		}
+		
 		// get list
 		return list;
 	}
@@ -297,21 +224,21 @@ public class OWLDatasetManager_v2
 		long start = bean.getCurrentThreadUserTime(); 
 				
 		// get subject individual
-		Individual subject = this.model.getIndividual(this.ABOX_NS + subjectName);
+		Resource subject = this.inf.getResource(this.ABOX_NS + subjectName);
 		if (subject == null) {
 			// exception
-			throw new OWLIndividualNotFoundException("[" + this.label + "]: Individual not found \"" + TBOX_NS + subjectName + "\"");
+			throw new OWLIndividualNotFoundException("[" + this.label + "]: Individual not found \"" + this.ABOX_NS + subjectName + "\"");
 		}
 	
 		// get property
-		Property p = this.model.getOntProperty(TBOX_NS + propertyName);
+		Property p = this.inf.getProperty(KBCLVocabulary_v2.ONTOLOGY_URL + "#" + propertyName);
 		if (p == null) {
 			// exception
-			throw new OWLPropertyNotFoundException("[" + this.label + "]: Property not found \"" + TBOX_NS + propertyName + "\"");
+			throw new OWLPropertyNotFoundException("[" + this.label + "]: Property not found \"" + KBCLVocabulary_v2.ONTOLOGY_URL + "#" + propertyName + "\"");
 		}
 		
 		// list statements
-		Iterator<Statement> it = this.infModel.listStatements(subject, p, (RDFNode) null);
+		Iterator<Statement> it = this.inf.listStatements(subject, p, (RDFNode) null);
 		// update inference time
 		this.time = bean.getCurrentThreadUserTime() - start;
 		this.totalTime += this.time;
@@ -323,9 +250,9 @@ public class OWLDatasetManager_v2
 			Resource obj = s.getObject().asResource();
 			if (!obj.isAnon()) {
 				// find in model
-				Individual n = this.model.getIndividual(obj.getURI());
+				Resource n = this.inf.getResource(obj.getURI());
 				// get class
-				Resource nType = n.getRDFType();
+				Resource nType = n.getRequiredProperty(RDF.type).getObject().asResource();
 				list.add(new OWLInstance(n.getURI(), n.getLocalName(), 
 						new OWLClass(nType.getURI(), nType.getLocalName())));
 			}
@@ -350,9 +277,9 @@ public class OWLDatasetManager_v2
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 		long start = bean.getCurrentThreadUserTime(); 
 		// get class
-		OntClass c = this.model.getOntClass(TBOX_NS + className);
+		OntClass c = this.tbox.getOntClass(KBCLVocabulary_v2.ONTOLOGY_URL + "#" + className);
 		if (c == null) {
-			throw new OWLClassNotFoundException("[" + this.label + "]: Class not found \"" + TBOX_NS + className + "\"");
+			throw new OWLClassNotFoundException("[" + this.label + "]: Class not found \"" + KBCLVocabulary_v2.ONTOLOGY_URL + "#" + className + "\"");
 		}
 		
 		// get individuals
@@ -517,13 +444,17 @@ public class OWLDatasetManager_v2
 	 * 
 	 */
 	public void close() {
-		if (this.infModel != null) {
-			this.infModel.close();
-			this.infModel = null;
+		if (this.abox != null) {
+			this.abox.close();
+			this.abox = null;
 		}
-		if (this.model != null) {
-			this.model.close();
-			this.model = null;
+		if (this.inf != null) {
+			this.inf.close();
+			this.inf = null;
+		}
+		if (this.tbox != null) {
+			this.tbox.close();
+			this.tbox = null;
 		}
 		INSTANCE = null;
 	}

@@ -32,7 +32,6 @@ public class OWLDatasetInferenceRulesTest
 {
 	private static final String ABOX_URL = "http://pst.istc.cnr.it/kbcl/instance";
 	private static final String ABOX_PATH = "dev/onto/v2/abox/single.rdf";
-//	private static final String TBOX_URL = "http://pst.istc.cnr.it/kbcl/ontology";
 	private static final String TBOX_PATH = "dev/onto/v2/tbox/onto_v2.owl";
 	private static final String RULES_PATH = "dev/onto/v2/rules_testing.rules";
 	
