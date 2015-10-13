@@ -206,9 +206,19 @@
 
     <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#connection">
         <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
-        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
         <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#enable -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#enable">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Device"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Device"/>
     </owl:ObjectProperty>
     
 
@@ -367,6 +377,7 @@
 
     <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/kbcl/ontology#hasPerformance">
         <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
         <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
         <rdfs:domain rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Endurant"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
@@ -1039,7 +1050,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#MentalObject"/>
@@ -1104,7 +1114,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Decrease"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
@@ -1467,7 +1476,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
@@ -1824,7 +1832,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Join"/>
@@ -1906,7 +1913,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Join"/>
@@ -1972,7 +1978,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Join"/>
@@ -2165,7 +2170,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Engine"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Join"/>
@@ -2224,7 +2228,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Decrease"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
@@ -2276,7 +2279,6 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Decrease"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Event"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
@@ -2606,7 +2608,6 @@
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Fact">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Abstract"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
@@ -2660,19 +2661,14 @@
     <!-- http://pst.istc.cnr.it/kbcl/ontology#Failure -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Failure">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#NonOperative"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Feature"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Function"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Increase"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Join"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#MentalObject"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-agentivePhysicalObject"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-agentiveSocialObject"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalEndurant"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalObject"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Operative"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Perdurant"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalObject"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#PhysicalRegion"/>
@@ -2681,27 +2677,19 @@
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Receive"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Reclassify"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Region"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Release"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Robot"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Send"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Sensing"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Sensor"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Set"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SocialAgent"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SocialObject"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Society"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#SpatialLocation"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Stabilize"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#State"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Stative"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Store"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalLocation"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalQuality"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TemporalRelation"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Test"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TimeInstant"/>
-        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TimeInterval"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Tool"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#TransportationModule"/>
     </owl:Class>
@@ -2917,7 +2905,7 @@
     <!-- http://pst.istc.cnr.it/kbcl/ontology#Maintenance -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Maintenance">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#NonOperative"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#MentalObject"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-agentivePhysicalObject"/>
         <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Non-agentiveSocialObject"/>
@@ -3179,6 +3167,23 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#NonOperative -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#NonOperative">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Performance"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Operative"/>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/kbcl/ontology#Operative -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Operative">
@@ -3298,8 +3303,7 @@
         <rdfs:subClassOf>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
-                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
+                    <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#NonOperative"/>
                     <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Operative"/>
                 </owl:unionOf>
             </owl:Class>
@@ -4216,6 +4220,41 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#failure -->
+
+    <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/kbcl/ontology#failure">
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#maintenance -->
+
+    <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/kbcl/ontology#maintenance">
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://pst.istc.cnr.it/kbcl/ontology#operative -->
+
+    <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/kbcl/ontology#operative">
+        <rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Operative"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // General axioms
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -4224,17 +4263,17 @@
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Region"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Set"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractQuality"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalQuality"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ArbitrarySum"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalEndurant"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractRegion"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalRegion"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
@@ -4258,17 +4297,25 @@
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractRegion"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalRegion"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRegion"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#ArbitrarySum"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Non-physicalEndurant"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalEndurant"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#AbstractQuality"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#PhysicalQuality"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalQuality"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRelation"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInstant"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInterval"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Fact"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Region"/>
+            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Set"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
@@ -4294,22 +4341,6 @@
             <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Action"/>
             <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Communication"/>
             <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Test"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Failure"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Maintenance"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#Operative"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TemporalRelation"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInstant"/>
-            <rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/ontology#TimeInterval"/>
         </owl:members>
     </rdf:Description>
 </rdf:RDF>

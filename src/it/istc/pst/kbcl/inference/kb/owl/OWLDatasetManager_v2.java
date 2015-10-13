@@ -37,41 +37,6 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
  */
 public class OWLDatasetManager_v2 
 {
-	public static final String PROPERTY_LABEL_HAS_CHANNEL = "hasChannel";
-	public static final String PROPERTY_LABEL_HAS_NEIGHBOR = "hasNeighbor";
-	public static final String PROPERTY_LABEL_HAS_PORT = "hasPort";
-	public static final String PROPERTY_LABEL_HAS_INPUT_PORT = "hasInput";
-	public static final String PROPERTY_LABEL_HAS_OUTPUT_PORT = "hasOutput";
-	public static final String PROPERTY_LABEL_CONNECT = "connect";
-	public static final String PROPERTY_LABEL_HAS_ELEMENT = "hasElement";
-	public static final String PROPERTY_LABEL_HAS_CROSS_TRANSFER = "hasCrossTransfer";
-	public static final String PROPERTY_LABEL_HAS_CONVEYOR = "hasConveyor";
-	public static final String PROPERTY_LABEL_ENABLE = "enable";
-	
-	// module agent ID and type
-	public static final String CONSTANT_AGENT_TYPE = "Agent";
-	
-	// module ports
-//	public static final String CONSTANT_ELEMENT_TYPE = "Element";
-	public static final String CONSTANT_ELEMENT_TYPE = "Component";
-	public static final String CONSTANT_PORT_TYPE = "Port";
-	
-	// module conveyors
-//	public static final String CONSTANT_CONVEYOR_TYPE = "ConveyorEngine";
-	public static final String CONSTANT_CONVEYOR_TYPE = "Conveyor";
-	
-	// module cross transfers
-//	public static final String CONSTANT_CROSS_TRANSFER_TYPE = "CrossTransferEngine";
-	public static final String CONSTANT_CROSS_TRANSFER_TYPE = "CrossTransfer";
-	
-	// possible channels
-//	public static final String CONSTANT_FUNCTIONALITY_TYPE = "Functionality";
-	public static final String CONSTANT_FUNCTIONALITY_TYPE = "Function";
-	public static final String CONSTANT_CHANNEL_TYPE = "Channel";
-	
-	// possible neighbors
-//	public static final String CONSTANT_NEIGHBOR_TYPE = "Neighbor";
-	
 	private OntModel model;
 	private InfModel infModel;
 	private String label;

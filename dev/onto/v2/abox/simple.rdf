@@ -6,21 +6,6 @@
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:kbcl="http://pst.istc.cnr.it/kbcl/ontology#">
-	
-	<!-- OPERATIVE PHYSICAL QUALITIES -->
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#operative">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Operative" />
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#failure">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Failure" />
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="http://pst.istc.cnr.it/kbcl/instance#maintenance">
-		<rdf:type rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#Maintenance" />
-	</rdf:Description>
-	
 		
 	<!-- LOCATION INDIVIDUALS -->
 	
@@ -69,7 +54,7 @@
 		
 		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lr1" />
 		
-		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#operative" />		
 		
 	</rdf:Description>
 	
@@ -78,7 +63,7 @@
 		
 		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lr2" />
 		
-		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#operative" />		
 		
 	</rdf:Description>
 		
@@ -89,7 +74,7 @@
 		
 		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportf" />
 		
-		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#operative" />		
 		
 	</rdf:Description>
 	
@@ -98,7 +83,7 @@
 		
 		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lportb" />
 		
-		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#operative" />		
 		
 	</rdf:Description>
 	
@@ -109,7 +94,7 @@
 		
 		<kbcl:hasLocation rdf:resource="http://pst.istc.cnr.it/kbcl/instance#lconveyor" />
 		
-		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />		
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#operative" />		
 		
 	</rdf:Description>
 	
@@ -122,7 +107,7 @@
 		<kbcl:hasDevice rdf:resource="http://pst.istc.cnr.it/kbcl/instance#portb" />				
 		<kbcl:hasDevice rdf:resource="http://pst.istc.cnr.it/kbcl/instance#conveyor" />
 		
-		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/instance#operative" />
+		<kbcl:hasPerformance rdf:resource="http://pst.istc.cnr.it/kbcl/ontology#operative" />
 		
 	</rdf:Description>
 	

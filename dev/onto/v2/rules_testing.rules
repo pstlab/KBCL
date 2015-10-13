@@ -22,14 +22,28 @@
 	(?d rdf:type kbcl:Port)
 	-> 
 	(?m kbcl:hasPort ?d)]
-	
+
+# SE IL MODULO HA UN COMPONENTE (QUINDI DEVICE ATTIVO) LA CUI LOCAZIONE E COLLEGATA ALLA 
+# LOCAZIONE DI UN ALTRO ROBOT DELL'AMBIENTE DI PRODUZIONE, ALLORA QUEL ROBOT E UN COLLABORATORE
+# DEL MODULO DI TRASPORTO 
 [collaborators:
 	(?m kbcl:hasComponent ?p), (?p kbcl:hasLocation ?l1),
 	(?r rdf:type kbcl:Robot), (?r kbcl:hasPerformance ?per), (?per rdf:type kbcl:Operative), 
 	(?r kbcl:hasLocation ?l2), (?l1 kbcl:connection ?l2)
 	-> 
 	(?m kbcl:hasCollaborator ?r)]
-	
+
+# SE UN COMPONENT HA PIU DI UNA LOCAZIONE, POSSO FARE DELLE CHANGE-OVER PER PASSARE DA
+# UNA LOCAZIONE ALL'ALTRA, QUINDI POSSO FARE ANCHE DELLE CHANNEL TRA LE DUE LOCAZIONI
+# DELLO STESSO COMPONENTE
+[change-overs-and-primitive-channels:
+	(?m kbcl:hasComponent ?c1), (?c1 kbcl:hasLocation ?x1), (?c1 kbcl:hasLocation ?x2),
+	notEqual(?x1, ?x2), makeTemp(?f), makeTemp(?ff)
+	->
+	(?f rdf:type kbcl:ChangeOver), (?m kbcl:canDoChangeOver ?f), (?x1 kbcl:connection ?x2),
+	(?ff rdf:type kbcl:Channel), (?ff kbcl:startLocation ?x1), (?ff kbcl:endLocation ?x2)]
+
+# POSSO SVOLGERE UNA CHANNEL QUANDO DUE LOCAZIONI DI DUE COMPONENTI SONO CONNESSE
 [primitive-channels:
 	(?m kbcl:hasComponent ?c1), (?m kbcl:hasComponent ?c2),
 	(?c1 kbcl:hasLocation ?x1), (?c2 kbcl:hasLocation ?x2),
@@ -37,15 +51,20 @@
 	makeTemp(?f), notEqual(?c1, ?c2)
 	->
 	(?f rdf:type kbcl:Channel), (?f kbcl:startLocation ?x1), (?f kbcl:endLocation ?x2)]
-	
+
+# SE HO DUE CHANNEL CONNESSE, OSSIA UNA CHANNEL FINISCE IN UNA LOCAZIONE DALLA QUALE INIZIA
+# UN'ALTRA CHANNEL, ALLORA LE DUE LOCAZIONI SONO CONNESSE (DALLA COMBINAZIONE DELLE DUE FUNZIONI)
 [connection-transitive-closure-bychannel:
 	(?f1 rdf:type kbcl:Channel), (?f2 rdf:type kbcl:Channel),
 	(?f1 kbcl:startLocation ?s1), (?f1 kbcl:endLocation ?e1),
 	(?f2 kbcl:startLocation ?s2), (?f2 kbcl:endLocation ?e2),
-	notEqual(?f1, ?f2), equal(?e1, ?s2)
+	notEqual(?f1, ?f2), notEqual(?s1, ?e2), equal(?e1, ?s2)
 	->
 	(?s1 kbcl:connection ?e2)]
 
+# SE HO DUE LOCAZIONI INTERNE DEL MODULO CHE SONO CONNESSE CON DEI ROBOT ESTERNI E 
+# SE QUESTE LOCAZIONI SONO INTERNAMENTE RAGGIUNGIBILI TRA DI LORO, ALLORA IL MDOULO
+# PUO SVOLGERE UNA CHANNEL TRA I DUE COLLABORATORI
 [available-channels:
 	(?m kbcl:hasCollaborator ?r1), (?m kbcl:hasCollaborator ?r2)
 	(?r1 kbcl:hasLocation ?xr1), (?r2 kbcl:hasLocation ?xr2),

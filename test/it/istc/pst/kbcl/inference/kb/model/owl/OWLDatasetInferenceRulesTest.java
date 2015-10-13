@@ -1,5 +1,7 @@
 package it.istc.pst.kbcl.inference.kb.model.owl;
 
+import it.istc.pst.kbcl.inference.kb.owl.KBCLVocabulary_v2;
+
 import java.util.Iterator;
 
 import org.junit.After;
@@ -26,11 +28,11 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
  * @author alessandroumbrico
  *
  */
-public class OWLDatasetV2Test 
+public class OWLDatasetInferenceRulesTest 
 {
 	private static final String ABOX_URL = "http://pst.istc.cnr.it/kbcl/instance";
-	private static final String ABOX_PATH = "dev/onto/v2/abox/simple.rdf";
-	private static final String TBOX_URL = "http://pst.istc.cnr.it/kbcl/ontology";
+	private static final String ABOX_PATH = "dev/onto/v2/abox/single.rdf";
+//	private static final String TBOX_URL = "http://pst.istc.cnr.it/kbcl/ontology";
 	private static final String TBOX_PATH = "dev/onto/v2/tbox/onto_v2.owl";
 	private static final String RULES_PATH = "dev/onto/v2/rules_testing.rules";
 	
@@ -50,8 +52,8 @@ public class OWLDatasetV2Test
 		// create the model of the schema (TBOX)
 		this.tbox = ModelFactory.createOntologyModel();
 		// read the schema from a file
-		this.tbox.getDocumentManager().addAltEntry(TBOX_URL, "file:" + TBOX_PATH);
-		this.tbox.read(TBOX_URL, "RDF/XML");
+		this.tbox.getDocumentManager().addAltEntry(KBCLVocabulary_v2.ONTOLOGY_URL.getValue(), "file:" + TBOX_PATH);
+		this.tbox.read(KBCLVocabulary_v2.ONTOLOGY_URL.getValue(), "RDF/XML");
 		
 		// create reasoner
 		Reasoner reasoner = ReasonerRegistry.getOWLMicroReasoner();
@@ -85,6 +87,14 @@ public class OWLDatasetV2Test
 		this.inf = null;
 		this.abox = null;
 		this.tbox = null;
+		
+		try {
+			System.gc();
+			Thread.sleep(1000);
+		}
+		catch (Exception ex) {
+			System.err.println(ex.getMessage());
+		}
 		System.out.println("-----------------------------------------------------------------");
 	}
 	
@@ -111,7 +121,11 @@ public class OWLDatasetV2Test
 		
 		// get transportation modules
 		System.out.println("Retrieve all transportation modules:");
-		Iterator<Statement> it = this.inf.listStatements((Resource) null, RDF.type, this.inf.getResource(TBOX_URL + "#TransportationModule"));
+		Iterator<Statement> it = this.inf.listStatements(
+				(Resource) null, 
+				RDF.type, 
+				this.inf.getResource(KBCLVocabulary_v2.CLASS_TRANSPORTATIO_MODULE_URI.getValue())
+		);
 		
 		Assert.assertNotNull(it);
 		int count = 0;
@@ -124,9 +138,8 @@ public class OWLDatasetV2Test
 		Assert.assertTrue(count == 1);
 		
 		// get connection property
-		String prop = "connection";
-		System.out.println("Statements concerning ObjectProperty \"" + prop + "\"");
-		Property p = this.tbox.getOntProperty(TBOX_URL + "#" + prop);
+		System.out.println("Statements concerning ObjectProperty \"" + KBCLVocabulary_v2.PROPERTY_CONNECTION_LABEL + "\"");
+		Property p = this.tbox.getOntProperty(KBCLVocabulary_v2.PROPERTY_CONNECTION_URI.getValue());
 		Assert.assertNotNull(p);
 		it = this.inf.listStatements((Resource) null, p, (RDFNode) null);
 		while (it.hasNext()) {
@@ -147,7 +160,11 @@ public class OWLDatasetV2Test
 		// initialize transportation module reference
 		Resource tm = null;
 		// get transportation modules
-		Iterator<Statement> it = this.inf.listStatements((Resource) null, RDF.type, this.inf.getResource(TBOX_URL + "#TransportationModule"));
+		Iterator<Statement> it = this.inf.listStatements(
+				(Resource) null, 
+				RDF.type, 
+				this.inf.getResource(KBCLVocabulary_v2.CLASS_TRANSPORTATIO_MODULE_URI.getValue())
+		);
 		Assert.assertNotNull(it);
 		int count = 0;
 		while (it.hasNext()) {
@@ -162,9 +179,11 @@ public class OWLDatasetV2Test
 		
 		// get information about components
 		System.out.println("Retrieve all statements concerning module's components");
-		it = this.inf.listStatements(this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
-				this.inf.getProperty(TBOX_URL + "#hasComponent"),
-				(RDFNode) null);
+		it = this.inf.listStatements(
+				tm, 
+				this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_HAS_COMPONENT_URI.getValue()),
+				(RDFNode) null
+		);
 		
 		Assert.assertNotNull(it);
 		while (it.hasNext()) {
@@ -186,9 +205,11 @@ public class OWLDatasetV2Test
 		// initialize transportation module reference
 		Resource tm = null;
 		// get transportation modules
-		Iterator<Statement> it = this.inf.listStatements((Resource) null, 
+		Iterator<Statement> it = this.inf.listStatements(
+				(Resource) null, 
 				RDF.type, 
-				this.inf.getResource(TBOX_URL + "#TransportationModule"));
+				this.inf.getResource(KBCLVocabulary_v2.CLASS_TRANSPORTATIO_MODULE_URI.getValue())
+		);
 		
 		Assert.assertNotNull(it);
 		int count = 0;
@@ -204,9 +225,11 @@ public class OWLDatasetV2Test
 		
 		// get information about collaborators
 		System.out.println("Retrieve all statements concerning module's collaborators:");
-		it = this.inf.listStatements(this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
-				inf.getProperty(TBOX_URL + "#hasCollaborator"), 
-				(RDFNode) null);
+		it = this.inf.listStatements(
+				this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
+				inf.getProperty(KBCLVocabulary_v2.PROPERTY_HAS_COLLABORATOR_URI.getValue()), 
+				(RDFNode) null
+		);
 		
 		Assert.assertNotNull(it);
 		while (it.hasNext()) {
@@ -228,7 +251,7 @@ public class OWLDatasetV2Test
 		System.out.println("Retrieve information concerning primitive channels:");
 		Iterator<Statement> it = inf.listStatements((Resource) null, 
 				RDF.type, 
-				inf.getResource(TBOX_URL + "#Channel"));
+				inf.getResource(KBCLVocabulary_v2.CLASS_FUNCTION_CHANNEL_URI.getValue()));
 		
 		Assert.assertNotNull(it);
 		while (it.hasNext()) {
@@ -237,10 +260,11 @@ public class OWLDatasetV2Test
 			System.out.println("- " + s);
 			
 			// print start location
-			Iterator<Statement> sit = inf.listStatements(
+			Iterator<Statement> sit = this.inf.listStatements(
 					s.getSubject().asResource(), 
-					inf.getProperty(TBOX_URL + "#startLocation"), 
-					(RDFNode) null);
+					this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_START_LOCATION_URI.getValue()), 
+					(RDFNode) null
+			);
 			
 			Assert.assertNotNull(sit);
 			System.out.println("- Start Location:");
@@ -253,8 +277,9 @@ public class OWLDatasetV2Test
 			
 			sit = this.inf.listStatements(
 					s.getSubject().asResource(), 
-					inf.getProperty(TBOX_URL + "#endLocation"),
-					(RDFNode) null);
+					this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_END_LOCATION_URI.getValue()),
+					(RDFNode) null
+			);
 			
 			Assert.assertNotNull(sit);
 			System.out.println("- End Location:");
@@ -278,9 +303,11 @@ public class OWLDatasetV2Test
 		// initialize transportation module reference
 		Resource tm = null;
 		// get transportation modules
-		Iterator<Statement> it = this.inf.listStatements((Resource) null, 
+		Iterator<Statement> it = this.inf.listStatements(
+				(Resource) null, 
 				RDF.type, 
-				this.inf.getResource(TBOX_URL + "#TransportationModule"));
+				this.inf.getResource(KBCLVocabulary_v2.CLASS_TRANSPORTATIO_MODULE_URI.getValue())
+		);
 		
 		Assert.assertNotNull(it);
 		int count = 0;
@@ -296,8 +323,190 @@ public class OWLDatasetV2Test
 		
 		// get information about primitive channels
 		System.out.println("Retrieve channel functions the module actually can do:");
-		it = this.inf.listStatements(this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
-				this.inf.getProperty(TBOX_URL + "#canDoChannel"), 
+		it = this.inf.listStatements(
+				this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
+				this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_CAN_DO_CHANNEL_URI.getValue()), 
+				(RDFNode) null
+		);
+		
+		Assert.assertNotNull(it);
+		while (it.hasNext()) {
+			Statement s = it.next();
+			Assert.assertNotNull(s);
+			Assert.assertEquals(s.getSubject().getURI(), tm.getURI());
+			System.out.println("- " + s);
+			// print start location
+			Iterator<Statement> sit = this.inf.listStatements(
+					s.getObject().asResource(), 
+					inf.getProperty(KBCLVocabulary_v2.PROPERTY_START_LOCATION_URI.getValue()), 
+					(RDFNode) null
+			);
+			
+			Assert.assertNotNull(sit);
+			System.out.println("- Start Location:");
+			while (sit.hasNext()) {
+				Statement ss = sit.next();
+				Assert.assertNotNull(ss);
+				Assert.assertEquals(s.getObject().asResource().getURI(), ss.getSubject().getURI());
+				System.out.println("-- " + ss.getObject());
+			}
+			
+			sit = this.inf.listStatements(
+					s.getObject().asResource(), 
+					this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_END_LOCATION_URI.getValue()),
+					(RDFNode) null
+			);
+			
+			Assert.assertNotNull(sit);
+			System.out.println("- End Location:");
+			while (sit.hasNext()) {
+				Statement ss = sit.next();
+				Assert.assertNotNull(ss);
+				Assert.assertEquals(s.getObject().asResource().getURI(), ss.getSubject().getURI());
+				System.out.println("-- " + ss.getObject());
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void moduleChangeOverInferenceRuleTest() {
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("-------- moduleChangeOverInferenceRuleTest()");
+		
+		// initialize transportation module reference
+		Resource tm = null;
+		// get transportation modules
+		Iterator<Statement> it = this.inf.listStatements(
+				(Resource) null, 
+				RDF.type, 
+				this.inf.getResource(KBCLVocabulary_v2.CLASS_TRANSPORTATIO_MODULE_URI.getValue())
+		);
+		
+		Assert.assertNotNull(it);
+		int count = 0;
+		while (it.hasNext()) {
+			Statement s = it.next();
+			Assert.assertNotNull(s);
+			count++;
+			tm = s.getSubject();
+			System.out.println("- " + tm);
+		}
+		Assert.assertTrue(count == 1);
+		Assert.assertNotNull(tm);
+		
+		// get information about primitive channels
+		System.out.println("Retrieve change-over functions the module actually can do:");
+		it = this.inf.listStatements(
+				this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
+				this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_CAN_DO_CHANGE_OVER_URI.getValue()),
+				(RDFNode) null
+		);
+		
+		Assert.assertNotNull(it);
+		while (it.hasNext()) {
+			Statement s = it.next();
+			Assert.assertNotNull(s);
+			Assert.assertEquals(s.getSubject().getURI(), tm.getURI());
+			System.out.println("- " + s);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void componentFailureTest() {
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("-------- componentFailureTest()");
+		
+		// initialize transportation module reference
+		Resource tm = null;
+		// get transportation modules
+		Iterator<Statement> it = this.inf.listStatements(
+				(Resource) null, 
+				RDF.type, 
+				this.inf.getResource(KBCLVocabulary_v2.CLASS_TRANSPORTATIO_MODULE_URI.getValue())
+		);
+		
+		Assert.assertNotNull(it);
+		int count = 0;
+		while (it.hasNext()) {
+			Statement s = it.next();
+			Assert.assertNotNull(s);
+			count++;
+			tm = s.getSubject();
+			System.out.println("- " + tm);
+		}
+		Assert.assertTrue(count == 1);
+		Assert.assertNotNull(tm);
+		
+		// print information about primitive channels
+		System.out.println("Channel functions before the event");
+		this.printChannelFunctions(tm);
+		
+		// get information about primitive channels
+		System.out.println("Retrieve cross transfer information:");
+		it = this.inf.listStatements(
+				this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
+				this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_HAS_CROSS_TRANSFER_URI.getValue()), 
+				(RDFNode) null
+		);
+		
+		Resource cross = null;
+		Assert.assertNotNull(it);
+		while (it.hasNext()) {
+			Statement s = it.next();
+			cross = s.getObject().asResource();
+			Assert.assertNotNull(s);
+			Assert.assertNotNull(cross);
+		}
+		Assert.assertNotNull(cross);
+		System.out.println("- " + cross);
+
+		// get performance information
+		it = this.inf.listStatements(
+				cross, 
+				this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_HAS_PERFORMANCE_URI.getValue()),
+				(RDFNode) null
+		);
+		
+		Assert.assertNotNull(it);
+		Statement sToRemove = null;
+		count = 0;
+		while (it.hasNext()) {
+			// only one result expected
+			sToRemove = it.next();
+			count++;
+			Assert.assertNotNull(sToRemove);
+		}
+		Assert.assertTrue(count == 1);
+		
+		// remove statement
+		System.out.println("Removing statement " + sToRemove);
+		this.inf.remove(sToRemove);
+		
+		// get failure performance instance
+		Resource failure = this.inf.getResource(KBCLVocabulary_v2.COSTANT_FAILURE_PERFORMANCE_URI.getValue());
+		// add statement
+		Statement sToAdd = this.inf.createStatement(cross, this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_HAS_PERFORMANCE_URI.getValue()), failure);
+		System.out.println("Added statement " + sToAdd);
+		
+		// print information about primitive channels
+		System.out.println("Channel functions after the event");
+		this.printChannelFunctions(tm);
+	}
+	
+	/**
+	 * 
+	 * @param tm
+	 */
+	private void printChannelFunctions(Resource tm) {
+		System.out.println("Retrieve channel functions the module actually can do:");
+		Iterator<Statement> it = this.inf.listStatements(this.inf.getResource(ABOX_URL + "#" + tm.getLocalName()), 
+				this.inf.getProperty(KBCLVocabulary_v2.PROPERTY_CAN_DO_CHANNEL_URI.getValue()), 
 				(RDFNode) null);
 		
 		Assert.assertNotNull(it);
@@ -309,7 +518,7 @@ public class OWLDatasetV2Test
 			// print start location
 			Iterator<Statement> sit = this.inf.listStatements(
 					s.getObject().asResource(), 
-					inf.getProperty(TBOX_URL + "#startLocation"), 
+					inf.getProperty(KBCLVocabulary_v2.PROPERTY_START_LOCATION_URI.getValue()),
 					(RDFNode) null);
 			
 			Assert.assertNotNull(sit);
@@ -323,8 +532,9 @@ public class OWLDatasetV2Test
 			
 			sit = this.inf.listStatements(
 					s.getObject().asResource(), 
-					this.inf.getProperty(TBOX_URL + "#endLocation"),
-					(RDFNode) null);
+					this.inf.getProperty(
+							KBCLVocabulary_v2.PROPERTY_END_LOCATION_URI.getValue()),
+							(RDFNode) null);
 			
 			Assert.assertNotNull(sit);
 			System.out.println("- End Location:");
