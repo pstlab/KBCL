@@ -153,7 +153,7 @@ public class OWLDatasetManager_v1
 			
 			// get property file
 			Properties prop = new Properties();
-			prop.load(new FileInputStream(new File("etc/infCfg.properties")));
+			prop.load(new FileInputStream(new File("etc/reasoner.properties")));
 			
 			// set label
 			this.label = this.getClass().getSimpleName();
